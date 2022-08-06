@@ -17,6 +17,18 @@ console.log("dataaaaaaaaaaaaaa",dataEnd)
   setDataEnd(Datessssss)
   }, [])
 
+
+//   useEffect(() => {
+//    const Datessssss = clockindata.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
+//  setDatesend(Datessssss)
+
+//  const variableOne = datesends.filter(itemInArray => 
+//    itemInArray.employeeId == valId
+//  );
+//  setNewVariable(variableOne)
+
+//  }, [newVariable])
+
   const admindata=[
     {
         "id": 310,

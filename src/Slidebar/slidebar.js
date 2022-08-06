@@ -16,8 +16,6 @@ import Header from "../header/header";
 import { DownOutlined } from '@ant-design/icons';
 // import { Dropdown, Menu, Space } from 'antd';
 
-
-
 const Slidebar = (props) => {
 
   const moment = require('moment');
@@ -437,22 +435,18 @@ const Slidebar = (props) => {
       leaveDate:"03-Aug-2022"
          }
 ]
-// console.log("dataaaaaaaaaaaaaaa", newVariable)
 let { id } = useParams();
 let valId = `${id}`
-    // console.log("valid", valId);
 
-    useEffect(() => {
-      const Datessssss = clockindata.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
-    setDatesend(Datessssss)
 
-    const variableOne = datesends.filter(itemInArray => 
-      itemInArray.employeeId == valId
-    );
-    setNewVariable(variableOne)
-
-    }, [newVariable])
-    // console.log("chandru", newVariable)
+useEffect(() => {
+  const Datessssss = clockindata.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
+setDatesend(Datessssss)
+const variableOne = datesends.filter(itemInArray => 
+  itemInArray.employeeId == valId
+);
+setNewVariable(variableOne)
+}, [newVariable])
     
 const dateCellRender = (value) => {
     let listData = [];
@@ -462,11 +456,11 @@ const dateCellRender = (value) => {
     const data = moment(dates).isSame(newData);
     if (data){
      listData = [
-    { 
+    {
       type: '',
       content:(item.workingHrs) ,
     },
-    ] 
+    ]
   }
    })}
     
@@ -519,49 +513,26 @@ const dateCellRender = (value) => {
 
   return (
     <ul className="events">
-        {listData.map((item) => (
+         {listData.map((item) => (
           <li key={item.content}>
-          <Badge status={item.type} text={item.content} />
+           <Badge status={item.type} text={item.content} />
           </li>
         ))}
-    </ul>
+     </ul>
     );
     };
 
   const onChange = (key) => {
-    // console.log(key);
+    console.log(key);
   };
-
-  // const menu = (
-  //   <Menu
-  //     items={[
-  //       {
-  //         label: <a href="https://www.antgroup.com">1st menu item</a>,
-  //         key: '0',
-  //       },
-  //       {
-  //         label: <a href="https://www.aliyun.com">2nd menu item</a>,
-  //         key: '1',
-  //       },
-  //       {
-  //         type: 'divider',
-  //       },
-  //       {
-  //         label: '3rd menu item',
-  //         key: '3',
-  //       },
-  //     ]}
-  //   />
-  // );
-
-  
-
-  
 
   return(
 
     <div className='container_divs'>
+      <div className="headerdivs">
               <Header />
+              
+</div>
 
 <div className="section">
 
@@ -714,9 +685,7 @@ const dateCellRender = (value) => {
               <TabPane tab="My Leave Balance" key="2">
                <label>As of date</label> <input type="date" /><button >Find My Leave</button>
                </TabPane>
-            </Tabs>
-
-
+              </Tabs>
                 </div>
               </div>
             </div>

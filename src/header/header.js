@@ -477,7 +477,9 @@ const variableOne = datesends.filter(itemInArray =>
         items={
           [{
 
+
             label:<div className="profile_name">
+                        
                <h1>Siva Chandru</h1> 
                        <p>sivachandru@anexas.net</p><hr></hr>
                        </div>
@@ -520,7 +522,7 @@ const variableOne = datesends.filter(itemInArray =>
       />
         );
     return (
-        <div className="header">
+      <div className='header'>
         <div className="logo_div">
           </div>
 

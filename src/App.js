@@ -22,7 +22,6 @@ function App() {
       <Route path={"/Admin"} element={<Admin />} />
       <Route path="/Addemploye" element={<Addemploye />} />
       <Route path={`/EditPage/:id`} element={<EditPage />} />
-
     </Routes>
     
   </Router>
