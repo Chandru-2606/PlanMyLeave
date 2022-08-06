@@ -1,0 +1,33 @@
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from 'react-router-dom'
+import Login from './Login/login';
+import Slidebar from './Slidebar/slidebar';
+import Form from './Form/form';
+import Admin from './adminDashboard/admin';
+import Addemploye from './adminDashboard/addEmployee';
+import EditPage from './adminDashboard/editEmploye';
+
+function App() {
+  return (
+
+    <Router>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path={`/Slidebar/:id`} element={<Slidebar />} />
+      <Route path="/Form" element={<Form />} />
+      <Route path={"/Admin"} element={<Admin />} />
+      <Route path="/Addemploye" element={<Addemploye />} />
+      <Route path={`/EditPage/:id`} element={<EditPage />} />
+
+    </Routes>
+    
+  </Router>
+  );
+}
+
+
+export default App;

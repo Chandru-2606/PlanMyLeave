@@ -1,0 +1,97 @@
+.add_emp button{
+     margin-top: 20px;
+    justify-content: center;
+    margin-left: 80px;
+}
+
+.add_employee{
+    display: flex;
+    margin-left: 100px;
+}
+
+.add_emp{
+    margin-top: 100px;
+}
+
+.addemp_details{
+    display: flex;
+    list-style-type:none;
+    width: 80%;
+    margin-left: 110px;
+    margin-top: 50px;
+}
+
+.details_data{
+    width: 20%;
+    text-align: center;
+}
+
+.addemp_details button{
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+.userData_heading{
+    display: flex;
+    margin-top: 100px;
+    margin-bottom: 30px;
+    width: 80%;
+}
+
+.headingName{
+    width: 20%;
+    margin-left: 60px;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.employeeesDatalist{
+    display: flex;
+    width: 80%;
+    line-height: 2.5;
+}
+
+.employesssList{
+    width: 20%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.edit_btn{
+    width: 40px;
+    height: 20px;
+}
+
+.edit_btn button{
+    border: none;
+    height: 30px;
+    width: 30px;
+}
+
+.leaveDatalist{
+    margin-top: 50px;
+    margin-left:50px;
+    width: 45%;
+    height: 350px;
+    overflow-y: scroll;
+}
+.leaveDatalist h1{
+    text-align: center;
+    margin-bottom: 50px;
+}
+.leaveDatalist li{
+    list-style-type:none;
+}
+.leaveDatalist  span {
+ margin-left: 10px;
+}
+.leaveDatalist button{
+    float: right;
+    margin-right: 20px;
+}
+
+
+
+

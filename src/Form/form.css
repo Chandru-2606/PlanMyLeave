@@ -1,0 +1,129 @@
+
+
+  .form_container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: grey;
+height: 100vh;
+  }
+  
+
+
+  .form_sub_container{
+    width: 30%;
+  }
+  
+
+.contact_form{
+  margin-top: 50px;
+  width: 100%;
+  text-align: center;
+  height: 600px;
+
+}
+.contact_form h1{
+  padding-top: 30px;
+  font-weight: bolder;
+  font-size: 35px;
+}  
+
+.contact_form  p{
+  font-size: 15px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.contact_form .ant-input-affix-wrapper {
+  margin-top: 20px;
+  margin-bottom: 15px;
+  border: none;
+  border:1px solid grey;
+  border-radius: 5px;
+}
+ 
+.form_span{
+   padding-top: 10px;
+   color: red;
+}
+
+.form_btn{
+  width: 50%;
+  height: 40px;
+  border: none;
+  background-color: rgb(68, 0, 255);
+  color: white;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.ant-input-prefix{
+  display: none;
+}
+@media only screen and (max-width: 375px) {
+  .form_sub_container{
+    width: 80%;
+  }
+  .contact_form  p{
+    font-size: 12px;
+      font-weight: bold;
+      padding-bottom: 10px;
+  }
+  
+}
+
+@media only screen and (max-width: 450px) {
+  .form_sub_container{
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 820px) {
+
+  .form_sub_container{
+    width: 40%;
+    margin-top: 50px;
+  }
+}
+
+@media only screen and (max-width: 912px) {
+  .form_sub_container{
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .form_sub_container{
+    width: 81%;
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 280px) {
+  .form_sub_container{
+    width: 90%;
+    margin-top: -20px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .contact_form {
+    margin-top: 25px;
+    width: 100%;
+    text-align: center;
+    height: 571px;
+  }
+  
+
+  .contact_form .ant-input-affix-wrapper {
+    margin-top: 20px;
+    /* margin-bottom: 15px;
+    border: none;
+    border:1px solid grey;
+    border-radius: 5px; */
+    
+  }
+
+}
