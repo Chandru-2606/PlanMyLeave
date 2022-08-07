@@ -447,6 +447,7 @@ const variableOne = datesends.filter(itemInArray =>
 );
 setNewVariable(variableOne)
 }, [newVariable])
+// console.log("daaaaaaa", newVariable)
     
 const dateCellRender = (value) => {
     let listData = [];
@@ -527,10 +528,9 @@ const dateCellRender = (value) => {
   };
 
   return(
-
     <div className='container_divs'>
       <div className="headerdivs">
-              <Header />
+              <Header name={newVariable?.[0]?.name}/>
               
 </div>
 
@@ -771,25 +771,27 @@ const dateCellRender = (value) => {
 
 {newVariable.map((item, index)=>{
   return(
+ 
   <div className='clockinDate_list'>
-    <div className="clockin_listli">
-      <li >{moment(item.clockin).format('ll')}</li>
-    </div>
-
-    <div className="clockin_listli">
-      <li >{moment(item.clockin).format('LT')}</li>
-    </div>
-
-    <div className="clockin_listli">
-      <li >{moment(item.clockout).format('LT')}</li><br/>
-    </div>
-
-    <div className="clockin_listli">
-      <li>{item.workingHrs}</li>
-    </div>
-  </div>
   
+    <div className="clockin_listli">
+      <li>{item.clockin ? moment(item.clockin).format('ll'):""}</li>
+    </div>
 
+    <div className="clockin_listli">
+      <li >{item.clockin ? moment(item.clockin).format('LT'):""}</li>
+    </div>
+
+    <div className="clockin_listli">
+      <li >{item.clockout ? moment(item.clockout).format('LT'):""}</li><br/>
+    </div>
+
+    <div className="clockin_listli">
+      <li>{item.workingHrs ? item.workingHrs : ""}</li>
+    </div>
+    
+  </div>
+   
   )
 })}
 </div>

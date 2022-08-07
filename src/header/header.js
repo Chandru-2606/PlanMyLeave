@@ -2,7 +2,7 @@ import { Dropdown, Menu } from 'antd';
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router";
- function Header () {
+ function Header (props) {
   const moment = require('moment');
   const [datesends, setDatesend] = useState([])
   const [isLoggedin, setIsLoggedin] = useState(true)
@@ -480,7 +480,7 @@ const variableOne = datesends.filter(itemInArray =>
 
             label:<div className="profile_name">
                         
-               <h1>Siva Chandru</h1> 
+               <h1>{props.name}</h1> 
                        <p>sivachandru@anexas.net</p><hr></hr>
                        </div>
                        ,
