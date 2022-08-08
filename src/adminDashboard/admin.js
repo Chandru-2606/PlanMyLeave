@@ -7,7 +7,6 @@ import { Space } from 'antd';
 import { Button, Modal } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { Input } from 'antd';
-// import { Input } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { DatePicker } from 'antd';
 import {EditOutlined} from '@ant-design/icons';
@@ -18,10 +17,12 @@ function Admin (props) {
 const [userdatamap, setUserdatamap] = useState([])
 const [dashboardData, setDashboardData] = useState([])
 const [leavedata, setLeavedata] = useState([])
+const [isModalVisible, setIsModalVisible] = useState(false);
+
 const [select, setSelect] = useState("")
 const [lisEmployee, setListEmployee] = useState([])
 const [todayData, setTodayData] = useState([])
-const [isModalVisible, setIsModalVisible] = useState(false);
+const [clockinClockout, setClockinClockout] = useState([])
 
 
 
@@ -33,10 +34,10 @@ useEffect(() => {
 
   const listDatessssss = userdata.map(t1 => ({...t1, ...clockindata.find(t2 => t2.employeeId === t1.id)}))
 setListEmployee(listDatessssss)
+// console.log("dattttttttttttttttttttttaaaaaaaaaaa", listDatessssss)
 
 const today = todayClockin.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
 setTodayData(today)
-// console.log("todayyyyyyyyyyyyyyyyyy", today)
 
 
   let a = JSON.parse(localStorage.getItem("employeeData"))
@@ -44,7 +45,8 @@ setTodayData(today)
   setDashboardData(a)
 }, [])
 
-console.log("todayyyyyyyyyyy", todayData)
+// console.log("todayyyyyyyyyyy", ListEmployee)
+// console.log('loooool', lisEmployee)
 
   const userdata=[
     {
@@ -550,6 +552,7 @@ const admindata=[
 // console.log("btn trigerred")
 // }
 
+// console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", userdatamap)
 const showModal = () => {
    setIsModalVisible(true);
  };
@@ -558,6 +561,7 @@ const showModal = () => {
    setIsModalVisible(false);
  };
 
+ console.log("qazsdfxcgvhbjnkm", userdatamap)
  const handleSubmit = () => {
    setIsModalVisible(false);
 //  console.log("submit", handleSubmit)
@@ -577,6 +581,19 @@ const onChange = (e) => {
    console.log(e);
  };
 
+ const EmployeeName =(e) =>{
+  console.log("qwersdtfgyuhijo", e.target.value)
+  const filtered = clockindata.filter(employee => {
+   return employee.employeeId == e.target.value;
+ });
+
+ setTodayData(filtered)
+
+}
+// console.log("looololl", clockinClockout)
+
+
+
 let navigate = useNavigate()
     return(
       <div className="adminApp">  
@@ -590,7 +607,19 @@ let navigate = useNavigate()
       </div>
 <div className="data-today">
    <div className="day-today"> 
+
       <h1>Today:{moment().format('L')}</h1>
+      <select onChange={EmployeeName}>
+
+      {lisEmployee.map((item, index)=>{
+         return(
+            <option value={item.id}>
+               {item.name}
+            </option>
+         );
+      })}
+         </select>
+
    </div>
    <div className="today-data">
       <div className="todayData-head"><h1>Name</h1></div>
@@ -598,7 +627,6 @@ let navigate = useNavigate()
       <div className="todayData-head"><h1>Clockout</h1></div>
       <div className="todayData-head"><h1>Leave</h1></div>
       <div className="todayData-head"><h1>workingHrs</h1></div>
-
    </div>
 {todayData && todayData.map((item, index)=>{
       return(
@@ -611,7 +639,6 @@ let navigate = useNavigate()
             <div className="today_listData" id="leave-type" >{item.leaveType}</div>
             <div className="today_listData" id="workingshrs">{item.workingHrs}</div>
             </div>
-
          </ul>
       );
      })}
