@@ -133,7 +133,7 @@ const Slidebar = (props) => {
       employeeId: 3180,
       clockin:"Mon Aug 01 2022 10:00:00 GMT+0530 (India Standard Time)",
       clockout:"Mon Aug 01 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
+      workingHrs:8,
       leaveType:"",
       leaveDate:""
          },
@@ -157,7 +157,7 @@ const Slidebar = (props) => {
       employeeId: 3182,
       clockin:"Fri Jul 27 2022 09:30:00 GMT+0530 (India Standard Time)",
       clockout:"Fri Jul 27 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
+      workingHrs:5,
       leaveType:"",
       leaveDate:""
          },
@@ -530,7 +530,7 @@ const dateCellRender = (value) => {
   return(
     <div className='container_divs'>
       <div className="headerdivs">
-              <Header name={newVariable?.[0]?.name}/>
+              <Header name={newVariable?.[0]?.name}   email={newVariable?.[0]?.email}/>
               
 </div>
 
@@ -771,15 +771,13 @@ const dateCellRender = (value) => {
 
 {newVariable.map((item, index)=>{
   return(
- 
   <div className='clockinDate_list'>
-  
     <div className="clockin_listli">
       <li>{item.clockin ? moment(item.clockin).format('ll'):""}</li>
     </div>
 
     <div className="clockin_listli">
-      <li >{item.clockin ? moment(item.clockin).format('LT'):""}</li>
+      <li >{item.clockin ? moment(item.clockin).format('LT'): (item.leaveType)}</li>
     </div>
 
     <div className="clockin_listli">

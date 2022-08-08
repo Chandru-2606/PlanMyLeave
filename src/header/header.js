@@ -481,7 +481,7 @@ const variableOne = datesends.filter(itemInArray =>
             label:<div className="profile_name">
                         
                <h1>{props.name}</h1> 
-                       <p>sivachandru@anexas.net</p><hr></hr>
+                       <p>{props.email}</p><hr></hr>
                        </div>
                        ,
             key: '0',

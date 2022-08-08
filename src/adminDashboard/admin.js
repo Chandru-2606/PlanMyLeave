@@ -4,20 +4,47 @@ import './admin.css'
 import Header from "../header/header";
 import EditFilled from '@ant-design/icons'
 import { Space } from 'antd';
+import { Button, Modal } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+import { Input } from 'antd';
+// import { Input } from 'antd';
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import { DatePicker } from 'antd';
+import {EditOutlined} from '@ant-design/icons';
+import {DownCircleOutlined  } from '@ant-design/icons';
+
 
 function Admin (props) {
 const [userdatamap, setUserdatamap] = useState([])
 const [dashboardData, setDashboardData] = useState([])
 const [leavedata, setLeavedata] = useState([])
-const moment = require('moment');
+const [select, setSelect] = useState("")
+const [lisEmployee, setListEmployee] = useState([])
+const [todayData, setTodayData] = useState([])
+const [isModalVisible, setIsModalVisible] = useState(false);
 
+
+
+const moment = require('moment');
+const { TextArea } = Input;
 useEffect(() => {
-  const Datessssss = clockindata.map(t1 => ({...t1, ...userdata.find(t2 => t2.clockindata === t1.id)}))
+   const Datessssss = clockindata.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
   setUserdatamap(Datessssss)
+
+  const listDatessssss = userdata.map(t1 => ({...t1, ...clockindata.find(t2 => t2.employeeId === t1.id)}))
+setListEmployee(listDatessssss)
+
+const today = todayClockin.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
+setTodayData(today)
+// console.log("todayyyyyyyyyyyyyyyyyy", today)
+
+
   let a = JSON.parse(localStorage.getItem("employeeData"))
-  console.log("from use effects", JSON.parse(localStorage.getItem("expenses")));
+//   console.log("from use effects", JSON.parse(localStorage.getItem("expenses")));
   setDashboardData(a)
 }, [])
+
+console.log("todayyyyyyyyyyy", todayData)
 
   const userdata=[
     {
@@ -85,7 +112,7 @@ useEffect(() => {
       workingHrs:9,
       leaveType:"",
       leaveDate:""
-         },
+      },
      {
       employeeId: 3180,
       clockin:"",
@@ -122,7 +149,7 @@ useEffect(() => {
       employeeId: 3180,
       clockin:"Mon Aug 01 2022 10:00:00 GMT+0530 (India Standard Time)",
       clockout:"Mon Aug 01 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
+      workingHrs:8,
       leaveType:"",
       leaveDate:""
          },
@@ -146,7 +173,7 @@ useEffect(() => {
       employeeId: 3182,
       clockin:"Fri Jul 27 2022 09:30:00 GMT+0530 (India Standard Time)",
       clockout:"Fri Jul 27 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
+      workingHrs:5,
       leaveType:"",
       leaveDate:""
          },
@@ -467,25 +494,129 @@ const leaveData = [
       "Date" : "03.05.22 (Tue)"
      },
 ]
+const admindata=[
+   {
+       "id": 310,
+       "roleId":2,
+       "name": "Admin",
+       "email": "admin@anexas.net",
+       "password":"Anexas123456",
+       "DOB":"00-00-0000",
+       "DOJ":"00-00-0000",
+       "Address":"6-11, main road, hsr layout",
+       "profilepicture": "http://restapi.adequateshop.com/Media//Images/userimageicon.png",
+       "location": "USAnew",
+       "createdat": "2021-02-16T10:29:48.0112462",
+       "updatedat":"DD-MM-YYYY"
+     },
+ ]
+
+ const todayClockin =[
+   {
+      employeeId: 3180,
+      clockin:"Mom Aug 08 2022 09:00:00 GMT+0530 (India Standard Time)",
+      clockout:"Mom Aug 08 2022 06:00:00 GMT+0530 (India Standard Time)",
+      workingHrs:"8",
+      leaveType:"",
+      leaveDate:""
+      },
+      {
+         employeeId: 3182,
+         clockin:"Mom Aug 08 2022 10:10:00 GMT+0530 (India Standard Time)",
+         clockout:"Mom Aug 08 2022 07:00:00 GMT+0530 (India Standard Time)",
+         workingHrs:"9",
+         leaveType:"",
+         leaveDate:""
+         },
+         {
+            employeeId: 3183,
+            clockin:"",
+            clockout:"",
+            workingHrs:"",
+            leaveType:"Sick Leave",
+            leaveDate:"Mom Aug 08 2022"
+            },
+            {
+               employeeId: 3184,
+               clockin:"Mom Aug 08 2022 09:30:00 GMT+0530 (India Standard Time)",
+               clockout:"Mom Aug 08 2022 06:30:00 GMT+0530 (India Standard Time)",
+               workingHrs:"7",
+               leaveType:"",
+               leaveDate:""
+               },
+            
+ ]
+// const AddSubmit = (e) =>{
+// console.log("btn trigerred")
+// }
+
+const showModal = () => {
+   setIsModalVisible(true);
+ };
+
+ const handleOk = () => {
+   setIsModalVisible(false);
+ };
+
+ const handleSubmit = () => {
+   setIsModalVisible(false);
+//  console.log("submit", handleSubmit)
+
+ };
+
+ 
 
 
-const AddSubmit = (e) =>{
-console.log("btn trigerred")
+// const variableOne =userdatamap.filter(itemInArray => 
+//    itemInArray.id 
+//    );
+//    console.log("lllooooooool", variableOne)
+// console.log("loooolool", select)
 
-}
+const onChange = (e) => {
+   console.log(e);
+ };
 
 let navigate = useNavigate()
     return(
       <div className="adminApp">  
       <div className="admin_header">
-      <Header />
-      </div>
+      <Header name={admindata?.[0]?.name} email={admindata?.[0]?.email}/>
+      </div >
       <div className="add_employee">
-      <div  className="add_emp">
-      <h1>Add Employee</h1>
-      <button onClick={() => {  navigate("/Addemploye"); }}>Add Employee</button>      
-      </div><br></br>
+         <div className="add_emp">
+     
       </div>
+      </div>
+<div className="data-today">
+   <div className="day-today"> 
+      <h1>Today:{moment().format('L')}</h1>
+   </div>
+   <div className="today-data">
+      <div className="todayData-head"><h1>Name</h1></div>
+      <div className="todayData-head"><h1>Clockin</h1></div>
+      <div className="todayData-head"><h1>Clockout</h1></div>
+      <div className="todayData-head"><h1>Leave</h1></div>
+      <div className="todayData-head"><h1>workingHrs</h1></div>
+
+   </div>
+{todayData && todayData.map((item, index)=>{
+      return(
+         <ul>
+            <div className="today_list">            
+            <div className="today_listData">{item.name}</div>
+            <div className="today_listData">{item.clockin ? moment(item.clockin).format('LT') : ""}</div>
+            <div className="today_listData">{item.clockout ? moment(item.clockout).format('LT') :
+                                             ""}</div>
+            <div className="today_listData" id="leave-type" >{item.leaveType}</div>
+            <div className="today_listData" id="workingshrs">{item.workingHrs}</div>
+            </div>
+
+         </ul>
+      );
+     })}
+</div>
+
       {dashboardData && dashboardData.map((item, index) =>{
       return(
          <div className="addemp_details">
@@ -502,32 +633,133 @@ let navigate = useNavigate()
             </div>
             );
             })}
+
          <div>
+            <div className="empolyee-header">
+               <h1>Employee List</h1>
+               {/* <button onClick={() => {navigate("/Addemploye"); }}>Add Employee</button>*/}
+               <Button type="primary" onClick={showModal}>
+        Add Employee
+      </Button>
+      <Modal title="Add Employee" visible={isModalVisible} onOk={handleOk} onCancel={handleSubmit}>
+      <from>
+      <div className="addemp_list">
+         <div className="emp_label">
+            <label>Name:</label>
+            {/* <input /> */}
+            <div className="div-input">
+            <Input size="large"   />
+            </div>
+         </div>
+      </div>
+
+      <div className="addemp_list">
+         <div className="emp_label">
+            <label>Password :</label>
+            <div className="div-input">
+
+            <Input size="large"   />
+
+    </div>
+
+         </div>
+      </div>
+
+      <div className="addemp_list">
+         <div className="emp_label">
+            <label>Email :</label>
+            <div className="div-input">
+
+            <Input size="large"   />
+          </div>
+         </div>
+      </div>
+
+      <div className="addemp_list">
+         <div className="emp_label">
+            <label>Address :</label>
+            <div className="div-input">
+            <Input size="large"   />
+         </div>
+
+         </div>
+      </div>
+
+      <div className="addemp_list">
+         <div className="emp_label">
+            <label>DOB :</label>
+            <div className="div-input">
+            <Input size="large"   />
+            </div>
+         </div>
+      </div>
+
+      <div className="addemp_list">
+         <div className="emp_label">
+            <label>DOJ :</label>
+            <div className="div-input">
+
+            <Input size="large"   />
+            </div>
+
+         </div>
+      </div>
+
+      </from>
+      </Modal>
+
+            </div>
             <div className="userData">
             <div className="userData_heading">
             <div className="headingName"> <h4>Name</h4></div>
-            <div className="headingName"><h4>Date</h4></div>
-            <div className="headingName"><h4>Clockin</h4></div>
-            <div className="headingName"><h4>Clockout</h4></div>
-            <div className="headingName"><h4>Working Hours</h4></div>
-         </div>
-            {userdatamap.length && userdatamap.map((item, index) => {
-            return(
-            <ul key={index}>
-               <div className="employeeesDatalist">
-               <div className="employesssList"> {item.name}  </div>
-               <div className="employesssList"> { moment(item.clockin).format(' DD-MM-YYYY')}</div> 
-               <div className="employesssList"> { moment(item.clockin).format(' h:mm:ss a')}</div> 
-               <div className="employesssList">  { moment(item.clockout).format(' h:mm:ss a')}</div> 
-               <div className="employesssList">  {item.workingHrs} </div> 
+            <div className="headingName" id="heading-email"><h4>email</h4></div>
+            <div className="headingName"><h4>Adress</h4></div>
+            <div className="headingName"><h4>DOB</h4></div>
+            <div className="headingName"><h4>DOJ </h4></div>
+            <div className="headingName"><h4>Status </h4></div>
+            <div className="headingName"><h4>Action </h4></div>
+           
             </div>
+
+             {lisEmployee.length && lisEmployee.map((item, index) => {
+           return(
+               <div className="employeeesDatalist"> 
+             
+               <ul key={index}>
+                  <div className="employesssList">{item.name}</div>
+                  <div className="employesssList" id="employe-email">{item.email}</div>
+                  <div className="employesssList">{item.Address}</div>
+                  <div className="employesssList">{item.DOB}</div>
+                  <div className="employesssList">{item.DOJ}</div>
+                  {/* <div className="employesssList">Working</div>
+                  <div className="employesssList">Working</div> */}
+
+                  <div className="edit_btns">
+                  <Button type="primary"  onClick={showModal}>
+                     <EditOutlined />
+                  </Button>
+                     <div className="edit_btns1">
+                     <DownCircleOutlined />
+                     </div>
+
+                  </div>
+
+
+
+                  
+
             </ul>
+
+            </div>
             );
-            })}
+            })} 
+            <div>
+
+            </div>
       </div>
             
       </div>
-      <div className="leaveDatalist">
+      {/* <div className="leaveDatalist">
          <div> 
             <h1>Leave Data</h1>
          </div>
@@ -538,7 +770,7 @@ let navigate = useNavigate()
       </ul>
          );
          })}
-      </div>
+      </div> */}
       </div>
     );
 }
