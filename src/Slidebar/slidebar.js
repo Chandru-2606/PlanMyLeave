@@ -1,32 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { Button, Modal } from 'antd';
 import 'antd/dist/antd.css';
 import './slidebar.css'
 import { useParams } from "react-router";
-
-import {   Tooltip } from 'antd';
-import { HomeOutlined, UnlockFilled } from '@ant-design/icons';
-import { ContactsOutlined } from '@ant-design/icons';
-import {PhoneOutlined} from '@ant-design/icons'
-import { useNavigate } from 'react-router-dom';
 import { Badge, Calendar } from 'antd';
-import { dateFnsLocalizer } from "react-big-calendar";
 import { Tabs } from 'antd';
-import { Dropdown, Menu , Space} from 'antd';
 import Header from "../header/header";
-import { DownOutlined } from '@ant-design/icons';
-// import { Dropdown, Menu, Space } from 'antd';
 
 const Slidebar = (props) => {
 
   const moment = require('moment');
   const [datesends, setDatesend] = useState([])
   const [newVariable, setNewVariable] = useState([])
-
-  // const [currentTab, setCurrentTab] = useState("1")
-  // const [display, setDisplay] = useState(false)
-  // const [isLoggedin, setIsLoggedin] = useState(true)
-  // const [logout, setLogout] = useState([])
-  // const [login, setLogin] = useState([])
+  const [yearLeaveData, setYearLeaveData] = useState([])
+  const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
   const { TabPane } = Tabs;
 
   
@@ -435,6 +423,66 @@ const Slidebar = (props) => {
       leaveDate:"03-Aug-2022"
          }
 ]
+
+
+const ApplyLeave = [
+  {
+    "leavetype":"Authorized break during day",
+    "nextyear":"Nextyear",
+    "remainingyear":"00 Days",
+    "remainingme":"00 Days",
+    "applyLeave":"Apply Leave"
+  },
+  {
+    "leavetype":"Casual Leave",
+    "nextyear":"Nextyear",
+    "remainingyear":"12 Days",
+    "remainingme":"6 Days",
+    "applyLeave":"Apply Leave"
+  },
+
+  {
+    "leavetype":"Compensatory Off",
+    "nextyear":"Nextyear",
+    "remainingyear":"00 Days",
+    "remainingme":"00 Days",
+    "applyLeave":"Apply Leave"
+  },
+
+  {
+    "leavetype":"Restricted Holidays",
+    "nextyear":"Nextyear",
+    "remainingyear":"2 Days",
+    "remainingme":"1 Days",
+    "applyLeave":"Apply Leave"
+  },
+
+  {
+    "leavetype":"Sick Leave",
+    "nextyear":"Nextyear",
+    "remainingyear":"6 Days",
+    "remainingme":"3 Days",
+    "applyLeave":"Apply Leave"
+  },
+
+  {
+    "leavetype":"Paid Leave",
+    "nextyear":"Nextyear",
+    "remainingyear":"12 Days",
+    "remainingme":"0 Days",
+    "applyLeave":"Apply Leave"
+  },
+
+  {
+    "leavetype":"Leave without Pay",
+    "nextyear":"Nextyear",
+    "remainingyear":"0 Days",
+    "remainingme":"0 Days",
+    "applyLeave":"Apply Leave"
+  },
+]
+
+
 let { id } = useParams();
 let valId = `${id}`
 
@@ -446,9 +494,34 @@ const variableOne = datesends.filter(itemInArray =>
   itemInArray.employeeId == valId
 );
 setNewVariable(variableOne)
+
+let a = JSON.parse(localStorage.getItem("leaveData"))
+// console.log("from use effects", JSON.parse(localStorage.getItem("leaveData")));
+setYearLeaveData(a)
+
+
 }, [newVariable])
 // console.log("daaaaaaa", newVariable)
-    
+
+const showModal = () => {
+  setVisible(true);
+};
+
+const handleOk = () => {
+  setLoading(true);
+  setTimeout(() => {
+    setLoading(false);
+    setVisible(false);
+  }, 3000);
+};
+
+const handleCancel = () => {
+  setVisible(false);
+};
+
+
+
+    // console.log("leaveDataaaaaaaaaaaaaaaaaa", yearLeaveData)
 const dateCellRender = (value) => {
     let listData = [];
     {newVariable.map((item,index)=>{
@@ -512,6 +585,8 @@ const dateCellRender = (value) => {
 
 
 
+
+
   return (
     <ul className="events">
          {listData.map((item) => (
@@ -548,138 +623,156 @@ const dateCellRender = (value) => {
 
               <Tabs defaultActiveKey="1" onChange={onChange}>
                 <TabPane tab="My Leave Data" key="1">
-                <table>
+                
+               
+                {/* {
+    "leavetype":"Authorized break during day",
+    "nextyear":"Nextyear",
+    "remaining-year":"00 Days",
+    "remaining-me":"00 Days",
+    "applyLeave":"Apply Leave"
+  }, */}
+               
+{ApplyLeave && ApplyLeave.map((item, index)=>{
+  return(
+    <table>
+<tr >
+
+                <div className="th_div">
+                <div className="data_leave">
+                 <th ><li>{item.leavetype}</li></th><br></br>
+                 <th>{item.nextyear}</th>
+                 </div>
+
+                 <div className="hours">
+                  <th>{item.remainingme}</th><br></br>
+                  <th>{item.remainingyear}</th>
+                 </div>
+
+                 <div className="td_a">
+                 <td >
+                 <Button type="primary" onClick={showModal}>
+        {item.applyLeave}
+      </Button>
+      <Modal
+        visible={visible}
+        title="Apply Leave"
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={[
+          <Button key="back" onClick={handleCancel}>
+          Cancel
+          </Button>,
+          <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
+            Submit
+          </Button>,
+          
+        ]}
+      >
+        <div className="leave-form">
+    <form>
+    
+    <div className="select-leave">
+      <div className="leave-type">
+        <label >Leave Type</label><br/>
+          <select >
+            <option >Casual Leave</option>
+            <option >Compensatory Off</option>
+            <option >Restricted Holidays</option>
+            <option >Sick Leave</option>
+            <option>Paid Leave</option>
+          </select>
+      </div>
+
+      <div className="balance-leave">
+        <label>Current Balance</label><br/>
+          <h1>0 Hours</h1>
+      </div>
+    </div>
+     <hr />
+
+
+<div className="apply-leave">    
+  <div className="leave-start">
+    <div className="leave-start-date">
+      <label>Leave Start from</label>
+    </div>
+    
+    <div className="leave-daytype">
+      <input type="date" /> 
+
+    <select>
+      <option>Full Day</option>
+      <option>First Half of the Day</option>
+      <option>Second Half of the Day</option>
+    </select>
+    </div>
+    </div>
+
+    <div className="leave-start">
+  <div className="leave-start-date">
+  <label>Leave ending on</label> <br></br>
+    </div>
+    
+    <div className="leave-daytype">
+    <input type="date" /> 
+
+    <select>
+      <option>Full Day</option>
+      <option>First Half of the Day</option>
+      <option>Second Half of the Day</option>
+    </select>
+    </div>
+    </div>
+    </div>
+    <hr />
+
+<div className="leave-reason">  
+   <label>Reason for Leave</label><br/>
+    <textarea /><br/>
+    </div>
+    <hr/>
+
+<div className="leave-contact">
+  <div className="leave-address">
+   <label>Contact Address</label><br/>
+   <textarea />
+   </div>
+
+<div className="leave-number">
+    <label>Contact Number (Optional)</label><br/>
+  <input />
+    
+    </div>
+    <hr />
+
+  </div>
+    </form>
+    </div>
+      </Modal>
+                  
+                  </td>
+                 </div>
+                 </div>
+               </tr>
+               <hr />
+               </table>
+);
+})}
                
 
-               <tr>
-                <div className="th_div">
-                <div className="data_leave">
-                 <th >Authorized break during day</th><br></br>
-                 <th>Next Year</th>
-                 </div>
 
-                 <div className="hours">
-                  <th>0 Hours (s)</th><br></br>
-                  <th>0 Hours (s)</th>
-                 </div>
-
-                 <div className="td_a">
-                 <td ><a>Apply Leave</a></td>
-                 </div>
-                 </div>
-               </tr>
-
-               <tr>
-                <div className="th_div">
-                <div className="data_leave">
-                 <th >Casual Leave</th><br></br>
-                 <th>Next Year</th>
-                 </div>
-
-                 <div className="hours">
-                  <th>0 Hours (s)</th><br></br>
-                  <th>0 Hours (s)</th>
-                 </div>
-
-                 <div className="td_a">
-                 <td ><a>Apply Leave</a></td>
-                 </div>
-                 </div>
-               </tr>
+               
 
 
-               <tr>
-                <div className="th_div">
-                <div className="data_leave">
-                 <th >Compensatory Off</th><br></br>
-                 <th>Next Year</th>
-                 </div>
+               
 
-                 <div className="hours">
-                  <th>0 Hours (s)</th><br></br>
-                  <th>0 Hours (s)</th>
-                 </div>
+               
 
-                 <div className="td_a">
-                 <td ><a>Apply Leave</a></td>
-                 </div>
-                 </div>
-               </tr>
+               
 
+               
 
-               <tr>
-                <div className="th_div">
-                <div className="data_leave">
-                 <th >Leave without Pay</th><br></br>
-                 <th>Next Year</th>
-                 </div>
-
-                 <div className="hours">
-                  <th>0 Hours (s)</th><br></br>
-                  <th>0 Hours (s)</th>
-                 </div>
-
-                 <div className="td_a">
-                 <td ><a>Apply Leave</a></td>
-                 </div>
-                 </div>
-               </tr>
-
-               <tr>
-                <div className="th_div">
-                <div className="data_leave">
-                 <th >Paid Leave</th><br></br>
-                 <th>Next Year</th>
-                 </div>
-
-                 <div className="hours">
-                  <th>0 Hours (s)</th><br></br>
-                  <th>0 Hours (s)</th>
-                 </div>
-
-                 <div className="td_a">
-                 <td ><a>Apply Leave</a></td>
-                 </div>
-                 </div>
-               </tr>
-
-               <tr>
-                <div className="th_div">
-                <div className="data_leave">
-                 <th >Restricted Holidays</th><br></br>
-                 <th>Next Year</th>
-                 </div>
-
-                 <div className="hours">
-                  <th>0 Hours (s)</th><br></br>
-                  <th>0 Hours (s)</th>
-                 </div>
-
-                 <div className="td_a">
-                 <td ><a>Apply Leave</a></td>
-                 </div>
-                 </div>
-               </tr>
-
-               <tr>
-                <div className="th_div">
-                <div className="data_leave">
-                 <th >Sick Leave</th><br></br>
-                 <th>Next Year</th>
-                 </div>
-
-                 <div className="hours">
-                  <th>0 Hours (s)</th><br></br>
-                  <th>0 Hours (s)</th>
-                 </div>
-
-                 <div className="td_a">
-                 <td ><a>Apply Leave</a></td>
-                 </div>
-                 </div>
-               </tr>
-
-               </table>  
                </TabPane>
 
               <TabPane tab="My Leave Balance" key="2">
@@ -702,31 +795,23 @@ const dateCellRender = (value) => {
 
                      <TabPane tab="2022" key="3">
                       <div>
-                          <li>New Year (Closed Holiday) <span>01.01.22 (Sat)</span></li>
-                          <li>Makar Sakranti / Pongal <span>14.01.22 (Fri)</span></li>
-                          <li>Republic Day (Closed Holiday)<span>26.01.22 (Wed)</span></li>
-                          <li>Maha Shivratri (Restricted Holiday)<span>01.03.22 (Tue)</span></li>
-                          <li>Holi(Restricted Holiday) <span>18.03.22 (Fri)</span></li>
-                          <li>UGADI/ Gudi Padva (Closed Holiday) <span>02.04.22 (Sat)</span></li>
-                          <li>Good Friday(Restricted Holiday)<span>15.04.22 ( Fri )</span></li>
-                          <li>Vishu(Restricted Holiday) <span>15.04.22 (Fri)</span></li>
-                          <li>May Day(Restricted Holiday)	 <span>01.05.22 (Sun)</span></li>
-                          <li>Id ul Fitr(Restricted Holiday) <span>03.05.22 (Tue)</span></li>
-                          <li>Bakri EID (Restricted Holiday)<span>09.07.22 ( Sat )</span></li>
-                          <li>Muharram (Restricted Holiday)<span>	08.08.22 ( Mon)</span></li>
-                          <li>Rakshabandhan (Restricted Holiday)<span>		11.08.22 ( Thu )</span></li>
-                          <li>Independence Day (Closed Holiday)	<span>15.08.22 ( Mon )</span></li>
-                          <li>Shri Krishna Janamashtami (Restricted Holiday)<span>19.08.22 ( Fri )</span></li>
-                          <li>Ganesh Chaturthi (Closed Day)	<span>31.08.22 ( Wed )</span></li>
-                          <li>Onam(Restricted Holiday)<span>	08.09.22 ( Thu )</span></li>
-                          <li>Gandhi Jayanthi (Closed Holiday)	<span>	02.10.22 ( Sun )</span></li>
-                          <li>Dussehra(Closed Holiday)		<span>	05.10.22 ( Wed )</span></li>
-                          <li>Deepawali (Closed Holiday)		<span>23.10.22 ( Sun )</span></li>
-                          <li>Deepawali (Closed Holiday)		<span>24.10.22 ( Mon )</span></li>
-                          <li>Bhai Dooj (Restricted Holiday)<span>26.10.22 ( Wed )</span></li>
-                          <li>Kannada Rajyaotsava (Closed Holiday)	<span>01.11.22 ( Tue )</span></li>
-                          <li>Gurunanak Jayanti (Restricted Holiday)		<span>08.11.22 ( Tue )</span></li>
-                          <li>Christmas (Closed Holiday)		<span>25.12.22 ( Sun )</span></li>
+                         {yearLeaveData && yearLeaveData.map((item, index)=>{
+                          return(
+                            <ul>
+                              <div>
+                              <li>{item.leaveDate}</li>
+                              </div>
+
+                              <div>
+                              <li>{item.leaveType}</li>
+                              </div>
+
+                              <div>
+                              <li>{item.Date}</li>
+                              </div>
+                            </ul>
+                          );
+                         })}
                           </div>                 
 
                         

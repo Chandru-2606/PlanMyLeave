@@ -377,6 +377,221 @@ margin-left: 50px;
   margin-left: 100px;
   font-size: 16px;
 }
+.leave-form{
+width: 100%
+}
+.leave-form form{
+  margin-left: 20px;
+  width: 90%;
+}
+
+/* .dropdownleave{
+width: 100%;
+}
+
+.dropdownleave label{
+font-size: 20px;
+width: 25%;
+font-weight: bolder;
+}
+
+.dropdownleave1{
+display: flex;
+justify-content: space-between;
+width: 100%;
+}
+
+.dropdownleave select{
+margin-top: 10px;
+width: 50%;
+font-size: 16px;
+margin-left: 17px;
+
+}
+
+.hours-div{
+  width: 50%;
+}
+
+.hours-div label {
+  font-size: 20px;
+width: 25%;
+font-weight: bolder;
+}
+
+.hours-div  h1{
+  font-size: 20px;
+}
+
+.select-leave{
+  width: 100%;
+  margin-top: 10px;
+}
+
+.select-leave label{
+  font-size: 20px;
+  width: 25%;
+  font-weight: bolder;
+}
+.leave-start {
+  margin-top: 10px;
+  display: flex;
+  margin-left: 20px;
+}
+
+.leave-start input{
+  width: 170px;
+}
+
+.leave-start select{
+  margin-left: 40px;
+  width: 170px;
+}
+
+.reason{
+  font-size: 20px;
+  font-weight: bolder;
+  margin-top: 10px;
+}
+
+.reason textarea{
+  margin-left: 17px;
+  width: 80%;
+  margin-top: 10px;
+} */
+ 
+.ant-modal-content{
+  width: 170% !important;
+  margin-left: -150px !important;
+  margin-top: -70px !important;
+}
+
+.leave-form{
+  width: 100%;
+}
+
+.select-leave{
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.leave-type{
+  width: 50%;
+}
+
+.leave-type label{
+  color: black;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+
+.leave-type select{
+ color: black;
+ margin-top: 10px;
+ font-size: 16px;
+ height: 30px;
+ width: 70%;
+}
+
+.balance-leave {
+  width: 50%;
+}
+.balance-leave label{
+  color: black;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+.balance-leave h1{
+  font-size: 16px;
+  color: red;
+}
+
+.apply-leave{
+  display: flex;
+}
+.leave-start {
+  display: grid;
+  width: 50%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.leave-start-date label{
+  color: black;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+
+.leave-daytype{
+  margin-top: 10px;
+}
+.leave-daytype input{
+ height: 30px;
+ width: 120px;
+}
+
+.leave-daytype select{
+  height: 30px;
+  margin-left: 20px;
+  width: 150px;
+ }
+
+ .leave-reason{
+  width: 50%;
+ }
+
+ .leave-reason label{
+  color: red;
+  font-size: 16px;
+  font-family: sans-serif;
+  margin-top: 20px;
+  margin-bottom: 20px;
+ }
+
+ .leave-reason textarea{
+  margin-top: 10px;
+  width: 90%;
+  height: 40px;
+ }
+
+.leave-contact{
+  display: flex;
+}
+
+.leave-address{
+  display: grid;
+  width: 50%;
+}
+
+.leave-address label{
+  color: black;
+  font-size: 16px;
+  font-family: sans-serif;
+  margin-bottom: 20px;
+}
+
+.leave-address textarea{
+  margin-top: -30px;
+  width: 90%;
+}
+
+.leave-number{
+  display: grid;
+}
+
+.leave-number label{
+  color: black;
+  font-size: 16px;
+  font-family: sans-serif;
+  margin-bottom: 20px;
+}
+
+.leave-number input{
+  margin-top: -40px;
+  height: 30px;
+  width: 100%;
+}
+
 
 /* @media only screen and (max-width: 400px) {
          .slide_container{

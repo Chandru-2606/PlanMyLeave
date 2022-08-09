@@ -2,29 +2,23 @@ import React, {useState , useEffect} from "react";
 import { useNavigate } from 'react-router-dom';
 import './admin.css'
 import Header from "../header/header";
-import EditFilled from '@ant-design/icons'
-import { Space } from 'antd';
 import { Button, Modal } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
 import { Input } from 'antd';
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import { DatePicker } from 'antd';
 import {EditOutlined} from '@ant-design/icons';
 import {DownCircleOutlined  } from '@ant-design/icons';
+import {MenuUnfoldOutlined } from '@ant-design/icons';
+import {FileAddOutlined } from '@ant-design/icons';
+
 
 
 function Admin (props) {
+
 const [userdatamap, setUserdatamap] = useState([])
 const [dashboardData, setDashboardData] = useState([])
-const [leavedata, setLeavedata] = useState([])
 const [isModalVisible, setIsModalVisible] = useState(false);
-
-const [select, setSelect] = useState("")
 const [lisEmployee, setListEmployee] = useState([])
 const [todayData, setTodayData] = useState([])
-const [clockinClockout, setClockinClockout] = useState([])
-
-
+const [display, setDisplay] = useState(false)
 
 const moment = require('moment');
 const { TextArea } = Input;
@@ -34,19 +28,14 @@ useEffect(() => {
 
   const listDatessssss = userdata.map(t1 => ({...t1, ...clockindata.find(t2 => t2.employeeId === t1.id)}))
 setListEmployee(listDatessssss)
-// console.log("dattttttttttttttttttttttaaaaaaaaaaa", listDatessssss)
 
 const today = todayClockin.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
 setTodayData(today)
 
 
   let a = JSON.parse(localStorage.getItem("employeeData"))
-//   console.log("from use effects", JSON.parse(localStorage.getItem("expenses")));
   setDashboardData(a)
 }, [])
-
-// console.log("todayyyyyyyyyyy", ListEmployee)
-// console.log('loooool', lisEmployee)
 
   const userdata=[
     {
@@ -105,7 +94,7 @@ setTodayData(today)
       "createdat": "2021-02-16T15:26:45.3582964",
       "updatedat":"DD-MM-YYYY"
     }
-  ]
+]
   const clockindata=[
     {
       employeeId: 3180,
@@ -457,43 +446,60 @@ setTodayData(today)
 const leaveData = [
    {
     "leaveDate" :"New Year",
-    "Date" : "01.01.22 (Sat)"
+    "Date" : "01.01.22 (Sat)",
+    "leaveType":"Closed Holiday"
    },
    {
       "leaveDate" :"Makar Sakranti / Pongal",
-      "Date" : "14.01.22 (Fri)"
+      "Date" : "14.01.22 (Fri)",
+      "leaveType":"Closed Holiday"
      },
      {
-      "leaveDate" :"Republic Day (Closed Holiday)",
-      "Date" : "26.01.22 (Wed)"
+      "leaveDate" :"Republic Day ",
+      "Date" : "26.01.22 (Wed)",
+      "leaveType":"Closed Holiday"
+
      },
      {
-      "leaveDate" :"Maha Shivratri (Restricted Holiday)",
-      "Date" : "01.03.22 (Tue)"
+      "leaveDate" :"Maha Shivratri ",
+      "Date" : "01.03.22 (Tue)", 
+      "leaveType":"Restricted Holiday"
      },
      {
-      "leaveDate" :"Holi(Restricted Holiday)",
-      "Date" : "18.03.22 (Fri)"
+      "leaveDate" :"Holi",
+      "Date" : "18.03.22 (Fri)",
+      "leaveType":"Restricted Holiday"
+
      },
      {
-      "leaveDate" :"UGADI/ Gudi Padva (Closed Holiday)",
-      "Date" : "02.04.22 (Sat)"
+      "leaveDate" :"UGADI/ Gudi Padva ",
+      "Date" : "02.04.22 (Sat)",
+      "leaveType":"Closed Holiday"
+
      },
      {
-      "leaveDate" :"Good Friday(Restricted Holiday)",
-      "Date" : "15.04.22 ( Fri )"
+      "leaveDate" :"Good Friday",
+      "Date" : "15.04.22 ( Fri )",
+      "leaveType":"Restricted Holiday"
+
      },
      {
-      "leaveDate" :"Vishu(Restricted Holiday) ",
-      "Date" : "15.04.22 (Fri)"
+      "leaveDate" :"Vishu",
+      "Date" : "15.04.22 (Fri)",
+      "leaveType":"Restricted Holiday"
+
      },
      {
-      "leaveDate" :"May Day(Restricted Holiday)",
-      "Date" : "01.05.22 (Sun)"
+      "leaveDate" :"May Day",
+      "Date" : "01.05.22 (Sun)",
+      "leaveType":"Restricted Holiday"
+
      },
      {
-      "leaveDate" :"Id ul Fitr(Restricted Holiday)",
-      "Date" : "03.05.22 (Tue)"
+      "leaveDate" :"Id ul Fitr",
+      "Date" : "03.05.22 (Tue)",
+      "leaveType":"Restricted Holiday"
+
      },
 ]
 const admindata=[
@@ -511,21 +517,21 @@ const admindata=[
        "createdat": "2021-02-16T10:29:48.0112462",
        "updatedat":"DD-MM-YYYY"
      },
- ]
+]
 
  const todayClockin =[
    {
       employeeId: 3180,
-      clockin:"Mom Aug 08 2022 09:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mom Aug 08 2022 06:00:00 GMT+0530 (India Standard Time)",
+      clockin:"Mom Aug 09 2022 09:00:00 GMT+0530 (India Standard Time)",
+      clockout:"Mom Aug 09 2022 06:00:00 GMT+0530 (India Standard Time)",
       workingHrs:"8",
       leaveType:"",
       leaveDate:""
       },
       {
          employeeId: 3182,
-         clockin:"Mom Aug 08 2022 10:10:00 GMT+0530 (India Standard Time)",
-         clockout:"Mom Aug 08 2022 07:00:00 GMT+0530 (India Standard Time)",
+         clockin:"Mom Aug 09 2022 10:10:00 GMT+0530 (India Standard Time)",
+         clockout:"Mom Aug 09 2022 07:00:00 GMT+0530 (India Standard Time)",
          workingHrs:"9",
          leaveType:"",
          leaveDate:""
@@ -540,19 +546,15 @@ const admindata=[
             },
             {
                employeeId: 3184,
-               clockin:"Mom Aug 08 2022 09:30:00 GMT+0530 (India Standard Time)",
-               clockout:"Mom Aug 08 2022 06:30:00 GMT+0530 (India Standard Time)",
+               clockin:"Mom Aug 09 2022 09:30:00 GMT+0530 (India Standard Time)",
+               clockout:"Mom Aug 09 2022 06:30:00 GMT+0530 (India Standard Time)",
                workingHrs:"7",
                leaveType:"",
                leaveDate:""
                },
             
- ]
-// const AddSubmit = (e) =>{
-// console.log("btn trigerred")
-// }
+]
 
-// console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", userdatamap)
 const showModal = () => {
    setIsModalVisible(true);
  };
@@ -564,37 +566,38 @@ const showModal = () => {
  console.log("qazsdfxcgvhbjnkm", userdatamap)
  const handleSubmit = () => {
    setIsModalVisible(false);
-//  console.log("submit", handleSubmit)
-
  };
-
- 
-
-
-// const variableOne =userdatamap.filter(itemInArray => 
-//    itemInArray.id 
-//    );
-//    console.log("lllooooooool", variableOne)
-// console.log("loooolool", select)
 
 const onChange = (e) => {
    console.log(e);
  };
 
  const EmployeeName =(e) =>{
-  console.log("qwersdtfgyuhijo", e.target.value)
   const filtered = clockindata.filter(employee => {
    return employee.employeeId == e.target.value;
  });
-
  setTodayData(filtered)
-
 }
-// console.log("looololl", clockinClockout)
 
 
 
-let navigate = useNavigate()
+const AddSubmit = (e) =>{
+
+   const LeaveYear = {leaveData : leaveData}
+const leaveDatareceived=localStorage.getItem("leaveData")
+
+if(leaveDatareceived==null){
+   localStorage.setItem("leaveData",JSON.stringify(leaveData))
+ }
+ else{
+   let arr=JSON.parse(leaveDatareceived);
+   console.log(arr);
+   arr.push(leaveData);
+   localStorage.setItem("leaveData",JSON.stringify(arr));
+ }
+}
+
+let navigate = useNavigate();
     return(
       <div className="adminApp">  
       <div className="admin_header">
@@ -602,15 +605,12 @@ let navigate = useNavigate()
       </div >
       <div className="add_employee">
          <div className="add_emp">
-     
       </div>
       </div>
 <div className="data-today">
    <div className="day-today"> 
-
       <h1>Today:{moment().format('L')}</h1>
       <select onChange={EmployeeName}>
-
       {lisEmployee.map((item, index)=>{
          return(
             <option value={item.id}>
@@ -618,8 +618,7 @@ let navigate = useNavigate()
             </option>
          );
       })}
-         </select>
-
+      </select>
    </div>
    <div className="today-data">
       <div className="todayData-head"><h1>Name</h1></div>
@@ -633,7 +632,7 @@ let navigate = useNavigate()
          <ul>
             <div className="today_list">            
             <div className="today_listData">{item.name}</div>
-            <div className="today_listData">{item.clockin ? moment(item.clockin).format('LT') : ""}</div>
+            <div className="today_listData">{item.clockin ? moment(item.clockin).format('lll') : ""}</div>
             <div className="today_listData">{item.clockout ? moment(item.clockout).format('LT') :
                                              ""}</div>
             <div className="today_listData" id="leave-type" >{item.leaveType}</div>
@@ -664,7 +663,6 @@ let navigate = useNavigate()
          <div>
             <div className="empolyee-header">
                <h1>Employee List</h1>
-               {/* <button onClick={() => {navigate("/Addemploye"); }}>Add Employee</button>*/}
                <Button type="primary" onClick={showModal}>
         Add Employee
       </Button>
@@ -745,59 +743,56 @@ let navigate = useNavigate()
             <div className="headingName"><h4>DOJ </h4></div>
             <div className="headingName"><h4>Status </h4></div>
             <div className="headingName"><h4>Action </h4></div>
-           
+            <div className="headingName">
+               <button onClick={() => { setDisplay(true)}}><MenuUnfoldOutlined /></button></div>
             </div>
-
              {lisEmployee.length && lisEmployee.map((item, index) => {
            return(
                <div className="employeeesDatalist"> 
-             
                <ul key={index}>
                   <div className="employesssList">{item.name}</div>
                   <div className="employesssList" id="employe-email">{item.email}</div>
                   <div className="employesssList">{item.Address}</div>
                   <div className="employesssList">{item.DOB}</div>
                   <div className="employesssList">{item.DOJ}</div>
-                  {/* <div className="employesssList">Working</div>
-                  <div className="employesssList">Working</div> */}
 
+                 {display ? 
                   <div className="edit_btns">
                   <Button type="primary"  onClick={showModal}>
                      <EditOutlined />
                   </Button>
                      <div className="edit_btns1">
-                     <DownCircleOutlined />
+                  <DownCircleOutlined />
                      </div>
-
-                  </div>
-
-
-
-                  
-
+                  </div> :"" }
             </ul>
 
             </div>
             );
             })} 
             <div>
-
-            </div>
+         </div>
       </div>
             
       </div>
-      {/* <div className="leaveDatalist">
+      <div className="leaveDatalist">
          <div> 
             <h1>Leave Data</h1>
          </div>
       {leaveData.length && leaveData.map((item, index) => {
       return(
-      <ul>
-         <li >{item.leaveDate} <span>{item.Date} <button onClick={(e)=>{AddSubmit(item.leaveDate)}}>Add</button></span></li>
+         <div>
+         <button onClick={(e)=>{AddSubmit(e)}}><FileAddOutlined /></button>
+
+      <ul value={item.Date}>
+         <li >{item.leaveDate}</li>
+         <li>{item.leaveType}</li>
+         <li>{item.Date} </li>
       </ul>
+      </div>
          );
          })}
-      </div> */}
+      </div>
       </div>
     );
 }
