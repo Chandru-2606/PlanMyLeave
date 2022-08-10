@@ -592,6 +592,24 @@ font-weight: bolder;
   width: 100%;
 }
 
+.user-leave{
+  margin-left: 50px;
+  margin-top: 10px;
+  height: 400px;
+  width: 44%;
+  overflow-y: scroll;
+}
+
+
+ .drop-antd{
+  border: 1px solid black;
+  width: 20% !important;
+}
+
+/* .user-leave .ant-dropdown-menu{
+  width: 166px !important;
+} */
+
 
 /* @media only screen and (max-width: 400px) {
          .slide_container{

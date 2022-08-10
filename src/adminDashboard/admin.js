@@ -19,6 +19,11 @@ const [isModalVisible, setIsModalVisible] = useState(false);
 const [lisEmployee, setListEmployee] = useState([])
 const [todayData, setTodayData] = useState([])
 const [display, setDisplay] = useState(false)
+const [loading, setLoading] = useState(false);
+const [visible, setVisible] = useState(false);
+const [todayClockin, setTodayClockin] = useState([])
+
+
 
 const moment = require('moment');
 const { TextArea } = Input;
@@ -35,7 +40,24 @@ setTodayData(today)
 
   let a = JSON.parse(localStorage.getItem("employeeData"))
   setDashboardData(a)
+
+  const current = new Date();
+//   const filterLeave = clockindata.filter(itemInArray =>{
+//      if(moment(itemInArray).format('DD-MM-YYYY')==moment(current).format('DD-MM-YYYY')){
+//   console.log(moment(itemInArray).format('DD-MM-YYYY'),moment(current).format('DD-MM-YYYY'))
+//      }
+//    });
+
+   const FilteredArarry = clockindata.filter(itemInArray =>
+      (moment(itemInArray.clockin).format('DD-MM-YYYY')==moment(current).format('DD-MM-YYYY'))
+   )
+   setTodayClockin(FilteredArarry)
+
+   console.log("todayClockin", todayClockin)
+   
 }, [])
+
+
 
   const userdata=[
     {
@@ -95,352 +117,363 @@ setTodayData(today)
       "updatedat":"DD-MM-YYYY"
     }
 ]
-  const clockindata=[
-    {
-      employeeId: 3180,
-      clockin:"Fri Jul 26 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 26 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-      },
+const clockindata=[ 
+   {
+     employeeId:3180,
+     clockin:"Mon Aug 01 2022 09:30:00 GMT+0530 (India Standard Time)",
+     clockout:"Mon Aug 01 2022 06:30:00 GMT+0530 (India Standard Time)",
+     workingHrs:9,
+     leaveType:"",
+     leaveDate:""
+     },
      {
-      employeeId: 3180,
-      clockin:"",
-      clockout:"",
-      workingHrs:0,
-      leaveType:"Sick leave",
-      leaveDate:"Fri Jul 27 2022"
-         },
-      {
-      employeeId: 3180,
-      clockin:"Fri Jul 28 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 28 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
+       employeeId:3180,
+       clockin:"Tue Aug 02 2022 09:30:00 GMT+0530 (India Standard Time)",
+       clockout:"Tue Aug 02 2022 06:00:00 GMT+0530 (India Standard Time)",
+       workingHrs:'8:30',
+       leaveType:"",
+       leaveDate:""
+       },{
+         employeeId:3180,
+         clockin:"Wed Aug 03 2022 09:30:00 GMT+0530 (India Standard Time)",
+         clockout:"Wed Aug 03 2022 06:30:00 GMT+0530 (India Standard Time)",
+         workingHrs:9,
+         leaveType:"",
+         leaveDate:""
+         },{
+           employeeId:3180,
+           clockin:"Thu Aug 04 2022 10:30:00 GMT+0530 (India Standard Time)",
+           clockout:"Thu Aug 04 2022 06:00:00 GMT+0530 (India Standard Time)",
+           workingHrs:"7:30",
+           leaveType:"",
+           leaveDate:""
+           },{
+             employeeId:3180,
+             clockin:"Fri Aug 05 2022 10:00:00 GMT+0530 (India Standard Time)",
+             clockout:"Fri Aug 05 2022 07:00:00 GMT+0530 (India Standard Time)",
+             workingHrs:9,
+             leaveType:"",
+             leaveDate:""
+             },{
+               employeeId:3180,
+               clockin:"Sat Aug 06 2022 09:30:00 GMT+0530 (India Standard Time)",
+               clockout:"Sat Aug 06 2022 06:30:00 GMT+0530 (India Standard Time)",
+               workingHrs:9,
+               leaveType:"",
+               leaveDate:""
+               },{
+                 employeeId:3180,
+                 clockin:"Mon Aug 08 2022 09:30:00 GMT+0530 (India Standard Time)",
+                 clockout:"Mon Aug 08 2022 06:30:00 GMT+0530 (India Standard Time)",
+                 workingHrs:9,
+                 leaveType:"",
+                 leaveDate:""
+                 },{
+                   employeeId:3180,
+                   clockin:"Tue Aug 09 2022 09:30:00 GMT+0530 (India Standard Time)",
+                   clockout:"Tue Aug 09 2022 06:30:00 GMT+0530 (India Standard Time)",
+                   workingHrs:9,
+                   leaveType:"",
+                   leaveDate:""
+                   },{
+                     employeeId:3180,
+                     clockin:"Wed Aug 10 2022 09:30:00 GMT+0530 (India Standard Time)",
+                     clockout:"Wed Aug 10 2022 06:30:00 GMT+0530 (India Standard Time)",
+                     workingHrs:9,
+                     leaveType:"",
+                     leaveDate:""
+                     },
+                   {
+                   employeeId:3180,
+                   clockin:"",
+                   clockout:"",
+                   workingHrs:0,
+                   leaveType:"Leave without Pay",
+                   leaveDate:"Thu Aug 11 2022 09:30:00 GMT+0530 (India Standard Time)"
+                   },
+                   {
+                     employeeId:3180,
+                     clockin:"",
+                     clockout:"",
+                     workingHrs:0,
+                     leaveType:"Leave without Pay",
+                     leaveDate:"Fri Aug 12 2022 09:30:00 GMT+0530 (India Standard Time)"
+                     },
+                     {
+                       employeeId:3180,
+                       clockin:"",
+                       clockout:"",
+                       workingHrs:0,
+                       leaveType:"Leave without Pay",
+                       leaveDate:"Sat Aug 13 2022 09:30:00 GMT+0530 (India Standard Time)"
+                       },
+   {
+     employeeId:3182,
+     clockin:"Mon Aug 01 2022 09:30:00 GMT+0530 (India Standard Time)",
+     clockout:"Mon Aug 01 2022 06:30:00 GMT+0530 (India Standard Time)",
+     workingHrs:9,
+     leaveType:"",
+     leaveDate:""
+     },
      {
-      employeeId: 3180,
-      clockin:"Fri Jul 29 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 29 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
+       employeeId:3182,
+       clockin:"Tue Aug 02 2022 09:30:00 GMT+0530 (India Standard Time)",
+       clockout:"Tue Aug 02 2022 06:00:00 GMT+0530 (India Standard Time)",
+       workingHrs:'8:30',
+       leaveType:"",
+       leaveDate:""
+       },{
+         employeeId:3182,
+         clockin:"Wed Aug 03 2022 09:30:00 GMT+0530 (India Standard Time)",
+         clockout:"Wed Aug 03 2022 06:30:00 GMT+0530 (India Standard Time)",
+         workingHrs:9,
+         leaveType:"",
+         leaveDate:""
+         },{
+           employeeId:3182,
+           clockin:"Thu Aug 04 2022 10:30:00 GMT+0530 (India Standard Time)",
+           clockout:"Thu Aug 04 2022 06:00:00 GMT+0530 (India Standard Time)",
+           workingHrs:"7:30",
+           leaveType:"",
+           leaveDate:""
+           },{
+             employeeId:3182,
+             clockin:"Fri Aug 05 2022 10:00:00 GMT+0530 (India Standard Time)",
+             clockout:"Fri Aug 05 2022 07:00:00 GMT+0530 (India Standard Time)",
+             workingHrs:9,
+             leaveType:"",
+             leaveDate:""
+             },{
+               employeeId:3182,
+               clockin:"Sat Aug 06 2022 09:30:00 GMT+0530 (India Standard Time)",
+               clockout:"Sat Aug 06 2022 06:30:00 GMT+0530 (India Standard Time)",
+               workingHrs:9,
+               leaveType:"",
+               leaveDate:""
+               },{
+                 employeeId:3182,
+                 clockin:"Mon Aug 08 2022 09:30:00 GMT+0530 (India Standard Time)",
+                 clockout:"Mon Aug 08 2022 06:30:00 GMT+0530 (India Standard Time)",
+                 workingHrs:9,
+                 leaveType:"",
+                 leaveDate:""
+                 },{
+                   employeeId:3182,
+                   clockin:"Tue Aug 09 2022 09:30:00 GMT+0530 (India Standard Time)",
+                   clockout:"Tue Aug 09 2022 06:30:00 GMT+0530 (India Standard Time)",
+                   workingHrs:9,
+                   leaveType:"",
+                   leaveDate:""
+                   },{
+                     employeeId:3182,
+                     clockin:"Wed Aug 10 2022 09:30:00 GMT+0530 (India Standard Time)",
+                     clockout:"Wed Aug 10 2022 06:30:00 GMT+0530 (India Standard Time)",
+                     workingHrs:9,
+                     leaveType:"",
+                     leaveDate:""
+                     },
+                   {
+                   employeeId:3182,
+                   clockin:"",
+                   clockout:"",
+                   workingHrs:0,
+                   leaveType:"Restricted Holidays",
+                   leaveDate:"Thu Aug 11 2022 09:30:00 GMT+0530 (India Standard Time)"
+                   },
+                   {
+                     employeeId:3182,
+                     clockin:"",
+                     clockout:"",
+                     workingHrs:0,
+                     leaveType:"Sick leave",
+                     leaveDate:"Fri Aug 12 2022 09:30:00 GMT+0530 (India Standard Time)"
+                     },
+                     {
+                       employeeId:3182,
+                       clockin:"",
+                       clockout:"",
+                       workingHrs:0,
+                       leaveType:"Restricted Holidays",
+                       leaveDate:"Sat Aug 13 2022 09:30:00 GMT+0530 (India Standard Time)"
+                       },
+   {
+   employeeId: 3183,
+   clockin:"Mon Aug 01 2022 09:30:00 GMT+0530 (India Standard Time)",
+   clockout:"Mon Aug 01 2022 06:30:00 GMT+0530 (India Standard Time)",
+   workingHrs:9,
+   leaveType:"",
+   leaveDate:""
+   },
+   {
+     employeeId: 3183,
+     clockin:"Tue Aug 02 2022 09:30:00 GMT+0530 (India Standard Time)",
+     clockout:"Tue Aug 02 2022 06:00:00 GMT+0530 (India Standard Time)",
+     workingHrs:'8:30',
+     leaveType:"",
+     leaveDate:""
+     },{
+       employeeId: 3183,
+       clockin:"Wed Aug 03 2022 09:30:00 GMT+0530 (India Standard Time)",
+       clockout:"Wed Aug 03 2022 06:30:00 GMT+0530 (India Standard Time)",
+       workingHrs:9,
+       leaveType:"",
+       leaveDate:""
+       },{
+         employeeId: 3183,
+         clockin:"Thu Aug 04 2022 10:30:00 GMT+0530 (India Standard Time)",
+         clockout:"Thu Aug 04 2022 06:00:00 GMT+0530 (India Standard Time)",
+         workingHrs:"7:30",
+         leaveType:"",
+         leaveDate:""
+         },{
+           employeeId: 3183,
+           clockin:"Fri Aug 05 2022 10:00:00 GMT+0530 (India Standard Time)",
+           clockout:"Fri Aug 05 2022 07:00:00 GMT+0530 (India Standard Time)",
+           workingHrs:9,
+           leaveType:"",
+           leaveDate:""
+           },{
+             employeeId: 3183,
+             clockin:"Sat Aug 06 2022 09:30:00 GMT+0530 (India Standard Time)",
+             clockout:"Sat Aug 06 2022 06:30:00 GMT+0530 (India Standard Time)",
+             workingHrs:9,
+             leaveType:"",
+             leaveDate:""
+             },{
+               employeeId: 3183,
+               clockin:"Mon Aug 08 2022 09:30:00 GMT+0530 (India Standard Time)",
+               clockout:"Mon Aug 08 2022 06:30:00 GMT+0530 (India Standard Time)",
+               workingHrs:9,
+               leaveType:"",
+               leaveDate:""
+               },{
+                 employeeId: 3183,
+                 clockin:"Tue Aug 09 2022 09:30:00 GMT+0530 (India Standard Time)",
+                 clockout:"Tue Aug 09 2022 06:30:00 GMT+0530 (India Standard Time)",
+                 workingHrs:9,
+                 leaveType:"",
+                 leaveDate:""
+                 },{
+                   employeeId: 3183,
+                   clockin:"Wed Aug 10 2022 09:30:00 GMT+0530 (India Standard Time)",
+                   clockout:"Wed Aug 10 2022 06:30:00 GMT+0530 (India Standard Time)",
+                   workingHrs:9,
+                   leaveType:"",
+                   leaveDate:""
+                   },
+                 {
+                 employeeId: 3183,
+                 clockin:"",
+                 clockout:"",
+                 workingHrs:0,
+                 leaveType:"Sick leave",
+                 leaveDate:"Thu Aug 11 2022 09:30:00 GMT+0530 (India Standard Time)"
+                 },
+                 {
+                   employeeId: 3183,
+                   clockin:"",
+                   clockout:"",
+                   workingHrs:0,
+                   leaveType:"Sick leave",
+                   leaveDate:"Fri Aug 12 2022 09:30:00 GMT+0530 (India Standard Time)"
+                   },
+                   {
+                     employeeId: 3183,
+                     clockin:"",
+                     clockout:"",
+                     workingHrs:0,
+                     leaveType:"Sick leave",
+                     leaveDate:"Sat Aug 13 2022 09:30:00 GMT+0530 (India Standard Time)"
+                     },
+   {
+     employeeId: 3184,
+     clockin:"Mon Aug 01 2022 09:30:00 GMT+0530 (India Standard Time)",
+     clockout:"Mon Aug 01 2022 06:30:00 GMT+0530 (India Standard Time)",
+     workingHrs:9,
+     leaveType:"",
+     leaveDate:""
+     },
      {
-      employeeId: 3180,
-      clockin:"Sat Jul 30 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Sat Jul 30 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3180,
-      clockin:"Mon Aug 01 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 01 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:8,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3180,
-      clockin:"Mon Aug 02 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 02 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Fri Jul 26 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 26 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Fri Jul 27 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 27 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:5,
-      leaveType:"",
-      leaveDate:""
-         },
-      {
-      employeeId: 3182,
-      clockin:"Fri Jul 28 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 28 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Fri Jul 29 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 29 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Sat Jul 30 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Sat Jul 30 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Mon Aug 01 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 01 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Mon Aug 02 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 02 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Fri Jul 26 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 26 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Fri Jul 27 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 27 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-      {
-      employeeId: 3182,
-      clockin:"Fri Jul 28 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 28 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Fri Jul 29 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 29 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Sat Jul 30 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Sat Jul 30 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Mon Aug 01 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 01 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Mon Aug 02 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 02 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-  
-  {
-      employeeId: 3183,
-      clockin:"Fri Jul 26 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 26 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Fri Jul 27 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 27 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-      {
-      employeeId: 3183,
-      clockin:"Fri Jul 28 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 28 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Fri Jul 29 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 29 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Sat Jul 30 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Sat Jul 30 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Mon Aug 01 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 01 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Mon Aug 02 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 02 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Fri Jul 26 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 26 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Fri Jul 27 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 27 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-      {
-      employeeId: 3183,
-      clockin:"Fri Jul 28 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 28 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Fri Jul 29 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 29 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Sat Jul 30 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Sat Jul 30 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Mon Aug 01 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 01 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"",
-      clockout:"",
-      workingHrs:0,
-      leaveType:"Casual Leave",
-      leaveDate:"Aug 02 2022"
-         },
-     {
-      employeeId: 3184,
-      clockin:"Fri Jul 26 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 26 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3184,
-      clockin:"Fri Jul 27 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 27 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-      {
-      employeeId: 3184,
-      clockin:"Fri Jul 28 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 28 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3184,
-      clockin:"Fri Jul 29 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 29 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3184,
-      clockin:"Sat Jul 30 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Sat Jul 30 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3184,
-      clockin:"Mon Aug 01 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 01 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3184,
-      clockin:"Mon Aug 02 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 02 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3184,
-      clockin:"",
-      clockout:"",
-      workingHrs:0,
-      leaveType:"Casual Leave",
-      leaveDate:"03-Aug-2022"
-         }
+       employeeId: 3184,
+       clockin:"Tue Aug 02 2022 09:30:00 GMT+0530 (India Standard Time)",
+       clockout:"Tue Aug 02 2022 06:00:00 GMT+0530 (India Standard Time)",
+       workingHrs:'8:30',
+       leaveType:"",
+       leaveDate:""
+       },{
+         employeeId: 3184,
+         clockin:"Wed Aug 03 2022 09:30:00 GMT+0530 (India Standard Time)",
+         clockout:"Wed Aug 03 2022 06:30:00 GMT+0530 (India Standard Time)",
+         workingHrs:9,
+         leaveType:"",
+         leaveDate:""
+         },{
+           employeeId: 3184,
+           clockin:"Thu Aug 04 2022 10:30:00 GMT+0530 (India Standard Time)",
+           clockout:"Thu Aug 04 2022 06:00:00 GMT+0530 (India Standard Time)",
+           workingHrs:"7:30",
+           leaveType:"",
+           leaveDate:""
+           },{
+             employeeId: 3184,
+             clockin:"Fri Aug 05 2022 10:00:00 GMT+0530 (India Standard Time)",
+             clockout:"Fri Aug 05 2022 07:00:00 GMT+0530 (India Standard Time)",
+             workingHrs:9,
+             leaveType:"",
+             leaveDate:""
+             },{
+               employeeId: 3184,
+               clockin:"Sat Aug 06 2022 09:30:00 GMT+0530 (India Standard Time)",
+               clockout:"Sat Aug 06 2022 06:30:00 GMT+0530 (India Standard Time)",
+               workingHrs:9,
+               leaveType:"",
+               leaveDate:""
+               },{
+                 employeeId: 3184,
+                 clockin:"Mon Aug 08 2022 09:30:00 GMT+0530 (India Standard Time)",
+                 clockout:"Mon Aug 08 2022 06:30:00 GMT+0530 (India Standard Time)",
+                 workingHrs:9,
+                 leaveType:"",
+                 leaveDate:""
+                 },{
+                   employeeId: 3184,
+                   clockin:"Tue Aug 09 2022 09:30:00 GMT+0530 (India Standard Time)",
+                   clockout:"Tue Aug 09 2022 06:30:00 GMT+0530 (India Standard Time)",
+                   workingHrs:9,
+                   leaveType:"",
+                   leaveDate:""
+                   },{
+                     employeeId: 3184,
+                     clockin:"Wed Aug 10 2022 09:30:00 GMT+0530 (India Standard Time)",
+                     clockout:"Wed Aug 10 2022 06:30:00 GMT+0530 (India Standard Time)",
+                     workingHrs:9,
+                     leaveType:"",
+                     leaveDate:""
+                     },
+                   {
+                   employeeId: 3184,
+                   clockin:"",
+                   clockout:"",
+                   workingHrs:0,
+                   leaveType:"Casual Leave",
+                   leaveDate:"Thu Aug 11 2022 09:30:00 GMT+0530 (India Standard Time)"
+                   },
+                   {
+                     employeeId: 3184,
+                     clockin:"",
+                     clockout:"",
+                     workingHrs:0,
+                     leaveType:"Casual Leave",
+                     leaveDate:"Fri Aug 12 2022 09:30:00 GMT+0530 (India Standard Time)"
+                     },
+                     {
+                       employeeId: 3184,
+                       clockin:"",
+                       clockout:"",
+                       workingHrs:0,
+                       leaveType:"Casual Leave",
+                       leaveDate:"Sat Aug 13 2022 09:30:00 GMT+0530 (India Standard Time)"
+                       }
 ]
 
 const leaveData = [
@@ -519,57 +552,70 @@ const admindata=[
      },
 ]
 
- const todayClockin =[
-   {
-      employeeId: 3180,
-      clockin:"Mom Aug 09 2022 09:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mom Aug 09 2022 06:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:"8",
-      leaveType:"",
-      leaveDate:""
-      },
-      {
-         employeeId: 3182,
-         clockin:"Mom Aug 09 2022 10:10:00 GMT+0530 (India Standard Time)",
-         clockout:"Mom Aug 09 2022 07:00:00 GMT+0530 (India Standard Time)",
-         workingHrs:"9",
-         leaveType:"",
-         leaveDate:""
-         },
-         {
-            employeeId: 3183,
-            clockin:"",
-            clockout:"",
-            workingHrs:"",
-            leaveType:"Sick Leave",
-            leaveDate:"Mom Aug 08 2022"
-            },
-            {
-               employeeId: 3184,
-               clockin:"Mom Aug 09 2022 09:30:00 GMT+0530 (India Standard Time)",
-               clockout:"Mom Aug 09 2022 06:30:00 GMT+0530 (India Standard Time)",
-               workingHrs:"7",
-               leaveType:"",
-               leaveDate:""
-               },
+//  const todayClockin =[
+//    {
+//       employeeId: 3180,
+//       clockin:"Mom Aug 10 2022 09:00:00 GMT+0530 (India Standard Time)",
+//       clockout:"Mom Aug 10 2022 06:00:00 GMT+0530 (India Standard Time)",
+//       workingHrs:"8",
+//       leaveType:"",
+//       leaveDate:""
+//       },
+//       {
+//          employeeId: 3182,
+//          clockin:"Mom Aug 10 2022 10:10:00 GMT+0530 (India Standard Time)",
+//          clockout:"Mom Aug 10 2022 07:00:00 GMT+0530 (India Standard Time)",
+//          workingHrs:"9",
+//          leaveType:"",
+//          leaveDate:""
+//          },
+//          {
+//             employeeId: 3183,
+//             clockin:"",
+//             clockout:"",
+//             workingHrs:"",
+//             leaveType:"Sick Leave",
+//             leaveDate:"Mom Aug 10 2022"
+//             },
+//             {
+//                employeeId: 3184,
+//                clockin:"Mom Aug 10 2022 09:30:00 GMT+0530 (India Standard Time)",
+//                clockout:"Mom Aug 10 2022 06:30:00 GMT+0530 (India Standard Time)",
+//                workingHrs:"7",
+//                leaveType:"",
+//                leaveDate:""
+//                },
             
-]
+// ]
+
+
+
+
+
+// const filterLeave = clockindata.filter(itemInArray => 
+//    itemInArray.clockout == moment().format('LLLL')
+//  );
+//  console.log("datefilte", filterLeave)
+
 
 const showModal = () => {
-   setIsModalVisible(true);
+   setVisible(true);
  };
 
  const handleOk = () => {
-   setIsModalVisible(false);
+   setLoading(true);
+   setTimeout(() => {
+     setLoading(false);
+     setVisible(false);
+   }, 3000);
  };
 
- console.log("qazsdfxcgvhbjnkm", userdatamap)
+ const handleCancel = () => {
+   setVisible(false);
+ };
+//  console.log("qazsdfxcgvhbjnkm", userdatamap)
  const handleSubmit = () => {
    setIsModalVisible(false);
- };
-
-const onChange = (e) => {
-   console.log(e);
  };
 
  const EmployeeName =(e) =>{
@@ -635,7 +681,7 @@ let navigate = useNavigate();
             <div className="today_listData">{item.clockin ? moment(item.clockin).format('lll') : ""}</div>
             <div className="today_listData">{item.clockout ? moment(item.clockout).format('LT') :
                                              ""}</div>
-            <div className="today_listData" id="leave-type" >{item.leaveType}</div>
+            <div className="today_listData" id="leave-type" >{item.leaveType ? item.leaveType : "" }</div>
             <div className="today_listData" id="workingshrs">{item.workingHrs}</div>
             </div>
          </ul>
@@ -666,12 +712,26 @@ let navigate = useNavigate();
                <Button type="primary" onClick={showModal}>
         Add Employee
       </Button>
-      <Modal title="Add Employee" visible={isModalVisible} onOk={handleOk} onCancel={handleSubmit}>
-      <from>
+
+      <Modal
+        visible={visible}
+        title="Add Employee"
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={[
+          <Button key="back" onClick={handleCancel}>
+            Cancel
+          </Button>,
+          <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
+            Add Employee
+          </Button>,
+          
+        ]}
+      >
+          <from>
       <div className="addemp_list">
          <div className="emp_label">
             <label>Name:</label>
-            {/* <input /> */}
             <div className="div-input">
             <Input size="large"   />
             </div>
@@ -731,7 +791,15 @@ let navigate = useNavigate();
       </div>
 
       </from>
+       
       </Modal>
+
+
+
+
+
+
+    
 
             </div>
             <div className="userData">

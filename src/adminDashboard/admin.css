@@ -123,9 +123,7 @@
     list-style-type:none;
 }
 
-.ant-modal-content{
-    width: 600px;
-}
+
 
 .addemp_list{
     display: flex;
@@ -134,8 +132,6 @@
 }
 
 .emp_label{
-    margin-left: 25px;
-    margin-right: 25px;
     display: flex;
     width: 100%;
 }
@@ -145,14 +141,13 @@
     margin-bottom: 20px !important;
     color: red;
     text-align: center;
-    margin-right: 20px;
     width: 50%;
 }
 
 .div-input{
     float: right;
     width: 50%;
-    margin-left: -100px;
+    margin-left: -150px;
 }
 
 

@@ -1,11 +1,64 @@
 import React, { useState, useEffect } from "react";
-import { Button, Modal } from 'antd';
 import 'antd/dist/antd.css';
 import './slidebar.css'
 import { useParams } from "react-router";
 import { Badge, Calendar } from 'antd';
 import { Tabs } from 'antd';
 import Header from "../header/header";
+import ConformLeave from "../Props/conformleave";
+import ApplyLeavebtn from "../Props/applyLeavebtn";
+import { Dropdown, Menu } from 'antd';
+
+
+const menu = (
+  <Menu
+  items={
+    [{
+      label:<div className="date-filter">
+              <button>Today</button>
+            </div>,
+      key: '0',
+    },
+    {
+      label:<div className="date-filter">
+              <button>Tomorrow</button>
+            </div>,
+      key: '1',
+    },
+    {
+      label:<div className="date-filter">
+              <button>Next 7 Days</button>
+            </div>,
+      key: '2',
+    },
+    {
+      label:<div className="date-filter">
+              <button>Next 14 Days</button>
+            </div>,
+      key: '3',
+    },
+    {
+      label:<div className="date-filter">
+              <button>Next 30 Days</button>
+            </div>,
+      key: '4',
+    },
+    {
+      label:<div className="date-filter">
+              <button>Next 60 Days</button>
+            </div>,
+      key: '5',
+    },
+    {
+      label:<div className="date-filter">
+              <button>Custom</button>
+            </div>,
+      key: '6',
+    },
+    
+  ]}
+/>
+  );
 
 const Slidebar = (props) => {
 
@@ -15,7 +68,24 @@ const Slidebar = (props) => {
   const [yearLeaveData, setYearLeaveData] = useState([])
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [leaveBalance, setLeaveBalance] = useState("")
+  // const [selectLeave, setSelectLeave] = useState([])
   const { TabPane } = Tabs;
+
+
+
+
+  const [leaveType, setLeaveType] = useState("")
+  const [dateStart, setDateStart] = useState("")
+  const [dateType, setDateType] = useState("")
+  const [dateEnd, setDateEnd] = useState("")
+  const [dayEnd, setDayEnd] = useState("")
+  const [reason, setReason] = useState("")
+  const [address, setAddress] = useState("")
+  const [number, setNumber] = useState("")
+  const [startDate, setStartDate] = useState(new Date());
+
+  const [applyLeaveData, setApplyLeaveData] = useState([])
 
   
   const userdata=[
@@ -76,417 +146,421 @@ const Slidebar = (props) => {
       "updatedat":"DD-MM-YYYY"
     }
   ]
-  const clockindata=[
+  const clockindata=[ 
     {
-      employeeId: 3180,
-      clockin:"Fri Jul 26 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 26 2022 18:00:00 GMT+0530 (India Standard Time)",
+      employeeId:3180,
+      clockin:"Mon Aug 01 2022 09:30:00 GMT+0530 (India Standard Time)",
+      clockout:"Mon Aug 01 2022 06:30:00 GMT+0530 (India Standard Time)",
       workingHrs:9,
       leaveType:"",
       leaveDate:""
-         },
-     {
-      employeeId: 3180,
-      clockin:"",
-      clockout:"",
-      workingHrs:0,
-      leaveType:"Sick leave",
-      leaveDate:"Fri Jul 27 2022"
-         },
+      },
       {
-      employeeId: 3180,
-      clockin:"Fri Jul 28 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 28 2022 19:00:00 GMT+0530 (India Standard Time)",
+        employeeId:3180,
+        clockin:"Tue Aug 02 2022 09:30:00 GMT+0530 (India Standard Time)",
+        clockout:"Tue Aug 02 2022 06:00:00 GMT+0530 (India Standard Time)",
+        workingHrs:'8:30',
+        leaveType:"",
+        leaveDate:""
+        },{
+          employeeId:3180,
+          clockin:"Wed Aug 03 2022 09:30:00 GMT+0530 (India Standard Time)",
+          clockout:"Wed Aug 03 2022 06:30:00 GMT+0530 (India Standard Time)",
+          workingHrs:9,
+          leaveType:"",
+          leaveDate:""
+          },{
+            employeeId:3180,
+            clockin:"Thu Aug 04 2022 10:30:00 GMT+0530 (India Standard Time)",
+            clockout:"Thu Aug 04 2022 06:00:00 GMT+0530 (India Standard Time)",
+            workingHrs:"7:30",
+            leaveType:"",
+            leaveDate:""
+            },{
+              employeeId:3180,
+              clockin:"Fri Aug 05 2022 10:00:00 GMT+0530 (India Standard Time)",
+              clockout:"Fri Aug 05 2022 07:00:00 GMT+0530 (India Standard Time)",
+              workingHrs:9,
+              leaveType:"",
+              leaveDate:""
+              },{
+                employeeId:3180,
+                clockin:"Sat Aug 06 2022 09:30:00 GMT+0530 (India Standard Time)",
+                clockout:"Sat Aug 06 2022 06:30:00 GMT+0530 (India Standard Time)",
+                workingHrs:9,
+                leaveType:"",
+                leaveDate:""
+                },{
+                  employeeId:3180,
+                  clockin:"Mon Aug 08 2022 09:30:00 GMT+0530 (India Standard Time)",
+                  clockout:"Mon Aug 08 2022 06:30:00 GMT+0530 (India Standard Time)",
+                  workingHrs:9,
+                  leaveType:"",
+                  leaveDate:""
+                  },{
+                    employeeId:3180,
+                    clockin:"Tue Aug 09 2022 09:30:00 GMT+0530 (India Standard Time)",
+                    clockout:"Tue Aug 09 2022 06:30:00 GMT+0530 (India Standard Time)",
+                    workingHrs:9,
+                    leaveType:"",
+                    leaveDate:""
+                    },{
+                      employeeId:3180,
+                      clockin:"Wed Aug 10 2022 09:30:00 GMT+0530 (India Standard Time)",
+                      clockout:"Wed Aug 10 2022 06:30:00 GMT+0530 (India Standard Time)",
+                      workingHrs:9,
+                      leaveType:"",
+                      leaveDate:""
+                      },
+                    {
+                    employeeId:3180,
+                    clockin:"",
+                    clockout:"",
+                    workingHrs:0,
+                    leaveType:"Leave without Pay",
+                    leaveDate:"Thu Aug 11 2022 09:30:00 GMT+0530 (India Standard Time)"
+                    },
+                    {
+                      employeeId:3180,
+                      clockin:"",
+                      clockout:"",
+                      workingHrs:0,
+                      leaveType:"Leave without Pay",
+                      leaveDate:"Fri Aug 12 2022 09:30:00 GMT+0530 (India Standard Time)"
+                      },
+                      {
+                        employeeId:3180,
+                        clockin:"",
+                        clockout:"",
+                        workingHrs:0,
+                        leaveType:"Leave without Pay",
+                        leaveDate:"Sat Aug 13 2022 09:30:00 GMT+0530 (India Standard Time)"
+                        },
+    {
+      employeeId:3182,
+      clockin:"Mon Aug 01 2022 09:30:00 GMT+0530 (India Standard Time)",
+      clockout:"Mon Aug 01 2022 06:30:00 GMT+0530 (India Standard Time)",
       workingHrs:9,
       leaveType:"",
       leaveDate:""
-         },
-     {
-      employeeId: 3180,
-      clockin:"Fri Jul 29 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 29 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3180,
-      clockin:"Sat Jul 30 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Sat Jul 30 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3180,
-      clockin:"Mon Aug 01 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 01 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:8,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3180,
-      clockin:"Mon Aug 02 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 02 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Fri Jul 26 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 26 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Fri Jul 27 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 27 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:5,
-      leaveType:"",
-      leaveDate:""
-         },
+      },
       {
-      employeeId: 3182,
-      clockin:"Fri Jul 28 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 28 2022 19:00:00 GMT+0530 (India Standard Time)",
+        employeeId:3182,
+        clockin:"Tue Aug 02 2022 09:30:00 GMT+0530 (India Standard Time)",
+        clockout:"Tue Aug 02 2022 06:00:00 GMT+0530 (India Standard Time)",
+        workingHrs:'8:30',
+        leaveType:"",
+        leaveDate:""
+        },{
+          employeeId:3182,
+          clockin:"Wed Aug 03 2022 09:30:00 GMT+0530 (India Standard Time)",
+          clockout:"Wed Aug 03 2022 06:30:00 GMT+0530 (India Standard Time)",
+          workingHrs:9,
+          leaveType:"",
+          leaveDate:""
+          },{
+            employeeId:3182,
+            clockin:"Thu Aug 04 2022 10:30:00 GMT+0530 (India Standard Time)",
+            clockout:"Thu Aug 04 2022 06:00:00 GMT+0530 (India Standard Time)",
+            workingHrs:"7:30",
+            leaveType:"",
+            leaveDate:""
+            },{
+              employeeId:3182,
+              clockin:"Fri Aug 05 2022 10:00:00 GMT+0530 (India Standard Time)",
+              clockout:"Fri Aug 05 2022 07:00:00 GMT+0530 (India Standard Time)",
+              workingHrs:9,
+              leaveType:"",
+              leaveDate:""
+              },{
+                employeeId:3182,
+                clockin:"Sat Aug 06 2022 09:30:00 GMT+0530 (India Standard Time)",
+                clockout:"Sat Aug 06 2022 06:30:00 GMT+0530 (India Standard Time)",
+                workingHrs:9,
+                leaveType:"",
+                leaveDate:""
+                },{
+                  employeeId:3182,
+                  clockin:"Mon Aug 08 2022 09:30:00 GMT+0530 (India Standard Time)",
+                  clockout:"Mon Aug 08 2022 06:30:00 GMT+0530 (India Standard Time)",
+                  workingHrs:9,
+                  leaveType:"",
+                  leaveDate:""
+                  },{
+                    employeeId:3182,
+                    clockin:"Tue Aug 09 2022 09:30:00 GMT+0530 (India Standard Time)",
+                    clockout:"Tue Aug 09 2022 06:30:00 GMT+0530 (India Standard Time)",
+                    workingHrs:9,
+                    leaveType:"",
+                    leaveDate:""
+                    },{
+                      employeeId:3182,
+                      clockin:"Wed Aug 10 2022 09:30:00 GMT+0530 (India Standard Time)",
+                      clockout:"Wed Aug 10 2022 06:30:00 GMT+0530 (India Standard Time)",
+                      workingHrs:9,
+                      leaveType:"",
+                      leaveDate:""
+                      },
+                    {
+                    employeeId:3182,
+                    clockin:"",
+                    clockout:"",
+                    workingHrs:0,
+                    leaveType:"Restricted Holidays",
+                    leaveDate:"Thu Aug 11 2022 09:30:00 GMT+0530 (India Standard Time)"
+                    },
+                    {
+                      employeeId:3182,
+                      clockin:"",
+                      clockout:"",
+                      workingHrs:0,
+                      leaveType:"Sick leave",
+                      leaveDate:"Fri Aug 12 2022 09:30:00 GMT+0530 (India Standard Time)"
+                      },
+                      {
+                        employeeId:3182,
+                        clockin:"",
+                        clockout:"",
+                        workingHrs:0,
+                        leaveType:"Restricted Holidays",
+                        leaveDate:"Sat Aug 13 2022 09:30:00 GMT+0530 (India Standard Time)"
+                        },
+    {
+    employeeId: 3183,
+    clockin:"Mon Aug 01 2022 09:30:00 GMT+0530 (India Standard Time)",
+    clockout:"Mon Aug 01 2022 06:30:00 GMT+0530 (India Standard Time)",
+    workingHrs:9,
+    leaveType:"",
+    leaveDate:""
+    },
+    {
+      employeeId: 3183,
+      clockin:"Tue Aug 02 2022 09:30:00 GMT+0530 (India Standard Time)",
+      clockout:"Tue Aug 02 2022 06:00:00 GMT+0530 (India Standard Time)",
+      workingHrs:'8:30',
+      leaveType:"",
+      leaveDate:""
+      },{
+        employeeId: 3183,
+        clockin:"Wed Aug 03 2022 09:30:00 GMT+0530 (India Standard Time)",
+        clockout:"Wed Aug 03 2022 06:30:00 GMT+0530 (India Standard Time)",
+        workingHrs:9,
+        leaveType:"",
+        leaveDate:""
+        },{
+          employeeId: 3183,
+          clockin:"Thu Aug 04 2022 10:30:00 GMT+0530 (India Standard Time)",
+          clockout:"Thu Aug 04 2022 06:00:00 GMT+0530 (India Standard Time)",
+          workingHrs:"7:30",
+          leaveType:"",
+          leaveDate:""
+          },{
+            employeeId: 3183,
+            clockin:"Fri Aug 05 2022 10:00:00 GMT+0530 (India Standard Time)",
+            clockout:"Fri Aug 05 2022 07:00:00 GMT+0530 (India Standard Time)",
+            workingHrs:9,
+            leaveType:"",
+            leaveDate:""
+            },{
+              employeeId: 3183,
+              clockin:"Sat Aug 06 2022 09:30:00 GMT+0530 (India Standard Time)",
+              clockout:"Sat Aug 06 2022 06:30:00 GMT+0530 (India Standard Time)",
+              workingHrs:9,
+              leaveType:"",
+              leaveDate:""
+              },{
+                employeeId: 3183,
+                clockin:"Mon Aug 08 2022 09:30:00 GMT+0530 (India Standard Time)",
+                clockout:"Mon Aug 08 2022 06:30:00 GMT+0530 (India Standard Time)",
+                workingHrs:9,
+                leaveType:"",
+                leaveDate:""
+                },{
+                  employeeId: 3183,
+                  clockin:"Tue Aug 09 2022 09:30:00 GMT+0530 (India Standard Time)",
+                  clockout:"Tue Aug 09 2022 06:30:00 GMT+0530 (India Standard Time)",
+                  workingHrs:9,
+                  leaveType:"",
+                  leaveDate:""
+                  },{
+                    employeeId: 3183,
+                    clockin:"Wed Aug 10 2022 09:30:00 GMT+0530 (India Standard Time)",
+                    clockout:"Wed Aug 10 2022 06:30:00 GMT+0530 (India Standard Time)",
+                    workingHrs:9,
+                    leaveType:"",
+                    leaveDate:""
+                    },
+                  {
+                  employeeId: 3183,
+                  clockin:"",
+                  clockout:"",
+                  workingHrs:0,
+                  leaveType:"Sick leave",
+                  leaveDate:"Thu Aug 11 2022 09:30:00 GMT+0530 (India Standard Time)"
+                  },
+                  {
+                    employeeId: 3183,
+                    clockin:"",
+                    clockout:"",
+                    workingHrs:0,
+                    leaveType:"Sick leave",
+                    leaveDate:"Fri Aug 12 2022 09:30:00 GMT+0530 (India Standard Time)"
+                    },
+                    {
+                      employeeId: 3183,
+                      clockin:"",
+                      clockout:"",
+                      workingHrs:0,
+                      leaveType:"Sick leave",
+                      leaveDate:"Sat Aug 13 2022 09:30:00 GMT+0530 (India Standard Time)"
+                      },
+    {
+      employeeId: 3184,
+      clockin:"Mon Aug 01 2022 09:30:00 GMT+0530 (India Standard Time)",
+      clockout:"Mon Aug 01 2022 06:30:00 GMT+0530 (India Standard Time)",
       workingHrs:9,
       leaveType:"",
       leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Fri Jul 29 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 29 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Sat Jul 30 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Sat Jul 30 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Mon Aug 01 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 01 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Mon Aug 02 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 02 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Fri Jul 26 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 26 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Fri Jul 27 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 27 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
+      },
       {
-      employeeId: 3182,
-      clockin:"Fri Jul 28 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 28 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Fri Jul 29 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 29 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Sat Jul 30 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Sat Jul 30 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Mon Aug 01 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 01 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3182,
-      clockin:"Mon Aug 02 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 02 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-  
+        employeeId: 3184,
+        clockin:"Tue Aug 02 2022 09:30:00 GMT+0530 (India Standard Time)",
+        clockout:"Tue Aug 02 2022 06:00:00 GMT+0530 (India Standard Time)",
+        workingHrs:'8:30',
+        leaveType:"",
+        leaveDate:""
+        },{
+          employeeId: 3184,
+          clockin:"Wed Aug 03 2022 09:30:00 GMT+0530 (India Standard Time)",
+          clockout:"Wed Aug 03 2022 06:30:00 GMT+0530 (India Standard Time)",
+          workingHrs:9,
+          leaveType:"",
+          leaveDate:""
+          },{
+            employeeId: 3184,
+            clockin:"Thu Aug 04 2022 10:30:00 GMT+0530 (India Standard Time)",
+            clockout:"Thu Aug 04 2022 06:00:00 GMT+0530 (India Standard Time)",
+            workingHrs:"7:30",
+            leaveType:"",
+            leaveDate:""
+            },{
+              employeeId: 3184,
+              clockin:"Fri Aug 05 2022 10:00:00 GMT+0530 (India Standard Time)",
+              clockout:"Fri Aug 05 2022 07:00:00 GMT+0530 (India Standard Time)",
+              workingHrs:9,
+              leaveType:"",
+              leaveDate:""
+              },{
+                employeeId: 3184,
+                clockin:"Sat Aug 06 2022 09:30:00 GMT+0530 (India Standard Time)",
+                clockout:"Sat Aug 06 2022 06:30:00 GMT+0530 (India Standard Time)",
+                workingHrs:9,
+                leaveType:"",
+                leaveDate:""
+                },{
+                  employeeId: 3184,
+                  clockin:"Mon Aug 08 2022 09:30:00 GMT+0530 (India Standard Time)",
+                  clockout:"Mon Aug 08 2022 06:30:00 GMT+0530 (India Standard Time)",
+                  workingHrs:9,
+                  leaveType:"",
+                  leaveDate:""
+                  },{
+                    employeeId: 3184,
+                    clockin:"Tue Aug 09 2022 09:30:00 GMT+0530 (India Standard Time)",
+                    clockout:"Tue Aug 09 2022 06:30:00 GMT+0530 (India Standard Time)",
+                    workingHrs:9,
+                    leaveType:"",
+                    leaveDate:""
+                    },{
+                      employeeId: 3184,
+                      clockin:"Wed Aug 10 2022 09:30:00 GMT+0530 (India Standard Time)",
+                      clockout:"Wed Aug 10 2022 06:30:00 GMT+0530 (India Standard Time)",
+                      workingHrs:9,
+                      leaveType:"",
+                      leaveDate:""
+                      },
+                    {
+                    employeeId: 3184,
+                    clockin:"",
+                    clockout:"",
+                    workingHrs:0,
+                    leaveType:"Casual Leave",
+                    leaveDate:"Thu Aug 11 2022 09:30:00 GMT+0530 (India Standard Time)"
+                    },
+                    {
+                      employeeId: 3184,
+                      clockin:"",
+                      clockout:"",
+                      workingHrs:0,
+                      leaveType:"Casual Leave",
+                      leaveDate:"Fri Aug 12 2022 09:30:00 GMT+0530 (India Standard Time)"
+                      },
+                      {
+                        employeeId: 3184,
+                        clockin:"",
+                        clockout:"",
+                        workingHrs:0,
+                        leaveType:"Casual Leave",
+                        leaveDate:"Sat Aug 13 2022 09:30:00 GMT+0530 (India Standard Time)"
+                        }
+]
+
+const ApplyLeave=[
   {
-      employeeId: 3183,
-      clockin:"Fri Jul 26 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 26 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Fri Jul 27 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 27 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-      {
-      employeeId: 3183,
-      clockin:"Fri Jul 28 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 28 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Fri Jul 29 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 29 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Sat Jul 30 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Sat Jul 30 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Mon Aug 01 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 01 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Mon Aug 02 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 02 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Fri Jul 26 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 26 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Fri Jul 27 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 27 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-      {
-      employeeId: 3183,
-      clockin:"Fri Jul 28 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 28 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Fri Jul 29 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 29 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Sat Jul 30 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Sat Jul 30 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"Mon Aug 01 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 01 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3183,
-      clockin:"",
-      clockout:"",
-      workingHrs:0,
-      leaveType:"Casual Leave",
-      leaveDate:"Aug 02 2022"
-         },
-     {
-      employeeId: 3184,
-      clockin:"Fri Jul 26 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 26 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3184,
-      clockin:"Fri Jul 27 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 27 2022 18:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-      {
-      employeeId: 3184,
-      clockin:"Fri Jul 28 2022 09:30:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 28 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3184,
-      clockin:"Fri Jul 29 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Fri Jul 29 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3184,
-      clockin:"Sat Jul 30 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Sat Jul 30 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3184,
-      clockin:"Mon Aug 01 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 01 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3184,
-      clockin:"Mon Aug 02 2022 10:00:00 GMT+0530 (India Standard Time)",
-      clockout:"Mon Aug 02 2022 19:00:00 GMT+0530 (India Standard Time)",
-      workingHrs:9,
-      leaveType:"",
-      leaveDate:""
-         },
-     {
-      employeeId: 3184,
-      clockin:"",
-      clockout:"",
-      workingHrs:0,
-      leaveType:"Casual Leave",
-      leaveDate:"03-Aug-2022"
-         }
+    id:3180,
+    Authorizedbreak :0 ,//hrs
+    CasualLeave:7,//days
+    CompensatoryOff:0, //hrs
+    LeavewithoutPay:0 ,//days
+    PaidLeave:0 ,//days
+    RestrictedHolidays:2, //days
+    Sickleave:3,//days
+  },
+  {
+    id:3182,
+    Authorizedbreak :0 ,//hrs
+    CasualLeave:7,//days
+    CompensatoryOff:0, //hrs
+    LeavewithoutPay:0 ,//days
+    PaidLeave:0 ,//days
+    RestrictedHolidays:2, //days
+    Sickleave:3,//days
+  },{
+    id:3183,
+    Authorizedbreak :0 ,//hrs
+    CasualLeave:7,//days
+    CompensatoryOff:0, //hrs
+    LeavewithoutPay:0 ,//days
+    PaidLeave:0 ,//days
+    RestrictedHolidays:2, //days
+    Sickleave:3,//days
+  }
+  ,{
+    id:3184,
+    Authorizedbreak :0 ,//hrs
+    CasualLeave:7,//days
+    CompensatoryOff:0, //hrs
+    LeavewithoutPay:0 ,//days
+    PaidLeave:0 ,//days
+    RestrictedHolidays:2, //days
+    Sickleave:3,//days
+  }
 ]
 
 
-const ApplyLeave = [
-  {
-    "leavetype":"Authorized break during day",
-    "nextyear":"Nextyear",
-    "remainingyear":"00 Days",
-    "remainingme":"00 Days",
-    "applyLeave":"Apply Leave"
-  },
-  {
-    "leavetype":"Casual Leave",
-    "nextyear":"Nextyear",
-    "remainingyear":"12 Days",
-    "remainingme":"6 Days",
-    "applyLeave":"Apply Leave"
-  },
+const TodayEvents = (e) =>{
+// console.log("dcfgr", e.target.value)
+}
 
-  {
-    "leavetype":"Compensatory Off",
-    "nextyear":"Nextyear",
-    "remainingyear":"00 Days",
-    "remainingme":"00 Days",
-    "applyLeave":"Apply Leave"
-  },
+const TodayFilter =(e) =>{
+  console.log("today")
+}
 
-  {
-    "leavetype":"Restricted Holidays",
-    "nextyear":"Nextyear",
-    "remainingyear":"2 Days",
-    "remainingme":"1 Days",
-    "applyLeave":"Apply Leave"
-  },
-
-  {
-    "leavetype":"Sick Leave",
-    "nextyear":"Nextyear",
-    "remainingyear":"6 Days",
-    "remainingme":"3 Days",
-    "applyLeave":"Apply Leave"
-  },
-
-  {
-    "leavetype":"Paid Leave",
-    "nextyear":"Nextyear",
-    "remainingyear":"12 Days",
-    "remainingme":"0 Days",
-    "applyLeave":"Apply Leave"
-  },
-
-  {
-    "leavetype":"Leave without Pay",
-    "nextyear":"Nextyear",
-    "remainingyear":"0 Days",
-    "remainingme":"0 Days",
-    "applyLeave":"Apply Leave"
-  },
-]
-
-
+// console.log("leaveBalance", leaveBalance)
 let { id } = useParams();
 let valId = `${id}`
 
-
+// console.log("applyleave,ad", applyLeaveData)
 useEffect(() => {
   const Datessssss = clockindata.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
 setDatesend(Datessssss)
@@ -495,33 +569,17 @@ const variableOne = datesends.filter(itemInArray =>
 );
 setNewVariable(variableOne)
 
+const filterLeave = ApplyLeave.filter(itemInArray => 
+  itemInArray.id == valId
+);
+setLeaveBalance(filterLeave)
+
 let a = JSON.parse(localStorage.getItem("leaveData"))
 // console.log("from use effects", JSON.parse(localStorage.getItem("leaveData")));
 setYearLeaveData(a)
 
 
 }, [newVariable])
-// console.log("daaaaaaa", newVariable)
-
-const showModal = () => {
-  setVisible(true);
-};
-
-const handleOk = () => {
-  setLoading(true);
-  setTimeout(() => {
-    setLoading(false);
-    setVisible(false);
-  }, 3000);
-};
-
-const handleCancel = () => {
-  setVisible(false);
-};
-
-
-
-    // console.log("leaveDataaaaaaaaaaaaaaaaaa", yearLeaveData)
 const dateCellRender = (value) => {
     let listData = [];
     {newVariable.map((item,index)=>{
@@ -587,6 +645,7 @@ const dateCellRender = (value) => {
 
 
 
+
   return (
     <ul className="events">
          {listData.map((item) => (
@@ -623,156 +682,201 @@ const dateCellRender = (value) => {
 
               <Tabs defaultActiveKey="1" onChange={onChange}>
                 <TabPane tab="My Leave Data" key="1">
-                
                
-                {/* {
-    "leavetype":"Authorized break during day",
-    "nextyear":"Nextyear",
-    "remaining-year":"00 Days",
-    "remaining-me":"00 Days",
-    "applyLeave":"Apply Leave"
-  }, */}
-               
-{ApplyLeave && ApplyLeave.map((item, index)=>{
+{leaveBalance && leaveBalance.map((item, index)=>{
   return(
     <table>
-<tr >
+        <tr >
+          <div className="th_div">
+            <div className="data_leave">
+              <th > Authorizedbreak</th><br></br>
+                <th>Next Year</th>
+            </div>
 
-                <div className="th_div">
-                <div className="data_leave">
-                 <th ><li>{item.leavetype}</li></th><br></br>
-                 <th>{item.nextyear}</th>
-                 </div>
+            <div className="hours">
+              <th>{item.Authorizedbreak} Days</th><br></br>
+                <th>0 Days</th>
+            </div>
 
-                 <div className="hours">
-                  <th>{item.remainingme}</th><br></br>
-                  <th>{item.remainingyear}</th>
-                 </div>
+            <div className="td_a">
+              <td >
 
-                 <div className="td_a">
-                 <td >
-                 <Button type="primary" onClick={showModal}>
-        {item.applyLeave}
-      </Button>
-      <Modal
-        visible={visible}
-        title="Apply Leave"
-        onOk={handleOk}
-        onCancel={handleCancel}
-        footer={[
-          <Button key="back" onClick={handleCancel}>
-          Cancel
-          </Button>,
-          <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
-            Submit
-          </Button>,
-          
-        ]}
-      >
-        <div className="leave-form">
-    <form>
-    
-    <div className="select-leave">
-      <div className="leave-type">
-        <label >Leave Type</label><br/>
-          <select >
-            <option >Casual Leave</option>
-            <option >Compensatory Off</option>
-            <option >Restricted Holidays</option>
-            <option >Sick Leave</option>
-            <option>Paid Leave</option>
-          </select>
-      </div>
-
-      <div className="balance-leave">
-        <label>Current Balance</label><br/>
-          <h1>0 Hours</h1>
-      </div>
-    </div>
-     <hr />
-
-
-<div className="apply-leave">    
-  <div className="leave-start">
-    <div className="leave-start-date">
-      <label>Leave Start from</label>
-    </div>
-    
-    <div className="leave-daytype">
-      <input type="date" /> 
-
-    <select>
-      <option>Full Day</option>
-      <option>First Half of the Day</option>
-      <option>Second Half of the Day</option>
-    </select>
-    </div>
-    </div>
-
-    <div className="leave-start">
-  <div className="leave-start-date">
-  <label>Leave ending on</label> <br></br>
-    </div>
-    
-    <div className="leave-daytype">
-    <input type="date" /> 
-
-    <select>
-      <option>Full Day</option>
-      <option>First Half of the Day</option>
-      <option>Second Half of the Day</option>
-    </select>
-    </div>
-    </div>
-    </div>
-    <hr />
-
-<div className="leave-reason">  
-   <label>Reason for Leave</label><br/>
-    <textarea /><br/>
-    </div>
-    <hr/>
-
-<div className="leave-contact">
-  <div className="leave-address">
-   <label>Contact Address</label><br/>
-   <textarea />
-   </div>
-
-<div className="leave-number">
-    <label>Contact Number (Optional)</label><br/>
-  <input />
-    
-    </div>
-    <hr />
-
-  </div>
-    </form>
-    </div>
-      </Modal>
+              <ApplyLeavebtn leaveType={leaveType}  dateStart={dateStart} dateType={dateType} 
+                                        dateEnd={dateEnd} dayEnd={dayEnd} reason={reason} address={address}
+                                        number={number} startDate={startDate} applyLeaveData={applyLeaveData} 
+                                        setLeaveType={setLeaveType} setDateStart={setDateStart} setDateType={setDateType}
+                                        setDateEnd={setDateEnd} setReason={setReason} setAddress={setAddress} 
+                                        setNumber={setNumber} setApplyLeaveData={setApplyLeaveData} />
                   
-                  </td>
-                 </div>
-                 </div>
-               </tr>
-               <hr />
+              </td>
+            </div>
+          </div>
+        </tr>
+
+        <tr >
+          <div className="th_div">
+            <div className="data_leave">
+              <th >CasualLeave</th><br></br>
+                <th>Next Year</th>
+            </div>
+
+            <div className="hours">
+              <th>{item.CasualLeave} Days</th><br></br>
+                <th>0 Days</th>
+            </div>
+
+            <div className="td_a">
+              <td >
+
+              <ApplyLeavebtn leaveType={leaveType}  dateStart={dateStart} dateType={dateType} 
+                                        dateEnd={dateEnd} dayEnd={dayEnd} reason={reason} address={address}
+                                        number={number} startDate={startDate} applyLeaveData={applyLeaveData} 
+                                        setLeaveType={setLeaveType} setDateStart={setDateStart} setDateType={setDateType}
+                                        setDateEnd={setDateEnd} setReason={setReason} setAddress={setAddress} 
+                                        setNumber={setNumber} setApplyLeaveData={setApplyLeaveData} />
+                  
+              </td>
+            </div>
+          </div>
+        </tr>
+
+        <tr >
+          <div className="th_div">
+            <div className="data_leave">
+              <th > CompensatoryOff</th><br></br>
+                <th>Next Year</th>
+            </div>
+
+            <div className="hours">
+              <th>{item.CompensatoryOff} Days</th><br></br>
+                <th>0 Days</th>
+            </div>
+
+            <div className="td_a">
+              <td >
+
+              <ApplyLeavebtn leaveType={leaveType}  dateStart={dateStart} dateType={dateType} 
+                                        dateEnd={dateEnd} dayEnd={dayEnd} reason={reason} address={address}
+                                        number={number} startDate={startDate} applyLeaveData={applyLeaveData} 
+                                        setLeaveType={setLeaveType} setDateStart={setDateStart} setDateType={setDateType}
+                                        setDateEnd={setDateEnd} setReason={setReason} setAddress={setAddress} 
+                                        setNumber={setNumber} setApplyLeaveData={setApplyLeaveData} />
+                  
+              </td>
+            </div>
+          </div>
+        </tr>
+
+        <tr >
+          <div className="th_div">
+            <div className="data_leave">
+              <th >  LeavewithoutPay</th><br></br>
+                <th>Next Year</th>
+            </div>
+
+            <div className="hours">
+              <th>{item.LeavewithoutPay} Days</th><br></br>
+                <th>0 Days</th>
+            </div>
+
+            <div className="td_a">
+              <td >
+
+              <ApplyLeavebtn leaveType={leaveType}  dateStart={dateStart} dateType={dateType} 
+                                        dateEnd={dateEnd} dayEnd={dayEnd} reason={reason} address={address}
+                                        number={number} startDate={startDate} applyLeaveData={applyLeaveData} 
+                                        setLeaveType={setLeaveType} setDateStart={setDateStart} setDateType={setDateType}
+                                        setDateEnd={setDateEnd} setReason={setReason} setAddress={setAddress} 
+                                        setNumber={setNumber} setApplyLeaveData={setApplyLeaveData} />
+                  
+              </td>
+            </div>
+          </div>
+        </tr>
+
+        <tr >
+          <div className="th_div">
+            <div className="data_leave">
+              <th >   PaidLeave</th><br></br>
+                <th>Next Year</th>
+            </div>
+
+            <div className="hours">
+              <th>{item.PaidLeave} Days</th><br></br>
+                <th>0 Days</th>
+            </div>
+
+            <div className="td_a">
+              <td >
+
+              <ApplyLeavebtn leaveType={leaveType}  dateStart={dateStart} dateType={dateType} 
+                                        dateEnd={dateEnd} dayEnd={dayEnd} reason={reason} address={address}
+                                        number={number} startDate={startDate} applyLeaveData={applyLeaveData} 
+                                        setLeaveType={setLeaveType} setDateStart={setDateStart} setDateType={setDateType}
+                                        setDateEnd={setDateEnd} setReason={setReason} setAddress={setAddress} 
+                                        setNumber={setNumber} setApplyLeaveData={setApplyLeaveData} />
+                  
+              </td>
+            </div>
+          </div>
+        </tr>
+
+        <tr >
+          <div className="th_div">
+            <div className="data_leave">
+              <th >   RestrictedHolidays</th><br></br>
+                <th>Next Year</th>
+            </div>
+
+            <div className="hours">
+              <th>{item.RestrictedHolidays} Days</th><br></br>
+                <th>0 Days</th>
+            </div>
+
+            <div className="td_a">
+              <td >
+
+              <ApplyLeavebtn leaveType={leaveType}  dateStart={dateStart} dateType={dateType} 
+                                        dateEnd={dateEnd} dayEnd={dayEnd} reason={reason} address={address}
+                                        number={number} startDate={startDate} applyLeaveData={applyLeaveData} 
+                                        setLeaveType={setLeaveType} setDateStart={setDateStart} setDateType={setDateType}
+                                        setDateEnd={setDateEnd} setReason={setReason} setAddress={setAddress} 
+                                        setNumber={setNumber} setApplyLeaveData={setApplyLeaveData} />
+                  
+              </td>
+            </div>
+          </div>
+        </tr>
+
+        <tr >
+          <div className="th_div">
+            <div className="data_leave">
+              <th >   Sickleave</th><br></br>
+                <th>Next Year</th>
+            </div>
+
+            <div className="hours">
+              <th>{item.Sickleave} Days</th><br></br>
+                <th>0 Days</th>
+            </div>
+
+            <div className="td_a">
+              <td >
+              <ApplyLeavebtn leaveType={leaveType}  dateStart={dateStart} dateType={dateType} 
+                                        dateEnd={dateEnd} dayEnd={dayEnd} reason={reason} address={address}
+                                        number={number} startDate={startDate} applyLeaveData={applyLeaveData} 
+                                        setLeaveType={setLeaveType} setDateStart={setDateStart} setDateType={setDateType}
+                                        setDateEnd={setDateEnd} setReason={setReason} setAddress={setAddress} 
+                                        setNumber={setNumber} setApplyLeaveData={setApplyLeaveData} />
+                  
+              </td>
+            </div>
+          </div>
+        </tr>
                </table>
 );
 })}
                
-
-
-               
-
-
-               
-
-               
-
-               
-
-               
-
                </TabPane>
 
               <TabPane tab="My Leave Balance" key="2">
@@ -823,10 +927,35 @@ const dateCellRender = (value) => {
                      </TabPane>
                   </Tabs>
                     </div>
-          </div>
+        </div>
       
 
+        <div className="user-leave">
+            <h1>User on Leave</h1>
+            <div>
+              <select onClick={TodayEvents}  >
+                <option>Today</option>
+                <option >Tomorrow</option>
+                <option>Next 7 days</option>
+                <option>Next 14 days</option>
+                <option>Next 30 days</option>
+                <option>Next 60 days</option>
+                <option>Next 90 days</option>
+                <option>Custom</option>
+              </select>
+            </div>
 
+            {/* leaveType:"",
+      leaveDate:"" */}
+           {clockindata && clockindata.map((item, index)=>{
+            return(
+            <div>
+              <li>{item.leaveType ? item.leaveType : ""}</li>
+              <li>{item.leaveDate ? item.leaveDate : ""}</li>
+            </div>
+            );
+          })}
+          </div>
         </div>
 
 
