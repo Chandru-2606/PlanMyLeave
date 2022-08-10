@@ -1010,23 +1010,18 @@ const dateCellRender = (value) => {
         </div>
  
       
-       {/* <div className='phone_navbar'>
-       <button onClick={() => { setDisplay(true)}} ><UnorderedListOutlined /></button><br></br>
-       {display ? <div className='display' id='phone_navbar'>
-      <div className='nav_list'>
-              <a href='#'>Home</a><br></br>
-              <a href='#'>Contact us</a><br></br>
-              <a href='#'>About</a><br></br>
-              <a href='#'>Location</a><br></br>
-            
-             </div>
-
-       </div> : ""}   
-       
-       </div> */}
+       {/*  <div className='phone_navbar'>
+              <button onClick={() => { setDisplay(true)}} ><UnorderedListOutlined /></button><br></br>
+                {display ? <div className='display' id='phone_navbar'>
+                  <div className='nav_list'>
+                    <a href='#'>Home</a><br></br>
+                    <a href='#'>Contact us</a><br></br>
+                    <a href='#'>About</a><br></br>
+                    <a href='#'>Location</a><br></br>
+                  </div>
+                </div> : ""}   
+            </div> */}
   </div>
-
-
   )
   }
   export default Slidebar;
