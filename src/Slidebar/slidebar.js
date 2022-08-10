@@ -84,6 +84,7 @@ const Slidebar = (props) => {
   const [address, setAddress] = useState("")
   const [number, setNumber] = useState("")
   const [startDate, setStartDate] = useState(new Date());
+  const [dateRange , setDateRange] = useState("")
 
   const [applyLeaveData, setApplyLeaveData] = useState([])
 
@@ -550,6 +551,83 @@ const ApplyLeave=[
 
 const TodayEvents = (e) =>{
 // console.log("dcfgr", e.target.value)
+
+
+switch (e.target.value){
+  case "Today": 
+  let todayDate =  moment(new Date()).format('l')
+    clockindata.map((item,index)=>{
+    
+      let Dataaaaaa = moment(item.leaveDate).format('l')
+
+//       let comparedData =  todayDate == Dataaaaaa
+// console.log("comparedData", comparedData)
+
+
+
+    })
+    // console.log("Today");
+    break;
+
+
+    case "Tomorrow":
+
+      let TommowDate =  moment().add(1, 'days').format('l');
+      console.log("TommorwDate", TommowDate)
+      clockindata.map((item,index)=>{
+      
+        let Dataaaaaa = moment(item.leaveDate).format('l')
+  
+        let comparedData =  TommowDate == Dataaaaaa
+  console.log("comparedData", comparedData)
+  
+    })
+    console.log("Tomorror");
+    break;
+    case "Next 7 Days":
+    // clockindata.map((item,index)=>{
+    //   return()
+
+    // })
+    console.log("Next 7 Days");
+    break;
+    case "Next 14 Days":
+    // clockindata.map((item,index)=>{
+    //   return()
+
+    // })
+    console.log("Next 14 Days");
+    break;
+    case "Next 30 Days":
+    // clockindata.map((item,index)=>{
+    //   return()
+
+    // })
+    console.log("Next 30 Days");
+    break;
+    case "Next 60 Days":
+    // clockindata.map((item,index)=>{
+    //   return()
+
+    // })
+    console.log("Next 60 Days");
+    break;
+    case "Next 90 Days":
+    // clockindata.map((item,index)=>{
+    //   return()
+
+    // })
+    console.log("Next 90 Days");
+    break;
+    default:
+      console.log("default statement")
+
+}
+
+setDateRange(e.target.value)
+
+
+
 }
 
 const TodayFilter =(e) =>{
@@ -934,16 +1012,20 @@ const dateCellRender = (value) => {
             <h1>User on Leave</h1>
             <div>
               <select onClick={TodayEvents}  >
-                <option>Today</option>
-                <option >Tomorrow</option>
-                <option>Next 7 days</option>
-                <option>Next 14 days</option>
-                <option>Next 30 days</option>
-                <option>Next 60 days</option>
-                <option>Next 90 days</option>
-                <option>Custom</option>
+                <option value={"Today"} >Today</option>
+                <option value={"Tomorrow"} >Tomorrow</option>
+                <option value={"Next 7 days"}>Next 7 days</option>
+                <option value={"Next 14 days"}>Next 14 days</option>
+                <option value={"Next 30 days"}>Next 30 days</option>
+                <option value={"Next 60 days"}>Next 60 days</option>
+                <option value={"Next 90 days"}>Next 90 days</option>
+                {/* <option>Custom</option> */}
               </select>
             </div>
+            {dateRange}
+{(() => {
+         
+})()}
 
             {/* leaveType:"",
       leaveDate:"" */}
