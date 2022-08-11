@@ -1,11 +1,22 @@
 import { Button, Modal } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './conformleave.css'
+import { userdata } from '../adminDashboard/ApiDatas/apiData';
 
 const ConformLeave = (props) =>{
 
-    const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    const filterId = userdata.filter(itemInArray => 
+      itemInArray.id == props.id
+    );
+    console.log("filterId", filterId)
+  setNameEmp(filterId)
+
+  })
+
+  const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [nameEmp, setNameEmp] = useState([])
 
   const showModal = () => {
     setVisible(true);
@@ -18,14 +29,13 @@ const ConformLeave = (props) =>{
       setVisible(false);
     }, 3000);
   };
-
   const handleCancel = () => {
     setVisible(false);
   };
     return(
         <div>
-           <Button type="primary" onClick={showModal}>
-        Submit
+        <Button type="primary" onClick={showModal}>
+          Submit
       </Button>
       <Modal
         visible={visible}
@@ -39,22 +49,26 @@ const ConformLeave = (props) =>{
           <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
             Confirm
           </Button>,
-
         ]}
       >
        <div className='confirm-container'>
         <form>
 
             <div className='Confirm-header'>
-            <h1>Confirm Leave for Siva Chandru - Sick Leave</h1>
+              {nameEmp && nameEmp.map((item, index)=>{
+                return(
+            <h1><span id='confirm-name'>Confirm Leave for</span> {item.name} <span id='confirm-name'>{props.leaveType}</span></h1>
+                )
+          })}
             </div>
-
-            <h1>Sick Leave - 11.08.22 - 11.08.22</h1>
-
-            <h3>leave duration: 0 Days</h3>
-            <h3>Calender days : 1 day</h3>
-
-            <h1>Approver: Admin</h1>
+      <div className='confirm-body'>
+            <h1>{props.leaveType} - <span>{props.dateStart} - {props.dateEnd}</span></h1>
+            <hr />
+            <h3>Leave duration: <span id ="spam-day" >0 Days</span></h3>
+            <h3>Calender days :<span id ="spam-day"> 1 day</span></h3>
+             <hr/>
+            <h1 id='admin-footer'>Approver: <span id='admin-approve'>Admin</span></h1>
+            </div>
         </form>
        </div>
       </Modal>

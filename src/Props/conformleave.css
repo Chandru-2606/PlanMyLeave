@@ -1,6 +1,60 @@
 .confirm-container{
-    background-color: rgb(248,248,248);
+    width: 80%;
+    /* height: auto; */
 }
 .Confirm-header{
     font-size: 10px;
+    margin-left: 100px;
+    text-align: center;
+}
+
+.ant-modal-body{
+    background-color: rgb(248,248,248);
+}
+.confirm-body{
+    width: 120%;
+    height: 100%;
+    background-color: white;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.confirm-body h1{
+    margin-left: 10px;
+    font-size: 20px;
+    padding-top: 10px;
+    color: rgb(0,102,204);
+}
+
+.confirm-body span{
+    color: rgb(239,124,63);
+    margin-left: 20px;
+
+}
+.confirm-body h3{
+    margin-top: 20px;
+    margin-left: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #16a085;
+}
+
+#spam-day{
+    color: black;
+}
+
+#admin-footer{
+    margin-left: 20px;
+    padding-bottom: 20px;
+    color: #16a085;
+}
+#admin-approve{
+    margin-left: 20px;
+    color: black;
+    /* border: 1px solid grey; */
+}
+
+#confirm-name{
+    color: #006400;
+    margin-left: 20px;
+    margin-right: 20px;
 }

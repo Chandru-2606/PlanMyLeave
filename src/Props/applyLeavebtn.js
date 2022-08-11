@@ -1,39 +1,59 @@
 import React, { useState, useEffect } from "react";
+import ConformLeave from "./conformleave";
+import { useParams } from "react-router";
+
 
 import { Button, Modal } from 'antd';
-const ApplyLeavebtn = (props) =>{
+const ApplyLeavebtn = () =>{
+
+  let { id } = useParams();
+let valId = `${id}`
 
     const [loading, setLoading] = useState(false);
     const [visible, setVisible] = useState(false);
+     const [leaveType, setLeaveType] = useState("")
+    const [dateStart, setDateStart] = useState("")
+    const [dateType, setDateType] = useState("")
+    const [dateEnd, setDateEnd] = useState("")
+    const [dayEnd, setDayEnd] = useState("")
+    const [reason, setReason] = useState("")
+    const [address, setAddress] = useState("")
+    const [number, setNumber] = useState("")
+    const [startDate, setStartDate] = useState(new Date());
+
+  const [applyLeaveData, setApplyLeaveData] = useState([])
+
+
   const moment = require('moment');
 
-
+// console.log("applyLeaveData", applyLeaveData)
 
     const showModal = () => {
         setVisible(true);
       };
       
       
-      // console.log("Apply Levae", newVariable)
       const handleOk = () => {
+        setVisible(false);
+
         setLoading(true);
         setTimeout(() => {
           setLoading(false);
-          setVisible(false);
+          // setVisible(false);
         }, 3000);
-        let momentDate = moment(props.startDate).valueOf()
+        let momentDate = moment(startDate).valueOf()
       
-        let ApplyLeave = {leaveType:props.leaveType, dateStart:props.dateStart, dateType:props.dateType,
-                          dateEnd:props.dateEnd, dayEnd:props.dayEnd, reason:props.reason, address:props.address,
-                          number:props.number, id:props.id, date:props.momentDate, }
-                           props.setApplyLeaveData(ApplyLeave)
-      
-       console.log("leave APply", ApplyLeave)
+        let ApplyLeave = {leaveType:leaveType, dateStart:dateStart, dateType:dateType,
+                          dateEnd:dateEnd, dayEnd:dayEnd, reason:reason, address:address,
+                          number:number, id:id, date:momentDate }
+                           setApplyLeaveData(ApplyLeave)
+       console.log("leave Apply", ApplyLeave)
       };
       
       const handleCancel = (props) => {
         setVisible(false);
       };
+
 
     return(
         <div>
@@ -49,8 +69,14 @@ const ApplyLeavebtn = (props) =>{
           <Button key="back" onClick={handleCancel}>
           Cancel
           </Button>,
+
+// dateStart:dateStart, dateType:dateType,
+//                           dateEnd:dateEnd, dayEnd:dayEnd, reason:reason, address:address,
+//                           number:number, id:id, date:momentDate
+
+
           <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
-           {/* <ConformLeave state={applyLeaveData} /> */}
+           <ConformLeave id={id} dateStart={dateStart} dateEnd={dateEnd} leaveType={leaveType}/>
            Submit
           </Button>,
         ]}
@@ -58,25 +84,24 @@ const ApplyLeavebtn = (props) =>{
         <div className="leave-form">
     <form>
     
-    {/* <div className="select-leave">
-      <div className="leave-type">
-        <label >Leave Type</label><br/>
-          <select value={leaveType} onChange={(e) => {setLeaveType(e.target.value)}} >
-            <option >Casual Leave</option>
-            <option >Compensatory Off</option>
-            <option >Restricted Holidays</option>
-            <option >Sick Leave</option>
-            <option>Paid Leave</option>
-          </select>
-      </div>
+   
+<div className="type-leave">
+  <div className="type-leavedata">
+  <label>Leave Type</label><br></br>
+  <select value={leaveType} onChange={(e) => {setLeaveType(e.target.value)}}>
+    <option>Casual Leave</option>
+    <option>Sick Leave</option>
+    <option>CompensatoryOff</option>
+    <option>Paid Leave</option>
+    <option>RestrictedHolidays</option>
+  </select>
+  </div>
 
-      <div className="balance-leave">
-        <label>Current Balance</label><br/>
-          <h1>0 Hours</h1>
-      </div>
-    </div>
-     <hr /> */}
-
+  <div className="leave-balnce">
+    <label>Current Balance</label>
+    <span>0 Hours(s)</span>
+  </div>
+</div>
 
 <div className="apply-leave">    
   <div className="leave-start">
@@ -85,9 +110,9 @@ const ApplyLeavebtn = (props) =>{
     </div>
     
     <div className="leave-daytype">
-      <input type="date" value={props.dateStart} onChange={(e) => {props.setDateStart(e.target.value)}}/> 
+      <input type="date" value={dateStart} onChange={(e) => {setDateStart(e.target.value)}}/> 
 
-    <select value={props.dateType} onChange={(e) => {props.setDateType(e.target.value)}}>
+    <select value={dateType} onChange={(e) => {setDateType(e.target.value)}}>
       <option>Full Day</option>
       <option>First Half of the Day</option>
       <option>Second Half of the Day</option>
@@ -101,9 +126,9 @@ const ApplyLeavebtn = (props) =>{
     </div>
     
     <div className="leave-daytype">
-    <input type="date" value={props.dateEnd} onChange={(e) => {props.setDateEnd(e.target.value)}} /> 
+    <input type="date" value={dateEnd} onChange={(e) => {setDateEnd(e.target.value)}} /> 
 
-    <select value={props.dayEnd} onChange={(e) => {props.setDayEnd(e.target.value)}} >
+    <select value={dayEnd} onChange={(e) => {setDayEnd(e.target.value)}} >
       <option>Full Day</option>
       <option>First Half of the Day</option>
       <option>Second Half of the Day</option>
@@ -115,19 +140,19 @@ const ApplyLeavebtn = (props) =>{
 
 <div className="leave-reason">  
    <label>Reason for Leave</label><br/>
-    <textarea  value={props.reason} onChange={(e) => {props.setReason(e.target.value)}}/><br/>
+    <textarea  value={reason} onChange={(e) => {setReason(e.target.value)}}/><br/>
     </div>
     <hr/>
 
 <div className="leave-contact">
   <div className="leave-address">
    <label>Contact Address <span>(Optional)</span></label><br/>
-   <textarea value={props.address} onChange={(e) => {props.setAddress(e.target.value)}}/>
+   <textarea value={address} onChange={(e) => {setAddress(e.target.value)}}/>
    </div>
 
 <div className="leave-number">
     <label>Contact Number <span>(Optional)</span></label><br/>
-  <input value={props.number} onChange={(e) => {props.setNumber(e.target.value)}} />
+  <input value={number} onChange={(e) => {setNumber(e.target.value)}} />
     
     </div>
     <hr />

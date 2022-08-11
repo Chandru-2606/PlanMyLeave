@@ -4,7 +4,9 @@ import { emailValidator} from "./components/regexValidator"
 import { Input } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import './login.css'
-import eachMonthOfInterval from "date-fns/eachMonthOfInterval";
+import { admindata } from "../adminDashboard/ApiDatas/apiData";
+import { userdata } from "../adminDashboard/ApiDatas/apiData";
+import { clockindata } from "../adminDashboard/ApiDatas/apiData";
 
 const  Login =() =>{
 const [dataEnd, setDataEnd ] = useState ("")
@@ -29,82 +31,9 @@ console.log("dataaaaaaaaaaaaaa",dataEnd)
 
 //  }, [newVariable])
 
-  const admindata=[
-    {
-        "id": 310,
-        "roleId":2,
-        "name": "Admin",
-        "email": "admin@anexas.net",
-        "password":"Anexas123456",
-        "DOB":"00-00-0000",
-        "DOJ":"00-00-0000",
-        "Address":"6-11, main road, hsr layout",
-        "profilepicture": "http://restapi.adequateshop.com/Media//Images/userimageicon.png",
-        "location": "USAnew",
-        "createdat": "2021-02-16T10:29:48.0112462",
-        "updatedat":"DD-MM-YYYY"
-      },
-  ]
 
-  const userdata=[
-    {
-      "id": 3180,
-      "roleId":1,
-      "name": "Raj M new",
-      "email": "rajmalhotrnewa3007@gmail.com",
-      "password":"Anexas123456",
-      "DOB":"00-00-0000",
-      "DOJ":"00-00-0000",
-      "Address":"6-11, main road, hsr layout",
-      "profilepicture": "http://restapi.adequateshop.com/Media//Images/userimageicon.png",
-      "location": "USAnew",
-      "createdat": "2021-02-16T10:29:48.0112462",
-      "updatedat":"DD-MM-YYYY"
-    },
-    
-    {
-      "id": 3182,
-      "roleId":1,
-      "name": "Sharan S Nair",
-      "email": "sharans.nair@yahoo.in",
-      "password":"Anexas123456",
-      "DOB":"00-00-0000",
-      "DOJ":"00-00-0000",
-      "Address":"6-11, main road, hsr layout",
-      "profilepicture": "http://restapi.adequateshop.com/Media//Images/userimageicon.png",
-      "location": "USA",
-      "createdat": "2021-02-16T11:12:25.1586341",
-      "updatedat":"DD-MM-YYYY"
-    },
-    {
-      "id": 3183,
-      "roleId":1,
-      "name": "Yusuff Olanrewaju",
-      "email": "olanrewajuyusuff65@gmail.com",
-      "password":"Anexas123456",
-      "DOB":"00-00-0000",
-      "DOJ":"00-00-0000",
-      "Address":"6-11, main road, hsr layout",
-      "profilepicture": "http://restapi.adequateshop.com/Media/Images/d8b37cee-20dc-4007-aa71-60661eae4509.png",
-      "location": "USA",
-      "createdat": "2021-02-16T13:29:04.9659055",
-      "updatedat":"DD-MM-YYYY"
-    },
-    {
-      "id": 3184,
-      "roleId":1,
-      "name": "Anouar Snader",
-      "email": "anouarsnader612@gmail.com",
-      "password":"Anexas123456",
-      "DOB":"00-00-0000",
-      "DOJ":"00-00-0000",
-      "Address":"6-11, main road, hsr layout",
-      "profilepicture": "http://restapi.adequateshop.com/Media/Images/.png",
-      "location": "USA",
-      "createdat": "2021-02-16T15:26:45.3582964",
-      "updatedat":"DD-MM-YYYY"
-    }
-  ]
+
+
   const clockindata=[
     {
       employeeId: 3180,
