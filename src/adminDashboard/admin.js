@@ -228,7 +228,7 @@ let navigate = useNavigate();
             <div className="employee-divformlabel">
                <label>Address</label><br/>
             </div>
-            <Input value={addAddress} size="small" onChange={(e)=>setAddAddress(e.target.value)} /><br/>
+            <TextArea value={addAddress} rows={4} onChange={(e)=>setAddAddress(e.target.value)}  />
          </div>
 
          <div className="employee-divform">
