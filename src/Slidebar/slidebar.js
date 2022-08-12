@@ -81,6 +81,9 @@ const Slidebar = (props) => {
   const { TabPane } = Tabs;
 
 
+  
+  const [approvalLeave, setApprovalLeave] = useState([])
+
 
 
 
@@ -245,8 +248,15 @@ let a = JSON.parse(localStorage.getItem("leaveData"))
 // console.log("from use effects", JSON.parse(localStorage.getItem("leaveData")));
 setYearLeaveData(a)
 
+let localrecived = JSON.parse(localStorage.getItem("ApprovalData"))
+//  console.log("aaaaaaaaaaaaaaaaa", a)
+ setApprovalLeave(localrecived)
+ 
 
 }, [newVariable])
+
+// console.log("approvalLeave", approvalLeave)
+
 const dateCellRender = (value) => {
     let listData = [];
     {newVariable.map((item,index)=>{
@@ -325,7 +335,7 @@ const dateCellRender = (value) => {
     };
 
   const onChange = (key) => {
-    console.log(key);
+    // console.log(key);
   };
 
   return(
@@ -520,27 +530,6 @@ const dateCellRender = (value) => {
               <TabPane tab="My Leave Balance" key="2">
                <label>As of date</label> <input type="date" /><button >Find My Leave</button>
 
-               {/* <tr >
-          <div className="th_div">
-            <div className="data_leave">
-              <th > Authorizedbreak</th><br></br>
-                <th>Next Year</th>
-            </div>
-
-            <div className="hours">
-              <th> Days</th><br></br>
-                <th>0 Days</th>
-            </div>
-
-            <div className="td_a">
-              <td >
-
-              <ApplyLeavebtn />
-                  
-              </td>
-            </div>
-          </div>
-        </tr> */}
                </TabPane>
               </Tabs>
                 </div>
@@ -633,6 +622,19 @@ const dateCellRender = (value) => {
 </ul>
     );
   })}
+</div>
+
+<div className="leave-request">
+  <h1>My Leave Request</h1>
+{approvalLeave && approvalLeave.map((item, index)=>{
+  return(
+    <div className="leave-requestList">
+     <h3>{moment(item.dateStart).format('L')} - { moment(item.dateEnd).format('L')}  <span></span></h3>
+     <h3>Applied on {moment(item.date ).format('LLL')}</h3>
+     <h3>{item.leaveType}</h3>
+    </div>
+  );
+})}
 </div>
 
         <div className='clockin_datas'>

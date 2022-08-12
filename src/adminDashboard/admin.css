@@ -205,5 +205,41 @@
     color: white;
 }
 
+.approveRequest{
+    margin-left: 100px;
+    margin-top: 50px;
 
+}
 
+.approveRequest h1{
+    color: #dd5353;
+}
+
+.approveRequest-list{
+    display: flex;
+}
+
+.approveRequest-list h3{
+   margin-left: 100px;
+}
+
+.approveRequest-btn{
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+#approveRequest-btn1{
+    margin-left: 20px;
+    background-color: #dd5353;
+    color: wheat;
+    border: none;
+    width: 100px;
+    height: 30px;
+
+}
+
+#approveRequest-btn2{
+    margin-left: 20px;
+    width: 100px;
+    height: 30px;
+}

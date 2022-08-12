@@ -593,60 +593,19 @@ width: 100%
   font-size: 16px;
 
 }
+.leave-request{
+  margin-left: 90px;
+  margin-bottom: 50px;
+}
 
+.leave-request h1{
+   color: #dd5353;
+}
 
-/* .user-leave .ant-dropdown-menu{
-  width: 166px !important;
-} */
-
-
-/* @media only screen and (max-width: 400px) {
-         .slide_container{
-          display: none;
-         }
-         .demo{
-          display: none;
-         }
-
-       .phone_navbar{
-          display: inline;
-       }
-         .phone_navbar{
-        
-          width: 100%;
-          height: 100vh;
-          padding-top: 50px;
-
-       }
-
-       .phone_navbar button{
-          float: right;
-          margin-right: 30px;
-          margin-top: 20px;
-          border: none;
-          border-radius: 5px solid black;
-      }
-        
-       .phone_navbar span{
-          font-size: 20px;
-
-      cursor: pointer;
-      }
-
-       .nav_list{
-         text-align: center;
-         margin-top: 100px;
-         }
-       .nav_list a{
-             font-size: 20px;
-             line-height: 90px;
-             font-weight: bolder;
-             width: 100%;
-      }
-
-      .nav_list a:hover{
-          font-size: 25px;
-          color: black;
-          width: 100%;
-      }
-      } */
+.leave-requestList {
+  margin-top: 20px;
+  display: flex;
+}
+.leave-requestList  h3{
+  margin-left: 50px;
+}

@@ -47,9 +47,8 @@ let valId = `${id}`
                           dateEnd:dateEnd, dayEnd:dayEnd, reason:reason, address:address,
                           number:number, id:id, date:momentDate }
                            setApplyLeaveData(ApplyLeave)
-       console.log("leave Apply", ApplyLeave)
+       console.log("leave Apply", ApplyLeave)  
       };
-      
       const handleCancel = (props) => {
         setVisible(false);
       };
@@ -74,9 +73,12 @@ let valId = `${id}`
 //                           dateEnd:dateEnd, dayEnd:dayEnd, reason:reason, address:address,
 //                           number:number, id:id, date:momentDate
 
-
+// {leaveType:leaveType, dateStart:dateStart, dateType:dateType,
+//   dateEnd:dateEnd, dayEnd:dayEnd, reason:reason, address:address,
+//   number:number, id:id, date:momentDate }
           <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
-           <ConformLeave id={id} dateStart={dateStart} dateEnd={dateEnd} leaveType={leaveType}/>
+           <ConformLeave id={id} dateStart={dateStart} dateType={dateType} dateEnd={dateEnd} dayEnd={dayEnd} 
+                          reason={reason} leaveType={leaveType}  />
            Submit
           </Button>,
         ]}

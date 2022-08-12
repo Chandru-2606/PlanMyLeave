@@ -2,6 +2,7 @@ import { Button, Modal } from 'antd';
 import React, { useState, useEffect } from 'react';
 import './conformleave.css'
 import { userdata } from '../adminDashboard/ApiDatas/apiData';
+import moment from 'moment';
 
 const ConformLeave = (props) =>{
 
@@ -9,7 +10,7 @@ const ConformLeave = (props) =>{
     const filterId = userdata.filter(itemInArray => 
       itemInArray.id == props.id
     );
-    console.log("filterId", filterId)
+    // console.log("filterId", filterId)
   setNameEmp(filterId)
 
   })
@@ -17,12 +18,36 @@ const ConformLeave = (props) =>{
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [nameEmp, setNameEmp] = useState([])
+  const [startDate, setStartDate] = useState(new Date());
+
+  let momentDate = moment(startDate).valueOf()
+
+
 
   const showModal = () => {
     setVisible(true);
   };
 
   const handleOk = () => {
+
+  const ApprovalData = {name:props.id,   dateStart:props.dateStart, dateType:props.dateType, dateEnd:props.dateEnd,  
+                      dayEnd:props.dayEnd, reason:props.reason, leaveType:props.leaveType, date:momentDate}
+
+                      // console.log("ApprovalData", ApprovalData)
+        const ApprovalDatareceived=localStorage.getItem("ApprovalData")
+
+        if(ApprovalDatareceived==null){
+          localStorage.setItem("ApprovalData",JSON.stringify([ApprovalData]))
+        }
+        else{
+          let arr=JSON.parse(ApprovalData);
+          console.log(arr);
+          arr.push(ApprovalData);
+          localStorage.setItem("ApprovalData",JSON.stringify(arr));
+        }
+
+
+
     setLoading(true);
     setTimeout(() => {
       setLoading(false);

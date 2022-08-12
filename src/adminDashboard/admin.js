@@ -15,8 +15,6 @@ import { admindata} from './../adminDashboard/ApiDatas/apiData'
 import { UserOutlined} from  '@ant-design/icons'
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
-
-
 function Admin () {
 
 const [userdatamap, setUserdatamap] = useState([])
@@ -36,6 +34,7 @@ const [addAddress, setAddAddress] = useState ("")
 const [addDOB, setAddDOB] = useState("")
 const [addDOJ, setAddDOJ] = useState("")
 
+const [approvalLeave, setApprovalLeave] = useState([])
 
 
 const moment = require('moment');
@@ -61,8 +60,21 @@ setListEmployee(listDatessssss)
  )
  console.log("FilteredArarry", FilteredArarryLeave)
  setTodayLeave(FilteredArarryLeave)
-}, [])
 
+ let a = JSON.parse(localStorage.getItem("ApprovalData"))
+ console.log("a", a)
+ setApprovalLeave(a)
+ 
+
+
+
+
+
+
+
+
+}, [])
+console.log("approvalLeave", approvalLeave)
 
 const showModal = () => {
    setVisible(true);
@@ -162,6 +174,29 @@ let navigate = useNavigate();
   )
 })}
 
+</div>
+
+<div className="approveRequest">
+<h1>Leave Approval</h1>
+
+   {approvalLeave && approvalLeave.map((item, index)=>{
+      return(
+         <div className="approveRequest">
+            <div className="approveRequest-list">
+            <h3>{item.name}  </h3>
+            <h3> {moment(item.dateEnd).format('LL')}</h3>
+            <h3>{item.dateType}</h3>
+            <h3>{item.leaveType}</h3>
+            <h3>{item.reason}</h3>
+            </div>
+            <div className="approveRequest-btn">
+            <button id="approveRequest-btn1" >Approved</button>
+            <button id="approveRequest-btn2">Cancel</button>
+            </div>
+         </div>
+
+      );
+   })}
 </div>
          <div>
             <div className="empolyee-header">
