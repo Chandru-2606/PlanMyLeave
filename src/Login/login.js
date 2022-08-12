@@ -6,7 +6,6 @@ import { UserOutlined } from '@ant-design/icons';
 import './login.css'
 import { admindata } from "../adminDashboard/ApiDatas/apiData";
 import { userdata } from "../adminDashboard/ApiDatas/apiData";
-import { clockindata } from "../adminDashboard/ApiDatas/apiData";
 
 const  Login =() =>{
 const [dataEnd, setDataEnd ] = useState ("")

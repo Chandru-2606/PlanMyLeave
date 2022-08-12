@@ -12,21 +12,29 @@ import {clockindata} from './../adminDashboard/ApiDatas/apiData'
 import {userdata} from './../adminDashboard/ApiDatas/apiData'
 import { leaveData } from './../adminDashboard/ApiDatas/apiData'
 import { admindata} from './../adminDashboard/ApiDatas/apiData'
+import { UserOutlined} from  '@ant-design/icons'
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 
 
-function Admin (props) {
+function Admin () {
 
 const [userdatamap, setUserdatamap] = useState([])
-const [dashboardData, setDashboardData] = useState([])
 const [isModalVisible, setIsModalVisible] = useState(false);
 const [lisEmployee, setListEmployee] = useState([])
-const [todayData, setTodayData] = useState([])
 const [display, setDisplay] = useState(false)
 const [loading, setLoading] = useState(false);
 const [visible, setVisible] = useState(false);
 const [todayClockin, setTodayClockin] = useState([])
 const [todayLeave,  setTodayLeave] = useState([])
+
+const [addName, setAddName] = useState("")
+const [addPassword, setAddPassword] = useState("")
+const [addEmail, setAddEmail] = useState("")
+const [addNumber, setAddNumber] = useState("")
+const [addAddress, setAddAddress] = useState ("")
+const [addDOB, setAddDOB] = useState("")
+const [addDOJ, setAddDOJ] = useState("")
 
 
 
@@ -34,25 +42,15 @@ const moment = require('moment');
 const { TextArea } = Input;
 useEffect(() => {
    const Datessssss = clockindata.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
+  //  console.log("Datessssss", )
   setUserdatamap(Datessssss)
 
   const listDatessssss = userdata.map(t1 => ({...t1, ...clockindata.find(t2 => t2.employeeId === t1.id)}))
 setListEmployee(listDatessssss)
 
-const today = todayClockin.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
-setTodayData(today)
-
-
-  let a = JSON.parse(localStorage.getItem("employeeData"))
-  setDashboardData(a)
+  
 
   const current = new Date();
-//   const filterLeave = clockindata.filter(itemInArray =>{
-//      if(moment(itemInArray).format('DD-MM-YYYY')==moment(current).format('DD-MM-YYYY')){
-//   console.log(moment(itemInArray).format('DD-MM-YYYY'),moment(current).format('DD-MM-YYYY'))
-//      }
-//    });
-
    const FilteredArarry = clockindata.filter(itemInArray =>
       (moment(itemInArray.clockin).format('DD-MM-YYYY')==moment(current).format('DD-MM-YYYY'))
    )
@@ -63,11 +61,6 @@ setTodayData(today)
  )
  console.log("FilteredArarry", FilteredArarryLeave)
  setTodayLeave(FilteredArarryLeave)
-
-
-
-
-   
 }, [])
 
 
@@ -76,6 +69,10 @@ const showModal = () => {
  };
 
  const handleOk = () => {
+   
+   let AddEmployeData ={addName :addName, addPassword:addPassword, addEmail:addEmail, 
+      addNumber:addNumber, addAddress:addAddress, addDOB:addDOB, addDOJ:addDOJ   }
+     console.log("AddEmployeData", AddEmployeData)
    setLoading(true);
    setTimeout(() => {
      setLoading(false);
@@ -86,7 +83,6 @@ const showModal = () => {
  const handleCancel = () => {
    setVisible(false);
  };
-//  console.log("qazsdfxcgvhbjnkm", userdatamap)
  const handleSubmit = () => {
    setIsModalVisible(false);
  };
@@ -135,6 +131,7 @@ let navigate = useNavigate();
       <select onChange={EmployeeName}>
       {lisEmployee.map((item, index)=>{
          return(
+
             <option value={item.id}>
                {item.name}
             </option>
@@ -149,20 +146,7 @@ let navigate = useNavigate();
       <div className="todayData-head"><h1>Leave</h1></div>
       <div className="todayData-head"><h1>workingHrs</h1></div>
    </div>
-{/* {todayClockin && todayClockin.map((item, index)=>{
-      return(
-         <ul>
-            <div className="today_list">            
-            <div className="today_listData">{item.id}</div>
-            <div className="today_listData">{item.clockin ? moment(item.clockin).format('lll') : ""}</div>
-            <div className="today_listData">{item.clockout ? moment(item.clockout).format('LT') :
-                                             ""}</div>
-            <div className="today_listData" id="leave-type" >{ item.leaveType ? item.id : ""  }</div>
-            <div className="today_listData" id="workingshrs">{item.workingHrs ? item.workingHrs : ""}</div>
-            </div>
-         </ul>
-      );
-     })} */}
+
 {todayLeave && todayLeave.map((item, index)=>{
   return(
     <ul>
@@ -172,31 +156,13 @@ let navigate = useNavigate();
             <div className="today_listData">{item.clockout ? moment(item.clockout).format('LT') :
                                              ""}</div>
             <div className="today_listData" id="leave-type" >{ item.leaveType   }</div>
-            <div className="today_listData" id="workingshrs">{item.workingHrs ? item.workingHrs : ""}</div>
+            <div className="today_listData" id="workingshrs">{item.workingHrs ? item.workingHrs : "0"} hours</div>
             </div>
     </ul>
   )
 })}
 
 </div>
-
-      {dashboardData && dashboardData.map((item, index) =>{
-      return(
-         <div className="addemp_details">
-         <button onClick={() => { 
-         navigate(`/EditPage/${item.idd}`)
-         }}>
-         <div className="details_data"> {item.employee}</div>
-         </button>
-            <div className="details_data"> {item.employeeEmail}</div>
-            <div className="details_data">{item.employeeNumber}</div>
-            <div className="details_data"> {item.password}</div>
-            <div className="details_data">{item.department}</div>
-            <div className="details_data">{moment(item.date).format("MMM Do YY")}</div>
-            </div>
-            );
-            })}
-
          <div>
             <div className="empolyee-header">
                <h1>Employee List</h1>
@@ -219,70 +185,78 @@ let navigate = useNavigate();
           
         ]}
       >
-          <from>
-      <div className="addemp_list">
-         <div className="emp_label">
-            <label>Name:</label>
-            <div className="div-input">
-            <Input size="large"   />
+
+
+       <form>
+
+      <div className="add-employeeForm">
+         <div className="employee-divform">
+            <div className="employee-divformlabel">
+               <label>Name</label><br/>
             </div>
-         </div>
-      </div>
-
-      <div className="addemp_list">
-         <div className="emp_label">
-            <label>Password :</label>
-            <div className="div-input">
-
-            <Input size="large"   />
-
-    </div>
-
-         </div>
-      </div>
-
-      <div className="addemp_list">
-         <div className="emp_label">
-            <label>Email :</label>
-            <div className="div-input">
-
-            <Input size="large"   />
-          </div>
-         </div>
-      </div>
-
-      <div className="addemp_list">
-         <div className="emp_label">
-            <label>Address :</label>
-            <div className="div-input">
-            <Input size="large"   />
+            <Input value={addName} size="small" onChange={(e)=>setAddName(e.target.value)} /><br/>
          </div>
 
-         </div>
-      </div>
-
-      <div className="addemp_list">
-         <div className="emp_label">
-            <label>DOB :</label>
-            <div className="div-input">
-            <Input size="large"   />
+         <div className="employee-divform">
+            <div className="employee-divformlabel">
+               <label>Password</label><br/>
             </div>
+            <Input value={addPassword}   size="small" onChange={(e)=>setAddPassword(e.target.value)} /><br/>
          </div>
       </div>
 
-      <div className="addemp_list">
-         <div className="emp_label">
-            <label>DOJ :</label>
-            <div className="div-input">
 
-            <Input size="large"   />
+      <div className="add-employeeForm">
+         <div className="employee-divform">
+            <div className="employee-divformlabel">
+               <label>Email</label><br/>
             </div>
+            <Input value={addEmail} type='email' size="small" onChange={(e)=>setAddEmail(e.target.value)} /><br/>
+         </div>
+
+         <div className="employee-divform">
+            <div className="employee-divformlabel">
+               <label>Phone Number</label><br/>
+            </div>
+            <Input value={addNumber} size="small" onChange={(e)=>setAddNumber(e.target.value)}  /><br/>
+         </div>
+      </div>
+
+
+      <div className="add-employeeForm">
+         <div className="employee-divform">
+            <div className="employee-divformlabel">
+               <label>Address</label><br/>
+            </div>
+            <Input value={addAddress} size="small" onChange={(e)=>setAddAddress(e.target.value)} /><br/>
+         </div>
+
+         <div className="employee-divform">
+            <div className="employee-divformlabel">
+               <label>DOB</label><br/>
+            </div>
+            <input id="addemp-id" value={addDOB} type="date" onChange={(e)=>setAddDOB(e.target.value)} />
 
          </div>
       </div>
 
-      </from>
-       
+      
+
+      <div className="add-employeeForm">
+         <div className="employee-divform">
+            <div className="employee-divformlabel">
+               <label>DOJ</label><br/>
+            </div>
+            <input id="addemp-id" value={addDOJ} type="date" onChange={(e)=>setAddDOJ(e.target.value)} />
+         </div>
+
+         
+      </div>
+
+
+       </form>
+
+
       </Modal>
 
 
@@ -318,7 +292,7 @@ let navigate = useNavigate();
                  {display ? 
                   <div className="edit_btns">
                   <Button type="primary"  onClick={showModal}>
-                     <EditOutlined />
+                     <EditOutlined  />
                   </Button>
                      <div className="edit_btns1">
                   <DownCircleOutlined />

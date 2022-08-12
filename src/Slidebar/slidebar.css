@@ -190,6 +190,7 @@ background-color: rgb(247,247,247);
 }
 .ant-picker-content th{
   background-color: grey;
+  color: white;
 }
 .events{
   list-style-type: none !important;
@@ -384,81 +385,6 @@ width: 100%
   margin-left: 20px;
   width: 90%;
 }
-
-/* .dropdownleave{
-width: 100%;
-}
-
-.dropdownleave label{
-font-size: 20px;
-width: 25%;
-font-weight: bolder;
-}
-
-.dropdownleave1{
-display: flex;
-justify-content: space-between;
-width: 100%;
-}
-
-.dropdownleave select{
-margin-top: 10px;
-width: 50%;
-font-size: 16px;
-margin-left: 17px;
-
-}
-
-.hours-div{
-  width: 50%;
-}
-
-.hours-div label {
-  font-size: 20px;
-width: 25%;
-font-weight: bolder;
-}
-
-.hours-div  h1{
-  font-size: 20px;
-}
-
-.select-leave{
-  width: 100%;
-  margin-top: 10px;
-}
-
-.select-leave label{
-  font-size: 20px;
-  width: 25%;
-  font-weight: bolder;
-}
-.leave-start {
-  margin-top: 10px;
-  display: flex;
-  margin-left: 20px;
-}
-
-.leave-start input{
-  width: 170px;
-}
-
-.leave-start select{
-  margin-left: 40px;
-  width: 170px;
-}
-
-.reason{
-  font-size: 20px;
-  font-weight: bolder;
-  margin-top: 10px;
-}
-
-.reason textarea{
-  margin-left: 17px;
-  width: 80%;
-  margin-top: 10px;
-} */
  
 .ant-modal-content{
   width: 170% !important;
@@ -492,6 +418,7 @@ font-weight: bolder;
  font-size: 16px;
  height: 30px;
  width: 70%;
+ cursor: pointer;
 }
 
 .balance-leave {
@@ -534,6 +461,8 @@ font-weight: bolder;
   height: 30px;
   margin-left: 20px;
   width: 150px;
+ cursor: pointer;
+
  }
 
  .leave-reason{
@@ -609,7 +538,9 @@ font-weight: bolder;
 .users-on-leave select{
   width: 30%;
   height: 30px;
+ cursor: pointer;
 }
+
 
 .user-real {
  display: flex;
@@ -641,6 +572,8 @@ font-weight: bolder;
   margin-left: 10px;
   margin-top: 10px;
   width: 150px;
+ cursor: pointer;
+
 }
 
 .leave-balnce{

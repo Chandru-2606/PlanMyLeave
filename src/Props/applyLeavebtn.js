@@ -89,6 +89,8 @@ let valId = `${id}`
   <div className="type-leavedata">
   <label>Leave Type</label><br></br>
   <select value={leaveType} onChange={(e) => {setLeaveType(e.target.value)}}>
+  <option id="select-leave">Select Leave</option>
+
     <option>Casual Leave</option>
     <option>Sick Leave</option>
     <option>CompensatoryOff</option>
@@ -113,6 +115,7 @@ let valId = `${id}`
       <input type="date" value={dateStart} onChange={(e) => {setDateStart(e.target.value)}}/> 
 
     <select value={dateType} onChange={(e) => {setDateType(e.target.value)}}>
+      <option>Select day type</option>
       <option>Full Day</option>
       <option>First Half of the Day</option>
       <option>Second Half of the Day</option>
@@ -129,6 +132,7 @@ let valId = `${id}`
     <input type="date" value={dateEnd} onChange={(e) => {setDateEnd(e.target.value)}} /> 
 
     <select value={dayEnd} onChange={(e) => {setDayEnd(e.target.value)}} >
+    <option>Select day type</option>
       <option>Full Day</option>
       <option>First Half of the Day</option>
       <option>Second Half of the Day</option>

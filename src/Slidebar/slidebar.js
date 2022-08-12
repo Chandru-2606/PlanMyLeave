@@ -157,13 +157,14 @@ const [display, setDisplay] = useState(false)
 const TodayEvents = (e) =>{
 // console.log("dcfgr", e.target.value)
 
+const current =  moment(new Date()).format('l');
 
 switch (e.target.value){
+
   case "Today": 
-      const current = new Date();
       datesends.map((item,index)=>{
       const filterLeaveData = datesends.filter(itemInArray => 
-      moment(itemInArray.leaveDate).format('l') == moment(current).format('l')
+      moment(itemInArray.leaveDate).format('l') == current
       );
       setSelectLeave(filterLeaveData)
     })
@@ -172,7 +173,6 @@ switch (e.target.value){
 
     case "Tomorrow":
       let TomorrowDate =  moment().add(1, 'days').format('l');
-      // console.log("TomorrowDate", TomorrowDate)
       datesends.map((item,index)=>{
       const filterLeaveData = datesends.filter(itemInArray => 
       moment(itemInArray.leaveDate).format('l') == moment(TomorrowDate).format('l')
@@ -182,17 +182,16 @@ switch (e.target.value){
     })
     console.log("Tomorrow");
     break;
- 
-
-
     case "Next 7 days":
-      // let Nextdays =  moment().add(7, 'days').format('l');
-      // console.log("Nextdays", Nextdays)
-      // const filterLeaveData = datesends.filter(itemInArray => 
-      //   //  moment(itemInArray.leaveDate).max(moment().add(7, 'd'))
-      //   );
-        // console.log("filterLeaveData", filterLeaveData)
-    console.log("Next 7 days");
+    const next7days = moment().add(2, 'days').format('l')
+    
+    const filterLeaveData = datesends.filter(itemInArray => 
+      moment(itemInArray.leaveDate).format('l') == moment(next7days).format('l')
+      );
+      setSelectLeave(filterLeaveData)
+
+
+
     break;
 
 
@@ -217,21 +216,12 @@ switch (e.target.value){
     console.log("Next 90 Days");
     break;
     // default:
-    //   console.log("default statement")
+    //      case "Today" :
 
 }
-
-// setDateRange(e.target.value)
-
-
-
 }
 
-const TodayFilter =(e) =>{
-  console.log("today")
-}
 
-// console.log("leaveBalance", leaveBalance)
 let { id } = useParams();
 let valId = `${id}`
 
@@ -529,6 +519,28 @@ const dateCellRender = (value) => {
 
               <TabPane tab="My Leave Balance" key="2">
                <label>As of date</label> <input type="date" /><button >Find My Leave</button>
+
+               {/* <tr >
+          <div className="th_div">
+            <div className="data_leave">
+              <th > Authorizedbreak</th><br></br>
+                <th>Next Year</th>
+            </div>
+
+            <div className="hours">
+              <th> Days</th><br></br>
+                <th>0 Days</th>
+            </div>
+
+            <div className="td_a">
+              <td >
+
+              <ApplyLeavebtn />
+                  
+              </td>
+            </div>
+          </div>
+        </tr> */}
                </TabPane>
               </Tabs>
                 </div>
@@ -650,7 +662,7 @@ const dateCellRender = (value) => {
     </div>
 
     <div className="clockin_listli">
-      <li >{item.clockout ? moment(item.clockout).format('LT'):""}</li><br/>
+      <li >{item.clockout ? moment(item.clockout).format('LT'): ""}</li><br/>
     </div>
 
     <div className="clockin_listli">

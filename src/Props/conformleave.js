@@ -58,7 +58,7 @@ const ConformLeave = (props) =>{
               {nameEmp && nameEmp.map((item, index)=>{
                 return(
             <h1><span id='confirm-name'>Confirm Leave for</span> {item.name} <span id='confirm-name'>{props.leaveType}</span></h1>
-                )
+            )
           })}
             </div>
       <div className='confirm-body'>

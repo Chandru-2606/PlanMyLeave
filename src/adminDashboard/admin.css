@@ -123,33 +123,42 @@
     list-style-type:none;
 }
 
-
-
-.addemp_list{
-    display: flex;
-    margin-bottom: 30px;
-    justify-content: space-between;
-}
-
-.emp_label{
-    display: flex;
+.add-employeeForm{
     width: 100%;
+    display: flex;
+    margin-left: 50px;
+    margin-top: 20px;
 }
 
-.emp_label label{
-    margin-top: 7px;
-    margin-bottom: 20px !important;
-    color: red;
-    text-align: center;
+.employee-divform{
     width: 50%;
+
 }
 
-.div-input{
-    float: right;
-    width: 50%;
-    margin-left: -150px;
+.employee-divform label{
+    color: brown;
+    font-size: 16px;
+    padding-bottom: 20px;
 }
 
+.employee-divform .ant-input {
+    margin-top: 50px !important; 
+    width: 300px !important;
+    height: 40px !important;
+}
+
+.employee-divformlabel{
+  margin-bottom: 10px;
+}
+
+#addemp-id{
+    width: 300px;
+    height: 40px;
+}
+
+.employee-divform .ant-input{
+  margin-top: -6px !important;
+}
 
 .leaveDatalist{
     margin-top: 50px;
