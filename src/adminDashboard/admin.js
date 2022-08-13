@@ -74,9 +74,7 @@ setApprovalLeave(a)
 }, [])
 // console.log("approvalLeave", approvalLeave)
 
-// const showModal = () => {
-//    setVisible(true);
-//  };
+
 
 
  const EmployeeName =(e) =>{
@@ -84,7 +82,7 @@ setApprovalLeave(a)
    return employee.employeeId == e.target.value;
  });
 //  setTodayData(filtered)
-// console.log("filtered", filtered)
+console.log("filtered", filtered)
 setTodayLeave(filtered)
  }
 

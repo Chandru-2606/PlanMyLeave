@@ -90,66 +90,7 @@ const [display, setDisplay] = useState(false)
 
 
 
-  // console.log("filterLeave", filterLeave)
-
-  // const userdata=[
-  //   {
-  //     "id": 3180,
-  //     "roleId":1,
-  //     "name": "Raj M new",
-  //     "email": "rajmalhotrnewa3007@gmail.com",
-  //     "password":"Anexas123456",
-  //     "DOB":"00-00-0000",
-  //     "DOJ":"00-00-0000",
-  //     "Address":"6-11, main road, hsr layout",
-  //     "profilepicture": "http://restapi.adequateshop.com/Media//Images/userimageicon.png",
-  //     "location": "USAnew",
-  //     "createdat": "2021-02-16T10:29:48.0112462",
-  //     "updatedat":"DD-MM-YYYY"
-  //   },
-  //   {
-  //     "id": 3182,
-  //     "roleId":1,
-  //     "name": "Sharan S Nair",
-  //     "email": "sharans.nair@yahoo.in",
-  //     "password":"Anexas123456",
-  //     "DOB":"00-00-0000",
-  //     "DOJ":"00-00-0000",
-  //     "Address":"6-11, main road, hsr layout",
-  //     "profilepicture": "http://restapi.adequateshop.com/Media//Images/userimageicon.png",
-  //     "location": "USA",
-  //     "createdat": "2021-02-16T11:12:25.1586341",
-  //     "updatedat":"DD-MM-YYYY"
-  //   },
-  //   {
-  //     "id": 3183,
-  //     "roleId":1,
-  //     "name": "Yusuff Olanrewaju",
-  //     "email": "olanrewajuyusuff65@gmail.com",
-  //     "password":"Anexas123456",
-  //     "DOB":"00-00-0000",
-  //     "DOJ":"00-00-0000",
-  //     "Address":"6-11, main road, hsr layout",
-  //     "profilepicture": "http://restapi.adequateshop.com/Media/Images/d8b37cee-20dc-4007-aa71-60661eae4509.png",
-  //     "location": "USA",
-  //     "createdat": "2021-02-16T13:29:04.9659055",
-  //     "updatedat":"DD-MM-YYYY"
-  //   },
-  //   {
-  //     "id": 3184,
-  //     "roleId":1,
-  //     "name": "Anouar Snader",
-  //     "email": "anouarsnader612@gmail.com",
-  //     "password":"Anexas123456",
-  //     "DOB":"00-00-0000",
-  //     "DOJ":"00-00-0000",
-  //     "Address":"6-11, main road, hsr layout",
-  //     "profilepicture": "http://restapi.adequateshop.com/Media/Images/.png",
-  //     "location": "USA",
-  //     "createdat": "2021-02-16T15:26:45.3582964",
-  //     "updatedat":"DD-MM-YYYY"
-  //   }
-  // ]
+  
  
 
 
@@ -163,56 +104,48 @@ const current =  moment(new Date()).format('l');
 switch (e.target.value){
 
   case "Today": 
-      datesends.map((item,index)=>{
-      const filterLeaveData = datesends.filter(itemInArray => 
+      
+      const todayLeaveData = datesends.filter(itemInArray => 
       moment(itemInArray.leaveDate).format('l') == current
       );
-      setSelectLeave(filterLeaveData)
-    })
+      setSelectLeave(todayLeaveData)
     break;
 
 
     case "Tomorrow":
       let TomorrowDate =  moment().add(1, 'days').format('l');
-      datesends.map((item,index)=>{
-      const filterLeaveData = datesends.filter(itemInArray => 
+      const TomorrowLeaveData = datesends.filter(itemInArray => 
       moment(itemInArray.leaveDate).format('l') == moment(TomorrowDate).format('l')
       );
-      setSelectLeave(filterLeaveData)
-
-    })
-    console.log("Tomorrow");
+      setSelectLeave(TomorrowLeaveData)
+      console.log("Tomorrow");
     break;
+
     case "Next 7 days":
-    const next7days = moment().add(3, 'days').format('l')
-    console.log("next7days", next7days)
-    
-    const filterLeaveData = datesends.filter(itemInArray => 
+      const next7days = moment().add(3, 'days').format('l')
+      console.log("next7days", next7days)
+      const filterLeaveData = datesends.filter(itemInArray => 
       moment(itemInArray.leaveDate).format('l') == moment(next7days).format('l')
       );
       setSelectLeave(filterLeaveData)
-
     break;
 
 
     case "Next 14 Days":
-    console.log("Next 14 Days");
+      console.log("Next 14 Days");
     break;
 
 
     case "Next 30 Days":
-    console.log("Next 30 Days");
+      console.log("Next 30 Days");
     break;
 
 
     case "Next 60 Days":
-    console.log("Next 60 Days");
+      console.log("Next 60 Days");
     break;
-    case "Next 90 Days":
-    // clockindata.map((item,index)=>{
-    //   return()
+      case "Next 90 Days":
 
-    // })
     console.log("Next 90 Days");
     break;
     // default:
@@ -579,7 +512,6 @@ const dateCellRender = (value) => {
             <h1>User on Leave</h1>
             <div className="users-on-leave"> 
               <select onClick={TodayEvents} >
-                <option>Select Date</option>
                 <option value={"Today"} >Today</option>
                 <option value={"Tomorrow"} >Tomorrow</option>
                 <option value={"Next 7 days"}>Next 7 days</option>

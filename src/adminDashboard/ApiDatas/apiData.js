@@ -278,6 +278,22 @@ export  const clockindata=[
                           leaveType:"Restricted Holidays",
                           leaveDate:"Sat Aug 14 2022 09:30:00 GMT+0530 (India Standard Time)"
                           },
+                          {
+                            employeeId: 3183,
+                            clockin:"Mon july 30 2022 010:00:00 GMT+0530 (India Standard Time)",
+                            clockout:"Mon july 30 2022 06:30:00 GMT+0530 (India Standard Time)",
+                            workingHrs:'8:30',
+                            leaveType:"",
+                            leaveDate:""
+                            },
+                          {
+                            employeeId: 3183,
+                            clockin:"Mon july 31 2022 09:30:00 GMT+0530 (India Standard Time)",
+                            clockout:"Mon july 31 2022 06:30:00 GMT+0530 (India Standard Time)",
+                            workingHrs:9,
+                            leaveType:"",
+                            leaveDate:""
+                            },
     {
     employeeId: 3183,
     clockin:"Mon Aug 01 2022 09:30:00 GMT+0530 (India Standard Time)",
