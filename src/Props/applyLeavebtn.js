@@ -69,16 +69,15 @@ let valId = `${id}`
           Cancel
           </Button>,
 
-// dateStart:dateStart, dateType:dateType,
-//                           dateEnd:dateEnd, dayEnd:dayEnd, reason:reason, address:address,
-//                           number:number, id:id, date:momentDate
 
-// {leaveType:leaveType, dateStart:dateStart, dateType:dateType,
-//   dateEnd:dateEnd, dayEnd:dayEnd, reason:reason, address:address,
-//   number:number, id:id, date:momentDate }
           <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
-           <ConformLeave id={id} dateStart={dateStart} dateType={dateType} dateEnd={dateEnd} dayEnd={dayEnd} 
-                          reason={reason} leaveType={leaveType}  />
+           <ConformLeave id={id} 
+                        dateStart={dateStart} 
+                        dateType={dateType} 
+                        dateEnd={dateEnd} 
+                        dayEnd={dayEnd} 
+                        reason={reason} 
+                        leaveType={leaveType}  />
            Submit
           </Button>,
         ]}

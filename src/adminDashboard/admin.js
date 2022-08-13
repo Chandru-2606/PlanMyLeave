@@ -42,46 +42,41 @@ const moment = require('moment');
 const { TextArea } = Input;
 useEffect(() => {
    const Datessssss = clockindata.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
+  //  console.log("Datessssss", )
   setUserdatamap(Datessssss)
 
   const listDatessssss = userdata.map(t1 => ({...t1, ...clockindata.find(t2 => t2.employeeId === t1.id)}))
 setListEmployee(listDatessssss)
 
-
+  
 
   const current = new Date();
    const FilteredArarry = clockindata.filter(itemInArray =>
-      (moment(itemInArray.clockin).format('DD-MM-YYYY')==moment(current).format('DD-MM-YYYY'))
+      (moment(itemInArray.clockin).format('DD-MM-YYYY') == moment(current).format('DD-MM-YYYY'))
    )
    setTodayClockin(FilteredArarry)
 
    const FilteredArarryLeave = clockindata.filter(itemInArray =>
-    (moment(itemInArray.leaveDate).format('DD-MM-YYYY')==moment(current).format('DD-MM-YYYY'))
+    (moment(itemInArray.leaveDate).format('DD-MM-YYYY') == moment(current).format('DD-MM-YYYY'))
  )
- console.log("FilteredArarry", FilteredArarryLeave)
+//  console.log("FilteredArarry", FilteredArarryLeave)
  setTodayLeave(FilteredArarryLeave)
+
+//  let a = JSON.parse(localStorage.getItem("Data"))
+//  console.log("a", a)
+//  setApprovalLeave(a)
  
 
-
-
- 
- let a = JSON.parse(localStorage.getItem("approvalData"))
-console.log("aaaaaa", a)
+ let a = JSON.parse(localStorage.getItem("ApprovalData"))
+// console.log("aaaaaa", a)
 setApprovalLeave(a)
 
-
-
-
-
-
-
-
 }, [])
-console.log("approvalLeave", approvalLeave)
+// console.log("approvalLeave", approvalLeave)
 
-const showModal = () => {
-   setVisible(true);
- };
+// const showModal = () => {
+//    setVisible(true);
+//  };
 
 
  const EmployeeName =(e) =>{
@@ -91,9 +86,7 @@ const showModal = () => {
 //  setTodayData(filtered)
 // console.log("filtered", filtered)
 setTodayLeave(filtered)
-
-}
-
+ }
 
 
 const AddSubmit = (e) =>{

@@ -81,7 +81,7 @@ export  const clockindata=[
       clockin:"Mon Aug 01 2022 09:30:00 GMT+0530 (India Standard Time)",
       clockout:"Mon Aug 01 2022 06:30:00 GMT+0530 (India Standard Time)",
       workingHrs:9,
-      leaveType:"",
+      leaveType:'',
       leaveDate:""
       },
       {
