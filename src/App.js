@@ -9,6 +9,7 @@ import Slidebar from './Slidebar/slidebar';
 import Form from './Form/form';
 import Admin from './adminDashboard/admin';
 import ConformLeave from './Props/conformleave';
+import AddEmployee from './Props/addEmployee';
 
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
       <Route path="/Form" element={<Form />} />
       <Route path={"/Admin"} element={<Admin />} />
       <Route path={"/ConformLeave"} element={<ConformLeave />} />
+      <Route path={"/AddEmployee"} element={<AddEmployee />} />
+
 
     </Routes>
     

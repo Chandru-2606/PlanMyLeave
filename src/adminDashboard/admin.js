@@ -12,6 +12,7 @@ import {clockindata} from './../adminDashboard/ApiDatas/apiData'
 import {userdata} from './../adminDashboard/ApiDatas/apiData'
 import { leaveData } from './../adminDashboard/ApiDatas/apiData'
 import { admindata} from './../adminDashboard/ApiDatas/apiData'
+import AddEmployee from "../Props/addEmployee";
 import { UserOutlined} from  '@ant-design/icons'
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
@@ -21,10 +22,10 @@ const [userdatamap, setUserdatamap] = useState([])
 const [isModalVisible, setIsModalVisible] = useState(false);
 const [lisEmployee, setListEmployee] = useState([])
 const [display, setDisplay] = useState(false)
-const [loading, setLoading] = useState(false);
-const [visible, setVisible] = useState(false);
+
 const [todayClockin, setTodayClockin] = useState([])
 const [todayLeave,  setTodayLeave] = useState([])
+const [visible, setVisible] = useState(false);
 
 const [addName, setAddName] = useState("")
 const [addPassword, setAddPassword] = useState("")
@@ -41,13 +42,12 @@ const moment = require('moment');
 const { TextArea } = Input;
 useEffect(() => {
    const Datessssss = clockindata.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
-  //  console.log("Datessssss", )
   setUserdatamap(Datessssss)
 
   const listDatessssss = userdata.map(t1 => ({...t1, ...clockindata.find(t2 => t2.employeeId === t1.id)}))
 setListEmployee(listDatessssss)
 
-  
+
 
   const current = new Date();
    const FilteredArarry = clockindata.filter(itemInArray =>
@@ -60,11 +60,14 @@ setListEmployee(listDatessssss)
  )
  console.log("FilteredArarry", FilteredArarryLeave)
  setTodayLeave(FilteredArarryLeave)
-
- let a = JSON.parse(localStorage.getItem("ApprovalData"))
- console.log("a", a)
- setApprovalLeave(a)
  
+
+
+
+ 
+ let a = JSON.parse(localStorage.getItem("approvalData"))
+console.log("aaaaaa", a)
+setApprovalLeave(a)
 
 
 
@@ -80,24 +83,6 @@ const showModal = () => {
    setVisible(true);
  };
 
- const handleOk = () => {
-   
-   let AddEmployeData ={addName :addName, addPassword:addPassword, addEmail:addEmail, 
-      addNumber:addNumber, addAddress:addAddress, addDOB:addDOB, addDOJ:addDOJ   }
-     console.log("AddEmployeData", AddEmployeData)
-   setLoading(true);
-   setTimeout(() => {
-     setLoading(false);
-     setVisible(false);
-   }, 3000);
- };
-
- const handleCancel = () => {
-   setVisible(false);
- };
- const handleSubmit = () => {
-   setIsModalVisible(false);
- };
 
  const EmployeeName =(e) =>{
   const filtered = clockindata.filter(employee => {
@@ -164,10 +149,13 @@ let navigate = useNavigate();
     <ul>
                   <div className="today_list">            
             <div className="today_listData">{item.employeeId}</div>
-            <div className="today_listData">{item.clockin ? moment(item.clockin).format('lll') : ""}</div>
+            <div className="today_listData">{item.clockin ? moment(item.clockin).format('lll') : 
+                                             moment(item.leaveDate).format('ll')}
+            </div>
             <div className="today_listData">{item.clockout ? moment(item.clockout).format('LT') :
-                                             ""}</div>
-            <div className="today_listData" id="leave-type" >{ item.leaveType   }</div>
+                                             ""}
+            </div>
+            <div className="today_listData" id="leave-type">{ item.leaveType }</div>
             <div className="today_listData" id="workingshrs">{item.workingHrs ? item.workingHrs : "0"} hours</div>
             </div>
     </ul>
@@ -176,126 +164,42 @@ let navigate = useNavigate();
 
 </div>
 
-<div className="approveRequest">
-<h1>Leave Approval</h1>
 
-   {approvalLeave && approvalLeave.map((item, index)=>{
-      return(
-         <div className="approveRequest">
+
+      <div className="approveRequest">
+        <h1>Leave Approval</h1>
+        {approvalLeave && approvalLeave.map((item, index)=>{
+         return(
+            <div className="approveRequest">
             <div className="approveRequest-list">
-            <h3>{item.name}  </h3>
-            <h3> {moment(item.dateEnd).format('LL')}</h3>
-            <h3>{item.dateType}</h3>
+
+          <h3>{item.name}</h3>
+          <h3>{moment(item.dateEnd).format('LL')}</h3>
+          <h3>{item.dateType}</h3>
             <h3>{item.leaveType}</h3>
             <h3>{item.reason}</h3>
             </div>
+
             <div className="approveRequest-btn">
             <button id="approveRequest-btn1" >Approved</button>
             <button id="approveRequest-btn2">Cancel</button>
             </div>
-         </div>
 
-      );
-   })}
-</div>
+         
+               </div>
+         );
+           
+        })}
+      </div>
+
+
+
          <div>
             <div className="empolyee-header">
                <h1>Employee List</h1>
-               <Button type="primary" onClick={showModal}>
-        Add Employee
-      </Button>
+              
 
-      <Modal
-        visible={visible}
-        title="Add Employee"
-        onOk={handleOk}
-        onCancel={handleCancel}
-        footer={[
-          <Button key="back" onClick={handleCancel}>
-            Cancel
-          </Button>,
-          <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
-            Add Employee
-          </Button>,
-          
-        ]}
-      >
-
-
-       <form>
-
-      <div className="add-employeeForm">
-         <div className="employee-divform">
-            <div className="employee-divformlabel">
-               <label>Name</label><br/>
-            </div>
-            <Input value={addName} size="small" onChange={(e)=>setAddName(e.target.value)} /><br/>
-         </div>
-
-         <div className="employee-divform">
-            <div className="employee-divformlabel">
-               <label>Password</label><br/>
-            </div>
-            <Input value={addPassword}   size="small" onChange={(e)=>setAddPassword(e.target.value)} /><br/>
-         </div>
-      </div>
-
-
-      <div className="add-employeeForm">
-         <div className="employee-divform">
-            <div className="employee-divformlabel">
-               <label>Email</label><br/>
-            </div>
-            <Input value={addEmail} type='email' size="small" onChange={(e)=>setAddEmail(e.target.value)} /><br/>
-         </div>
-
-         <div className="employee-divform">
-            <div className="employee-divformlabel">
-               <label>Phone Number</label><br/>
-            </div>
-            <Input value={addNumber} size="small" onChange={(e)=>setAddNumber(e.target.value)}  /><br/>
-         </div>
-      </div>
-
-
-      <div className="add-employeeForm">
-         <div className="employee-divform">
-            <div className="employee-divformlabel">
-               <label>Address</label><br/>
-            </div>
-            <TextArea value={addAddress} rows={4} onChange={(e)=>setAddAddress(e.target.value)}  />
-         </div>
-
-         <div className="employee-divform">
-            <div className="employee-divformlabel">
-               <label>DOB</label><br/>
-            </div>
-            <input id="addemp-id" value={addDOB} type="date" onChange={(e)=>setAddDOB(e.target.value)} />
-
-         </div>
-      </div>
-
-      
-
-      <div className="add-employeeForm">
-         <div className="employee-divform">
-            <div className="employee-divformlabel">
-               <label>DOJ</label><br/>
-            </div>
-            <input id="addemp-id" value={addDOJ} type="date" onChange={(e)=>setAddDOJ(e.target.value)} />
-         </div>
-
-         
-      </div>
-
-
-       </form>
-
-
-      </Modal>
-
-
-
+              <AddEmployee />
 
 
 
@@ -326,9 +230,12 @@ let navigate = useNavigate();
 
                  {display ? 
                   <div className="edit_btns">
-                  <Button type="primary"  onClick={showModal}>
-                     <EditOutlined  />
-                  </Button>
+                  {/* <Button type="primary"  onClick={showModal}>
+                  <AddEmployee />
+
+                  </Button> */}
+              <AddEmployee />
+
                      <div className="edit_btns1">
                   <DownCircleOutlined />
                      </div>

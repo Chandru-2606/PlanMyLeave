@@ -80,8 +80,6 @@ const Slidebar = (props) => {
   const [selectLeave, setSelectLeave] = useState([])
   const { TabPane } = Tabs;
 
-
-  
   const [approvalLeave, setApprovalLeave] = useState([])
 
 
@@ -186,14 +184,13 @@ switch (e.target.value){
     console.log("Tomorrow");
     break;
     case "Next 7 days":
-    const next7days = moment().add(2, 'days').format('l')
+    const next7days = moment().add(3, 'days').format('l')
+    console.log("next7days", next7days)
     
     const filterLeaveData = datesends.filter(itemInArray => 
       moment(itemInArray.leaveDate).format('l') == moment(next7days).format('l')
       );
       setSelectLeave(filterLeaveData)
-
-
 
     break;
 
@@ -228,11 +225,13 @@ switch (e.target.value){
 let { id } = useParams();
 let valId = `${id}`
 
-// console.log("applyleave,ad", applyLeaveData)
+
+
+
+
 useEffect(() => {
   const Datessssss = clockindata.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
 setDatesend(Datessssss)
-// console.log("Datessssss", Datessssss)
 
 const variableOne = datesends.filter(itemInArray => 
   itemInArray.employeeId == valId
@@ -245,17 +244,14 @@ const filterLeave = ApplyLeave.filter(itemInArray =>
 setLeaveBalance(filterLeave)
 
 let a = JSON.parse(localStorage.getItem("leaveData"))
-// console.log("from use effects", JSON.parse(localStorage.getItem("leaveData")));
 setYearLeaveData(a)
 
-let localrecived = JSON.parse(localStorage.getItem("ApprovalData"))
-//  console.log("aaaaaaaaaaaaaaaaa", a)
- setApprovalLeave(localrecived)
- 
+// let localrecived = JSON.parse(localStorage.getItem(""))
 
+let localrecived = JSON.parse(localStorage.getItem("ApprovalData"))
+setApprovalLeave(localrecived)
 }, [newVariable])
 
-// console.log("approvalLeave", approvalLeave)
 
 const dateCellRender = (value) => {
     let listData = [];
@@ -624,7 +620,7 @@ const dateCellRender = (value) => {
   })}
 </div>
 
-<div className="leave-request">
+{/* <div className="leave-request">
   <h1>My Leave Request</h1>
 {approvalLeave && approvalLeave.map((item, index)=>{
   return(
@@ -635,7 +631,25 @@ const dateCellRender = (value) => {
     </div>
   );
 })}
-</div>
+</div> */}
+
+
+
+ <div className="leave-request">
+   <h1>My Leave Request</h1>
+   {approvalLeave && approvalLeave.map((item, index)=>{
+    return(
+      <div className="leave-requestList">
+          <h3>{moment(item.dateStart).format('L')} - { moment(item.dateEnd).format('L')}</h3>
+          <h3>Applied on {moment(item.date).format('LLL')}</h3>
+          <h3>{item.leaveType}</h3>
+      </div>
+    );
+   })}
+ </div>
+
+
+
 
         <div className='clockin_datas'>
 <h1>Last 15 Clock In</h1>

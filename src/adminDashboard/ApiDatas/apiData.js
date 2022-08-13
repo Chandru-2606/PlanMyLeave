@@ -30,7 +30,7 @@ export   const userdata=[
       "createdat": "2021-02-16T10:29:48.0112462",
       "updatedat":"DD-MM-YYYY"
     },
-    
+   
     {
       "id": 3182,
       "roleId":1,
@@ -173,6 +173,14 @@ export  const clockindata=[
                           leaveType:"Leave without Pay",
                           leaveDate:"Sat Aug 14 2022 09:30:00 GMT+0530 (India Standard Time)"
                           },
+                          {
+                            employeeId:3180,
+                            clockin:"",
+                            clockout:"",
+                            workingHrs:0,
+                            leaveType:"Leave without Pay",
+                            leaveDate:"Sat Aug 16 2022 09:30:00 GMT+0530 (India Standard Time)"
+                            },
     {
       employeeId:3182,
       clockin:"Mon Aug 01 2022 09:30:00 GMT+0530 (India Standard Time)",
@@ -345,9 +353,9 @@ export  const clockindata=[
                   },
                     {
                       employeeId: 3183,
-                      clockin:"",
-                      clockout:"",
-                      workingHrs:0,
+                      clockin:"Wed Aug 13 2022 09:30:00 GMT+0530 (India Standard Time)",
+                      clockout:"Wed Aug 13 2022 13:30:00 GMT+0530 (India Standard Time)",
+                      workingHrs:"4 ",
                       leaveType:"Sick leave",
                       leaveDate:"Sat Aug 13 2022 09:30:00 GMT+0530 (India Standard Time)"
                       },
@@ -359,6 +367,14 @@ export  const clockindata=[
                         leaveType:"Sick leave",
                         leaveDate:"Sat Aug 14 2022 09:30:00 GMT+0530 (India Standard Time)"
                         },
+                        {
+                          employeeId: 3183,
+                          clockin:"",
+                          clockout:"",
+                          workingHrs:0,
+                          leaveType:"Sick leave",
+                          leaveDate:"Sat Aug 16 2022 09:30:00 GMT+0530 (India Standard Time)"
+                          },
     {
       employeeId: 3184,
       clockin:"Mon Aug 01 2022 09:30:00 GMT+0530 (India Standard Time)",
