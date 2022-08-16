@@ -177,9 +177,7 @@
     list-style-type:none;
 }
 
-.leaveDatalist  span {
-    margin-left: 10px;
-}
+
 
 .leaveDatalist button{
     float: right;
@@ -242,4 +240,19 @@
     margin-left: 20px;
     width: 100px;
     height: 30px;
+}
+/* .yearLeave-data {
+    margin-bottom: 50px;
+} */
+.yearLeave-data ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.yearLeave-data li {
+margin-left: 20px;
+}
+
+.yearleave-datess{
+    width: 30%;
 }

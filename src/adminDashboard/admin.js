@@ -23,7 +23,7 @@ const [isModalVisible, setIsModalVisible] = useState(false);
 const [lisEmployee, setListEmployee] = useState([])
 const [display, setDisplay] = useState(false)
 
-const [todayClockin, setTodayClockin] = useState([])
+const [todayClockin, setTodayClockin] = useState()
 const [todayLeave,  setTodayLeave] = useState([])
 const [visible, setVisible] = useState(false);
 
@@ -35,20 +35,21 @@ const [addAddress, setAddAddress] = useState ("")
 const [addDOB, setAddDOB] = useState("")
 const [addDOJ, setAddDOJ] = useState("")
 
+
 const [approvalLeave, setApprovalLeave] = useState([])
 
+// console.log("todayLeave", todayLeave)
 
 const moment = require('moment');
 const { TextArea } = Input;
 useEffect(() => {
    const Datessssss = clockindata.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
-  //  console.log("Datessssss", )
-  setUserdatamap(Datessssss)
+  setTodayLeave(Datessssss)
 
   const listDatessssss = userdata.map(t1 => ({...t1, ...clockindata.find(t2 => t2.employeeId === t1.id)}))
 setListEmployee(listDatessssss)
 
-  
+//   console.log("")
 
   const current = new Date();
    const FilteredArarry = clockindata.filter(itemInArray =>
@@ -56,11 +57,13 @@ setListEmployee(listDatessssss)
    )
    setTodayClockin(FilteredArarry)
 
-   const FilteredArarryLeave = clockindata.filter(itemInArray =>
+   const FilteredArarryLeave = Datessssss.filter(itemInArray =>
     (moment(itemInArray.leaveDate).format('DD-MM-YYYY') == moment(current).format('DD-MM-YYYY'))
  )
-//  console.log("FilteredArarry", FilteredArarryLeave)
+ console.log("FilteredArarryLeave", todayLeave)
+ console.log("Datessssss", Datessssss)
  setTodayLeave(FilteredArarryLeave)
+
 
 //  let a = JSON.parse(localStorage.getItem("Data"))
 //  console.log("a", a)
@@ -138,8 +141,8 @@ let navigate = useNavigate();
 {todayLeave && todayLeave.map((item, index)=>{
   return(
     <ul>
-                  <div className="today_list">            
-            <div className="today_listData">{item.employeeId}</div>
+                  <div className="today_list">   
+            <div className="today_listData">{item.name}</div>
             <div className="today_listData">{item.clockin ? moment(item.clockin).format('lll') : 
                                              moment(item.leaveDate).format('ll')}
             </div>
@@ -152,7 +155,6 @@ let navigate = useNavigate();
     </ul>
   )
 })}
-
 </div>
 
 
@@ -244,16 +246,17 @@ let navigate = useNavigate();
       <div className="leaveDatalist">
          <div> 
             <h1>Leave Data</h1>
+         <button onClick={(e)=>{AddSubmit(e)}}><FileAddOutlined /></button>
+
          </div>
       {leaveData.length && leaveData.map((item, index) => {
       return(
-         <div>
-         <button onClick={(e)=>{AddSubmit(e)}}><FileAddOutlined /></button>
+         <div className="yearLeave-data">
 
       <ul value={item.Date}>
-         <li >{item.leaveDate}</li>
-         <li>{item.leaveType}</li>
-         <li>{item.Date} </li>
+         <li className="yearleave-datess" >{item.leaveDate}</li>
+         <li  className="yearleave-datess">{item.leaveType}</li>
+         <li  className="yearleave-datess">{item.Date} </li>
       </ul>
       </div>
          );

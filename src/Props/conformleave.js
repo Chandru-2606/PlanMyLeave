@@ -13,6 +13,14 @@ const ConformLeave = (props) =>{
     // console.log("filterId", filterId)
   setNameEmp(filterId)
 
+
+  let a = moment(props.dateStart);
+  let b = moment(props.dateEnd).add(1, 'day')
+  // console.log("aaaaaa",a)
+  // console.log("bbbbbb", b)
+ let differenceDate = (b.diff(a, 'day' ))
+ console.log("difference", differenceDate)
+
   })
 
   const [loading, setLoading] = useState(false);
@@ -22,6 +30,12 @@ const ConformLeave = (props) =>{
 
   let momentDate = moment(startDate).valueOf()
 
+//   let a = moment(props.dateStart);
+//   let b = moment(props.dateEnd).add(1, 'day')
+//   console.log("aaaaaa",a)
+//   console.log("bbbbbb", b)
+//  let difference = (b.diff(a, 'day' ))
+//  console.log("difference", difference)
 
 
   const showModal = () => {
@@ -103,9 +117,11 @@ const ConformLeave = (props) =>{
             </div>
           
             <div className='confirm-body'>
-              <h1>{props.leaveType  } - <span>{ moment(props.dateStart).format('L')} - { moment(props.dateEnd).format('L')}</span></h1>
+              <h1>{props.leaveType  } - <span>{ moment(props.dateStart).format('DD/MM/YY')} - { moment(props.dateEnd).format('DD/MM/YY')}</span></h1>
               <hr/>
-              <h3>Leave duration: <span id ="spam-day" >0 Days</span></h3>
+
+                              <h3>Leave duration: <span id ="spam-day" > difference </span></h3>
+
               <h3>Calender days :<span id ="spam-day"> 1 day</span></h3>
               <hr/>
               <h1 id='admin-footer'>Approver: <span id='admin-approve'>Admin</span></h1>

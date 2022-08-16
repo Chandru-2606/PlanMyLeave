@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 
 
 import { Button, Modal } from 'antd';
-const ApplyLeavebtn = () =>{
+const ApplyLeavebtn = (props) =>{
 
   let { id } = useParams();
 let valId = `${id}`
@@ -19,6 +19,7 @@ let valId = `${id}`
     const [reason, setReason] = useState("")
     const [address, setAddress] = useState("")
     const [number, setNumber] = useState("")
+    const [difference, setDifference] = useState("")
     const [startDate, setStartDate] = useState(new Date());
 
   const [applyLeaveData, setApplyLeaveData] = useState([])
@@ -43,10 +44,23 @@ let valId = `${id}`
         }, 3000);
         let momentDate = moment(startDate).valueOf()
       
+      //   let a = moment(dateStart);
+      //   let b = moment(dateEnd).add(1, 'day')
+      //   console.log("aaaaaa",a)
+      //   console.log("bbbbbb", b)
+      //  let difference = (b.diff(a, 'day' ))
+      //  console.log("difference", difference)
+                          // setDifference(difference)
+
+
         let ApplyLeave = {leaveType:leaveType, dateStart:dateStart, dateType:dateType,
                           dateEnd:dateEnd, dayEnd:dayEnd, reason:reason, address:address,
-                          number:number, id:id, date:momentDate }
+                          number:number, id:id, date:momentDate, difference:difference }
                            setApplyLeaveData(ApplyLeave)
+
+
+
+
        console.log("leave Apply", ApplyLeave)  
       };
       const handleCancel = (props) => {
@@ -77,7 +91,10 @@ let valId = `${id}`
                         dateEnd={dateEnd} 
                         dayEnd={dayEnd} 
                         reason={reason} 
-                        leaveType={leaveType}  />
+                        leaveType={props.leaveType}
+                        difference={difference}
+                        applyLeaveData={applyLeaveData}
+                         />
            Submit
           </Button>,
         ]}
@@ -90,19 +107,15 @@ let valId = `${id}`
   <div className="type-leavedata">
   <label>Leave Type</label><br></br>
   <select value={leaveType} onChange={(e) => {setLeaveType(e.target.value)}}>
-  <option id="select-leave">Select Leave</option>
 
-    <option>Casual Leave</option>
-    <option>Sick Leave</option>
-    <option>CompensatoryOff</option>
-    <option>Paid Leave</option>
-    <option>RestrictedHolidays</option>
+      <option>{props.leaveType}</option>
+
   </select>
   </div>
 
   <div className="leave-balnce">
     <label>Current Balance</label>
-    <span>0 Hours(s)</span>
+    <span>{props.leaveBalance} Days</span>
   </div>
 </div>
 

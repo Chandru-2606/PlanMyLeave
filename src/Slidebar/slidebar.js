@@ -122,12 +122,8 @@ switch (e.target.value){
     break;
 
     case "Next 7 days":
-      const next7days = moment().add(3, 'days').format('l')
-      console.log("next7days", next7days)
-      const filterLeaveData = datesends.filter(itemInArray => 
-      moment(itemInArray.leaveDate).format('l') == moment(next7days).format('l')
-      );
-      setSelectLeave(filterLeaveData)
+      console.log("Next 7 days");
+  
     break;
 
 
@@ -307,7 +303,7 @@ const dateCellRender = (value) => {
             <div className="td_a">
               <td >
 
-              <ApplyLeavebtn />
+              <ApplyLeavebtn leaveBalance={item.Authorizedbreak} leaveType="Authorized break" />
                   
               </td>
             </div>
@@ -329,7 +325,7 @@ const dateCellRender = (value) => {
             <div className="td_a">
               <td >
 
-              <ApplyLeavebtn />
+              <ApplyLeavebtn leaveBalance={item.CasualLeave} leaveType="Casual Leave" />
 
                   
               </td>
@@ -352,7 +348,7 @@ const dateCellRender = (value) => {
             <div className="td_a">
               <td >
 
-              <ApplyLeavebtn />
+              <ApplyLeavebtn leaveBalance={item.CompensatoryOff}  leaveType="Compensatory Off"/>
 
                   
               </td>
@@ -375,7 +371,7 @@ const dateCellRender = (value) => {
             <div className="td_a">
               <td >
 
-              <ApplyLeavebtn />
+              <ApplyLeavebtn leaveBalance={item.LeavewithoutPay} leaveType="Leave without Pay" />
 
                   
               </td>
@@ -398,7 +394,7 @@ const dateCellRender = (value) => {
             <div className="td_a">
               <td >
 
-              <ApplyLeavebtn />
+              <ApplyLeavebtn leaveBalance={item.PaidLeave} leaveType="Paid Leave" />
 
                   
               </td>
@@ -421,7 +417,7 @@ const dateCellRender = (value) => {
             <div className="td_a">
               <td >
 
-              <ApplyLeavebtn />
+              <ApplyLeavebtn leaveBalance={item.RestrictedHolidays} leaveType="Restrickted Holidays" />
 
                   
               </td>
@@ -443,7 +439,7 @@ const dateCellRender = (value) => {
 
             <div className="td_a">
               <td >
-              <ApplyLeavebtn />
+              <ApplyLeavebtn leaveBalance={item.Sickleave}  leaveType="Sick Leave"/>
 
                   
               </td>
@@ -476,22 +472,22 @@ const dateCellRender = (value) => {
                    </TabPane>
 
                      <TabPane tab="2022" key="3">
-                      <div>
+                      <div className="year-leaveData">
                          {yearLeaveData && yearLeaveData.map((item, index)=>{
                           return(
-                            <ul>
-                              <div>
-                              <li>{item.leaveDate}</li>
+                            <div className="leaveData-year">
+                              <div className="leaveData-list">
+                                {item.leaveDate}
                               </div>
 
-                              <div>
-                              <li>{item.leaveType}</li>
+                              <div className="leaveData-list">
+                              {item.leaveType}
                               </div>
 
-                              <div>
-                              <li>{item.Date}</li>
+                              <div className="leaveData-list">
+                              {item.Date}
                               </div>
-                            </ul>
+                            </div>
                           );
                          })}
                           </div>                 
@@ -524,8 +520,7 @@ const dateCellRender = (value) => {
 
 
 
-            {/* leaveType:"",
-      leaveDate:"" */}
+          
            {selectLeave && selectLeave.map((item, index)=>{
             return(
             <div className="user-real">
@@ -545,8 +540,10 @@ const dateCellRender = (value) => {
   {newVariable.map((item, index)=>{
     return (
 <ul>
-<li>{item.leaveType}</li> 
-     {<li>  {item.leaveDate ? moment(item.leaveDate).format("LL") : ""}</li>}
+  <li className="appliedDate">{item.leaveDate ? moment(item.leaveDate).format('DD.MM.YY') : ""}</li>
+<li className="leaveType-data">{item.leaveType}</li> 
+     
+  <li>{item.leaveDate ? moment(item.leaveDate).format('LLL') : ""}</li>
 </ul>
     );
   })}
