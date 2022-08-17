@@ -54,7 +54,7 @@ let valId = `${id}`
       // //  console.log("difference", difference)
 
 
-        let ApplyLeave = {dateStart:dateStart, 
+        let ApplyLeave = {dateStart:dateStart,
                           dateType:dateType,
                           dateEnd:dateEnd, 
                           dayEnd:dayEnd, 

@@ -590,7 +590,7 @@ const dateCellRender = (value) => {
 
 </div>
 
-{newVariable.map((item, index)=>{
+{newVariable.reverse().map((item, index)=>{
   return(
   <div className='clockinDate_list'>
     <div className="clockin_listli">
@@ -608,15 +608,7 @@ const dateCellRender = (value) => {
     <div className="clockin_listli">
       <li>{item.workingHrs  ? item.workingHrs : ""} </li>
     </div>
-    {/* {display ? 
-                  <div className="edit_btns">
-                  <Button type="primary"  >
-                     <EditOutlined />
-                  </Button>
-                     <div className="edit_btns1">
-                  <DownCircleOutlined />
-                     </div>
-                  </div> :"" } */}
+    
     
   </div>
    
@@ -625,18 +617,7 @@ const dateCellRender = (value) => {
 </div>
         </div>
  
-      
-       {/*  <div className='phone_navbar'>
-              <button onClick={() => { setDisplay(true)}} ><UnorderedListOutlined /></button><br></br>
-                {display ? <div className='display' id='phone_navbar'>
-                  <div className='nav_list'>
-                    <a href='#'>Home</a><br></br>
-                    <a href='#'>Contact us</a><br></br>
-                    <a href='#'>About</a><br></br>
-                    <a href='#'>Location</a><br></br>
-                  </div>
-                </div> : ""}   
-            </div> */}
+     
   </div>
   )
   }
