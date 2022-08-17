@@ -526,6 +526,8 @@ const variableOne = datesends.filter(itemInArray =>
         <div className="logo_div">
           </div>
 
+
+
           <div className="icons">
           {isLoggedin ?
            <button onClick={(e) => clockin(e)}>Clock in</button>

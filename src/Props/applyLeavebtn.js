@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ConformLeave from "./conformleave";
 import { useParams } from "react-router";
+import { ApplyLeave } from '../adminDashboard/ApiDatas/apiData';
 
 
 import { Button, Modal } from 'antd';
@@ -21,6 +22,7 @@ let valId = `${id}`
     const [number, setNumber] = useState("")
     const [difference, setDifference] = useState("")
     const [startDate, setStartDate] = useState(new Date());
+    
 
   const [applyLeaveData, setApplyLeaveData] = useState([])
 
@@ -49,13 +51,18 @@ let valId = `${id}`
       //   console.log("aaaaaa",a)
       //   console.log("bbbbbb", b)
       //  let difference = (b.diff(a, 'day' ))
-      //  console.log("difference", difference)
-                          // setDifference(difference)
+      // //  console.log("difference", difference)
 
 
-        let ApplyLeave = {leaveType:leaveType, dateStart:dateStart, dateType:dateType,
-                          dateEnd:dateEnd, dayEnd:dayEnd, reason:reason, address:address,
-                          number:number, id:id, date:momentDate, difference:difference }
+        let ApplyLeave = {dateStart:dateStart, 
+                          dateType:dateType,
+                          dateEnd:dateEnd, 
+                          dayEnd:dayEnd, 
+                          reason:reason, 
+                          address:address,
+                          number:number, 
+                          id:id, 
+                          date:momentDate }
                            setApplyLeaveData(ApplyLeave)
 
 
@@ -94,6 +101,7 @@ let valId = `${id}`
                         leaveType={props.leaveType}
                         difference={difference}
                         applyLeaveData={applyLeaveData}
+                        leaveBalance={props.leaveBalance}
                          />
            Submit
           </Button>,
@@ -105,12 +113,10 @@ let valId = `${id}`
    
 <div className="type-leave">
   <div className="type-leavedata">
-  <label>Leave Type</label><br></br>
-  <select value={leaveType} onChange={(e) => {setLeaveType(e.target.value)}}>
-
-      <option>{props.leaveType}</option>
-
-  </select>
+    <label>Leave Type</label><br></br>
+      <div className="leave-balnce">
+        <span id="leaveType-Data">{props.leaveType}</span>
+      </div>
   </div>
 
   <div className="leave-balnce">

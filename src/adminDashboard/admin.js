@@ -60,7 +60,6 @@ setListEmployee(listDatessssss)
    const FilteredArarryLeave = Datessssss.filter(itemInArray =>
     (moment(itemInArray.leaveDate).format('DD-MM-YYYY') == moment(current).format('DD-MM-YYYY'))
  )
- console.log("FilteredArarryLeave", todayLeave)
  console.log("Datessssss", Datessssss)
  setTodayLeave(FilteredArarryLeave)
 
@@ -90,10 +89,10 @@ setTodayLeave(filtered)
  }
 
 
-const AddSubmit = (e) =>{
+const AddSubmit = () =>{
 
    const LeaveYear = {leaveData : leaveData}
-const leaveDatareceived=localStorage.getItem("leaveData")
+   const leaveDatareceived=localStorage.getItem("leaveData")
 
 if(leaveDatareceived==null){
    localStorage.setItem("leaveData",JSON.stringify(leaveData))
@@ -122,7 +121,6 @@ let navigate = useNavigate();
       <select onChange={EmployeeName}>
       {lisEmployee.map((item, index)=>{
          return(
-
             <option value={item.id}>
                {item.name}
             </option>
@@ -149,8 +147,8 @@ let navigate = useNavigate();
             <div className="today_listData">{item.clockout ? moment(item.clockout).format('LT') :
                                              ""}
             </div>
-            <div className="today_listData" id="leave-type">{ item.leaveType }</div>
-            <div className="today_listData" id="workingshrs">{item.workingHrs ? item.workingHrs : "0"} hours</div>
+            <div className="today_listData" id="leave-type">{item.leaveType ? item.leaveType : ""}</div>
+            <div className="today_listData" id="workingshrs">{item.workingHrs ? item.workingHrs : ""} hours</div>
             </div>
     </ul>
   )
@@ -167,10 +165,11 @@ let navigate = useNavigate();
             <div className="approveRequest-list">
 
           <h3>{item.name}</h3>
-          <h3>{moment(item.dateEnd).format('LL')}</h3>
-          <h3>{item.dateType}</h3>
+          <h3>FROM :{moment(item.dateEnd).format('DD.MM.YY')}</h3>
+          <h3>TO :{item.dateEnd}</h3>
             <h3>{item.leaveType}</h3>
             <h3>{item.reason}</h3>
+            <h3>{item.difference} days</h3>
             </div>
 
             <div className="approveRequest-btn">

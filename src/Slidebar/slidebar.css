@@ -232,7 +232,6 @@ background-color: rgb(247,247,247);
     width: 83%;
     margin-left: 70px;
     height: 350px;
-    /* box-shadow: 1px 1px 1px 1px #888888; */
 
 }
 
@@ -634,10 +633,34 @@ width: 100%
   justify-content: space-between;
   width: 90%;
 }
- 
 
- .leaveData-list{
+.leaveData-list{
   width: 50.33%;
   text-align: center;
   margin-left: 50px;
  }
+
+ #leaveType-Data{
+  font-size: 20px;
+  margin-top: 10px;
+ }
+
+ .yearLeave-data{
+  width: 600px;
+  margin-left: -50px;
+ }
+
+ .yearLeave-data ul {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+}
+
+.yearLeave-data li {
+margin-left: 20px;
+font-size: 16px;
+}
+
+.yearleave-datess{
+    width: 30%;
+}

@@ -13,7 +13,6 @@ function Form() {
     userName: "",
     email:"",
    message:"",
-
   });
   
   
@@ -23,7 +22,6 @@ function Form() {
    
   const  InputChange =(event)=>{
     setValues({... values, userName:event.target.value})
-    
   }
 
   const  emailChange =(event)=>{
@@ -58,7 +56,6 @@ function Form() {
         <div className='form_sub_container'>
                <form  className='contact_form'
              onSubmit={handleSubmit}
-
                > 
           <h1>Contact Us</h1>
         <p>Please fill the form in decent Manner</p>

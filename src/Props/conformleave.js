@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './conformleave.css'
 import { userdata } from '../adminDashboard/ApiDatas/apiData';
 import moment from 'moment';
+import { ApplyLeave } from '../adminDashboard/ApiDatas/apiData';
 
 const ConformLeave = (props) =>{
 
@@ -10,16 +11,29 @@ const ConformLeave = (props) =>{
     const filterId = userdata.filter(itemInArray => 
       itemInArray.id == props.id
     );
-    // console.log("filterId", filterId)
-  setNameEmp(filterId)
+    setNameEmp(filterId)
 
+    const filterLeaveData = ApplyLeave.filter(itemInArray => 
+      itemInArray.id == props.id
+    );
+    setFilterLeave(filterLeaveData)
 
-  let a = moment(props.dateStart);
+    let leaveBalanceData = props.leaveBalance - difference
+    if (leaveBalanceData >  -1){
+      setSubmitted(true)
+    }
+    else{
+      setSubmitted("You may have overdrawn the balance and hence cannot apply anymore")
+    }
+
+  let a = moment(props.dateStart)
   let b = moment(props.dateEnd).add(1, 'day')
-  // console.log("aaaaaa",a)
-  // console.log("bbbbbb", b)
- let differenceDate = (b.diff(a, 'day' ))
- console.log("difference", differenceDate)
+ let differenceDate = (b.diff(a, 'day'))
+ setDifference(differenceDate)
+
+
+
+
 
   })
 
@@ -27,25 +41,26 @@ const ConformLeave = (props) =>{
   const [visible, setVisible] = useState(false);
   const [nameEmp, setNameEmp] = useState([])
   const [startDate, setStartDate] = useState(new Date());
-
+  const [difference, setDifference] = useState([])
   let momentDate = moment(startDate).valueOf()
+  const [filterLeave, setFilterLeave] = useState([])
 
-//   let a = moment(props.dateStart);
-//   let b = moment(props.dateEnd).add(1, 'day')
-//   console.log("aaaaaa",a)
-//   console.log("bbbbbb", b)
-//  let difference = (b.diff(a, 'day' ))
-//  console.log("difference", difference)
+
+const[submitted,setSubmitted]=useState(false);
+
+  
 
 
   const showModal = () => {
     setVisible(true);
   };
 
+
+
+
   const handleOk = () => {
 
-  // const ApprovalData = {name:id,   dateStart:dateStart, dateType:dateType, dateEnd:dateEnd,  
-  //                     dayEnd:dayEnd, reason:reason, leaveType:leaveType, date:momentDate}
+  
 
   const ApprovalData ={name:props.id, 
                       dateStart:props.dateStart, 
@@ -54,7 +69,8 @@ const ConformLeave = (props) =>{
                       dayEnd:props.dayEnd, 
                       reason:props.reason, 
                       leaveType:props.leaveType, 
-                      date:momentDate
+                      date:momentDate,
+                      difference:difference
                       }
 
                       console.log("ApprovalData", ApprovalData)
@@ -71,7 +87,7 @@ const ConformLeave = (props) =>{
           arr.push(ApprovalData)
           localStorage.setItem("ApprovalData", JSON.stringify(arr))
         }
-
+// console.log("props.leaveBalance", props.leaveBalance)
 
 
     setLoading(true);
@@ -119,11 +135,11 @@ const ConformLeave = (props) =>{
             <div className='confirm-body'>
               <h1>{props.leaveType  } - <span>{ moment(props.dateStart).format('DD/MM/YY')} - { moment(props.dateEnd).format('DD/MM/YY')}</span></h1>
               <hr/>
+                              <h3>Leave duration: <span id ="spam-day" >{ difference} Days</span></h3>
 
-                              <h3>Leave duration: <span id ="spam-day" > difference </span></h3>
+              <h1 id='errorMessage'>{submitted}</h1>
 
-              <h3>Calender days :<span id ="spam-day"> 1 day</span></h3>
-              <hr/>
+                       <hr />
               <h1 id='admin-footer'>Approver: <span id='admin-approve'>Admin</span></h1>
             </div>
           </form>

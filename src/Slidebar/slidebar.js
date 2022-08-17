@@ -475,18 +475,13 @@ const dateCellRender = (value) => {
                       <div className="year-leaveData">
                          {yearLeaveData && yearLeaveData.map((item, index)=>{
                           return(
-                            <div className="leaveData-year">
-                              <div className="leaveData-list">
-                                {item.leaveDate}
-                              </div>
+                            <div className="yearLeave-data">
 
-                              <div className="leaveData-list">
-                              {item.leaveType}
-                              </div>
-
-                              <div className="leaveData-list">
-                              {item.Date}
-                              </div>
+                            <ul value={item.Date}>
+                               <li className="yearleave-datess" >{item.leaveDate}</li>
+                               <li  className="yearleave-datess">{item.leaveType}</li>
+                               <li  className="yearleave-datess">{item.Date} </li>
+                            </ul>
                             </div>
                           );
                          })}
@@ -569,8 +564,8 @@ const dateCellRender = (value) => {
    {approvalLeave && approvalLeave.map((item, index)=>{
     return(
       <div className="leave-requestList">
-          <h3>{moment(item.dateStart).format('L')} - { moment(item.dateEnd).format('L')}</h3>
-          <h3>Applied on {moment(item.date).format('LLL')}</h3>
+          <h3>{moment(item.dateStart).format('DD.MM.YY')} - { moment(item.dateEnd).format('DD.MM.YY')}</h3>
+          <h3>Applied on :  {moment(item.date).format('LLL')}</h3>
           <h3>{item.leaveType}</h3>
       </div>
     );

@@ -181,6 +181,16 @@ export  const clockindata=[
                             leaveType:"Leave without Pay",
                             leaveDate:"Sat Aug 16 2022 09:30:00 GMT+0530 (India Standard Time)"
                             },
+                            {
+                              employeeId:3180,
+                              clockin:"",
+                              clockout:"",
+                              workingHrs:0,
+                              leaveType:"Leave without Pay",
+                              leaveDate:"Sat Aug 17 2022 09:30:00 GMT+0530 (India Standard Time)"
+                              },
+                            
+                           
     {
       employeeId:3182,
       clockin:"Mon Aug 01 2022 09:30:00 GMT+0530 (India Standard Time)",
@@ -391,6 +401,14 @@ export  const clockindata=[
                           leaveType:"Sick leave",
                           leaveDate:"Sat Aug 16 2022 09:30:00 GMT+0530 (India Standard Time)"
                           },
+                          {
+                            employeeId: 3183,
+                            clockin:"Wed Aug 17 2022 09:30:00 GMT+0530 (India Standard Time)",
+                            clockout:"Wed Aug 17 2022 13:30:00 GMT+0530 (India Standard Time)",
+                            workingHrs:9,
+                            leaveType:"Sick leave",
+                            leaveDate:"Sat Aug 17 2022 09:30:00 GMT+0530 (India Standard Time)"
+                            },
     {
       employeeId: 3184,
       clockin:"Mon Aug 01 2022 09:30:00 GMT+0530 (India Standard Time)",
