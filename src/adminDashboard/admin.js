@@ -1,10 +1,7 @@
 import React, {useState , useEffect} from "react";
-import { useNavigate } from 'react-router-dom';
 import './admin.css'
 import Header from "../header/header";
-import { Button, Modal } from 'antd';
 import { Input } from 'antd';
-import {EditOutlined} from '@ant-design/icons';
 import {DownCircleOutlined  } from '@ant-design/icons';
 import {MenuUnfoldOutlined } from '@ant-design/icons';
 import {FileAddOutlined } from '@ant-design/icons';
@@ -13,35 +10,19 @@ import {userdata} from './../adminDashboard/ApiDatas/apiData'
 import { leaveData } from './../adminDashboard/ApiDatas/apiData'
 import { admindata} from './../adminDashboard/ApiDatas/apiData'
 import AddEmployee from "../Props/addEmployee";
-import { UserOutlined} from  '@ant-design/icons'
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 function Admin () {
 
-const [userdatamap, setUserdatamap] = useState([])
-const [isModalVisible, setIsModalVisible] = useState(false);
+
 const [lisEmployee, setListEmployee] = useState([])
 const [display, setDisplay] = useState(false)
-
 const [todayClockin, setTodayClockin] = useState()
 const [todayLeave,  setTodayLeave] = useState([])
-const [visible, setVisible] = useState(false);
-
-const [addName, setAddName] = useState("")
-const [addPassword, setAddPassword] = useState("")
-const [addEmail, setAddEmail] = useState("")
-const [addNumber, setAddNumber] = useState("")
-const [addAddress, setAddAddress] = useState ("")
-const [addDOB, setAddDOB] = useState("")
-const [addDOJ, setAddDOJ] = useState("")
-
-
+const [approved, setApproved] = useState("Approved")
 const [approvalLeave, setApprovalLeave] = useState([])
-
-// console.log("todayLeave", todayLeave)
-
+const [newData, setNewData] = useState([])
 const moment = require('moment');
-const { TextArea } = Input;
+
 useEffect(() => {
    const Datessssss = clockindata.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
   setTodayLeave(Datessssss)
@@ -49,45 +30,74 @@ useEffect(() => {
   const listDatessssss = userdata.map(t1 => ({...t1, ...clockindata.find(t2 => t2.employeeId === t1.id)}))
 setListEmployee(listDatessssss)
 
-//   console.log("")
+  console.log("listDatessssss00", Datessssss)
 
   const current = new Date();
-   const FilteredArarry = clockindata.filter(itemInArray =>
-      (moment(itemInArray.clockin).format('DD-MM-YYYY') == moment(current).format('DD-MM-YYYY'))
-   )
-   setTodayClockin(FilteredArarry)
+   // const FilteredArarry = clockindata.filter(itemInArray =>
+   //    (moment(itemInArray.clockin).format('DD-MM-YYYY') == moment(current).format('DD-MM-YYYY'))
+   // )
 
    const FilteredArarryLeave = Datessssss.filter(itemInArray =>
     (moment(itemInArray.leaveDate).format('DD-MM-YYYY') == moment(current).format('DD-MM-YYYY'))
  )
- console.log("Datessssss", Datessssss)
  setTodayLeave(FilteredArarryLeave)
 
+ const FilteredArarry= Datessssss.filter(itemInArray =>
+   (moment(itemInArray.clockin).format('DD-MM-YYYY') == moment(current).format('DD-MM-YYYY'))
+)
+console.log("FilteredArarry", FilteredArarry)
+   setTodayClockin(FilteredArarry)
 
-//  let a = JSON.parse(localStorage.getItem("Data"))
-//  console.log("a", a)
-//  setApprovalLeave(a)
+
+
+
+
  
 
  let a = JSON.parse(localStorage.getItem("ApprovalData"))
-// console.log("aaaaaa", a)
 setApprovalLeave(a)
 
 }, [])
-// console.log("approvalLeave", approvalLeave)
 
+const EmployeeLeave = (e)=>{
+   const filteredLeave = clockindata.filter(employee => {
+      return employee.employeeId == e.target.value;
+    });
+    console.log("filteredLeave", filteredLeave)
+    setNewData(filteredLeave)
 
+}
 
 
  const EmployeeName =(e) =>{
+
   const filtered = clockindata.filter(employee => {
    return employee.employeeId == e.target.value;
  });
-//  setTodayData(filtered)
-console.log("filtered", filtered)
+// console.log("filtered", filtered)
 setTodayLeave(filtered)
  }
 
+ const Approval = (e)=>{
+   {approvalLeave && approvalLeave.map((item, index)=>{
+   
+   const aprovelDatass = {approved : approved, id:item.name}
+   console.log("aprovelDatass", aprovelDatass)
+   const localrecived = localStorage.getItem("aprovelDatass")
+   if(localrecived==null){
+      localStorage.setItem("aprovelDatass", JSON.stringify([aprovelDatass]))
+   }
+   else{
+      let brr = JSON.parse(localrecived);
+      console.log("brr", brr)
+      brr.push(aprovelDatass);
+      localStorage.setItem("aprovelDatass", JSON.stringify(brr));
+   }
+})}
+}
+// console.log("newData", newData)
+
+// console.log("leaveDtaa", todayLeave)
 
 const AddSubmit = () =>{
 
@@ -105,7 +115,6 @@ if(leaveDatareceived==null){
  }
 }
 
-let navigate = useNavigate();
     return(
       <div className="adminApp">  
       <div className="admin_header">
@@ -136,7 +145,7 @@ let navigate = useNavigate();
       <div className="todayData-head"><h1>workingHrs</h1></div>
    </div>
 
-{todayLeave && todayLeave.map((item, index)=>{
+{todayLeave && todayLeave.reverse().map((item, index)=>{
   return(
     <ul>
                   <div className="today_list">   
@@ -144,12 +153,27 @@ let navigate = useNavigate();
             <div className="today_listData">{item.clockin ? moment(item.clockin).format('lll') : 
                                              moment(item.leaveDate).format('ll')}
             </div>
-            <div className="today_listData">{item.clockout ? moment(item.clockout).format('LT') :
-                                             ""}
+            <div className="today_listData">{item.clockout ? moment(item.clockout).format('LT') : ""}
             </div>
             <div className="today_listData" id="leave-type">{item.leaveType ? item.leaveType : ""}</div>
-            <div className="today_listData" id="workingshrs">{item.workingHrs ? item.workingHrs : ""} hours</div>
+            <div className="today_listData" id="workingshrs">{item.workingHrs ? item.workingHrs : "0"} hours</div>
             </div>
+    </ul>
+  )
+})}
+
+{todayClockin && todayClockin.reverse().map((item, index)=>{
+  return(
+    <ul>
+      <div className="today_list">   
+         <div className="today_listData">{item.name ? item.name :""}</div>
+         <div className="today_listData">{item.clockin ? moment(item.clockin).format('lll') : 
+                                             moment(item.leaveDate).format('ll')}
+         </div>
+         <div className="today_listData">{item.clockout ? moment(item.clockout).format('LT') :""} </div>
+         <div className="today_listData" id="leave-type">{item.leaveType ? item.leaveType : ""}</div>
+         <div className="today_listData" id="workingshrs">{item.workingHrs ? item.workingHrs : ""} hours</div>
+      </div>
     </ul>
   )
 })}
@@ -159,30 +183,64 @@ let navigate = useNavigate();
 
       <div className="approveRequest">
         <h1>Leave Approval</h1>
+    
+      <div className="today-data">
+      <div className="todayData-head"><h1>Name</h1></div>
+      <div className="todayData-head"><h1>Leave start</h1></div>
+      <div className="todayData-head"><h1>Leave End</h1></div>
+      <div className="todayData-head"><h1>Leave Type</h1></div>
+      <div className="todayData-head"><h1>Reason</h1></div>
+      <div className="todayData-head"><h1>No of Days</h1></div>
+
+   </div>
+   <select onChange={EmployeeLeave}>
+      {lisEmployee.map((item, index)=>{
+         return(
+            <option value={item.id}>
+               {item.name}
+            </option>
+         );
+      })}
+   </select>
         {approvalLeave && approvalLeave.map((item, index)=>{
          return(
-            <div className="approveRequest">
-            <div className="approveRequest-list">
-
-          <h3>{item.name}</h3>
-          <h3>FROM :{moment(item.dateEnd).format('DD.MM.YY')}</h3>
-          <h3>TO :{item.dateEnd}</h3>
-            <h3>{item.leaveType}</h3>
-            <h3>{item.reason}</h3>
-            <h3>{item.difference} days</h3>
-            </div>
-
-            <div className="approveRequest-btn">
-            <button id="approveRequest-btn1" >Approved</button>
-            <button id="approveRequest-btn2">Cancel</button>
-            </div>
-
-         
+            <ul>
+               <div className="today_list">   
+                  <div className="today_listData">{item.name}</div>
+                  <div className="today_listData">{moment(item.dateEnd).format('DD.MM.YY')}</div>
+                  <div className="today_listData">{moment(item.dateEnd).format('DD.MM.YY')}</div>
+                  <div className="today_listData" id="workingshrs">{item.leaveType} </div>
+                  <div className="today_listData" id="leave-type">{item.reason}</div>
+                  <div className="today_listData" id="workingshrs">{item.difference} Days </div><br/>
                </div>
+            <div>
+            <div>
+               <button id="approveRequest-btn1" onClick={Approval} >Approved</button>
+               <button id="approveRequest-btn2">Cancel</button> </div>
+            </div>
+    </ul>
          );
            
         })}
-      </div>
+
+
+
+      {newData && newData.reverse().map((item, index)=>{
+      return(
+         <ul>
+            <div id="user-leaveDate" className="today_list">   
+               <div className="today_listData">{item.leaveType ? item.employeeId : ""}</div>
+               <div className="today_listData">{item.leaveDate ? moment(item.leaveDate).format('DD.MM.YY') : ""}</div>
+               <div className="today_listData">{item.leaveDate ? moment(item.leaveDate).format('DD.MM.YY') : ""}</div>
+               <div className="today_listData" id="workingshrs">{item.leaveType} </div>
+               <div className="today_listData" id="leave-type">{item.reason}</div>
+               <div className="today_listData" id="workingshrs"> {item.leaveType ? moment(item.leaveDate).format('DD.MM.YY') : ""} </div><br/>
+     
+            </div>
+         </ul>
+      );
+      })}
+   </div>
 
 
 

@@ -77,17 +77,18 @@ const[submitted,setSubmitted]=useState(false);
 
         const ApprovalDatareceived =localStorage.getItem("ApprovalData")
 
-        if(ApprovalDatareceived==null){
-          localStorage.setItem("ApprovalData", JSON.stringify([ApprovalData]))
-        }
+console.log("ApprovalDatareceived", ApprovalDatareceived)
 
-        else {
-          let arr = JSON.parse(ApprovalData)
-          console.log("arr", arr)
-          arr.push(ApprovalData)
-          localStorage.setItem("ApprovalData", JSON.stringify(arr))
-        }
-// console.log("props.leaveBalance", props.leaveBalance)
+if(ApprovalDatareceived==null){
+  localStorage.setItem("ApprovalData",JSON.stringify([ApprovalData]))
+}
+else{
+  let arr=JSON.parse(ApprovalDatareceived);
+  console.log(arr);
+  arr.push(ApprovalData);
+  localStorage.setItem("ApprovalData",JSON.stringify(arr));
+
+}
 
 
     setLoading(true);

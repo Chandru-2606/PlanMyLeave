@@ -664,3 +664,11 @@ font-size: 16px;
 .yearleave-datess{
     width: 30%;
 }
+
+#aprovel{
+  margin-left: 50px;
+  color: #dd5353;
+  font-size: 20px;
+  font-weight: bolder;
+  margin-top: 18px;
+}

@@ -80,15 +80,15 @@ const Slidebar = (props) => {
   const [selectLeave, setSelectLeave] = useState([])
   const { TabPane } = Tabs;
 
-  const [approvalLeave, setApprovalLeave] = useState([])
+  const [approvalLeave, setApprovalLeave] = useState("")
+  const [approvedData, setApprovedData] = useState([])
 
 
 
 
-  const [dateRange , setDateRange] = useState("")
-const [display, setDisplay] = useState(false)
+  
 
-
+// console.log("newApproval", newApproval)
 
   
  
@@ -174,11 +174,49 @@ setLeaveBalance(filterLeave)
 
 let a = JSON.parse(localStorage.getItem("leaveData"))
 setYearLeaveData(a)
+console.log("aaaaaaaa", a)
+
+
+
+let b = JSON.parse(localStorage.getItem("aprovelDatass"))
+// setApproved(b) 
+// console.log("bbbbbbbbbb", b)
+// console.log("approved", approved)
+const arrayFiltered =b ? b.filter(itemInArray =>
+  itemInArray.id == id 
+  // console.log("itemInArray.id", itemInArray.id == id)
+  // if(itemInArray.id == id ){
+
+  // }
+
+ ) :[]
+  setApprovedData(arrayFiltered) 
+
+
+ console.log("arrayFiltered", arrayFiltered)
 
 // let localrecived = JSON.parse(localStorage.getItem(""))
 
 let localrecived = JSON.parse(localStorage.getItem("ApprovalData"))
-setApprovalLeave(localrecived)
+
+
+const FilteredArarryed =localrecived ? localrecived.filter(itemInArray =>
+ itemInArray.name == id 
+) : []
+console.log("FilteredArarryed", FilteredArarryed)
+ setApprovalLeave(FilteredArarryed)
+
+
+// {localrecived && localrecived.map((item, index)=>{
+//   if(item.name === valId){
+//  setApprovalLeave(localrecived)
+ 
+//   }
+//   else{
+//     console.log("false")
+//   }
+// })}
+
 }, [newVariable])
 
 
@@ -532,7 +570,7 @@ const dateCellRender = (value) => {
 
 <div className='leaves_taken'>
   <h1>My recent leave</h1>
-  {newVariable.map((item, index)=>{
+  {newVariable.reverse().map((item, index)=>{
     return (
 <ul>
   <li className="appliedDate">{item.leaveDate ? moment(item.leaveDate).format('DD.MM.YY') : ""}</li>
@@ -570,6 +608,13 @@ const dateCellRender = (value) => {
       </div>
     );
    })}
+          {approvedData && approvedData.map((item, index)=>{
+   return(
+    <h3 id="aprovel">{item.approved}</h3>
+   );
+
+          })}
+
  </div>
 
 
@@ -590,7 +635,7 @@ const dateCellRender = (value) => {
 
 </div>
 
-{newVariable.reverse().map((item, index)=>{
+{newVariable && newVariable.map((item, index)=>{
   return(
   <div className='clockinDate_list'>
     <div className="clockin_listli">

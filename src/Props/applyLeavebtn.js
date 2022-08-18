@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ConformLeave from "./conformleave";
 import { useParams } from "react-router";
 import { ApplyLeave } from '../adminDashboard/ApiDatas/apiData';
+import {userdata} from '../adminDashboard/ApiDatas/apiData'
 
 
 import { Button, Modal } from 'antd';
@@ -9,6 +10,16 @@ const ApplyLeavebtn = (props) =>{
 
   let { id } = useParams();
 let valId = `${id}`
+
+// useEffect(() => {
+//   const FilteredArarry = userdata.filter(itemInArray =>
+//       itemInArray.id == id
+//     )
+//     setName(FilteredArarry)
+//     // console.log("FilteredArarry", FilteredArarry)
+
+// },[])
+
 
     const [loading, setLoading] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -22,7 +33,10 @@ let valId = `${id}`
     const [number, setNumber] = useState("")
     const [difference, setDifference] = useState("")
     const [startDate, setStartDate] = useState(new Date());
+    const [name, setName] = useState([])
     
+
+    // console.log("name", name)
 
   const [applyLeaveData, setApplyLeaveData] = useState([])
 
@@ -46,24 +60,27 @@ let valId = `${id}`
         }, 3000);
         let momentDate = moment(startDate).valueOf()
       
-      //   let a = moment(dateStart);
-      //   let b = moment(dateEnd).add(1, 'day')
-      //   console.log("aaaaaa",a)
-      //   console.log("bbbbbb", b)
-      //  let difference = (b.diff(a, 'day' ))
-      // //  console.log("difference", difference)
+      
+
+{name && name.map((item, index)=>{
+console.log("item.name", item.name)
+
+  let ApplyLeave = {dateStart:dateStart,
+    dateType:dateType,
+    dateEnd:dateEnd, 
+    dayEnd:dayEnd, 
+    reason:reason, 
+    address:address,
+    number:number, 
+    // id:id,
+    name:(item.name),
+    date:momentDate }
+    setApplyLeaveData(ApplyLeave)
+
+  })}
 
 
-        let ApplyLeave = {dateStart:dateStart,
-                          dateType:dateType,
-                          dateEnd:dateEnd, 
-                          dayEnd:dayEnd, 
-                          reason:reason, 
-                          address:address,
-                          number:number, 
-                          id:id, 
-                          date:momentDate }
-                           setApplyLeaveData(ApplyLeave)
+        
 
 
 
