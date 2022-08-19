@@ -19,8 +19,11 @@ const [display, setDisplay] = useState(false)
 const [todayClockin, setTodayClockin] = useState()
 const [todayLeave,  setTodayLeave] = useState([])
 const [approved, setApproved] = useState("Approved")
+const [notApproved, setNotApproved] = useState("Rejected")
+
 const [approvalLeave, setApprovalLeave] = useState([])
 const [newData, setNewData] = useState([])
+const [filterAprroval, setFilterApproval] = useState([])
 const moment = require('moment');
 
 useEffect(() => {
@@ -30,7 +33,7 @@ useEffect(() => {
   const listDatessssss = userdata.map(t1 => ({...t1, ...clockindata.find(t2 => t2.employeeId === t1.id)}))
 setListEmployee(listDatessssss)
 
-  console.log("listDatessssss00", Datessssss)
+//   console.log("listDatessssss00", Datessssss)
 
   const current = new Date();
    // const FilteredArarry = clockindata.filter(itemInArray =>
@@ -48,10 +51,6 @@ setListEmployee(listDatessssss)
 console.log("FilteredArarry", FilteredArarry)
    setTodayClockin(FilteredArarry)
 
-
-
-
-
  
 
  let a = JSON.parse(localStorage.getItem("ApprovalData"))
@@ -65,39 +64,87 @@ const EmployeeLeave = (e)=>{
     });
     console.log("filteredLeave", filteredLeave)
     setNewData(filteredLeave)
-
 }
+const Approval = (event , param)=>{
+   console.log("hellooooo ")
+   console.log("param",param)
 
+   // let variableOne1 = approvalLeave.filter(itemInArray => 
+   //  itemInArray.name == param.name
+   //  );
+   //  setFilterApproval(variableOne1)
+   //  console.log("variableOne1", variableOne1)
+
+    let approvelDates = {approved:approved, id:param.name}
+    console.log("approvelDates", approvelDates)
+
+   const localrecived = localStorage.getItem("approvelDates")
+   if(localrecived==null){
+      localStorage.setItem("aprovelDatass", JSON.stringify([approvelDates]))
+   }
+   else{
+      let brr = JSON.parse(localrecived);
+      console.log("brr", brr)
+      brr.push(approvelDates);
+      localStorage.setItem("approvelDates", JSON.stringify(brr));
+   }
+   }
+
+   const NotApproval = (event , param)=>{
+      console.log("hellooooo ")
+      console.log("param",param)
+
+      let notapprovelDates = {notapproved:notApproved, id:param.name}
+    console.log("notapprovelDates", notapprovelDates)
+
+   const localrecived = localStorage.getItem("notapprovelDates")
+   if(localrecived==null){
+      localStorage.setItem("notapprovelDates", JSON.stringify([notapprovelDates]))
+   }
+   else{
+      let brr = JSON.parse(localrecived);
+      console.log("brr", brr)
+      brr.push(notapprovelDates);
+      localStorage.setItem("notapprovelDates", JSON.stringify(brr))
+   }
+   }
 
  const EmployeeName =(e) =>{
 
   const filtered = clockindata.filter(employee => {
    return employee.employeeId == e.target.value;
  });
-// console.log("filtered", filtered)
 setTodayLeave(filtered)
  }
+// console.log("approvalLeave", approvalLeave)
+ 
 
- const Approval = (e)=>{
-   {approvalLeave && approvalLeave.map((item, index)=>{
+// console.log("aprovelDatass", aprovelDatass)
+//if(variableOne1)
+   //{approvalLeave && approvalLeave.map((item, index)=>{
    
-   const aprovelDatass = {approved : approved, id:item.name}
-   console.log("aprovelDatass", aprovelDatass)
-   const localrecived = localStorage.getItem("aprovelDatass")
-   if(localrecived==null){
-      localStorage.setItem("aprovelDatass", JSON.stringify([aprovelDatass]))
-   }
-   else{
-      let brr = JSON.parse(localrecived);
-      console.log("brr", brr)
-      brr.push(aprovelDatass);
-      localStorage.setItem("aprovelDatass", JSON.stringify(brr));
-   }
-})}
-}
-// console.log("newData", newData)
+   // const aprovelDatass = {approved : approved, id:id}
+   // console.log("aprovelDatass", aprovelDatass)
+   // const localrecived = localStorage.getItem("aprovelDatass")
+   // if(localrecived==null){
+   //    localStorage.setItem("aprovelDatass", JSON.stringify([aprovelDatass]))
+   // }
+   // else{
+   //    let brr = JSON.parse(localrecived);
+   //    console.log("brr", brr)
+   //    brr.push(aprovelDatass);
+   //    localStorage.setItem("aprovelDatass", JSON.stringify(brr));
+   // }
+//})}
+// approvalLeave.map((item,index) => {
+//    // return(
+      
+//    //       // {item.name }
+      
+//    // )
+// })
 
-// console.log("leaveDtaa", todayLeave)
+
 
 const AddSubmit = () =>{
 
@@ -203,8 +250,10 @@ if(leaveDatareceived==null){
       })}
    </select>
         {approvalLeave && approvalLeave.map((item, index)=>{
+         let name = item.name
          return(
-            <ul>
+            
+            <ul >
                <div className="today_list">   
                   <div className="today_listData">{item.name}</div>
                   <div className="today_listData">{moment(item.dateEnd).format('DD.MM.YY')}</div>
@@ -215,8 +264,9 @@ if(leaveDatareceived==null){
                </div>
             <div>
             <div>
-               <button id="approveRequest-btn1" onClick={Approval} >Approved</button>
-               <button id="approveRequest-btn2">Cancel</button> </div>
+               <button id="approveRequest-btn1"onClick={event => Approval(event, {name})}>Approve</button>
+               
+               <button id="approveRequest-btn2" onClick={event => NotApproval(event, {name})}>Cancel</button> </div>
             </div>
     </ul>
          );

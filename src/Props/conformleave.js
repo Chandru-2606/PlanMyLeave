@@ -22,19 +22,17 @@ const ConformLeave = (props) =>{
     if (leaveBalanceData >  -1){
       setSubmitted(true)
     }
+    // if(leaveBalanceData == -1){
+      
+    // }
     else{
-      setSubmitted("You may have overdrawn the balance and hence cannot apply anymore")
+        setSubmitted("You may have overdrawn the balance and hence cannot apply anymore")
     }
 
   let a = moment(props.dateStart)
   let b = moment(props.dateEnd).add(1, 'day')
  let differenceDate = (b.diff(a, 'day'))
  setDifference(differenceDate)
-
-
-
-
-
   })
 
   const [loading, setLoading] = useState(false);
@@ -42,14 +40,12 @@ const ConformLeave = (props) =>{
   const [nameEmp, setNameEmp] = useState([])
   const [startDate, setStartDate] = useState(new Date());
   const [difference, setDifference] = useState([])
+  // const [approved, setApproved] = useState("Approved")
   let momentDate = moment(startDate).valueOf()
   const [filterLeave, setFilterLeave] = useState([])
 
 
 const[submitted,setSubmitted]=useState(false);
-
-  
-
 
   const showModal = () => {
     setVisible(true);
@@ -61,7 +57,7 @@ const[submitted,setSubmitted]=useState(false);
   const handleOk = () => {
 
   
-
+    
   const ApprovalData ={name:props.id, 
                       dateStart:props.dateStart, 
                       dateType:props.dateType, 
@@ -70,7 +66,8 @@ const[submitted,setSubmitted]=useState(false);
                       reason:props.reason, 
                       leaveType:props.leaveType, 
                       date:momentDate,
-                      difference:difference
+                      difference:difference,
+                      
                       }
 
                       console.log("ApprovalData", ApprovalData)
@@ -78,6 +75,17 @@ const[submitted,setSubmitted]=useState(false);
         const ApprovalDatareceived =localStorage.getItem("ApprovalData")
 
 console.log("ApprovalDatareceived", ApprovalDatareceived)
+
+let leaveBalanceData = props.leaveBalance - difference
+console.log("leaveBalanceData", leaveBalanceData)
+// if (leaveBalanceData ==  -1){
+//   setSubmitted(true)
+// }
+// else{
+//   // setSubmitted("You may have overdrawn the balance and hence cannot apply anymore")
+//   setSubmitted(false)
+// }
+
 
 if(ApprovalDatareceived==null){
   localStorage.setItem("ApprovalData",JSON.stringify([ApprovalData]))

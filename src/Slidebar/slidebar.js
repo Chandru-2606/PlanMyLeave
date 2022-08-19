@@ -80,12 +80,15 @@ const Slidebar = (props) => {
   const [selectLeave, setSelectLeave] = useState([])
   const { TabPane } = Tabs;
 
+
+
   const [approvalLeave, setApprovalLeave] = useState("")
   const [approvedData, setApprovedData] = useState([])
+  const [notApprovedData,setNotApprovedData] = useState([])
 
 
 
-
+// console.log("approvedData", approvedData)
   
 
 // console.log("newApproval", newApproval)
@@ -171,42 +174,62 @@ const filterLeave = ApplyLeave.filter(itemInArray =>
   itemInArray.id == valId
 );
 setLeaveBalance(filterLeave)
+// console.log("filterLeave", filterLeave)
 
 let a = JSON.parse(localStorage.getItem("leaveData"))
 setYearLeaveData(a)
-console.log("aaaaaaaa", a)
+// console.log("aaaaaaaa", a)
 
 
 
-let b = JSON.parse(localStorage.getItem("aprovelDatass"))
+// let b = JSON.parse(localStorage.getItem("aprovelDatass"))
 // setApproved(b) 
 // console.log("bbbbbbbbbb", b)
-// console.log("approved", approved)
-const arrayFiltered =b ? b.filter(itemInArray =>
-  itemInArray.id == id 
-  // console.log("itemInArray.id", itemInArray.id == id)
-  // if(itemInArray.id == id ){
+// // console.log("approved", approved)
+// const arrayFiltered =b ? b.filter(itemInArray =>
+//   // itemInArray.id == id 
+//   console.log("itemInArray.id", itemInArray.id == valId)
+//   // if(itemInArray.id == id ){
 
-  // }
+//   // }
 
- ) :[]
-  setApprovedData(arrayFiltered) 
+//  ) :[]
+//   setApprovedData(arrayFiltered) 
+//   console.log("valid", valId)
 
 
- console.log("arrayFiltered", arrayFiltered)
+//  console.log("ApprovedData", approvedData)
 
 // let localrecived = JSON.parse(localStorage.getItem(""))
 
 let localrecived = JSON.parse(localStorage.getItem("ApprovalData"))
+// console.log("localrecived", localrecived)
+setApprovedData(localrecived)
+
+let arrrr = JSON.parse(localStorage.getItem("aprovelDatass"))
+
+const filterArrr =arrrr ? arrrr.filter(itemInArray =>
+  itemInArray.id == id
+  ) : []
+  // console.log("filterArrr", filterArrr)
+  setApprovedData(filterArrr)
+const FilteredArarry = localrecived ? localrecived.filter(itemInArray =>
+  itemInArray.name == id
+  ) : []
+// console.log("FilteredArarry", FilteredArarry)
+setApprovalLeave(FilteredArarry)
+
+let brr = JSON.parse(localStorage.getItem("notapprovelDates"))
 
 
-const FilteredArarryed =localrecived ? localrecived.filter(itemInArray =>
- itemInArray.name == id 
-) : []
-console.log("FilteredArarryed", FilteredArarryed)
- setApprovalLeave(FilteredArarryed)
-
-
+const filterArrrarys =brr ? brr.filter(itemInArray =>
+  itemInArray.id == id
+  ) : []
+  // console.log("filterArrr", filterArrr)
+  setNotApprovedData(filterArrrarys)
+const FilteredArarryss = localrecived ? localrecived.filter(itemInArray =>
+  itemInArray.name == id
+  ) : []
 // {localrecived && localrecived.map((item, index)=>{
 //   if(item.name === valId){
 //  setApprovalLeave(localrecived)
@@ -582,38 +605,34 @@ const dateCellRender = (value) => {
   })}
 </div>
 
-{/* <div className="leave-request">
-  <h1>My Leave Request</h1>
-{approvalLeave && approvalLeave.map((item, index)=>{
-  return(
-    <div className="leave-requestList">
-     <h3>{moment(item.dateStart).format('L')} - { moment(item.dateEnd).format('L')}  <span></span></h3>
-     <h3>Applied on {moment(item.date ).format('LLL')}</h3>
-     <h3>{item.leaveType}</h3>
-    </div>
-  );
-})}
-</div> */}
 
 
 
- <div className="leave-request">
-   <h1>My Leave Request</h1>
+
+ 
+   <div className="leave-request">
+    <h1>My Leave Request</h1>
+  
    {approvalLeave && approvalLeave.map((item, index)=>{
     return(
       <div className="leave-requestList">
-          <h3>{moment(item.dateStart).format('DD.MM.YY')} - { moment(item.dateEnd).format('DD.MM.YY')}</h3>
-          <h3>Applied on :  {moment(item.date).format('LLL')}</h3>
-          <h3>{item.leaveType}</h3>
+        <h3>{moment(item.dateSatrt).format('DD.MM.YY')} - {moment(item.dateEnd).format('DD.MM.YY')}</h3>
+        <h3>Applied on : {moment(item.date).format('LLL')}</h3>
+        <h3>{item.leaveType}</h3>
       </div>
-    );
+    )
    })}
           {approvedData && approvedData.map((item, index)=>{
    return(
     <h3 id="aprovel">{item.approved}</h3>
    );
+    })}
 
-          })}
+{notApprovedData && notApprovedData.map((item, index)=>{
+   return(
+    <h3 id="aprovel">{item.notapproved}</h3>
+   );
+    })}
 
  </div>
 
