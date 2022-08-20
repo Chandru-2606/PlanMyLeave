@@ -19,12 +19,11 @@ const ConformLeave = (props) =>{
     setFilterLeave(filterLeaveData)
 
     let leaveBalanceData = props.leaveBalance - difference
+    console.log("leaveBalanceData", leaveBalanceData)
     if (leaveBalanceData >  -1){
       setSubmitted(true)
     }
-    // if(leaveBalanceData == -1){
-      
-    // }
+    
     else{
         setSubmitted("You may have overdrawn the balance and hence cannot apply anymore")
     }
@@ -64,30 +63,26 @@ const[submitted,setSubmitted]=useState(false);
                       dateEnd:props.dateEnd,  
                       dayEnd:props.dayEnd, 
                       reason:props.reason, 
-                      leaveType:props.leaveType, 
+                      leaveType:props.leaveType,
                       date:momentDate,
                       difference:difference,
-                      
                       }
-
                       console.log("ApprovalData", ApprovalData)
 
-        const ApprovalDatareceived =localStorage.getItem("ApprovalData")
-
-console.log("ApprovalDatareceived", ApprovalDatareceived)
-
-let leaveBalanceData = props.leaveBalance - difference
-console.log("leaveBalanceData", leaveBalanceData)
-// if (leaveBalanceData ==  -1){
-//   setSubmitted(true)
-// }
-// else{
-//   // setSubmitted("You may have overdrawn the balance and hence cannot apply anymore")
-//   setSubmitted(false)
-// }
 
 
-if(ApprovalDatareceived==null){
+      const ApprovalDatareceived =localStorage.getItem("ApprovalData")
+      console.log("ApprovalDatareceived", ApprovalDatareceived)
+
+      let a = moment(props.dateStart)
+      let b = moment(props.dateEnd).add(1, 'day')
+      let differenceDate = (b.diff(a, 'day'))
+
+      let leaveBalanceData = props.leaveBalance - differenceDate
+     
+                      
+
+if( (leaveBalanceData > -1)  && (ApprovalDatareceived == null)){
   localStorage.setItem("ApprovalData",JSON.stringify([ApprovalData]))
 }
 else{
@@ -95,7 +90,6 @@ else{
   console.log(arr);
   arr.push(ApprovalData);
   localStorage.setItem("ApprovalData",JSON.stringify(arr));
-
 }
 
 
@@ -142,9 +136,9 @@ else{
             </div>
           
             <div className='confirm-body'>
-              <h1>{props.leaveType  } - <span>{ moment(props.dateStart).format('DD/MM/YY')} - { moment(props.dateEnd).format('DD/MM/YY')}</span></h1>
+              <h1>{props.leaveType  } - <span>{ moment(props.dateStart).format('DD.MM.YY')} - { moment(props.dateEnd).format('DD.MM.YY')}</span></h1>
               <hr/>
-                              <h3>Leave duration: <span id ="spam-day" >{ difference} Days</span></h3>
+              <h3>Leave duration: <span id ="spam-day" >{ difference} Days</span></h3>
 
               <h1 id='errorMessage'>{submitted}</h1>
 

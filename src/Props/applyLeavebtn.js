@@ -23,7 +23,7 @@ let valId = `${id}`
 
     const [loading, setLoading] = useState(false);
     const [visible, setVisible] = useState(false);
-     const [leaveType, setLeaveType] = useState("")
+    //  const [leaveType, setLeaveType] = useState("")
     const [dateStart, setDateStart] = useState("")
     const [dateType, setDateType] = useState("")
     const [dateEnd, setDateEnd] = useState("")
@@ -56,7 +56,6 @@ let valId = `${id}`
         setLoading(true);
         setTimeout(() => {
           setLoading(false);
-          // setVisible(false);
         }, 3000);
         let momentDate = moment(startDate).valueOf()
       

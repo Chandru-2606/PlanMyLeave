@@ -77,6 +77,7 @@ const Slidebar = (props) => {
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [leaveBalance, setLeaveBalance] = useState("")
+  const [leaveBalanceData, setLeaveBalanceData] = useState([])
   const [selectLeave, setSelectLeave] = useState([])
   const { TabPane } = Tabs;
 
@@ -157,9 +158,15 @@ switch (e.target.value){
 let { id } = useParams();
 let valId = `${id}`
 
+// const filteredddd = leaveBalance.filter(employee => {
+//   return employee.CasualLeave > 0
+// });
+// console.log("filteredddd", filteredddd)
 
-
-
+// const LeaveBalanceData = ApplyLeave.filter(itemInArray => 
+//   itemInArray.Authorizedbreak == 0
+//   );
+//   console.log("LeaveBalanceData", LeaveBalanceData)
 
 useEffect(() => {
   const Datessssss = clockindata.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
@@ -175,6 +182,9 @@ const filterLeave = ApplyLeave.filter(itemInArray =>
 );
 setLeaveBalance(filterLeave)
 // console.log("filterLeave", filterLeave)
+
+
+
 
 let a = JSON.parse(localStorage.getItem("leaveData"))
 setYearLeaveData(a)
@@ -242,6 +252,10 @@ const FilteredArarryss = localrecived ? localrecived.filter(itemInArray =>
 
 }, [newVariable])
 
+
+const leaveBalnce = () =>{
+  console.log("btn trigrered")
+}
 
 const dateCellRender = (value) => {
     let listData = [];
@@ -514,7 +528,7 @@ const dateCellRender = (value) => {
                </TabPane>
 
               <TabPane tab="My Leave Balance" key="2">
-               <label>As of date</label> <input type="date" /><button >Find My Leave</button>
+               <label>As of date</label> <input type="date" /><button onClick={leaveBalnce} >Find My Leave</button>
 
                </TabPane>
               </Tabs>

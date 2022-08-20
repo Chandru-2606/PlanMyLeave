@@ -113,7 +113,7 @@ const Approval = (event , param)=>{
 
   const filtered = clockindata.filter(employee => {
    return employee.employeeId == e.target.value;
- });
+ })
 setTodayLeave(filtered)
  }
 // console.log("approvalLeave", approvalLeave)
@@ -285,7 +285,6 @@ if(leaveDatareceived==null){
                <div className="today_listData" id="workingshrs">{item.leaveType} </div>
                <div className="today_listData" id="leave-type">{item.reason}</div>
                <div className="today_listData" id="workingshrs"> {item.leaveType ? moment(item.leaveDate).format('DD.MM.YY') : ""} </div><br/>
-     
             </div>
          </ul>
       );
@@ -327,6 +326,7 @@ if(leaveDatareceived==null){
                   <div className="employesssList">{item.Address}</div>
                   <div className="employesssList">{item.DOB}</div>
                   <div className="employesssList">{item.DOJ}</div>
+                  
 
                  {display ? 
                   <div className="edit_btns">
