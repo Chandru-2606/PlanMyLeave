@@ -249,30 +249,25 @@ if(leaveDatareceived==null){
          );
       })}
    </select>
-        {approvalLeave && approvalLeave.map((item, index)=>{
+      {approvalLeave && approvalLeave.map((item, index)=>{
          let name = item.name
-         return(
-            
-            <ul >
-               <div className="today_list">   
-                  <div className="today_listData">{item.name}</div>
-                  <div className="today_listData">{moment(item.dateEnd).format('DD.MM.YY')}</div>
-                  <div className="today_listData">{moment(item.dateEnd).format('DD.MM.YY')}</div>
-                  <div className="today_listData" id="workingshrs">{item.leaveType} </div>
-                  <div className="today_listData" id="leave-type">{item.reason}</div>
-                  <div className="today_listData" id="workingshrs">{item.difference} Days </div><br/>
-               </div>
-            <div>
-            <div>
-               <button id="approveRequest-btn1"onClick={event => Approval(event, {name})}>Approve</button>
-               
-               <button id="approveRequest-btn2" onClick={event => NotApproval(event, {name})}>Cancel</button> </div>
-            </div>
-    </ul>
-         );
-           
-        })}
-
+            return(
+               <ul >
+                  <div className="today_list">   
+                     <div className="today_listData">{item.name}</div>
+                     <div className="today_listData">{moment(item.dateEnd).format('DD.MM.YY')}</div>
+                     <div className="today_listData">{moment(item.dateEnd).format('DD.MM.YY')}</div>
+                     <div className="today_listData" id="workingshrs">{item.leaveType} </div>
+                     <div className="today_listData" id="leave-type">{item.reason}</div>
+                     <div className="today_listData" id="workingshrs">{item.difference} Days </div><br/>
+                  </div>
+                  <div>
+                     <button id="approveRequest-btn1"onClick={event => Approval(event, {name})}>Approve</button>
+                     <button id="approveRequest-btn2" onClick={event => NotApproval(event, {name})}>Reject</button>
+                  </div>
+               </ul>
+            );
+            })}
 
 
       {newData && newData.reverse().map((item, index)=>{

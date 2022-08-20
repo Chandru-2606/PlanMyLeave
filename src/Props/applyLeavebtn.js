@@ -23,7 +23,6 @@ let valId = `${id}`
 
     const [loading, setLoading] = useState(false);
     const [visible, setVisible] = useState(false);
-    //  const [leaveType, setLeaveType] = useState("")
     const [dateStart, setDateStart] = useState("")
     const [dateType, setDateType] = useState("")
     const [dateEnd, setDateEnd] = useState("")
@@ -31,19 +30,11 @@ let valId = `${id}`
     const [reason, setReason] = useState("")
     const [address, setAddress] = useState("")
     const [number, setNumber] = useState("")
-    const [difference, setDifference] = useState("")
     const [startDate, setStartDate] = useState(new Date());
     const [name, setName] = useState([])
-    
+    const [applyLeaveData, setApplyLeaveData] = useState([])
+    const moment = require('moment');
 
-    // console.log("name", name)
-
-  const [applyLeaveData, setApplyLeaveData] = useState([])
-
-
-  const moment = require('moment');
-
-// console.log("applyLeaveData", applyLeaveData)
 
     const showModal = () => {
         setVisible(true);
@@ -115,7 +106,6 @@ console.log("item.name", item.name)
                         dayEnd={dayEnd} 
                         reason={reason} 
                         leaveType={props.leaveType}
-                        difference={difference}
                         applyLeaveData={applyLeaveData}
                         leaveBalance={props.leaveBalance}
                          />
@@ -150,32 +140,32 @@ console.log("item.name", item.name)
     <div className="leave-daytype">
       <input type="date" value={dateStart} onChange={(e) => {setDateStart(e.target.value)}}/> 
 
-    <select value={dateType} onChange={(e) => {setDateType(e.target.value)}}>
-      <option>Select day type</option>
-      <option>Full Day</option>
-      <option>First Half of the Day</option>
-      <option>Second Half of the Day</option>
-    </select>
-    </div>
-    </div>
+      <select value={dateType} onChange={(e) => {setDateType(e.target.value)}}>
+        <option>Select day type</option>
+        <option>Full Day</option>
+        <option>First Half of the Day</option>
+        <option>Second Half of the Day</option>
+      </select>
+     </div>
+  </div>
 
-    <div className="leave-start">
-  <div className="leave-start-date">
-  <label>Leave ending on</label> <br></br>
+  <div className="leave-start">
+    <div className="leave-start-date">
+      <label>Leave ending on</label> <br></br>
     </div>
     
     <div className="leave-daytype">
-    <input type="date" value={dateEnd} onChange={(e) => {setDateEnd(e.target.value)}} /> 
+      <input type="date" value={dateEnd} onChange={(e) => {setDateEnd(e.target.value)}} /> 
 
-    <select value={dayEnd} onChange={(e) => {setDayEnd(e.target.value)}} >
-    <option>Select day type</option>
-      <option>Full Day</option>
-      <option>First Half of the Day</option>
-      <option>Second Half of the Day</option>
-    </select>
+      <select value={dayEnd} onChange={(e) => {setDayEnd(e.target.value)}} >
+        <option>Select day type</option>
+        <option>Full Day</option>
+        <option>First Half of the Day</option>
+        <option>Second Half of the Day</option>
+      </select>
     </div>
-    </div>
-    </div>
+  </div>
+  </div>
     <hr />
 
 <div className="leave-reason">  

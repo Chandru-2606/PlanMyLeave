@@ -21,16 +21,15 @@ const ConformLeave = (props) =>{
     let leaveBalanceData = props.leaveBalance - difference
     console.log("leaveBalanceData", leaveBalanceData)
     if (leaveBalanceData >  -1){
-      setSubmitted(true)
+      setSubmitted(true)  
     }
     
     else{
         setSubmitted("You may have overdrawn the balance and hence cannot apply anymore")
     }
-
   let a = moment(props.dateStart)
   let b = moment(props.dateEnd).add(1, 'day')
- let differenceDate = (b.diff(a, 'day'))
+  let differenceDate = (b.diff(a, 'day'))
  setDifference(differenceDate)
   })
 
@@ -39,9 +38,9 @@ const ConformLeave = (props) =>{
   const [nameEmp, setNameEmp] = useState([])
   const [startDate, setStartDate] = useState(new Date());
   const [difference, setDifference] = useState([])
-  // const [approved, setApproved] = useState("Approved")
   let momentDate = moment(startDate).valueOf()
   const [filterLeave, setFilterLeave] = useState([])
+  // console.log("filterLeave", filterLeave)
 
 
 const[submitted,setSubmitted]=useState(false);
