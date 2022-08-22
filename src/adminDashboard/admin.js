@@ -13,7 +13,6 @@ import AddEmployee from "../Props/addEmployee";
 
 function Admin () {
 
-
 const [lisEmployee, setListEmployee] = useState([])
 const [display, setDisplay] = useState(false)
 const [todayClockin, setTodayClockin] = useState()
@@ -24,6 +23,7 @@ const [notApproved, setNotApproved] = useState("Rejected")
 const [approvalLeave, setApprovalLeave] = useState([])
 const [newData, setNewData] = useState([])
 const [filterAprroval, setFilterApproval] = useState([])
+const [newEmployee, setNewEmployee] = useState([])
 const moment = require('moment');
 
 useEffect(() => {
@@ -56,15 +56,27 @@ console.log("FilteredArarry", FilteredArarry)
  let a = JSON.parse(localStorage.getItem("ApprovalData"))
 setApprovalLeave(a)
 
-}, [])
 
-const EmployeeLeave = (e)=>{
-   const filteredLeave = clockindata.filter(employee => {
-      return employee.employeeId == e.target.value;
-    });
-    console.log("filteredLeave", filteredLeave)
+let data = JSON.parse(localStorage.getItem("AddEmployeData"))
+// console.log("data", data)
+setNewEmployee(data)
+}, [])
+console.log("newEmployee", newEmployee)
+// const EmployeeLeave = (e)=>{
+//    const filteredLeave = clockindata.filter(employee => {
+//       return employee == e;
+//     });
+//     console.log("filteredLeave", filteredLeave)
+// }
+
+const EmployeeLeave = (e) =>{
+   const filteredLeave = clockindata.filter(employee=>{
+     return employee.employeeId == e.target.value;
+   })
+   console.log("filteredLeave", filteredLeave)
     setNewData(filteredLeave)
 }
+
 const Approval = (event , param)=>{
    console.log("hellooooo ")
    console.log("param",param)
@@ -226,22 +238,12 @@ if(leaveDatareceived==null){
 })}
 </div>
 
-
-
       <div className="approveRequest">
+         <div className="approval">
         <h1>Leave Approval</h1>
-    
-      <div className="today-data">
-      <div className="todayData-head"><h1>Name</h1></div>
-      <div className="todayData-head"><h1>Leave start</h1></div>
-      <div className="todayData-head"><h1>Leave End</h1></div>
-      <div className="todayData-head"><h1>Leave Type</h1></div>
-      <div className="todayData-head"><h1>Reason</h1></div>
-      <div className="todayData-head"><h1>No of Days</h1></div>
 
-   </div>
-   <select onChange={EmployeeLeave}>
-      {lisEmployee.map((item, index)=>{
+        <select id="old-leave" onChange={EmployeeLeave}>
+      {lisEmployee.reverse().map((item, index)=>{
          return(
             <option value={item.id}>
                {item.name}
@@ -249,10 +251,20 @@ if(leaveDatareceived==null){
          );
       })}
    </select>
+   </div>
+      <div className="today-data">
+      <div className="todayData-head"><h1>Name</h1></div>
+      <div className="todayData-head"><h1>Leave start</h1></div>
+      <div className="todayData-head"><h1>Leave End</h1></div>
+      <div className="todayData-head"><h1>Leave Type</h1></div>
+      <div className="todayData-head"><h1>Reason</h1></div>
+      <div className="todayData-head"><h1>No of Days</h1></div>
+   </div>
+
       {approvalLeave && approvalLeave.map((item, index)=>{
          let name = item.name
             return(
-               <ul >
+               <ul>
                   <div className="today_list">   
                      <div className="today_listData">{item.name}</div>
                      <div className="today_listData">{moment(item.dateEnd).format('DD.MM.YY')}</div>
@@ -273,13 +285,15 @@ if(leaveDatareceived==null){
       {newData && newData.reverse().map((item, index)=>{
       return(
          <ul>
-            <div id="user-leaveDate" className="today_list">   
+  
+
+            <div id="user-leaveDate" className="today_list">
                <div className="today_listData">{item.leaveType ? item.employeeId : ""}</div>
+               <div className="today_listData"> {item.leaveDate ? moment(item.leaveDate).format('DD.MM.YY') : ""}</div>
                <div className="today_listData">{item.leaveDate ? moment(item.leaveDate).format('DD.MM.YY') : ""}</div>
-               <div className="today_listData">{item.leaveDate ? moment(item.leaveDate).format('DD.MM.YY') : ""}</div>
-               <div className="today_listData" id="workingshrs">{item.leaveType} </div>
+               <div className="today_listData" id="workingshrs"> {item.leaveType}</div>
                <div className="today_listData" id="leave-type">{item.reason}</div>
-               <div className="today_listData" id="workingshrs"> {item.leaveType ? moment(item.leaveDate).format('DD.MM.YY') : ""} </div><br/>
+               <div className="today_listData" id="workingshrs">{item.leaveType ? moment(item.leaveDate).format('DD.MM.YY') : ""}</div>
             </div>
          </ul>
       );
@@ -312,7 +326,7 @@ if(leaveDatareceived==null){
             <div className="headingName">
                <button onClick={() => { setDisplay(true)}}><MenuUnfoldOutlined /></button></div>
             </div>
-             {lisEmployee.length && lisEmployee.map((item, index) => {
+             {lisEmployee && lisEmployee.reverse().map((item, index) =>{
            return(
                <div className="employeeesDatalist"> 
                <ul key={index}>
@@ -321,14 +335,37 @@ if(leaveDatareceived==null){
                   <div className="employesssList">{item.Address}</div>
                   <div className="employesssList">{item.DOB}</div>
                   <div className="employesssList">{item.DOJ}</div>
-                  
-
                  {display ? 
                   <div className="edit_btns">
-                  {/* <Button type="primary"  onClick={showModal}>
-                  <AddEmployee />
+              <AddEmployee />
+                     <div className="edit_btns1">
+                  <DownCircleOutlined />
+                     </div>
+                  </div> :"" }
 
-                  </Button> */}
+            </ul>
+
+           
+
+            </div>
+            );
+            })} 
+            <div>
+
+           
+
+            {newEmployee && newEmployee.map((item, index) => {
+           return(
+               <div className="employeeesDatalist"> 
+               <ul key={index}>
+                  <div className="employesssList">{item.addName}</div>
+                  <div className="employesssList" id="employe-email">{item.addEmail}</div>
+                  <div className="employesssList">{item.addAddress}</div>
+                  <div className="employesssList">{moment(item.addDOB).format("DD.MM.YYYY")}</div>
+                  <div className="employesssList">{moment(item.addDOJ).format("DD.MM.YYYY")}</div>
+                 {display ? 
+                  <div className="edit_btns">
+                  
               <AddEmployee />
 
                      <div className="edit_btns1">
@@ -336,11 +373,12 @@ if(leaveDatareceived==null){
                      </div>
                   </div> :"" }
             </ul>
-
             </div>
             );
             })} 
-            <div>
+            
+           
+
          </div>
       </div>
             

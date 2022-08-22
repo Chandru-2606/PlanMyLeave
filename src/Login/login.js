@@ -10,7 +10,6 @@ import { userdata } from "../adminDashboard/ApiDatas/apiData";
 const  Login =() =>{
 const [dataEnd, setDataEnd ] = useState ("")
 
-console.log("dataaaaaaaaaaaaaa",dataEnd)
 
   useEffect(() => {
     const Datessssss = clockindata.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
@@ -393,7 +392,6 @@ const navigate = useNavigate();
     console.log(e)
     setPassword(e.target.value )
   }
-
   const formSubmitter = (e) =>{
      e.preventDefault();
   }
@@ -404,10 +402,11 @@ const Submit = (e) =>{
           return (navigate("/Admin"));
         } 
       console.log("submit triggered")
-        if(!emailValidator(email)){
+        if(!emailValidator(email))
+        {
           setEmailError(true)
         }
-        else {
+        else{
           setEmailError(false)
           console.log("hello")
         }

@@ -15,6 +15,7 @@ import { Button, Modal } from 'antd';
 import {EditOutlined} from '@ant-design/icons';
 import {DownCircleOutlined  } from '@ant-design/icons';
 import {MenuUnfoldOutlined } from '@ant-design/icons';
+import { applyPatches } from "immer";
 
 
 
@@ -101,7 +102,6 @@ const Slidebar = (props) => {
 
 
 const TodayEvents = (e) =>{
-// console.log("dcfgr", e.target.value)
 
 const current =  moment(new Date()).format('l');
 
@@ -254,9 +254,20 @@ const FilteredArarryss = localrecived ? localrecived.filter(itemInArray =>
 
 
 const leaveBalnce = () =>{
-  console.log("btn trigrered")
+  const FilteredArarryss =  leaveBalance.filter(itemInArray =>
+    itemInArray.Authorizedbreak >0
+   
+  ) 
+  // console.log("FilteredArarryss", FilteredArarryss)
+  if(FilteredArarryss == true ){
+    console.log("true")
+    setLeaveBalanceData(FilteredArarryss)
+  }
+  else {
+    console.log("false")
+  }
 }
-
+console.log("leaveBalanceData", leaveBalanceData)
 const dateCellRender = (value) => {
     let listData = [];
     {newVariable.map((item,index)=>{
@@ -529,9 +540,176 @@ const dateCellRender = (value) => {
 
               <TabPane tab="My Leave Balance" key="2">
                <label>As of date</label> <input type="date" /><button onClick={leaveBalnce} >Find My Leave</button>
-
+               
+               <div>
+               {leaveBalanceData && leaveBalanceData.map((item, index)=>{
+                 return(
+                  <table>
+                      <tr >
+                        <div className="th_div">
+                          <div className="data_leave">
+                            <th > Authorizedbreak</th><br></br>
+                              <th>Next Year</th>
+                          </div>
+              
+                          <div className="hours">
+                            <th>{item.Authorizedbreak} Days</th><br></br>
+                              <th>0 Days</th>
+                          </div>
+              
+                          <div className="td_a">
+                            <td >
+              
+                            <ApplyLeavebtn leaveBalance={item.Authorizedbreak} leaveType="Authorized break" />
+                                
+                            </td>
+                          </div>
+                        </div>
+                      </tr>
+              
+                      <tr >
+                        <div className="th_div">
+                          <div className="data_leave">
+                            <th >CasualLeave</th><br></br>
+                              <th>Next Year</th>
+                          </div>
+              
+                          <div className="hours">
+                            <th>{item.CasualLeave} Days</th><br></br>
+                              <th>0 Days</th>
+                          </div>
+              
+                          <div className="td_a">
+                            <td >
+              
+                            <ApplyLeavebtn leaveBalance={item.CasualLeave} leaveType="Casual Leave" />
+              
+                                
+                            </td>
+                          </div>
+                        </div>
+                      </tr>
+              
+                      <tr >
+                        <div className="th_div">
+                          <div className="data_leave">
+                            <th > CompensatoryOff</th><br></br>
+                              <th>Next Year</th>
+                          </div>
+              
+                          <div className="hours">
+                            <th>{item.CompensatoryOff} Days</th><br></br>
+                              <th>0 Days</th>
+                          </div>
+              
+                          <div className="td_a">
+                            <td >
+              
+                            <ApplyLeavebtn leaveBalance={item.CompensatoryOff}  leaveType="Compensatory Off"/>
+              
+                                
+                            </td>
+                          </div>
+                        </div>
+                      </tr>
+              
+                      <tr >
+                        <div className="th_div">
+                          <div className="data_leave">
+                            <th >  LeavewithoutPay</th><br></br>
+                              <th>Next Year</th>
+                          </div>
+              
+                          <div className="hours">
+                            <th>{item.LeavewithoutPay} Days</th><br></br>
+                              <th>0 Days</th>
+                          </div>
+              
+                          <div className="td_a">
+                            <td >
+              
+                            <ApplyLeavebtn leaveBalance={item.LeavewithoutPay} leaveType="Leave without Pay" />
+              
+                                
+                            </td>
+                          </div>
+                        </div>
+                      </tr>
+              
+                      <tr >
+                        <div className="th_div">
+                          <div className="data_leave">
+                            <th >   PaidLeave</th><br></br>
+                              <th>Next Year</th>
+                          </div>
+              
+                          <div className="hours">
+                            <th>{item.PaidLeave} Days</th><br></br>
+                              <th>0 Days</th>
+                          </div>
+              
+                          <div className="td_a">
+                            <td >
+              
+                            <ApplyLeavebtn leaveBalance={item.PaidLeave} leaveType="Paid Leave" />
+              
+                                
+                            </td>
+                          </div>
+                        </div>
+                      </tr>
+              
+                      <tr >
+                        <div className="th_div">
+                          <div className="data_leave">
+                            <th >   RestrictedHolidays</th><br></br>
+                              <th>Next Year</th>
+                          </div>
+              
+                          <div className="hours">
+                            <th>{item.RestrictedHolidays} Days</th><br></br>
+                              <th>0 Days</th>
+                          </div>
+              
+                          <div className="td_a">
+                            <td >
+              
+                            <ApplyLeavebtn leaveBalance={item.RestrictedHolidays} leaveType="Restrickted Holidays" />
+              
+                                
+                            </td>
+                          </div>
+                        </div>
+                      </tr>
+              
+                      <tr >
+                        <div className="th_div">
+                          <div className="data_leave">
+                            <th >   Sickleave</th><br></br>
+                              <th>Next Year</th>
+                          </div>
+              
+                          <div className="hours">
+                            <th>{item.Sickleave} Days</th><br></br>
+                              <th>0 Days</th>
+                          </div>
+              
+                          <div className="td_a">
+                            <td >
+                            <ApplyLeavebtn leaveBalance={item.Sickleave}  leaveType="Sick Leave"/>
+              
+                                
+                            </td>
+                          </div>
+                        </div>
+                      </tr>
+                             </table>
+              );
+               })}
+               </div>
                </TabPane>
               </Tabs>
+              
                 </div>
               </div>
             </div>

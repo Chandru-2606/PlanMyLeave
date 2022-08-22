@@ -11,7 +11,7 @@ export  const admindata=[
         "profilepicture": "http://restapi.adequateshop.com/Media//Images/userimageicon.png",
         "location": "USAnew",
         "createdat": "2021-02-16T10:29:48.0112462",
-        "updatedat":"DD-MM-YYYY"
+        "updatedat":"DD-MM-YYYY",
       },
   ]
 
@@ -19,8 +19,8 @@ export   const userdata=[
     {
       "id": 3180,
       "roleId":1,
-      "name": "Raj M new",
-      "email": "rajmalhotrnewa3007@gmail.com",
+      "name": "Chandru",
+      "email": "chandru@gmail.com",
       "password":"Anexas123456",
       "DOB":"00-00-0000",
       "DOJ":"00-00-0000",
@@ -34,8 +34,8 @@ export   const userdata=[
     {
       "id": 3182,
       "roleId":1,
-      "name": "Sharan S Nair",
-      "email": "sharans.nair@yahoo.in",
+      "name": "Kameshwar",
+      "email": "kameshwar@gmail",
       "password":"Anexas123456",
       "DOB":"00-00-0000",
       "DOJ":"00-00-0000",
@@ -48,8 +48,8 @@ export   const userdata=[
     {
       "id": 3183,
       "roleId":1,
-      "name": "Yusuff Olanrewaju",
-      "email": "olanrewajuyusuff65@gmail.com",
+      "name": "Naveen",
+      "email": "naveen@gmail.com",
       "password":"Anexas123456",
       "DOB":"00-00-0000",
       "DOJ":"00-00-0000",
@@ -62,8 +62,8 @@ export   const userdata=[
     {
       "id": 3184,
       "roleId":1,
-      "name": "Anouar Snader",
-      "email": "anouarsnader612@gmail.com",
+      "name": "Rajesh",
+      "email": "rajesh@gmail.com",
       "password":"Anexas123456",
       "DOB":"00-00-0000",
       "DOJ":"00-00-0000",
@@ -424,6 +424,14 @@ export  const clockindata=[
                             leaveType:"Sick leave",
                             leaveDate:"Sat Aug 17 2022 09:30:00 GMT+0530 (India Standard Time)"
                             },
+                            {
+                              employeeId: 3183,
+                              clockin:"Wed Aug 22 2022 09:30:00 GMT+0530 (India Standard Time)",
+                              clockout:"Wed Aug 22 2022 06:30:00 GMT+0530 (India Standard Time)",
+                              workingHrs:9,
+                              leaveType:"",
+                              leaveDate:""
+                              },
     {
       employeeId: 3184,
       clockin:"Mon Aug 01 2022 09:30:00 GMT+0530 (India Standard Time)",
@@ -520,7 +528,15 @@ export  const clockindata=[
                           workingHrs:0,
                           leaveType:"Casual Leave",
                           leaveDate:"Sat Aug 14 2022 09:30:00 GMT+0530 (India Standard Time)"
-                          }
+                          },
+                          {
+                            employeeId: 3184,
+                            clockin:"",
+                            clockout:"",
+                            workingHrs:0,
+                            leaveType:"Sick Leave",
+                            leaveDate:"Sat Aug 22 2022 09:30:00 GMT+0530 (India Standard Time)"
+                            }
  ]
 
  export const leaveData = [
@@ -606,7 +622,7 @@ export  const clockindata=[
     },{
       id:3183,
       Authorizedbreak :0 ,//hrs
-      CasualLeave:7,//days
+      CasualLeave:2,//days
       CompensatoryOff:0, //hrs
       LeavewithoutPay:0 ,//days
       PaidLeave:0 ,//days

@@ -257,3 +257,12 @@ margin-left: 20px;
     width: 30%;
 }
 
+.approval{
+    display: flex;
+    justify-content: space-between;
+}
+#old-leave{
+    margin-right: 200px;
+    height: 25px;
+    margin-top: 10px;
+}

@@ -11,14 +11,7 @@ const ApplyLeavebtn = (props) =>{
   let { id } = useParams();
 let valId = `${id}`
 
-// useEffect(() => {
-//   const FilteredArarry = userdata.filter(itemInArray =>
-//       itemInArray.id == id
-//     )
-//     setName(FilteredArarry)
-//     // console.log("FilteredArarry", FilteredArarry)
 
-// },[])
 
 
     const [loading, setLoading] = useState(false);

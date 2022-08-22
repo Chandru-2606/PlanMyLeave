@@ -5,7 +5,10 @@ import { Input } from 'antd';
 
 const AddEmployee = (props) =>{
 
-   
+  // useEffect(() => {
+
+  
+  // })   
 
    const [addName, setAddName] = useState("")
    const [addPassword, setAddPassword] = useState("")
@@ -36,6 +39,20 @@ let AddEmployeData ={addName :addName,
                      addDOJ:addDOJ
                   }
                   console.log("AddEmployeData", AddEmployeData)
+          
+                  const received=localStorage.getItem("AddEmployeData")
+        console.log(received);
+        if(received==null){
+          localStorage.setItem("AddEmployeData",JSON.stringify([AddEmployeData]))
+        }
+        else{
+          let arr=JSON.parse(received);
+          console.log(arr);
+          arr.push(AddEmployeData);
+          localStorage.setItem("AddEmployeData",JSON.stringify(arr));
+    
+        }
+
 
     setLoading(true);
     setTimeout(() => {
