@@ -58,10 +58,9 @@ setApprovalLeave(a)
 
 
 let data = JSON.parse(localStorage.getItem("AddEmployeData"))
-// console.log("data", data)
 setNewEmployee(data)
 }, [])
-console.log("newEmployee", newEmployee)
+// console.log("newEmployee", newEmployee)
 // const EmployeeLeave = (e)=>{
 //    const filteredLeave = clockindata.filter(employee => {
 //       return employee == e;
@@ -83,7 +82,7 @@ const Approval = (event , param)=>{
 
    // let variableOne1 = approvalLeave.filter(itemInArray => 
    //  itemInArray.name == param.name
-   //  );
+   //  )
    //  setFilterApproval(variableOne1)
    //  console.log("variableOne1", variableOne1)
 
@@ -91,14 +90,16 @@ const Approval = (event , param)=>{
     console.log("approvelDates", approvelDates)
 
    const localrecived = localStorage.getItem("approvelDates")
-   if(localrecived==null){
+   if(localrecived==null)
+   {
       localStorage.setItem("aprovelDatass", JSON.stringify([approvelDates]))
    }
-   else{
-      let brr = JSON.parse(localrecived);
+   else
+   {
+      let brr = JSON.parse(localrecived)
       console.log("brr", brr)
-      brr.push(approvelDates);
-      localStorage.setItem("approvelDates", JSON.stringify(brr));
+      brr.push(approvelDates)
+      localStorage.setItem("approvelDates", JSON.stringify(brr))
    }
    }
 
@@ -114,9 +115,9 @@ const Approval = (event , param)=>{
       localStorage.setItem("notapprovelDates", JSON.stringify([notapprovelDates]))
    }
    else{
-      let brr = JSON.parse(localrecived);
+      let brr = JSON.parse(localrecived)
       console.log("brr", brr)
-      brr.push(notapprovelDates);
+      brr.push(notapprovelDates)
       localStorage.setItem("notapprovelDates", JSON.stringify(brr))
    }
    }
@@ -128,33 +129,7 @@ const Approval = (event , param)=>{
  })
 setTodayLeave(filtered)
  }
-// console.log("approvalLeave", approvalLeave)
- 
 
-// console.log("aprovelDatass", aprovelDatass)
-//if(variableOne1)
-   //{approvalLeave && approvalLeave.map((item, index)=>{
-   
-   // const aprovelDatass = {approved : approved, id:id}
-   // console.log("aprovelDatass", aprovelDatass)
-   // const localrecived = localStorage.getItem("aprovelDatass")
-   // if(localrecived==null){
-   //    localStorage.setItem("aprovelDatass", JSON.stringify([aprovelDatass]))
-   // }
-   // else{
-   //    let brr = JSON.parse(localrecived);
-   //    console.log("brr", brr)
-   //    brr.push(aprovelDatass);
-   //    localStorage.setItem("aprovelDatass", JSON.stringify(brr));
-   // }
-//})}
-// approvalLeave.map((item,index) => {
-//    // return(
-      
-//    //       // {item.name }
-      
-//    // )
-// })
 
 
 
@@ -163,14 +138,16 @@ const AddSubmit = () =>{
    const LeaveYear = {leaveData : leaveData}
    const leaveDatareceived=localStorage.getItem("leaveData")
 
-if(leaveDatareceived==null){
+if(leaveDatareceived==null)
+{
    localStorage.setItem("leaveData",JSON.stringify(leaveData))
  }
- else{
-   let arr=JSON.parse(leaveDatareceived);
-   console.log(arr);
-   arr.push(leaveData);
-   localStorage.setItem("leaveData",JSON.stringify(arr));
+ else
+ {
+   let arr=JSON.parse(leaveDatareceived)
+   console.log(arr)
+   arr.push(leaveData)
+   localStorage.setItem("leaveData",JSON.stringify(arr))
  }
 }
 
@@ -307,7 +284,7 @@ if(leaveDatareceived==null){
                <h1>Employee List</h1>
               
 
-              <AddEmployee />
+              <AddEmployee button="Add Employee" name ="AddEmployee"/>
 
 
 
@@ -353,29 +330,29 @@ if(leaveDatareceived==null){
             <div>
 
            
+{newEmployee && newEmployee.map((item, index)=>{
+return(
+   <div className="employeeesDatalist"> 
+   <ul key={index}>
+      <div className="employesssList">{item.addName}</div>
+      <div className="employesssList" id="employe-email">{item.addEmail}</div>
+      <div className="employesssList">{item.addAddress}</div>
+      <div className="employesssList">{moment(item.addDOB).format("DD.MM.YYYY")}</div>
+      <div className="employesssList">{moment(item.addDOJ).format("DD.MM.YYYY")}</div>
+     {display ? 
+      <div className="edit_btns">
+      
+  <AddEmployee id={item.id} button="Edit Employee" />
 
-            {newEmployee && newEmployee.map((item, index) => {
-           return(
-               <div className="employeeesDatalist"> 
-               <ul key={index}>
-                  <div className="employesssList">{item.addName}</div>
-                  <div className="employesssList" id="employe-email">{item.addEmail}</div>
-                  <div className="employesssList">{item.addAddress}</div>
-                  <div className="employesssList">{moment(item.addDOB).format("DD.MM.YYYY")}</div>
-                  <div className="employesssList">{moment(item.addDOJ).format("DD.MM.YYYY")}</div>
-                 {display ? 
-                  <div className="edit_btns">
-                  
-              <AddEmployee />
-
-                     <div className="edit_btns1">
-                  <DownCircleOutlined />
-                     </div>
-                  </div> :"" }
-            </ul>
-            </div>
-            );
-            })} 
+         <div className="edit_btns1">
+      <DownCircleOutlined />
+         </div>
+      </div> :"" }
+</ul>
+</div>
+);
+})}
+            
             
            
 

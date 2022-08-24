@@ -5,9 +5,6 @@ import { Input } from 'antd';
 
 import './form.css';
 
-
-
-
 function Form() {
   const[values,setValues]=useState({
     userName: "",
@@ -39,16 +36,11 @@ function Form() {
     e.preventDefault();
     if(values.firstName && values.lastName && values.email){
       setValid(true);
-
     }
-
-    
     setSubmitted(true);
-    
   }
-
-          const submit = () =>{
-      console.log(values)
+    const submit = () =>{
+    console.log(values)
 } 
 
   return (
@@ -97,8 +89,6 @@ function Form() {
                    onChange={messageChange}
                    placeholder="Message" 
                    prefix={<UserOutlined />} /><br></br>
-
-
               {submitted  && !values.message ? <span className='form_span'>Please enter the Message</span> 
                         :null}<br></br>
               

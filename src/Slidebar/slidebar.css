@@ -647,24 +647,28 @@ width: 100%
  }
 
  .yearLeave-data{
-  width: 600px;
+  width: 590px;
   margin-left: -50px;
  }
+.year-data{
+  display: flex;
+  width: 70%;
+}
 
  .yearLeave-data ul {
   display: flex;
-  justify-content: space-between;
   list-style-type: none;
+  width: 100%;
 }
 
 .yearLeave-data li {
-margin-left: 20px;
-font-size: 16px;
+/* margin-left: 20px; */
+font-size: 15px;
 }
 
-.yearleave-datess{
+/* .yearleave-datess{
     width: 30%;
-}
+} */
 
 #aprovel{
   margin-left: 50px;
@@ -673,3 +677,7 @@ font-size: 16px;
   font-weight: bolder;
   margin-top: 18px;
 }
+
+/* .approved{
+  display: flex;
+} */

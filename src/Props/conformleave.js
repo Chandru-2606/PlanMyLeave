@@ -19,13 +19,12 @@ const ConformLeave = (props) =>{
     setFilterLeave(filterLeaveData)
 
     let leaveBalanceData = props.leaveBalance - difference
-    console.log("leaveBalanceData", leaveBalanceData)
+    // console.log("leaveBalanceData", leaveBalanceData)
     if (leaveBalanceData >  -1){
-      setSubmitted(true)  
+      setSubmitted(true)
     }
-    
     else{
-        setSubmitted("You may have overdrawn the balance and hence cannot apply anymore")
+    setSubmitted("You may have overdrawn the balance and hence cannot apply anymore")
     }
   let a = moment(props.dateStart)
   let b = moment(props.dateEnd).add(1, 'day')
@@ -33,13 +32,14 @@ const ConformLeave = (props) =>{
  setDifference(differenceDate)
   })
 
-  const [loading, setLoading] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false)
+  const [visible, setVisible] = useState(false)
   const [nameEmp, setNameEmp] = useState([])
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date())
   const [difference, setDifference] = useState([])
   let momentDate = moment(startDate).valueOf()
   const [filterLeave, setFilterLeave] = useState([])
+  const [isSubmit, SetIsSubmit] = useState(false)
   // console.log("filterLeave", filterLeave)
 
 
@@ -66,12 +66,10 @@ const[submitted,setSubmitted]=useState(false);
                       date:momentDate,
                       difference:difference,
                       }
-                      console.log("ApprovalData", ApprovalData)
-
-
+                      // console.log("ApprovalData", ApprovalData)
 
       const ApprovalDatareceived =localStorage.getItem("ApprovalData")
-      console.log("ApprovalDatareceived", ApprovalDatareceived)
+      // console.log("ApprovalDatareceived", ApprovalDatareceived)
 
       let a = moment(props.dateStart)
       let b = moment(props.dateEnd).add(1, 'day')
@@ -81,26 +79,25 @@ const[submitted,setSubmitted]=useState(false);
      
                       
 
-if( (leaveBalanceData > -1)  && (ApprovalDatareceived == null)){
+if( (leaveBalanceData > 0)  && (ApprovalDatareceived === null)){
   localStorage.setItem("ApprovalData",JSON.stringify([ApprovalData]))
 }
-else{
-  let arr=JSON.parse(ApprovalDatareceived);
-  console.log(arr);
-  arr.push(ApprovalData);
-  localStorage.setItem("ApprovalData",JSON.stringify(arr));
+else if(leaveBalanceData > 0){
+  let arr=JSON.parse(ApprovalDatareceived)
+  console.log(arr)
+  arr.push(ApprovalData)
+  localStorage.setItem("ApprovalData",JSON.stringify(arr))
 }
 
-
-    setLoading(true);
+    setLoading(true)
     setTimeout(() => {
-      setLoading(false);
-      setVisible(false);
-    }, 3000);
-  };
+      setLoading(false)
+      setVisible(false)
+    })
+  }
   const handleCancel = () => {
-    setVisible(false);
-  };
+    setVisible(false)
+  }
     return(
         <div>
         <Button type="primary" onClick={showModal}>

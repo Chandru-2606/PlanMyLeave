@@ -1,14 +1,13 @@
 import React, {useState , useEffect} from "react";
 import { Button, Modal } from 'antd';
 import { Input } from 'antd';
+import { v4 as uuidv4 } from 'uuid';
+
 
 
 const AddEmployee = (props) =>{
 
-  // useEffect(() => {
-
   
-  // })   
 
    const [addName, setAddName] = useState("")
    const [addPassword, setAddPassword] = useState("")
@@ -17,6 +16,7 @@ const AddEmployee = (props) =>{
    const [addAddress, setAddAddress] = useState("")
    const [addDOB, setAddDOB] = useState("")
    const [addDOJ, setAddDOJ] = useState("")
+   const [employeeId, setEmployeeId] = useState("")
 
     const [loading, setLoading] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -27,8 +27,6 @@ const AddEmployee = (props) =>{
 
 
 const handleOk = () => {
-   
-
 
 let AddEmployeData ={addName :addName,
                      addPassword:addPassword,
@@ -36,23 +34,22 @@ let AddEmployeData ={addName :addName,
                      addNumber:addNumber,
                      addAddress:addAddress,
                      addDOB:addDOB,
-                     addDOJ:addDOJ
+                     addDOJ:addDOJ,
+                     id:employeeId
                   }
                   console.log("AddEmployeData", AddEmployeData)
           
-                  const received=localStorage.getItem("AddEmployeData")
-        console.log(received);
-        if(received==null){
-          localStorage.setItem("AddEmployeData",JSON.stringify([AddEmployeData]))
-        }
-        else{
-          let arr=JSON.parse(received);
-          console.log(arr);
-          arr.push(AddEmployeData);
-          localStorage.setItem("AddEmployeData",JSON.stringify(arr));
-    
-        }
-
+        
+        const received = localStorage.getItem("AddEmployeData")
+         console.log("received")
+         if(received ==null){
+          localStorage.setItem("AddEmployeData", JSON.stringify([AddEmployeData]))
+         }
+         else{
+          let arr = JSON.parse(received)
+          arr.push(AddEmployeData)
+          localStorage.setItem("AddEmployeData", JSON.stringify(arr))
+         }
 
     setLoading(true);
     setTimeout(() => {
@@ -75,47 +72,48 @@ let AddEmployeData ={addName :addName,
 
     return (
     <div>
+      {props.name ?
          <Button type="primary" onClick={showModal}>
         Add Employee
       </Button>
+      : 
+      <Button type="primary" onClick={showModal}>
+        Edit Employee
+      </Button>
+      }
 
+      
       <Modal
         visible={visible}
         title="Add Employee"
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[
+          
           <Button key="back" onClick={handleCancel}>
             Cancel
           </Button>,
           <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
-            Add Employee
+            {props.button}
           </Button>,
         ]}
       >
 
 
        <form>
-
-      <div className="add-employeeForm">
-         
-
-         <div className="employee-divform">
-<div className="employee-divformlabel">
-<label>Name</label><br/>
-
-</div>
-<Input value={addName} size="small" onChange={(e)=>setAddName(e.target.value)} /> <br/>
-
+        <div className="add-employeeForm">
+        <div className="employee-divform">
+        <div className="employee-divformlabel">
+          <label>Name</label><br/>
+      </div>
+          <Input value={addName} size="small" onChange={(e)=>setAddName(e.target.value)} /> <br/>
          </div>
 
-       
          <div className="employee-divform">  
          <div className="employee-divformlabel">
          <label>Password</label><br/>
          </div>
          <Input value={addPassword} size="small" onChange={(e)=>setAddPassword(e.target.value)}/><br />
-
          </div>
       </div>
 
@@ -162,6 +160,8 @@ let AddEmployeData ={addName :addName,
           <input id="addemp-id" value={addDOB} type="date" onChange={(e)=>setAddDOB(e.target.value)} />
 
          </div>
+
+         
       </div>
 
       
@@ -177,10 +177,20 @@ let AddEmployeData ={addName :addName,
 
          </div>
 
+         <div className="employee-divform">
+          <div className="employee-divformlabel">
+          <label>ID</label><br/>
+
+          </div>
+          <input id="addemp-id" value={employeeId}  onChange={(e)=>setEmployeeId(e.target.value)} />
+
+         </div>
          
       </div>
        </form>
       </Modal>
+
+      
 
     </div>
     );

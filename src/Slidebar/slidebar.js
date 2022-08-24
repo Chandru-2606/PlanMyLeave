@@ -256,18 +256,17 @@ const FilteredArarryss = localrecived ? localrecived.filter(itemInArray =>
 const leaveBalnce = () =>{
   const FilteredArarryss =  leaveBalance.filter(itemInArray =>
     itemInArray.Authorizedbreak >0
-   
   ) 
   // console.log("FilteredArarryss", FilteredArarryss)
   if(FilteredArarryss == true ){
     console.log("true")
     setLeaveBalanceData(FilteredArarryss)
   }
-  else {
+  else{
     console.log("false")
   }
 }
-console.log("leaveBalanceData", leaveBalanceData)
+// console.log("leaveBalanceData", leaveBalanceData)
 const dateCellRender = (value) => {
     let listData = [];
     {newVariable.map((item,index)=>{
@@ -729,16 +728,15 @@ const dateCellRender = (value) => {
                          {yearLeaveData && yearLeaveData.map((item, index)=>{
                           return(
                             <div className="yearLeave-data">
-
                             <ul value={item.Date}>
-                               <li className="yearleave-datess" >{item.leaveDate}</li>
+                               <li className="yearleave-datess" >{item.leaveDate} </li>
                                <li  className="yearleave-datess">{item.leaveType}</li>
                                <li  className="yearleave-datess">{item.Date} </li>
                             </ul>
                             </div>
                           );
                          })}
-                          </div>                 
+                          </div>
 
                         
                      </TabPane>
@@ -802,9 +800,10 @@ const dateCellRender = (value) => {
 
 
  
-   <div className="leave-request">
     <h1>My Leave Request</h1>
-  
+  <div className="approved">    
+     <div className="leave-request">
+
    {approvalLeave && approvalLeave.map((item, index)=>{
     return(
       <div className="leave-requestList">
@@ -814,7 +813,8 @@ const dateCellRender = (value) => {
       </div>
     )
    })}
-          {approvedData && approvedData.map((item, index)=>{
+   <div>
+              {approvedData && approvedData.map((item, index)=>{
    return(
     <h3 id="aprovel">{item.approved}</h3>
    );
@@ -825,6 +825,9 @@ const dateCellRender = (value) => {
     <h3 id="aprovel">{item.notapproved}</h3>
    );
     })}
+    </div>
+    </div>
+
 
  </div>
 
