@@ -2,8 +2,15 @@
   height: 100vh;
   width: 100%;
 }
+.header-btn{
+  /* height: 50px; */
+}
+
+/* .body-container{
+  background-color: rgb(247,247,247);
+} */
 /* .section{
-background-color: rgb(247,247,247);
+background-color: rgb(247,247,247)
 } */
 
 
@@ -198,7 +205,10 @@ background-color: rgb(247,247,247);
     margin-left: -38px !important;
   overflow: hidden !important;
 }
-
+.ant-picker-calendar {
+  /* box-shadow: 3px 3px 3px 3px grey; */
+  border-radius: 5px;
+}
 .ant-badge span{
   font-weight: bolder;
   margin-left: 1px;
@@ -212,28 +222,64 @@ background-color: rgb(247,247,247);
 }
 
 .leave_data{
-  margin-top: 40px;
+  margin-top: 80px;
   display: flex;
   width: 100%;
 }
 
 .holidaylist{
-  width: 50%;
+  width: 52%;
   height: 350px;
 }
 
 .holidaylist h1{
   margin-left: 70px;
 }
+.ant-tabs {
+  width: 100% !important;
+  height: 355px;
+  background-color: white;
+  padding-left: 20px;
+  border-radius: 5px;
+  /* box-shadow: 2px 2px 2px 2px grey; */
+}
+.ant-picker-panel{
+  border-radius: 3px;
+  background-color: white;
+  /* box-shadow:3px 3px 3px 3px #888888; */
+  overflow-y: scroll;
+  height: 320px;
+border-radius: 5px;
+  width: 100%;
+}
 
 .holiday_year{
     display: flex;
     list-style: none;
-    overflow-y: scroll;
     width: 83%;
     margin-left: 70px;
     height: 350px;
+    border-radius: 3px;
+    box-shadow:3px 3px 3px 3px #888888;
+    background-color: white;
+}
 
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: grey; 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: grey; 
 }
 
 .ant-tabs-nav-wrap .ant-tabs-nav-list{
@@ -253,7 +299,6 @@ background-color: rgb(247,247,247);
   margin-left: 100px;
 }
 .srcoll_leave{
-  /* margin-left: -38px; */
   display: flex;
   width: 100%;
 }
@@ -262,26 +307,42 @@ background-color: rgb(247,247,247);
   margin-top: 100px;
   width: 50%;
 }
-
-.calender_div{
+.calender table{
+  margin-top: -10px;
+}
+ .calender_div{
   width: 90%;
-  margin-left: 50px;
+  margin-left:70px;
+  height: 350px;
+}
+/* .ant-picker-calendar .ant-picker-panel .ant-picker-body{
   overflow-y: scroll;
   height: 350px;
-  /* box-shadow: 2px 2px 2px 2px #888888; */
+  width: 100%;
+padding-left: 20px;
 
-}
+
+}  */
 
 .events{
   list-style-type:none;
+  height: 18px;
 }
+.ant-picker-cell-inner {
+  height: 55px !important;
+}
+/* .ant-picker-calendar-date-content{
+  height: 10px !important;
+} */
 
 .applyleave{
   margin-top: 100px;
 margin-left: 60px;
 width: 50%;
 }
+.ant-tabs .ant-tabs-top{
 
+}
 .applyleave_div {
   padding: 10px;
 }
@@ -299,12 +360,17 @@ th{
 
 .applyleave_div{
   width: 95%;
-  overflow-y: scroll;
   height: 350px;
-/* box-shadow: 1px 1px 2px 2px #888888; */
 
-  /* margin-left: 50px; */
 }
+.ant-tabs-content-holder{
+  overflow-y: scroll;
+  height: 300px;
+  width: 100%;
+
+  
+ }
+
 .hours{
   width: 33.33%;
 text-align: center;
@@ -531,32 +597,58 @@ width: 100%
   margin-top: 10px;
   height: 400px;
   width: 44%;
-  overflow-y: scroll;
 }
 
-
- .drop-antd{
+.drop-antd{
   border: 1px solid black;
   width: 20% !important;
 }
+.users-on-leave{
+  height: 350px;
+  width: 100%;
+  background-color: white;
+  margin-left: -40px;
+  margin-top: -6px;
+  box-shadow:3px 3px 3px 3px #888888;
 
+
+}
 .users-on-leave select{
   width: 30%;
   height: 30px;
  cursor: pointer;
+ margin-left: 10px;
+ margin-top: 10px;
 }
 
 
 .user-real {
  display: flex;
+ padding-left: 10px;
+ /* padding-bottom: 10px; */
+ line-height: 2.5;
+ border-bottom: 1px solid grey;
+ border-right: 1px solid gray;
 }
+/* .user-real li{
+ border-right: 1px solid gray;
+ margin-left: 15px;
+
+} */
 
 .user-real li{
   width: 33.33%;
   float: left;
-  margin-top: 25px;
+  font-size: 15px;
+  margin-left: 10px;
   list-style-type:none;
+ border-right: 1px solid gray;
 }
+
+#userData-leave{
+  color: #ce0d72;
+}
+
 .type-leave{
   display: flex;
   width: 100%;
@@ -634,14 +726,24 @@ width: 100%
   justify-content: space-between;
   width: 90%;
 }
+.year-leaveData ul{
+ list-style-type: none;
+ margin-left: -50px;
+}
+.year-leaveData li {
+  line-height: 2.5;
+}
+#yearleave-date{
+  color: black;
+  margin-right: 20px;
+}
 
-.leaveData-list{
+/* .leaveData-list{
   width: 50.33%;
   text-align: center;
-  margin-left: 50px;
- }
+ } */
 
- #leaveType-Data{
+ /* #leaveType-Data{
   font-size: 20px;
   margin-top: 10px;
  }
@@ -659,16 +761,13 @@ width: 100%
   display: flex;
   list-style-type: none;
   width: 100%;
+  line-height: 2.5;
 }
 
 .yearLeave-data li {
-/* margin-left: 20px; */
 font-size: 15px;
-}
-
-/* .yearleave-datess{
-    width: 30%;
 } */
+
 
 #aprovel{
   margin-left: 50px;
@@ -678,6 +777,3 @@ font-size: 15px;
   margin-top: 18px;
 }
 
-/* .approved{
-  display: flex;
-} */

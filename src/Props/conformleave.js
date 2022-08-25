@@ -2,7 +2,7 @@ import { Button, Modal } from 'antd';
 import React, { useState, useEffect } from 'react';
 import './conformleave.css'
 import { userdata } from '../adminDashboard/ApiDatas/apiData';
-import moment from 'moment';
+import moment from 'moment'
 import { ApplyLeave } from '../adminDashboard/ApiDatas/apiData';
 
 const ConformLeave = (props) =>{
@@ -10,7 +10,7 @@ const ConformLeave = (props) =>{
   useEffect(() => {
     const filterId = userdata.filter(itemInArray => 
       itemInArray.id == props.id
-    );
+    )
     setNameEmp(filterId)
 
     const filterLeaveData = ApplyLeave.filter(itemInArray => 
@@ -40,21 +40,16 @@ const ConformLeave = (props) =>{
   let momentDate = moment(startDate).valueOf()
   const [filterLeave, setFilterLeave] = useState([])
   const [isSubmit, SetIsSubmit] = useState(false)
-  // console.log("filterLeave", filterLeave)
 
 
-const[submitted,setSubmitted]=useState(false);
+const[submitted,setSubmitted]=useState(false)
 
   const showModal = () => {
     setVisible(true);
+   
   };
 
-
-
-
   const handleOk = () => {
-
-  
     
   const ApprovalData ={name:props.id, 
                       dateStart:props.dateStart, 
@@ -66,28 +61,27 @@ const[submitted,setSubmitted]=useState(false);
                       date:momentDate,
                       difference:difference,
                       }
-                      // console.log("ApprovalData", ApprovalData)
-
+console.log("ApprovalData", ApprovalData)
       const ApprovalDatareceived =localStorage.getItem("ApprovalData")
-      // console.log("ApprovalDatareceived", ApprovalDatareceived)
 
       let a = moment(props.dateStart)
       let b = moment(props.dateEnd).add(1, 'day')
       let differenceDate = (b.diff(a, 'day'))
 
       let leaveBalanceData = props.leaveBalance - differenceDate
-     
-                      
 
-if( (leaveBalanceData > 0)  && (ApprovalDatareceived === null)){
+if((leaveBalanceData > 0)  && (ApprovalDatareceived === null)){
   localStorage.setItem("ApprovalData",JSON.stringify([ApprovalData]))
 }
+
 else if(leaveBalanceData > 0){
   let arr=JSON.parse(ApprovalDatareceived)
   console.log(arr)
   arr.push(ApprovalData)
   localStorage.setItem("ApprovalData",JSON.stringify(arr))
 }
+
+
 
     setLoading(true)
     setTimeout(() => {

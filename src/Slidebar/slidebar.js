@@ -16,7 +16,7 @@ import {EditOutlined} from '@ant-design/icons';
 import {DownCircleOutlined  } from '@ant-design/icons';
 import {MenuUnfoldOutlined } from '@ant-design/icons';
 import { applyPatches } from "immer";
-
+import EditEmployee from "../Props/editEmployee";
 
 
 
@@ -79,7 +79,8 @@ const Slidebar = (props) => {
   const [visible, setVisible] = useState(false);
   const [leaveBalance, setLeaveBalance] = useState("")
   const [leaveBalanceData, setLeaveBalanceData] = useState([])
-  const [selectLeave, setSelectLeave] = useState([])
+  const [selectLeave, setSelectLeave] = useState(false)
+  const [todayLeave, setTodayLeave] = useState([])
   const { TabPane } = Tabs;
 
 
@@ -113,6 +114,7 @@ switch (e.target.value){
       moment(itemInArray.leaveDate).format('l') == current
       );
       setSelectLeave(todayLeaveData)
+      setTodayLeave(todayLeaveData)
     break;
 
 
@@ -120,9 +122,9 @@ switch (e.target.value){
       let TomorrowDate =  moment().add(1, 'days').format('l');
       const TomorrowLeaveData = datesends.filter(itemInArray => 
       moment(itemInArray.leaveDate).format('l') == moment(TomorrowDate).format('l')
-      );
+      )
       setSelectLeave(TomorrowLeaveData)
-      console.log("Tomorrow");
+      console.log("Tomorrow")
     break;
 
     case "Next 7 days":
@@ -213,8 +215,10 @@ setYearLeaveData(a)
 // let localrecived = JSON.parse(localStorage.getItem(""))
 
 let localrecived = JSON.parse(localStorage.getItem("ApprovalData"))
-// console.log("localrecived", localrecived)
-setApprovedData(localrecived)
+console.log("localrecived", localrecived)
+
+
+// setApprovedData(localrecived)
 
 let arrrr = JSON.parse(localStorage.getItem("aprovelDatass"))
 
@@ -354,7 +358,10 @@ const dateCellRender = (value) => {
               <Header name={newVariable?.[0]?.name}   email={newVariable?.[0]?.email}/>
               
 </div>
+<div className="header-btn">
 
+</div>
+<div className="body-container">
 <div className="section">
 
      <div className='srcoll_leave'>
@@ -555,7 +562,7 @@ const dateCellRender = (value) => {
                             <th>{item.Authorizedbreak} Days</th><br></br>
                               <th>0 Days</th>
                           </div>
-              
+
                           <div className="td_a">
                             <td >
               
@@ -565,6 +572,8 @@ const dateCellRender = (value) => {
                           </div>
                         </div>
                       </tr>
+                      <hr />
+
               
                       <tr >
                         <div className="th_div">
@@ -729,9 +738,8 @@ const dateCellRender = (value) => {
                           return(
                             <div className="yearLeave-data">
                             <ul value={item.Date}>
-                               <li className="yearleave-datess" >{item.leaveDate} </li>
-                               <li  className="yearleave-datess">{item.leaveType}</li>
-                               <li  className="yearleave-datess">{item.Date} </li>
+                               <li >{item.leaveDate}({item.leaveType}) </li>
+                               <li id="yearleave-date" >{item.Date} </li>
                             </ul>
                             </div>
                           );
@@ -762,20 +770,35 @@ const dateCellRender = (value) => {
                 <option value={"Next 60 days"}>Next 60 days</option>
                 <option value={"Next 90 days"}>Next 90 days</option>
               </select>
+             <hr />
+              
+
+             {selectLeave && selectLeave.map((item, index)=>{
+            return(
+            <div className="user-real">
+              <li>{item.name}</li>
+              <li>{item.leaveType ? item.leaveType : ""}</li>
+              <li id="userData-leave">{item.leaveDate ?   moment(item.leaveDate).format("LL") : ""}</li>
+
+            </div>
+            );
+          })}
             </div>
 
 
-
-          
-           {selectLeave && selectLeave.map((item, index)=>{
+            {/* {}
+            {todayLeave && todayLeave.map((item, index)=>{
             return(
             <div className="user-real">
               <li>{item.name}</li>
               <li>{item.leaveType ? item.leaveType : ""}</li>
               <li>{item.leaveDate ?   moment(item.leaveDate).format("LL") : ""}</li>
             </div>
-            );
-          })}
+            )
+          })} */}
+
+          
+          
           </div>
         </div>
 
@@ -875,7 +898,7 @@ const dateCellRender = (value) => {
 })}
 </div>
         </div>
- 
+        </div>
      
   </div>
   )

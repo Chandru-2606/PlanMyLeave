@@ -10,6 +10,7 @@ import {userdata} from './../adminDashboard/ApiDatas/apiData'
 import { leaveData } from './../adminDashboard/ApiDatas/apiData'
 import { admindata} from './../adminDashboard/ApiDatas/apiData'
 import AddEmployee from "../Props/addEmployee";
+import EditEmployee from "../Props/editEmployee";
 
 function Admin () {
 
@@ -129,7 +130,33 @@ const Approval = (event , param)=>{
  })
 setTodayLeave(filtered)
  }
+// console.log("approvalLeave", approvalLeave)
+ 
 
+// console.log("aprovelDatass", aprovelDatass)
+//if(variableOne1)
+   //{approvalLeave && approvalLeave.map((item, index)=>{
+   
+   // const aprovelDatass = {approved : approved, id:id}
+   // console.log("aprovelDatass", aprovelDatass)
+   // const localrecived = localStorage.getItem("aprovelDatass")
+   // if(localrecived==null){
+   //    localStorage.setItem("aprovelDatass", JSON.stringify([aprovelDatass]))
+   // }
+   // else{
+   //    let brr = JSON.parse(localrecived);
+   //    console.log("brr", brr)
+   //    brr.push(aprovelDatass);
+   //    localStorage.setItem("aprovelDatass", JSON.stringify(brr));
+   // }
+//})}
+// approvalLeave.map((item,index) => {
+//    // return(
+      
+//    //       // {item.name }
+      
+//    // )
+// })
 
 
 
@@ -284,7 +311,7 @@ if(leaveDatareceived==null)
                <h1>Employee List</h1>
               
 
-              <AddEmployee button="Add Employee" name ="AddEmployee"/>
+              <AddEmployee />
 
 
 
@@ -330,29 +357,29 @@ if(leaveDatareceived==null)
             <div>
 
            
-{newEmployee && newEmployee.map((item, index)=>{
-return(
-   <div className="employeeesDatalist"> 
-   <ul key={index}>
-      <div className="employesssList">{item.addName}</div>
-      <div className="employesssList" id="employe-email">{item.addEmail}</div>
-      <div className="employesssList">{item.addAddress}</div>
-      <div className="employesssList">{moment(item.addDOB).format("DD.MM.YYYY")}</div>
-      <div className="employesssList">{moment(item.addDOJ).format("DD.MM.YYYY")}</div>
-     {display ? 
-      <div className="edit_btns">
-      
-  <AddEmployee id={item.id} button="Edit Employee" />
 
-         <div className="edit_btns1">
-      <DownCircleOutlined />
-         </div>
-      </div> :"" }
-</ul>
-</div>
-);
-})}
-            
+            {newEmployee && newEmployee.map((item, index) => {
+           return(
+               <div className="employeeesDatalist"> 
+               <ul key={index}>
+                  <div className="employesssList">{item.addName}</div>
+                  <div className="employesssList" id="employe-email">{item.addEmail}</div>
+                  <div className="employesssList">{item.addAddress}</div>
+                  <div className="employesssList">{moment(item.addDOB).format("DD.MM.YYYY")}</div>
+                  <div className="employesssList">{moment(item.addDOJ).format("DD.MM.YYYY")}</div>
+                 {display ? 
+                  <div className="edit_btns">
+                  
+              <EditEmployee id={item.id} />
+
+                     <div className="edit_btns1">
+                  <DownCircleOutlined />
+                     </div>
+                  </div> :"" }
+            </ul>
+            </div>
+            );
+            })} 
             
            
 

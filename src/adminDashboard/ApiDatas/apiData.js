@@ -1,3 +1,4 @@
+
 export  const admindata=[
     {
         "id": 310,
@@ -19,7 +20,7 @@ export   const userdata=[
     {
       "id": 3180,
       "roleId":1,
-      "name": "Chandru",
+      "name": "Siva Chandru E",
       "email": "chandru@gmail.com",
       "password":"Anexas123456",
       "DOB":"00-00-0000",
@@ -35,7 +36,7 @@ export   const userdata=[
       "id": 3182,
       "roleId":1,
       "name": "Kameshwar",
-      "email": "kameshwar@gmail",
+      "email": "kameshwar@gmail.com",
       "password":"Anexas123456",
       "DOB":"00-00-0000",
       "DOJ":"00-00-0000",
@@ -72,8 +73,11 @@ export   const userdata=[
       "location": "USA",
       "createdat": "2021-02-16T15:26:45.3582964",
       "updatedat":"DD-MM-YYYY"
-    }
-  ]
+    }, 
+
+
+
+]
 
 export  const clockindata=[ 
     {
@@ -213,6 +217,14 @@ export  const clockindata=[
                                     leaveType:"Leave without Pay",
                                     leaveDate:"Sat Aug 24 2022 09:30:00 GMT+0530 (India Standard Time)"
                                     },
+                                    {
+                                      employeeId:3180,
+                                      clockin:"Wed Aug 25 2022 09:30:00 GMT+0530 (India Standard Time)",
+                                      clockout:"Wed Aug 25 2022 06:30:00 GMT+0530 (India Standard Time)",
+                                      workingHrs:9,
+                                      leaveType:"",
+                                      leaveDate:""
+                                      },
     {
       employeeId:3182,
       clockin:"Mon Aug 01 2022 09:30:00 GMT+0530 (India Standard Time)",
@@ -326,6 +338,14 @@ export  const clockindata=[
                             leaveType:"",
                             leaveDate:""
                             },
+                            {
+                              employeeId:3182,
+                              clockin:"",
+                              clockout:"",
+                              workingHrs:0,
+                              leaveType:"Restricted Holidays",
+                              leaveDate:"Sat Aug 25 2022 09:30:00 GMT+0530 (India Standard Time)"
+                              },
                             
     {
     employeeId: 3183,
@@ -561,7 +581,7 @@ export  const clockindata=[
                               leaveType:"Sick Leave",
                               leaveDate:"Sat Aug 25 2022 09:30:00 GMT+0530 (India Standard Time)"
                               }
- ]
+]
 
  export const leaveData = [
     {
@@ -621,7 +641,7 @@ export  const clockindata=[
        "leaveType":"Restricted Holiday"
  
       },
- ]
+]
 
  export const ApplyLeave=[
     {
@@ -663,5 +683,5 @@ export  const clockindata=[
       RestrictedHolidays:2, //days
       Sickleave:3,//days
     }
-  ]
+]
  

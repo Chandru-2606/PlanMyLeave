@@ -55,7 +55,7 @@ let AddEmployeData ={addName :addName,
     setTimeout(() => {
       setLoading(false);
       setVisible(false);
-    }, 3000);
+    })
   };
  
   const handleCancel = () => {
@@ -72,15 +72,10 @@ let AddEmployeData ={addName :addName,
 
     return (
     <div>
-      {props.name ?
          <Button type="primary" onClick={showModal}>
         Add Employee
       </Button>
-      : 
-      <Button type="primary" onClick={showModal}>
-        Edit Employee
-      </Button>
-      }
+      
 
       
       <Modal
