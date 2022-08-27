@@ -7,27 +7,23 @@ import { v4 as uuidv4 } from 'uuid';
 
 const AddEmployee = (props) =>{
 
-  
+const [addName, setAddName] = useState("")
+const [addPassword, setAddPassword] = useState("")
+const [addEmail, setAddEmail] = useState("")
+const [addNumber, setAddNumber] = useState("")
+const [addAddress, setAddAddress] = useState("")
+const [addDOB, setAddDOB] = useState("")
+const [addDOJ, setAddDOJ] = useState("")
+const [employeeId, setEmployeeId] = useState("")
 
-   const [addName, setAddName] = useState("")
-   const [addPassword, setAddPassword] = useState("")
-   const [addEmail, setAddEmail] = useState("")
-   const [addNumber, setAddNumber] = useState("")
-   const [addAddress, setAddAddress] = useState("")
-   const [addDOB, setAddDOB] = useState("")
-   const [addDOJ, setAddDOJ] = useState("")
-   const [employeeId, setEmployeeId] = useState("")
-
-    const [loading, setLoading] = useState(false);
-    const [visible, setVisible] = useState(false);
-    const { TextArea } = Input;
-
-    const [isModalVisible, setIsModalVisible] = useState(false);
+const [loading, setLoading] = useState(false);
+const [visible, setVisible] = useState(false);
+const { TextArea } = Input;
+const [isModalVisible, setIsModalVisible] = useState(false);
 
 
 
 const handleOk = () => {
-
 let AddEmployeData ={addName :addName,
                      addPassword:addPassword,
                      addEmail:addEmail, 
@@ -36,9 +32,8 @@ let AddEmployeData ={addName :addName,
                      addDOB:addDOB,
                      addDOJ:addDOJ,
                      id:employeeId
-                  }
+                    }
                   console.log("AddEmployeData", AddEmployeData)
-          
         
         const received = localStorage.getItem("AddEmployeData")
          console.log("received")
@@ -50,13 +45,12 @@ let AddEmployeData ={addName :addName,
           arr.push(AddEmployeData)
           localStorage.setItem("AddEmployeData", JSON.stringify(arr))
          }
-
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setVisible(false);
-    })
-  };
+        setLoading(true)
+        setTimeout(() => {
+        setLoading(false)
+        setVisible(false)
+      })
+    };
  
   const handleCancel = () => {
     setVisible(false);

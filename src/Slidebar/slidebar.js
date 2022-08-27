@@ -215,7 +215,7 @@ setYearLeaveData(a)
 // let localrecived = JSON.parse(localStorage.getItem(""))
 
 let localrecived = JSON.parse(localStorage.getItem("ApprovalData"))
-console.log("localrecived", localrecived)
+// console.log("localrecived", localrecived)
 
 
 // setApprovedData(localrecived)
@@ -225,12 +225,11 @@ let arrrr = JSON.parse(localStorage.getItem("aprovelDatass"))
 const filterArrr =arrrr ? arrrr.filter(itemInArray =>
   itemInArray.id == id
   ) : []
-  // console.log("filterArrr", filterArrr)
   setApprovedData(filterArrr)
+
 const FilteredArarry = localrecived ? localrecived.filter(itemInArray =>
   itemInArray.name == id
   ) : []
-// console.log("FilteredArarry", FilteredArarry)
 setApprovalLeave(FilteredArarry)
 
 let brr = JSON.parse(localStorage.getItem("notapprovelDates"))

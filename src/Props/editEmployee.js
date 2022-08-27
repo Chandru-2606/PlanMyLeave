@@ -6,56 +6,57 @@ import { EditOutlined} from '@ant-design/icons';
 
 const EditEmployee = (props) =>{
 
-    const [addName, setAddName] = useState("")
-    const [addPassword, setAddPassword] = useState("")
-    const [addEmail, setAddEmail] = useState("")
-    const [addNumber, setAddNumber] = useState("")
-    const [addAddress, setAddAddress] = useState("")
-    const [addDOB, setAddDOB] = useState("")
-    const [addDOJ, setAddDOJ] = useState("")
-    const [employeeId, setEmployeeId] = useState("")
+  const [addName, setAddName] = useState("")
+  const [addPassword, setAddPassword] = useState("")
+  const [addEmail, setAddEmail] = useState("")
+  const [addNumber, setAddNumber] = useState("")
+  const [addAddress, setAddAddress] = useState("")
+  const [addDOB, setAddDOB] = useState("")
+  const [addDOJ, setAddDOJ] = useState("")
+  const [employeeId, setEmployeeId] = useState("")
  
-     const [loading, setLoading] = useState(false);
-     const [visible, setVisible] = useState(false);
-     const { TextArea } = Input;
+  const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const { TextArea } = Input;
  
-     const [isModalVisible, setIsModalVisible] = useState(false);
-     let arr = JSON.parse(localStorage.getItem("AddEmployeData"))
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  let arr = JSON.parse(localStorage.getItem("AddEmployeData"))
 
 
 
-    useEffect (()=>{
+
+
+    useEffect(()=>{
       {arr && arr.map((item, index)=>{
-        if(item.id == props.id){
-          setAddName(item.addName)
-                  setAddPassword(item.addPassword)
-                  setAddEmail(item.addEmail)
-                  setAddNumber(item.addNumber)
-                  setAddAddress(item.addAddress)
-                  setAddDOB(item.addDOB)
-                  setAddDOJ(item.addDOJ)
-                  setEmployeeId(item.id)
+        if(item.id == props.id ){
+                        setAddName(item.addName)
+                        setAddPassword(item.addPassword)
+                        setAddEmail(item.addEmail)
+                        setAddNumber(item.addNumber)
+                        setAddAddress(item.addAddress)
+                        setAddDOB(item.addDOB)
+                        setAddDOJ(item.addDOJ)
+                        setEmployeeId(item.id)
         }
       })}
     }, [])
 
     const handleOk = () => {
 
-        let UpdatedEmployee ={addName :addName,
-                             addPassword:addPassword,
-                             addEmail:addEmail, 
-                             addNumber:addNumber,
-                             addAddress:addAddress,
-                             addDOB:addDOB,
-                             addDOJ:addDOJ,
-                             id:employeeId
-                          }
-                          console.log("EditEmployee", EditEmployee)
-                  
+
+        let UpdatedEmployee = {addName :addName,
+                               addPassword:addPassword,
+                               addEmail:addEmail, 
+                               addNumber:addNumber,
+                               addAddress:addAddress,
+                               addDOB:addDOB,
+                               addDOJ:addDOJ,
+                               id:employeeId
+                              }
                           let objIndex = arr.findIndex((obj => obj.id == props.id));
                           console.log(objIndex)
                           arr[objIndex] = UpdatedEmployee
-                          console.log("UpdatedEmployee", UpdatedEmployee)
+                          console.log("UpdatEmployee", UpdatedEmployee)
                           localStorage.setItem("AddEmployeData",JSON.stringify(arr))
                 
             setLoading(true);
