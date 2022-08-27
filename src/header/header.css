@@ -1,0 +1,152 @@
+.headerdivs{
+    background-color: rgb(251,246,246);
+  }
+
+  .header{
+    width: 100%;
+    position: fixed;
+    height: 57px;
+    background-color: rgb(251,246,246);
+    display: flex;
+    justify-content: space-between;
+    z-index: 3;
+    margin-bottom: 50px;
+  }
+  .logo_div{
+     background-image: url(./../Images/anexaslogo.png);
+     background-position: center;
+     background-size: 100px;
+     background-repeat: no-repeat;
+     height: 70px;
+     width: 20%;
+  }
+
+  .icons{
+    display: flex;
+  }
+  
+  .notification{
+       background-image: url(./../Images/notification.svg);
+       width: 53px;
+       background-position: center;
+       background-size: 35px;
+       background-repeat: no-repeat;
+       height: 36px;
+       border: none;
+       margin-top: 10px;
+  }
+  .apply_leave{
+    background-image: url(./../Images/apply-leave.svg);
+    width: 53px;
+    background-position: center;
+    background-size: 35px;
+    background-repeat: no-repeat;
+    height: 36px;
+    margin-top: 12px;
+  }
+
+  .header button{
+    border: none;
+    width: 100px;
+    height: 40px;
+    margin-top: 10px;
+    background-color: rgb(221, 83, 83);
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .profile {
+    background-image: url(./../Images/myprofile.svg);
+    width: 40px;
+    background-position: center;
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-color: white;
+    height: 46px;
+    margin-right: 40px;
+    margin-left: 20px;
+    margin-top: 5px;
+  }
+
+  .ant-dropdown-menu {
+    width: 400px;
+     margin-left: -250px;
+  }
+  
+  .profile_name{
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .profile_name h1{
+    font-size: 25px;
+  }
+  
+  .profile_name p{
+    font-size: 13px;
+  }
+  
+  .password{
+    background-image: url(./../Images/password.svg);
+    width: 20px;
+    background-position: center;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-color: white;
+    height: 30px;
+  }
+  
+  .my_profile{
+    background-image: url(./../Images/myprofile.svg);
+    width: 20px;
+    background-position: center;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-color: white;
+    height: 30px;
+  }
+  
+  .shortcut{
+    background-image: url(./../Images/shortcut.svg);
+    width: 20px;
+    background-position: center;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-color: white;
+    height: 30px;
+  }
+  
+  .mobile_version{
+    background-image: url(./../Images/mobile-version.svg);
+    width: 20px;
+    background-position: center;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-color: white;
+    height: 30px;
+  }
+
+  .display_profile{
+    display: flex;
+  }
+  
+  .profile_name{
+    margin-left: 20px;
+    color: black;
+    font-size: 16px;
+    padding-top: 5px;
+  }
+  
+  .login_btn{
+    display: flex;
+    color: red;
+  }
+  
+  .logout_btn{
+    margin-top: 20px;
+    margin-left: 150px;
+    height: 30px;
+    text-align: center;
+    width: 100px;
+  }

@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from "react";
 import { Button, Modal } from 'antd';
 import { Input } from 'antd';
+import { EditOutlined} from '@ant-design/icons';
+
 
 const EditEmployee = (props) =>{
 
-    const [addName, setAddName] = useState()
+    const [addName, setAddName] = useState("")
     const [addPassword, setAddPassword] = useState("")
     const [addEmail, setAddEmail] = useState("")
     const [addNumber, setAddNumber] = useState("")
@@ -20,20 +22,22 @@ const EditEmployee = (props) =>{
      const [isModalVisible, setIsModalVisible] = useState(false);
      let arr = JSON.parse(localStorage.getItem("AddEmployeData"))
 
-    useEffect(() => {
-        {arr && arr.map((item, index)=>{
-          if(item.id == props.id){
-            setAddName(item.addName)
-            setAddPassword(item.addPassword)
-            setAddEmail(item.addEmail)
-            setAddNumber(item.addNumber)
-            setAddAddress(item.addAddress)
-            setAddDOB(item.addDOB)
-            setAddDOJ(item.addDOJ)
-            setEmployeeId(item.id)
-          }
-         })
-    }  }, [])   
+
+
+    useEffect (()=>{
+      {arr && arr.map((item, index)=>{
+        if(item.id == props.id){
+          setAddName(item.addName)
+                  setAddPassword(item.addPassword)
+                  setAddEmail(item.addEmail)
+                  setAddNumber(item.addNumber)
+                  setAddAddress(item.addAddress)
+                  setAddDOB(item.addDOB)
+                  setAddDOJ(item.addDOJ)
+                  setEmployeeId(item.id)
+        }
+      })}
+    }, [])
 
     const handleOk = () => {
 
@@ -75,7 +79,7 @@ const EditEmployee = (props) =>{
     return(
         <div>
         <Button type="primary" onClick={showModal}>
-       Edit Employee
+        <EditOutlined />
      </Button>
      
 

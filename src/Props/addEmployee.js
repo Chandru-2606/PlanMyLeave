@@ -89,7 +89,7 @@ let AddEmployeData ={addName :addName,
             Cancel
           </Button>,
           <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
-            {props.button}
+            Add Employee
           </Button>,
         ]}
       >

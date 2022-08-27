@@ -3,15 +3,27 @@
   width: 100%;
 }
 .header-btn{
-  /* height: 50px; */
+  background-color: white;
+  padding-top: 70px;
+  margin-left: 80px;
+  margin-bottom: 10px;
 }
+
+.header-btn a{
+  color: #8a80b9;
+  text-decoration: none;
+  margin-left: 25px;
+  font-size: 17px;
+  font-weight: bolder;
+}
+
 
 /* .body-container{
   background-color: rgb(247,247,247);
 } */
-/* .section{
+.section{
 background-color: rgb(247,247,247)
-} */
+}
 
 
 /* .slide_container{
@@ -35,158 +47,16 @@ background-color: rgb(247,247,247)
       cursor: pointer;
       border: none;
 } */
-.headerdivs{
-  background-color: rgb(251,246,246);
-}
 
-.header{
-  width: 100%;
-  position: fixed;
-  height: 57px;
-  background-color: rgb(251,246,246);
-  display: flex;
-  justify-content: space-between;
-  z-index: 3;
-  margin-bottom: 50px;
-  /* margin-top: -22px; */
-}
-.logo_div{
-   background-image: url(./../Images/anexaslogo.png);
-   background-position: center;
-   background-size: 100px;
-   background-repeat: no-repeat;
-   height: 70px;
-   width: 20%;
-}
 
-.icons{
-  display: flex;
-}
 
-.notification{
-     background-image: url(./../Images/notification.svg);
-     width: 53px;
-     background-position: center;
-     background-size: 35px;
-     background-repeat: no-repeat;
-     height: 36px;
-     border: none;
-     margin-top: 10px;
-}
-.apply_leave{
-  background-image: url(./../Images/apply-leave.svg);
-  width: 53px;
-  background-position: center;
-  background-size: 35px;
-  background-repeat: no-repeat;
-  height: 36px;
-  margin-top: 12px;
-}
 
-.header button{
-  border: none;
-  width: 100px;
-  height: 40px;
-  margin-top: 10px;
-  background-color: rgb(221, 83, 83);
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
-}
 
-.profile {
-  background-image: url(./../Images/myprofile.svg);
-  width: 40px;
-  background-position: center;
-  background-size: 40px;
-  background-repeat: no-repeat;
-  background-color: white;
-  height: 46px;
-  margin-right: 40px;
-  margin-left: 20px;
-  margin-top: 5px;
-}
 
-.ant-dropdown-menu {
-  width: 400px;
-   margin-left: -250px;
-}
 
-.profile_name{
-  text-align: center;
-  margin-top: 20px;
-}
 
-.profile_name h1{
-  font-size: 25px;
-}
 
-.profile_name p{
-  font-size: 13px;
-}
 
-.password{
-  background-image: url(./../Images/password.svg);
-  width: 20px;
-  background-position: center;
-  background-size: 20px;
-  background-repeat: no-repeat;
-  background-color: white;
-  height: 30px;
-}
-
-.my_profile{
-  background-image: url(./../Images/myprofile.svg);
-  width: 20px;
-  background-position: center;
-  background-size: 20px;
-  background-repeat: no-repeat;
-  background-color: white;
-  height: 30px;
-}
-
-.shortcut{
-  background-image: url(./../Images/shortcut.svg);
-  width: 20px;
-  background-position: center;
-  background-size: 20px;
-  background-repeat: no-repeat;
-  background-color: white;
-  height: 30px;
-}
-
-.mobile_version{
-  background-image: url(./../Images/mobile-version.svg);
-  width: 20px;
-  background-position: center;
-  background-size: 20px;
-  background-repeat: no-repeat;
-  background-color: white;
-  height: 30px;
-}
-.display_profile{
-  display: flex;
-}
-
-.profile_name{
-  margin-left: 20px;
-  color: black;
-  font-size: 16px;
-  padding-top: 5px;
-}
-
-.login_btn{
-  display: flex;
-  color: red;
-}
-
-.logout_btn{
-  margin-top: 20px;
-  margin-left: 150px;
-  height: 30px;
-  text-align: center;
-  width: 100px;
-}
 
 .ant-radio-button-wrapper {
   display: none !important;
@@ -206,9 +76,23 @@ background-color: rgb(247,247,247)
   overflow: hidden !important;
 }
 .ant-picker-calendar {
-  /* box-shadow: 3px 3px 3px 3px grey; */
   border-radius: 5px;
 }
+.ant-picker-calendar-date-value{
+  text-align: center !important;
+  /* color: #007ecf; */
+}
+
+.ant-picker-cell {
+  border-right: 1px solid rgb(222,226,230);
+  
+  /* border-bottom: 1px solid ; */
+}
+.ant-picker-calendar-date-content{
+  text-align: center !important;
+  margin-top: 3px;
+}
+
 .ant-badge span{
   font-weight: bolder;
   margin-left: 1px;
@@ -222,7 +106,7 @@ background-color: rgb(247,247,247)
 }
 
 .leave_data{
-  margin-top: 80px;
+  margin-top: 40px;
   display: flex;
   width: 100%;
 }
@@ -232,23 +116,26 @@ background-color: rgb(247,247,247)
   height: 350px;
 }
 
+
 .holidaylist h1{
   margin-left: 70px;
+  font-size: 20px;
+  font-weight: bolder;
 }
 .ant-tabs {
   width: 100% !important;
   height: 355px;
-  background-color: white;
+  background-color: rgb(255,255,255);
   padding-left: 20px;
   border-radius: 5px;
-  /* box-shadow: 2px 2px 2px 2px grey; */
+  box-shadow: 2px 2px 2px 2px grey;
 }
 .ant-picker-panel{
   border-radius: 3px;
-  background-color: white;
-  /* box-shadow:3px 3px 3px 3px #888888; */
+  background-color: rgb(255,255,255);
+  box-shadow:3px 3px 3px 3px #888888;
   overflow-y: scroll;
-  height: 320px;
+  height: 300px;
 border-radius: 5px;
   width: 100%;
 }
@@ -261,7 +148,7 @@ border-radius: 5px;
     height: 350px;
     border-radius: 3px;
     box-shadow:3px 3px 3px 3px #888888;
-    background-color: white;
+    background-color: rgb(255,255,255);
 }
 
 ::-webkit-scrollbar {
@@ -304,8 +191,9 @@ border-radius: 5px;
 }
 
 .calender{
-  margin-top: 100px;
+  margin-top: 30px;
   width: 50%;
+  border-radius: 5px;
 }
 .calender table{
   margin-top: -10px;
@@ -313,7 +201,7 @@ border-radius: 5px;
  .calender_div{
   width: 90%;
   margin-left:70px;
-  height: 350px;
+  height: 300px;
 }
 /* .ant-picker-calendar .ant-picker-panel .ant-picker-body{
   overflow-y: scroll;
@@ -331,23 +219,19 @@ padding-left: 20px;
 .ant-picker-cell-inner {
   height: 55px !important;
 }
-/* .ant-picker-calendar-date-content{
-  height: 10px !important;
-} */
+
 
 .applyleave{
-  margin-top: 100px;
+  margin-top: 24px;
 margin-left: 60px;
 width: 50%;
 }
-.ant-tabs .ant-tabs-top{
 
-}
 .applyleave_div {
-  padding: 10px;
+  /* padding: 10px; */
 }
 th{
-  line-height: 5px;
+  line-height: 4px;
 }
 .applyleave_div table{
   width: 100%;
@@ -357,6 +241,10 @@ th{
 .data_leave{
   width: 33.33%;
 }
+.applyleave_div tr{
+  border-bottom: 1px solid rgb(222,226,230);
+} 
+
 
 .applyleave_div{
   width: 95%;
@@ -367,7 +255,7 @@ th{
   overflow-y: scroll;
   height: 300px;
   width: 100%;
-
+  
   
  }
 
@@ -376,19 +264,23 @@ th{
 text-align: center;
 padding-left: 70px;
 float: right;
-/* border-right: 1px solid black; */
 }
 
  .td_a{
   width: 33.33%;
   padding-left: 40px;
+  border-left: 1px solid rgb(222,226,230);
 }
 
 .th_div{
   display: flex;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   justify-content: space-between;
+}
+
+#type-leave{
+  color: rgb(0,102,207);
 }
 
 .clockin_datas{
@@ -594,10 +486,18 @@ width: 100%
 
 .user-leave{
   margin-left: 50px;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   height: 400px;
   width: 44%;
 }
+
+.user-leave h1{
+  font-size: 20px;
+  margin-left: -30px;
+  padding-bottom: 10px;
+  font-weight: bolder;
+}
+
 
 .drop-antd{
   border: 1px solid black;
@@ -606,13 +506,13 @@ width: 100%
 .users-on-leave{
   height: 350px;
   width: 100%;
-  background-color: white;
+  background-color: rgb(255,255,255);
   margin-left: -40px;
   margin-top: -6px;
   box-shadow:3px 3px 3px 3px #888888;
-
-
+  border-radius: 5px;
 }
+
 .users-on-leave select{
   width: 30%;
   height: 30px;
@@ -628,7 +528,7 @@ width: 100%
  /* padding-bottom: 10px; */
  line-height: 2.5;
  border-bottom: 1px solid grey;
- border-right: 1px solid gray;
+ border-right: 1px solid grey;
 }
 /* .user-real li{
  border-right: 1px solid gray;
@@ -642,7 +542,7 @@ width: 100%
   font-size: 15px;
   margin-left: 10px;
   list-style-type:none;
- border-right: 1px solid gray;
+ border-right: 1px solid grey;
 }
 
 #userData-leave{
@@ -691,21 +591,53 @@ width: 100%
 
 }
 .leave-request{
-  margin-left: 90px;
+  margin-left: 30px;
   margin-bottom: 50px;
+  /* display: flex; */
+  /* background-color: white; */
+  height: 55px;
+  width: 90%;
+  margin-left: 80px;
+  /* border-bottom: 1px solid grey; */
 }
 
-.leave-request h1{
+#leave-head {
    color: #dd5353;
+   margin-left: 80px;
+   font-size: 20px;
 }
+
 
 .leave-requestList {
   margin-top: 20px;
+  width: 80%;
   display: flex;
 }
 .leave-requestList  h3{
-  margin-left: 50px;
+  margin-left: 30px;
 }
+
+/* #no-days{
+  width: 30%;
+  border-right: 1px solid grey;
+height: 100%;
+
+ 
+}
+ 
+#days-difference{
+  background-color: white;
+width: 10%;
+border-right: 1px solid grey;
+height: 100%;
+
+}
+
+#applied-date{
+  width: 30%;
+  border-right: 1px solid grey;
+height: 100%;
+} */
 
 .ant-btn .ant-btn-primary{
    margin-top: -31px;
@@ -716,9 +648,9 @@ width: 100%
  .ant-modal-footer{
   height: 72px;
  }
+
  .year-leaveData{
   width: 100%;
-
  }
 
 .leaveData-year{
@@ -729,10 +661,13 @@ width: 100%
 .year-leaveData ul{
  list-style-type: none;
  margin-left: -50px;
+ border-bottom: 1px solid rgb(222,226,230);
 }
+
 .year-leaveData li {
-  line-height: 2.5;
+  line-height: 1.8;
 }
+
 #yearleave-date{
   color: black;
   margin-right: 20px;

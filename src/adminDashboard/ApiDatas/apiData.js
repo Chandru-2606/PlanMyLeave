@@ -217,14 +217,7 @@ export  const clockindata=[
                                     leaveType:"Leave without Pay",
                                     leaveDate:"Sat Aug 24 2022 09:30:00 GMT+0530 (India Standard Time)"
                                     },
-                                    {
-                                      employeeId:3180,
-                                      clockin:"Wed Aug 25 2022 09:30:00 GMT+0530 (India Standard Time)",
-                                      clockout:"Wed Aug 25 2022 06:30:00 GMT+0530 (India Standard Time)",
-                                      workingHrs:9,
-                                      leaveType:"",
-                                      leaveDate:""
-                                      },
+                                    
     {
       employeeId:3182,
       clockin:"Mon Aug 01 2022 09:30:00 GMT+0530 (India Standard Time)",
@@ -460,6 +453,14 @@ export  const clockindata=[
                               leaveType:"",
                               leaveDate:""
                               },
+                              {
+                                employeeId: 3183,
+                                clockin:"",
+                                clockout:"",
+                                workingHrs:9,
+                                leaveType:"Sick leave",
+                                leaveDate:"Sat Aug 27 2022 09:30:00 GMT+0530 (India Standard Time)"
+                                },
     {
       employeeId: 3184,
       clockin:"Mon Aug 01 2022 09:30:00 GMT+0530 (India Standard Time)",
@@ -580,7 +581,15 @@ export  const clockindata=[
                               workingHrs:0,
                               leaveType:"Sick Leave",
                               leaveDate:"Sat Aug 25 2022 09:30:00 GMT+0530 (India Standard Time)"
-                              }
+                              },
+                              {
+                                employeeId: 3184,
+                                clockin:"",
+                                clockout:"",
+                                workingHrs:0,
+                                leaveType:"Sick Leave",
+                                leaveDate:"Sat Aug 27 2022 09:30:00 GMT+0530 (India Standard Time)"
+                                }
 ]
 
  export const leaveData = [
@@ -641,6 +650,7 @@ export  const clockindata=[
        "leaveType":"Restricted Holiday"
  
       },
+
 ]
 
  export const ApplyLeave=[

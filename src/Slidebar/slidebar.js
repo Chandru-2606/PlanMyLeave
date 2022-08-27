@@ -270,7 +270,6 @@ const leaveBalnce = () =>{
     console.log("false")
   }
 }
-// console.log("leaveBalanceData", leaveBalanceData)
 const dateCellRender = (value) => {
     let listData = [];
     {newVariable.map((item,index)=>{
@@ -281,7 +280,7 @@ const dateCellRender = (value) => {
      listData = [
     {
       type: '',
-      content:(item.workingHrs) ,
+      content:(item.workingHrs),
     },
     ]
   }
@@ -354,12 +353,14 @@ const dateCellRender = (value) => {
 
   return(
     <div className='container_divs'>
-      <div className="headerdivs">
+     
               <Header name={newVariable?.[0]?.name}   email={newVariable?.[0]?.email}/>
               
-</div>
 <div className="header-btn">
-
+              <a href="#">LEAVE</a>
+              <a href="#">ATTENDANCE</a>
+              <a href="#">SOCIAL INTRANET</a>
+              <a href="#">REPORTS</a>
 </div>
 <div className="body-container">
 <div className="section">
@@ -368,6 +369,7 @@ const dateCellRender = (value) => {
                <div className='calender'>
                 <div className="calender_div">
                <Calendar  dateCellRender={dateCellRender}  />
+
                </div>
               </div>
 
@@ -383,7 +385,7 @@ const dateCellRender = (value) => {
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th > Authorizedbreak</th><br></br>
+              <th  id="type-leave"> Authorizedbreak</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -405,7 +407,7 @@ const dateCellRender = (value) => {
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th >CasualLeave</th><br></br>
+              <th id="type-leave" >CasualLeave</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -428,12 +430,12 @@ const dateCellRender = (value) => {
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th > CompensatoryOff</th><br></br>
+              <th id="type-leave" > CompensatoryOff</th><br></br>
                 <th>Next Year</th>
             </div>
 
             <div className="hours">
-              <th>{item.CompensatoryOff} Days</th><br></br>
+              <th >{item.CompensatoryOff} Days</th><br></br>
                 <th>0 Days</th>
             </div>
 
@@ -451,7 +453,7 @@ const dateCellRender = (value) => {
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th >  LeavewithoutPay</th><br></br>
+              <th id="type-leave" >  LeavewithoutPay</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -474,7 +476,7 @@ const dateCellRender = (value) => {
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th >   PaidLeave</th><br></br>
+              <th id="type-leave" >   PaidLeave</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -497,7 +499,7 @@ const dateCellRender = (value) => {
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th >   RestrictedHolidays</th><br></br>
+              <th id="type-leave" >   RestrictedHolidays</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -520,7 +522,7 @@ const dateCellRender = (value) => {
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th >   Sickleave</th><br></br>
+              <th id="type-leave" >   Sickleave</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -817,48 +819,44 @@ const dateCellRender = (value) => {
     );
   })}
 </div>
-
-
-
-
-
  
-    <h1>My Leave Request</h1>
+    <h1 id="leave-head">My Leave Request</h1>
   <div className="approved">    
      <div className="leave-request">
 
    {approvalLeave && approvalLeave.map((item, index)=>{
     return(
       <div className="leave-requestList">
-        <h3>{moment(item.dateSatrt).format('DD.MM.YY')} - {moment(item.dateEnd).format('DD.MM.YY')}</h3>
-        <h3>Applied on : {moment(item.date).format('LLL')}</h3>
+        <h3 id="no-days">{moment(item.dateStart).format('DD.MM.YY')} - {moment(item.dateEnd).format('DD.MM.YY')}</h3>
+        <h3 id="days-difference">{item.difference} Day</h3>
+        <h3 id="applied-date">Applied on {moment(item.date).format('L')} {moment(item.date).format('LT')}</h3>
         <h3>{item.leaveType}</h3>
       </div>
     )
    })}
-   <div>
-              {approvedData && approvedData.map((item, index)=>{
+   {approvedData && approvedData.map((item, index)=>{
    return(
     <h3 id="aprovel">{item.approved}</h3>
    );
     })}
-
+<br/>
 {notApprovedData && notApprovedData.map((item, index)=>{
    return(
     <h3 id="aprovel">{item.notapproved}</h3>
    );
     })}
+<br/>
+
+   <div>
+              
     </div>
     </div>
 
 
  </div>
 
-
-
-
         <div className='clockin_datas'>
-<h1>Last 15 Clock In</h1>
+          <h1>Last 15 Clock In</h1>
 
 <div className="clockinData_header" >
   <div className="clockData_list"> Date</div>
@@ -896,7 +894,7 @@ const dateCellRender = (value) => {
    
   )
 })}
-</div>
+        </div>
         </div>
         </div>
      

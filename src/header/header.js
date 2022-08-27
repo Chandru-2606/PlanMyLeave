@@ -2,6 +2,8 @@ import { Dropdown, Menu } from 'antd';
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router";
+import './header.css'
+
  function Header (props) {
   const moment = require('moment');
   const [datesends, setDatesend] = useState([])
@@ -529,6 +531,9 @@ const variableOne = datesends.filter(itemInArray =>
 
 
           <div className="icons">
+
+          
+
           {isLoggedin ?
            <button onClick={(e) => clockin(e)}>Clock in</button>
       :  <button className="logout" onClick={(e) => clockout(e)}>Clock out</button>}

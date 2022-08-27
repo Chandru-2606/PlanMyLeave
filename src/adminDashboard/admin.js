@@ -5,10 +5,10 @@ import { Input } from 'antd';
 import {DownCircleOutlined  } from '@ant-design/icons';
 import {MenuUnfoldOutlined } from '@ant-design/icons';
 import {FileAddOutlined } from '@ant-design/icons';
-import {clockindata} from './../adminDashboard/ApiDatas/apiData'
-import {userdata} from './../adminDashboard/ApiDatas/apiData'
-import { leaveData } from './../adminDashboard/ApiDatas/apiData'
-import { admindata} from './../adminDashboard/ApiDatas/apiData'
+import {clockindata} from './../adminDashboard/ApiDatas/apiData';
+import {userdata} from './../adminDashboard/ApiDatas/apiData';
+import { leaveData } from './../adminDashboard/ApiDatas/apiData';
+import { admindata} from './../adminDashboard/ApiDatas/apiData';
 import AddEmployee from "../Props/addEmployee";
 import EditEmployee from "../Props/editEmployee";
 
@@ -247,7 +247,7 @@ if(leaveDatareceived==null)
         <h1>Leave Approval</h1>
 
         <select id="old-leave" onChange={EmployeeLeave}>
-      {lisEmployee.reverse().map((item, index)=>{
+      {lisEmployee.map((item, index)=>{
          return(
             <option value={item.id}>
                {item.name}
@@ -341,7 +341,7 @@ if(leaveDatareceived==null)
                   <div className="employesssList">{item.DOJ}</div>
                  {display ? 
                   <div className="edit_btns">
-              <AddEmployee />
+              <EditEmployee />
                      <div className="edit_btns1">
                   <DownCircleOutlined />
                      </div>
