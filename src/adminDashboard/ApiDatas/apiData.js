@@ -459,7 +459,7 @@ export  const clockindata=[
                                 clockout:"",
                                 workingHrs:9,
                                 leaveType:"Sick leave",
-                                leaveDate:"Sat Aug 27 2022 09:30:00 GMT+0530 (India Standard Time)"
+                                leaveDate:"Sat Aug 29 2022 09:30:00 GMT+0530 (India Standard Time)"
                                 },
     {
       employeeId: 3184,
@@ -588,7 +588,7 @@ export  const clockindata=[
                                 clockout:"",
                                 workingHrs:0,
                                 leaveType:"Sick Leave",
-                                leaveDate:"Sat Aug 27 2022 09:30:00 GMT+0530 (India Standard Time)"
+                                leaveDate:"Sat Aug 29 2022 09:30:00 GMT+0530 (India Standard Time)"
                                 }
 ]
 

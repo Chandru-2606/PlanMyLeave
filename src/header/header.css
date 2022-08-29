@@ -50,12 +50,17 @@
     width: 100px;
     height: 40px;
     margin-top: 10px;
-    background-color: rgb(221, 83, 83);
+    /* background-color: rgb(221, 83, 83); */
     color: white;
     border-radius: 10px;
     cursor: pointer;
   }
-  
+  .clockin{
+    background-color: rgba(0, 0, 255, 0.548);
+  }
+  .logout{
+    background-color: rgb(221, 83, 83);
+  }
   .profile {
     background-image: url(./../Images/myprofile.svg);
     width: 40px;

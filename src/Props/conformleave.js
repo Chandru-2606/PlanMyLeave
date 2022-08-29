@@ -30,6 +30,7 @@ const ConformLeave = (props) =>{
   let b = moment(props.dateEnd).add(1, 'day')
   let differenceDate = (b.diff(a, 'day'))
  setDifference(differenceDate)
+
   })
 
   const [loading, setLoading] = useState(false)
@@ -40,6 +41,7 @@ const ConformLeave = (props) =>{
   let momentDate = moment(startDate).valueOf()
   const [filterLeave, setFilterLeave] = useState([])
   const [isSubmit, SetIsSubmit] = useState(false)
+  const [approved, setApproved] = useState(false)
 
 
 const[submitted,setSubmitted]=useState(false)
@@ -58,7 +60,7 @@ const[submitted,setSubmitted]=useState(false)
                       dayEnd:props.dayEnd, 
                       reason:props.reason, 
                       leaveType:props.leaveType,
-                      date:momentDate,
+                      date: moment(momentDate).format('LLL'),
                       difference:difference,
                       }
 console.log("ApprovalData", ApprovalData)

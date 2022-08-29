@@ -10,9 +10,10 @@ import ApplyLeavebtn from "../Props/applyLeavebtn";
 import { clockindata } from "../adminDashboard/ApiDatas/apiData";
 import { ApplyLeave } from "../adminDashboard/ApiDatas/apiData";
 import { userdata } from "../adminDashboard/ApiDatas/apiData";
+import { EyeFilled  } from '@ant-design/icons';
 import { Dropdown, Menu } from 'antd';
 import { Button, Modal } from 'antd';
-import {EditOutlined} from '@ant-design/icons';
+import {CodepenSquareFilled, EditOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import {DownCircleOutlined  } from '@ant-design/icons';
 import {MenuUnfoldOutlined } from '@ant-design/icons';
 import { applyPatches } from "immer";
@@ -71,41 +72,35 @@ const menu = (
   );
 const Slidebar = (props) => {
 
-  const moment = require('moment');
-  const [datesends, setDatesend] = useState([])
-  const [newVariable, setNewVariable] = useState([])
-  const [yearLeaveData, setYearLeaveData] = useState([])
-  const [loading, setLoading] = useState(false);
-  const [visible, setVisible] = useState(false);
-  const [leaveBalance, setLeaveBalance] = useState("")
-  const [leaveBalanceData, setLeaveBalanceData] = useState([])
-  const [selectLeave, setSelectLeave] = useState(false)
-  const [todayLeave, setTodayLeave] = useState([])
-  const { TabPane } = Tabs;
+const moment = require('moment');
+const [datesends, setDatesend] = useState([])
+const [newVariable, setNewVariable] = useState([])
+const [yearLeaveData, setYearLeaveData] = useState([])
+const [loading, setLoading] = useState(false);
+const [visible, setVisible] = useState(false);
+const [leaveBalance, setLeaveBalance] = useState("")
+const [leaveBalanceData, setLeaveBalanceData] = useState([])
+const [selectLeave, setSelectLeave] = useState(false)
+const [todayLeave, setTodayLeave] = useState([])
+const { TabPane } = Tabs;
 
 
 
-  const [approvalLeave, setApprovalLeave] = useState("")
-  const [approvedData, setApprovedData] = useState([])
-  const [notApprovedData,setNotApprovedData] = useState([])
+const [approvalLeave, setApprovalLeave] = useState("")
+const [approvedData, setApprovedData] = useState([])
+const [notApprovedData,setNotApprovedData] = useState([])
 
 
 
 // console.log("approvedData", approvedData)
-  
+
 
 // console.log("newApproval", newApproval)
-
-  
- 
-
-
 
 
 const TodayEvents = (e) =>{
 
 const current =  moment(new Date()).format('l');
-
 switch (e.target.value){
 
   case "Today": 
@@ -194,6 +189,7 @@ setYearLeaveData(a)
 
 
 
+
 // let b = JSON.parse(localStorage.getItem("aprovelDatass"))
 // setApproved(b) 
 // console.log("bbbbbbbbbb", b)
@@ -213,6 +209,7 @@ setYearLeaveData(a)
 //  console.log("ApprovedData", approvedData)
 
 // let localrecived = JSON.parse(localStorage.getItem(""))
+
 
 let localrecived = JSON.parse(localStorage.getItem("ApprovalData"))
 // console.log("localrecived", localrecived)
@@ -252,6 +249,15 @@ const FilteredArarryss = localrecived ? localrecived.filter(itemInArray =>
 //     console.log("false")
 //   }
 // })}
+let approval = JSON.parse(localStorage.getItem("approvelDates"))
+const Datessss =localrecived &&  localrecived.map(t1 => ({...t1, ...approval && approval.find(t2 => t2.date === t1.date)})) 
+
+console.log("Datessss", Datessss)
+
+const filterAproval =  Datessss && Datessss.filter(itemInArray => 
+ itemInArray.name == valId
+);
+setApprovalLeave(filterAproval)
 
 }, [newVariable])
 
@@ -288,15 +294,13 @@ const dateCellRender = (value) => {
 
     // let listData = [];
     // {listDates.map((item,index)=>{
-    //   let newData =  moment(item.clockin).format('LL');
-    //   console.log("hii", newData)
-    // const data = moment(dates).isSame(newData);
-    // console.log("hello", data)
-
-
-    // if (data){
-    // listData = [
-    // { 
+    //let newData =  moment(item.clockin).format('LL');
+    //console.log("hii", newData)
+    //const data = moment(dates).isSame(newData);
+    //console.log("hello", data)
+    //if (data){
+    //listData = [
+    //{ 
     //   type: '',
     //   content:    (item.workingHrs),
     // },
@@ -759,7 +763,7 @@ const dateCellRender = (value) => {
         </div>
       
 
-        <div className="user-leave">
+      <div className="user-leave">
             <h1>User on Leave</h1>
             <div className="users-on-leave"> 
               <select onClick={TodayEvents} >
@@ -772,40 +776,23 @@ const dateCellRender = (value) => {
                 <option value={"Next 90 days"}>Next 90 days</option>
               </select>
              <hr />
-              
 
-             {selectLeave && selectLeave.map((item, index)=>{
-            return(
-            <div className="user-real">
-              <li>{item.name}</li>
-              <li>{item.leaveType ? item.leaveType : ""}</li>
-              <li id="userData-leave">{item.leaveDate ?   moment(item.leaveDate).format("LL") : ""}</li>
-
+            {selectLeave && selectLeave.map((item, index)=>{
+              return(
+                <div className="user-real">
+                  <li>{item.name}</li>
+                  <li>{item.leaveType ? item.leaveType : ""}</li>
+                  <li id="userData-leave">{item.leaveDate ?   moment(item.leaveDate).format("LL") : ""}</li>
+                </div>
+              );
+            })}
             </div>
-            );
-          })}
-            </div>
-
-
-            {/* {}
-            {todayLeave && todayLeave.map((item, index)=>{
-            return(
-            <div className="user-real">
-              <li>{item.name}</li>
-              <li>{item.leaveType ? item.leaveType : ""}</li>
-              <li>{item.leaveDate ?   moment(item.leaveDate).format("LL") : ""}</li>
-            </div>
-            )
-          })} */}
-
-          
-          
-          </div>
+      </div>
         </div>
 
 
 
-<div className='leaves_taken'>
+{/* <div className='leaves_taken'>
   <h1>My recent leave</h1>
   {newVariable.reverse().map((item, index)=>{
     return (
@@ -817,87 +804,48 @@ const dateCellRender = (value) => {
 </ul>
     );
   })}
-</div>
+</div> */}
  
-    <h1 id="leave-head">My Leave Request</h1>
+<h1 id="leave-head">My Leave Request</h1>
   <div className="approved">    
-     <div className="leave-request">
-
-   {approvalLeave && approvalLeave.map((item, index)=>{
+    <div className="leave-request">
+      {approvalLeave && approvalLeave.map((item, index)=>{
     return(
-      <div className="leave-requestList">
+      <div className="applyLeave-container">
+        <div className="leave-requestList">
         <h3 id="no-days">{moment(item.dateStart).format('DD.MM.YY')} - {moment(item.dateEnd).format('DD.MM.YY')}</h3>
         <h3 id="days-difference">{item.difference} Day</h3>
-        <h3 id="applied-date">Applied on {moment(item.date).format('L')} {moment(item.date).format('LT')}</h3>
-        <h3>{item.leaveType}</h3>
+        <h3 id="applied-date">Applied on {moment(item.date).format('DD.MM.YY')} {moment(item.date).format('LT')}</h3>
+        <h3 id="aprovel">{item.approved ? item.approved : "Waiting For Approval"} <CloseCircleOutlined /></h3>
+        </div>
+        
+        <h3 id="type-leaveData">{item.leaveType}</h3>
+        <h3 id="approver">{item.approved? "Approved By: Varsha Saxena" : "Waiting For Approval"}</h3>
       </div>
     )
-   })}
-   {approvedData && approvedData.map((item, index)=>{
-   return(
-    <h3 id="aprovel">{item.approved}</h3>
-   );
-    })}
-<br/>
-{notApprovedData && notApprovedData.map((item, index)=>{
-   return(
-    <h3 id="aprovel">{item.notapproved}</h3>
-   );
-    })}
-<br/>
-
-   <div>
-              
+      })}
     </div>
+  </div>
+
+  <h1 id="clockin-head">Last 15 Clock In</h1>
+    <div className='clockin_datas'>
+      {newVariable && newVariable.reverse().map((item, index)=>{
+        return(
+          <div className='clockinDate_list'>
+            <li id="clockin-data"><span id="data-clockin">In :</span> {item.clockin ? moment(item.clockin).format('LLL') : moment(item.leaveDate).format('LL')} <EditOutlined /></li>
+            <li id="clockout-data"><span id="data-clockin">Out :</span>{item.clockout ? moment(item.clockout).format('LLL'): (item.leaveType)} <EditOutlined /></li><br/>
+            <li id="workinghrs-data"><span id="data-clockin">Time Worked :</span>{item.workingHrs  ? item.workingHrs : "0 "} Hours <EyeFilled /></li>
+          </div>
+        )
+      })}
     </div>
+  <div className="last"></div>
 
-
- </div>
-
-        <div className='clockin_datas'>
-          <h1>Last 15 Clock In</h1>
-
-<div className="clockinData_header" >
-  <div className="clockData_list"> Date</div>
-  <div className="clockData_list"> Clockin</div>
-  <div className="clockData_list"> Clockout</div>
-  <div className="clockData_list"> Working Hours</div>
-  {/* <div className="headingName">
-               <button onClick={() => { setDisplay(true)}}><MenuUnfoldOutlined /></button></div> */}
-
-
+  </div>
 
 </div>
 
-{newVariable && newVariable.map((item, index)=>{
-  return(
-  <div className='clockinDate_list'>
-    <div className="clockin_listli">
-      <li>{item.clockin ? moment(item.clockin).format('ll'):""}</li>
-    </div>
-
-    <div className="clockin_listli">
-      <li >{item.clockin ? moment(item.clockin).format('LT'): ""}</li>
-    </div>
-
-    <div className="clockin_listli">
-      <li >{item.clockout ? moment(item.clockout).format('LT'): ""}</li><br/>
-    </div>
-
-    <div className="clockin_listli">
-      <li>{item.workingHrs  ? item.workingHrs : ""} </li>
-    </div>
-    
-    
-  </div>
-   
-  )
-})}
-        </div>
-        </div>
-        </div>
-     
-  </div>
+     </div>
   )
   }
   export default Slidebar;

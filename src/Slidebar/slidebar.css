@@ -128,12 +128,12 @@ background-color: rgb(247,247,247)
   background-color: rgb(255,255,255);
   padding-left: 20px;
   border-radius: 5px;
-  box-shadow: 2px 2px 2px 2px grey;
+  box-shadow: 2px 2px 2px 2px rgb(222,226,230);
 }
 .ant-picker-panel{
   border-radius: 3px;
   background-color: rgb(255,255,255);
-  box-shadow:3px 3px 3px 3px #888888;
+  box-shadow:3px 3px 3px 3px rgb(222,226,230);
   overflow-y: scroll;
   height: 300px;
 border-radius: 5px;
@@ -147,19 +147,20 @@ border-radius: 5px;
     margin-left: 70px;
     height: 350px;
     border-radius: 3px;
-    box-shadow:3px 3px 3px 3px #888888;
+    box-shadow:3px 3px 3px 3px rgb(222,226,230);
     background-color: rgb(255,255,255);
 }
 
 ::-webkit-scrollbar {
   width: 7px;
+  color:  rgb(255,255,255);
 }
 
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey; 
+  box-shadow: inset 0 0 5px rgb(222,226,230); 
   border-radius: 10px;
 }
- 
+
 ::-webkit-scrollbar-thumb {
   background: grey; 
   border-radius: 10px;
@@ -284,39 +285,79 @@ float: right;
 }
 
 .clockin_datas{
-  padding-bottom: 50px;
+  background-color: white;
+  border-radius: 10px;
+  width: 90%;
+  margin-left: 80px;
+  box-shadow:3px 3px 3px 3px rgb(222,226,230);
+  margin-bottom: 50px;
 }
 
-.clockin_datas h1{
+
+#clockin-head{
   margin-left: 80px;
+  font-size: 20px;
 }
 .clockinDate_list{
   display: flex;
-  width: 80%;
+  width: 100%;
+  /* margin-left: 80px; */
+}
+.last{
+  height: 50px;
 }
 
-.clockinData_header{
-  display: flex;
-  width: 80%;
-  margin-top: 20px;
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 30px;
-}
-.clockData_list{
-  width: 20%;
-text-align: center;
-margin-left: 50px;
-
-}
 
 .clockinDate_list li{
   list-style-type: none;
+  line-height: 3;
+  font-size: 15px;
+  border-bottom: 1px solid rgb(222,226,230);
+  border-top: 1px solid rgb(222,226,230);
+
+
 } 
-.clockin_listli{
-  width: 20%;
-  text-align: center;
-  margin-left: 50px;
+
+#clockin-data{
+  font-size: 14px;
+  width: 35%;
+  float: left;
+  padding-left: 20px;
+  border-right: 1px solid rgb(222,226,230);
+  border-left: 1px solid rgb(222,226,230);
+
+
+}
+
+#clockout-data{
+  font-size: 14px;
+  width: 35%;
+  float: left;
+  padding-left: 20px;
+  border-right: 1px solid rgb(222,226,230);
+
+}
+
+#workinghrs-data{
+  font-size: 14px;
+  float: left;
+  padding-left: 20px;
+  border-right: 1px solid rgb(222,226,230);
+  width: 30%;
+
+}
+
+#data-clockin{
+  color: #dd5353;
+  font-weight: bold;
+  opacity: 0.9;
+  padding-right: 10px;
+}
+.anticon {
+  font-size: 20px;
+  opacity: .5;
+  margin-left: 10px;
+  cursor: pointer;
 }
 
 .leaves_taken{
@@ -509,7 +550,7 @@ width: 100%
   background-color: rgb(255,255,255);
   margin-left: -40px;
   margin-top: -6px;
-  box-shadow:3px 3px 3px 3px #888888;
+  box-shadow:3px 3px 3px 3px rgb(222,226,230);
   border-radius: 5px;
 }
 
@@ -527,8 +568,8 @@ width: 100%
  padding-left: 10px;
  /* padding-bottom: 10px; */
  line-height: 2.5;
- border-bottom: 1px solid grey;
- border-right: 1px solid grey;
+ border-bottom: 1px solid rgb(222,226,230);
+ border-right: 1px solid rgb(222,226,230);
 }
 /* .user-real li{
  border-right: 1px solid gray;
@@ -542,7 +583,7 @@ width: 100%
   font-size: 15px;
   margin-left: 10px;
   list-style-type:none;
- border-right: 1px solid grey;
+ border-right: 1px solid rgb(222,226,230);
 }
 
 #userData-leave{
@@ -588,56 +629,104 @@ width: 100%
   color: red;
   padding-bottom: 20px;
   font-size: 16px;
-
 }
+
+.ant-picker-calendar-header{
+  box-shadow:2px 2px 2px 2px rgb(222,226,230);
+}
+
+.applyLeave-container{
+  background-color: white;
+  box-shadow:2px 2px 2px 2px rgb(222,226,230);
+  border-radius: 10px;
+}
+
 .leave-request{
   margin-left: 30px;
-  margin-bottom: 50px;
-  display: flex;
-  /* background-color: white; */
-  height: 55px;
+  margin-bottom: 20px;
   width: 90%;
   margin-left: 80px;
-  /* border-bottom: 1px solid grey; */
 }
 
 #leave-head {
-   color: #dd5353;
+   color: black;
    margin-left: 80px;
    font-size: 20px;
+   margin-top: 50px;
 }
 
 
 .leave-requestList {
-  margin-top: 20px;
-  width: 80%;
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
   display: flex;
+  background-color: white;
+  padding-top: 10px;
+ border-bottom: 1px solid rgb(222,226,230);
+
+
 }
 .leave-requestList  h3{
   margin-left: 30px;
 }
 
-/* #no-days{
-  width: 30%;
-  border-right: 1px solid grey;
-height: 100%;
 
- 
+
+#no-days{
+  color: #dd5353;
+  width: 40%;
+height: 100%; 
+border-right: 1px solid rgb(222,226,230);
+
 }
  
 #days-difference{
+  opacity: 0.7;
   background-color: white;
 width: 10%;
-border-right: 1px solid grey;
 height: 100%;
+border-right: 1px solid rgb(222,226,230);
+
 
 }
 
 #applied-date{
+  opacity: 0.7;
   width: 30%;
-  border-right: 1px solid grey;
 height: 100%;
-} */
+border-right: 1px solid rgb(222,226,230);
+
+}
+
+#aprovel{
+  margin-left: 50px;
+  color: green;
+  font-size: 16px;
+  width: 20%;
+
+}
+
+#type-leaveData{
+  padding-left: 30px;
+border-bottom: 1px solid rgb(222,226,230);
+color: #dd5353;
+padding-bottom: 10px;
+
+}
+#approver{
+  padding-left: 30px;
+  opacity: 0.7;
+  padding-bottom: 10px;
+}
+
+#aprovel .anticon{
+  color: red;
+  float: right;
+  margin-right: 20px;
+  font-size: 28px;
+}
 
 .ant-btn .ant-btn-primary{
    margin-top: -31px;
@@ -704,11 +793,5 @@ font-size: 15px;
 } */
 
 
-#aprovel{
-  margin-left: 50px;
-  color: #dd5353;
-  font-size: 20px;
-  font-weight: bolder;
-  margin-top: 18px;
-}
+
 

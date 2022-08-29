@@ -11,6 +11,8 @@ import { leaveData } from './../adminDashboard/ApiDatas/apiData';
 import { admindata} from './../adminDashboard/ApiDatas/apiData';
 import AddEmployee from "../Props/addEmployee";
 import EditEmployee from "../Props/editEmployee";
+import { Table } from 'antd';
+
 
 function Admin () {
 
@@ -19,9 +21,12 @@ const [display, setDisplay] = useState(false)
 const [todayClockin, setTodayClockin] = useState()
 const [todayLeave,  setTodayLeave] = useState([])
 const [approved, setApproved] = useState("Approved")
+const [isSubmitted, setIsSubmitted] = useState(false)
+// const [approved, setApproved] = useState(false)
+
 const [notApproved, setNotApproved] = useState("Rejected")
 
-const [approvalLeave, setApprovalLeave] = useState([])
+const [approvalLeave, setApprovalLeave] = useState("")
 const [newData, setNewData] = useState([])
 const [filterAprroval, setFilterApproval] = useState([])
 const [newEmployee, setNewEmployee] = useState([])
@@ -60,14 +65,9 @@ setApprovalLeave(a)
 
 let data = JSON.parse(localStorage.getItem("AddEmployeData"))
 setNewEmployee(data)
+
 }, [])
-// console.log("newEmployee", newEmployee)
-// const EmployeeLeave = (e)=>{
-//    const filteredLeave = clockindata.filter(employee => {
-//       return employee == e;
-//     });
-//     console.log("filteredLeave", filteredLeave)
-// }
+
 
 const EmployeeLeave = (e) =>{
    const filteredLeave = clockindata.filter(employee=>{
@@ -77,31 +77,100 @@ const EmployeeLeave = (e) =>{
     setNewData(filteredLeave)
 }
 
-const Approval = (event , param)=>{
-   console.log("hellooooo ")
-   console.log("param",param)
 
-   // let variableOne1 = approvalLeave.filter(itemInArray => 
-   //  itemInArray.name == param.name
-   //  )
-   //  setFilterApproval(variableOne1)
-   //  console.log("variableOne1", variableOne1)
+// const columns = [
+//    {
+//      title: "Name",
+//      dataIndex: "name",
+//      key: "name"
+//    },
+//    {
+//      title: "Clockin",
+//      dataIndex: "Clockin",
+//      key: "Clockin"
+//    },
+//    {
+//      title: "Clockout",
+//      dataIndex: "Clockout",
+//      key: "Clockout"
+//    },
+//    {
+//       title: "Leave",
+//       dataIndex: "Leave",
+//       key: "Leave"
+//     },
+//     {
+//       title: "Working Hours",
+//       dataIndex: "Working Hours",
+//       key: "WorkingHours"
+//     },
+ 
+//    {
+//      title: "Action",
+//      dataIndex: "",
+//      key: "x",
+//      render: () => <a>Delete</a>
+//    }
+//  ];
 
-    let approvelDates = {approved:approved, id:param.name}
-    console.log("approvelDates", approvelDates)
+// let data = [];
 
-   const localrecived = localStorage.getItem("approvelDates")
-   if(localrecived==null)
-   {
-      localStorage.setItem("aprovelDatass", JSON.stringify([approvelDates]))
+// {todayLeave && todayLeave.map((item, index)=>{
+
+//  let data = [
+//    {
+     
+//      name: (item.name),
+//      Clockin: (item.clockin),
+//      Clockout: (item.clockout),
+//      Leave:(item.leaveType),
+//      WorkingHours:(item.workingHrs)
+//    },
+  
+//  ];
+// })}
+
+
+const Approval = (event, param)=>{
+   
+
+{approvalLeave && approvalLeave.map((item, index)=>{
+  
+
+   let approvelDates = {approved:approved,
+                        name:param.name,
+                        date :moment(item.date).format('LLL')
+                        }
+   console.log("approvalDates", approvelDates)
+   
+
+
+   // const localrecived = localStorage.getItem("approvelDates")
+   // if(localrecived==null)
+   // {
+   //    localStorage.setItem("aprovelDatass", JSON.stringify([approvelDates]))
+   // }
+   // else
+   // {
+   //    let brr = JSON.parse(localrecived)
+   //    console.log("brr", brr)
+   //    brr.push(approvelDates)
+   //    localStorage.setItem("approvelDates", JSON.stringify(brr))
+   // }
+
+
+   const localrecived=localStorage.getItem("approvelDates")
+   // console.log(localrecived);
+   if(localrecived==null){
+     localStorage.setItem("approvelDates",JSON.stringify([approvelDates]))
    }
-   else
-   {
-      let brr = JSON.parse(localrecived)
-      console.log("brr", brr)
-      brr.push(approvelDates)
-      localStorage.setItem("approvelDates", JSON.stringify(brr))
+   else{
+     let arr=JSON.parse(localrecived);
+   //   console.log(arr);
+     arr.push(approvelDates);
+     localStorage.setItem("approvelDates",JSON.stringify(arr));
    }
+})}
    }
 
    const NotApproval = (event , param)=>{
@@ -176,6 +245,10 @@ if(leaveDatareceived==null)
    arr.push(leaveData)
    localStorage.setItem("leaveData",JSON.stringify(arr))
  }
+
+
+
+ 
 }
 
     return(
@@ -225,23 +298,26 @@ if(leaveDatareceived==null)
   )
 })}
 
-{todayClockin && todayClockin.reverse().map((item, index)=>{
-  return(
-    <ul>
-      <div className="today_list">   
-         <div className="today_listData">{item.name ? item.name :""}</div>
-         <div className="today_listData">{item.clockin ? moment(item.clockin).format('lll') : 
-                                             moment(item.leaveDate).format('ll')}
-         </div>
-         <div className="today_listData">{item.clockout ? moment(item.clockout).format('LT') :""} </div>
-         <div className="today_listData" id="leave-type">{item.leaveType ? item.leaveType : ""}</div>
-         <div className="today_listData" id="workingshrs">{item.workingHrs ? item.workingHrs : ""} hours</div>
-      </div>
-    </ul>
-  )
-})}
-</div>
 
+{/* <Table
+    columns={columns}
+    expandable={{
+      expandedRowRender: (record) => (
+        <p
+          style={{
+            margin: 0
+          }}
+        >
+          {record.description}
+        </p>
+      ),
+      rowExpandable: (record) => record.name !== "Not Expandable"
+    }}
+    dataSource={data}
+  /> */}
+
+
+</div>
       <div className="approveRequest">
          <div className="approval">
         <h1>Leave Approval</h1>
@@ -276,10 +352,11 @@ if(leaveDatareceived==null)
                      <div className="today_listData" id="workingshrs">{item.leaveType} </div>
                      <div className="today_listData" id="leave-type">{item.reason}</div>
                      <div className="today_listData" id="workingshrs">{item.difference} Days </div><br/>
-                  </div>
-                  <div>
                      <button id="approveRequest-btn1"onClick={event => Approval(event, {name})}>Approve</button>
                      <button id="approveRequest-btn2" onClick={event => NotApproval(event, {name})}>Reject</button>
+                  </div>
+                  <div>
+
                   </div>
                </ul>
             );

@@ -535,7 +535,7 @@ const variableOne = datesends.filter(itemInArray =>
           
 
           {isLoggedin ?
-           <button onClick={(e) => clockin(e)}>Clock in</button>
+           <button className='clockin' onClick={(e) => clockin(e)}>Clock in</button>
       :  <button className="logout" onClick={(e) => clockout(e)}>Clock out</button>}
 
           <a href="#" className="notification" > </a>
