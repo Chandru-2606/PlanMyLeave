@@ -4,6 +4,8 @@ import './conformleave.css'
 import { userdata } from '../adminDashboard/ApiDatas/apiData';
 import moment from 'moment'
 import { ApplyLeave } from '../adminDashboard/ApiDatas/apiData';
+import { v4 as uuidv4 } from 'uuid';
+
 
 const ConformLeave = (props) =>{
 
@@ -62,6 +64,7 @@ const[submitted,setSubmitted]=useState(false)
                       leaveType:props.leaveType,
                       date: moment(momentDate).format('LLL'),
                       difference:difference,
+                      idd:uuidv4()
                       }
 console.log("ApprovalData", ApprovalData)
       const ApprovalDatareceived =localStorage.getItem("ApprovalData")
@@ -135,7 +138,7 @@ else if(leaveBalanceData > 0){
               <h1 id='errorMessage'>{submitted}</h1>
 
                        <hr />
-              <h1 id='admin-footer'>Approver: <span id='admin-approve'>Admin</span></h1>
+              <h1 id='admin-footer'>Approver: <span id='admin-approve'>Varsha Saxena</span></h1>
             </div>
           </form>
         </div>

@@ -5,7 +5,7 @@ import { Input } from 'antd';
 import {DownCircleOutlined  } from '@ant-design/icons';
 import {MenuUnfoldOutlined } from '@ant-design/icons';
 import {FileAddOutlined } from '@ant-design/icons';
-import {clockindata} from './../adminDashboard/ApiDatas/apiData';
+import {ApplyLeave, clockindata} from './../adminDashboard/ApiDatas/apiData';
 import {userdata} from './../adminDashboard/ApiDatas/apiData';
 import { leaveData } from './../adminDashboard/ApiDatas/apiData';
 import { admindata} from './../adminDashboard/ApiDatas/apiData';
@@ -23,6 +23,7 @@ const [todayLeave,  setTodayLeave] = useState([])
 const [approved, setApproved] = useState("Approved")
 const [isSubmitted, setIsSubmitted] = useState(false)
 // const [approved, setApproved] = useState(false)
+const [approvalbtn, setApprovalbtn ] = useState(false)
 
 const [notApproved, setNotApproved] = useState("Rejected")
 
@@ -45,16 +46,17 @@ setListEmployee(listDatessssss)
    // const FilteredArarry = clockindata.filter(itemInArray =>
    //    (moment(itemInArray.clockin).format('DD-MM-YYYY') == moment(current).format('DD-MM-YYYY'))
    // )
+   let arrrr = JSON.parse(localStorage.getItem("ApprovalData"))
 
-   const FilteredArarryLeave = Datessssss.filter(itemInArray =>
-    (moment(itemInArray.leaveDate).format('DD-MM-YYYY') == moment(current).format('DD-MM-YYYY'))
+   const FilteredArarryLeave =arrrr && arrrr.filter(itemInArray =>
+    (moment(itemInArray.dateStart).format('DD-MM-YYYY') == moment(current).format('DD-MM-YYYY'))
  )
  setTodayLeave(FilteredArarryLeave)
 
  const FilteredArarry= Datessssss.filter(itemInArray =>
    (moment(itemInArray.clockin).format('DD-MM-YYYY') == moment(current).format('DD-MM-YYYY'))
 )
-console.log("FilteredArarry", FilteredArarry)
+// console.log("FilteredArarry", FilteredArarry)
    setTodayClockin(FilteredArarry)
 
  
@@ -78,119 +80,84 @@ const EmployeeLeave = (e) =>{
 }
 
 
-// const columns = [
-//    {
-//      title: "Name",
-//      dataIndex: "name",
-//      key: "name"
-//    },
-//    {
-//      title: "Clockin",
-//      dataIndex: "Clockin",
-//      key: "Clockin"
-//    },
-//    {
-//      title: "Clockout",
-//      dataIndex: "Clockout",
-//      key: "Clockout"
-//    },
-//    {
-//       title: "Leave",
-//       dataIndex: "Leave",
-//       key: "Leave"
-//     },
-//     {
-//       title: "Working Hours",
-//       dataIndex: "Working Hours",
-//       key: "WorkingHours"
-//     },
- 
-//    {
-//      title: "Action",
-//      dataIndex: "",
-//      key: "x",
-//      render: () => <a>Delete</a>
-//    }
-//  ];
-
-// let data = [];
-
-// {todayLeave && todayLeave.map((item, index)=>{
-
-//  let data = [
-//    {
-     
-//      name: (item.name),
-//      Clockin: (item.clockin),
-//      Clockout: (item.clockout),
-//      Leave:(item.leaveType),
-//      WorkingHours:(item.workingHrs)
-//    },
-  
-//  ];
-// })}
 
 
 const Approval = (event, param)=>{
+ let arr = JSON.parse(localStorage.getItem("ApprovalData"))
    
+      let UpdatesapprovelDates = {approved:approved,
+                                 name:param.name,
+                                 dateStart:param.dateStart, 
+                                 dateType:param.dateType, 
+                                 dateEnd:param.dateEnd,  
+                                 dayEnd:param.dayEnd, 
+                                 reason:param.reason, 
+                                 leaveType:param.leaveType,
+                                 difference:param.difference,
+                                 idd:param.idd,
+                                 date:param.date
+                                 }
 
-{approvalLeave && approvalLeave.map((item, index)=>{
-  
+         let objIndex = arr.findIndex((obj => obj.idd == param.idd));
+         console.log(arr)
+         arr[objIndex] = UpdatesapprovelDates
 
-   let approvelDates = {approved:approved,
-                        name:param.name,
-                        date :moment(item.date).format('LLL')
-                        }
-   console.log("approvalDates", approvelDates)
-   
+         localStorage.setItem("ApprovalData",JSON.stringify(arr))
 
+         // console.log("updated expense",arr)
+   // console.log("approvalDates", approvelDates)
 
-   // const localrecived = localStorage.getItem("approvelDates")
-   // if(localrecived==null)
-   // {
-   //    localStorage.setItem("aprovelDatass", JSON.stringify([approvelDates]))
+   // const localrecived=localStorage.getItem("approvelDates")
+   // // console.log(localrecived);
+   // if(localrecived==null){
+   //   localStorage.setItem("approvelDates",JSON.stringify([approvelDates]))
    // }
-   // else
-   // {
+   // else{
+   //   let arr=JSON.parse(localrecived);
+   //   arr.push(approvelDates);
+   //   localStorage.setItem("approvelDates",JSON.stringify(arr));
+   // }
+   }
+
+   const Rejected = (event , param) =>{
+      let brr = JSON.parse(localStorage.getItem("ApprovalData"))
+  
+      let notapproved = {approved:notApproved,
+                        name:param.name,
+                        dateStart:param.dateStart, 
+                        dateType:param.dateType, 
+                        dateEnd:param.dateEnd,  
+                        dayEnd:param.dayEnd, 
+                        reason:param.reason, 
+                        leaveType:param.leaveType,
+                        difference:param.difference,
+                        idd:param.idd,
+                        date:param.date
+                     }
+      let objIndex = brr.findIndex((obj => obj.idd == param.idd));
+      console.log(brr)
+      brr[objIndex] = notapproved
+      localStorage.setItem("ApprovalData",JSON.stringify(brr))
+   }
+
+   // const NotApproval = (event , param)=>{
+   //    console.log("hellooooo ")
+   //    console.log("param",param)
+
+   //    let notapprovelDates = {notapproved:notApproved, id:param.name}
+   //  console.log("notapprovelDates", notapprovelDates)
+
+   // const localrecived = localStorage.getItem("notapprovelDates")
+   // if(localrecived==null){
+   //    localStorage.setItem("notapprovelDates", JSON.stringify([notapprovelDates]))
+   // }
+   // else{
    //    let brr = JSON.parse(localrecived)
    //    console.log("brr", brr)
-   //    brr.push(approvelDates)
-   //    localStorage.setItem("approvelDates", JSON.stringify(brr))
+   //    brr.push(notapprovelDates)
+   //    localStorage.setItem("notapprovelDates", JSON.stringify(brr))
    // }
-
-
-   const localrecived=localStorage.getItem("approvelDates")
-   // console.log(localrecived);
-   if(localrecived==null){
-     localStorage.setItem("approvelDates",JSON.stringify([approvelDates]))
-   }
-   else{
-     let arr=JSON.parse(localrecived);
-   //   console.log(arr);
-     arr.push(approvelDates);
-     localStorage.setItem("approvelDates",JSON.stringify(arr));
-   }
-})}
-   }
-
-   const NotApproval = (event , param)=>{
-      console.log("hellooooo ")
-      console.log("param",param)
-
-      let notapprovelDates = {notapproved:notApproved, id:param.name}
-    console.log("notapprovelDates", notapprovelDates)
-
-   const localrecived = localStorage.getItem("notapprovelDates")
-   if(localrecived==null){
-      localStorage.setItem("notapprovelDates", JSON.stringify([notapprovelDates]))
-   }
-   else{
-      let brr = JSON.parse(localrecived)
-      console.log("brr", brr)
-      brr.push(notapprovelDates)
-      localStorage.setItem("notapprovelDates", JSON.stringify(brr))
-   }
-   }
+   // }
 
  const EmployeeName =(e) =>{
 
@@ -199,33 +166,7 @@ const Approval = (event, param)=>{
  })
 setTodayLeave(filtered)
  }
-// console.log("approvalLeave", approvalLeave)
- 
 
-// console.log("aprovelDatass", aprovelDatass)
-//if(variableOne1)
-   //{approvalLeave && approvalLeave.map((item, index)=>{
-   
-   // const aprovelDatass = {approved : approved, id:id}
-   // console.log("aprovelDatass", aprovelDatass)
-   // const localrecived = localStorage.getItem("aprovelDatass")
-   // if(localrecived==null){
-   //    localStorage.setItem("aprovelDatass", JSON.stringify([aprovelDatass]))
-   // }
-   // else{
-   //    let brr = JSON.parse(localrecived);
-   //    console.log("brr", brr)
-   //    brr.push(aprovelDatass);
-   //    localStorage.setItem("aprovelDatass", JSON.stringify(brr));
-   // }
-//})}
-// approvalLeave.map((item,index) => {
-//    // return(
-      
-//    //       // {item.name }
-      
-//    // )
-// })
 
 
 
@@ -245,9 +186,6 @@ if(leaveDatareceived==null)
    arr.push(leaveData)
    localStorage.setItem("leaveData",JSON.stringify(arr))
  }
-
-
-
  
 }
 
@@ -256,23 +194,33 @@ if(leaveDatareceived==null)
       <div className="admin_header">
       <Header name={admindata?.[0]?.name} email={admindata?.[0]?.email}/>
       </div >
-      <div className="add_employee">
-         <div className="add_emp">
+      <div className="space">
+         <h3>clock</h3>
       </div>
-      </div>
+      <div className="admin-container">
+      
 <div className="data-today">
-   <div className="day-today"> 
-      <h1>Today:{moment().format('L')}</h1>
-      <select onChange={EmployeeName}>
-      {lisEmployee.map((item, index)=>{
-         return(
-            <option value={item.id}>
-               {item.name}
-            </option>
-         );
-      })}
-      </select>
-   </div>
+   <div className="admin-subComtainer">
+   <div className="today-header">
+<h3>Today Clockin</h3>
+
+<div className="day-today"> 
+
+<h1>Today:{moment().format('L')}</h1>
+<select onChange={EmployeeName}>
+{lisEmployee.map((item, index)=>{
+   return(
+      <option value={item.id}>
+         {item.name}
+      </option>
+   );
+})}
+</select>
+</div>
+</div>
+</div>
+
+
    <div className="today-data">
       <div className="todayData-head"><h1>Name</h1></div>
       <div className="todayData-head"><h1>Clockin</h1></div>
@@ -298,23 +246,6 @@ if(leaveDatareceived==null)
   )
 })}
 
-
-{/* <Table
-    columns={columns}
-    expandable={{
-      expandedRowRender: (record) => (
-        <p
-          style={{
-            margin: 0
-          }}
-        >
-          {record.description}
-        </p>
-      ),
-      rowExpandable: (record) => record.name !== "Not Expandable"
-    }}
-    dataSource={data}
-  /> */}
 
 
 </div>
@@ -342,7 +273,17 @@ if(leaveDatareceived==null)
    </div>
 
       {approvalLeave && approvalLeave.map((item, index)=>{
-         let name = item.name
+
+         let name= item.name
+         let idd = item.idd
+         let dateEnd = item.dateEnd
+         let dayEnd =item.dayEnd
+         let leaveType = item.leaveType
+         let reason = item.reason
+         let difference = item.difference
+         let date = item.date
+         let dateStart = item.dateStart
+           
             return(
                <ul>
                   <div className="today_list">   
@@ -352,8 +293,11 @@ if(leaveDatareceived==null)
                      <div className="today_listData" id="workingshrs">{item.leaveType} </div>
                      <div className="today_listData" id="leave-type">{item.reason}</div>
                      <div className="today_listData" id="workingshrs">{item.difference} Days </div><br/>
-                     <button id="approveRequest-btn1"onClick={event => Approval(event, {name})}>Approve</button>
-                     <button id="approveRequest-btn2" onClick={event => NotApproval(event, {name})}>Reject</button>
+                     
+                     <button  id="approveRequest-btn1"onClick={event => Approval(event, {dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Approve</button>
+                     <button id="approveRequest-btn1"onClick={event => Rejected(event, {dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Reject</button>
+
+                     {/* <button id="approveRequest-btn2" onClick={event => NotApproval(event)}>Reject</button> */}
                   </div>
                   <div>
 
@@ -392,9 +336,10 @@ if(leaveDatareceived==null)
 
 
 
-    
-
+            
             </div>
+            {/* <Table columns={columns} dataSource={data} size="middle" /> */}
+
             <div className="userData">
             <div className="userData_heading">
             <div className="headingName"> <h4>Name</h4></div>
@@ -482,6 +427,7 @@ if(leaveDatareceived==null)
       </div>
          );
          })}
+      </div>
       </div>
       </div>
     );

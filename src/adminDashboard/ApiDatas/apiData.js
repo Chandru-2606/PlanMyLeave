@@ -217,6 +217,7 @@ export  const clockindata=[
                                     leaveType:"Leave without Pay",
                                     leaveDate:"Sat Aug 24 2022 09:30:00 GMT+0530 (India Standard Time)"
                                     },
+                                   
                                     
     {
       employeeId:3182,
@@ -689,7 +690,7 @@ export  const clockindata=[
       CasualLeave:7,//days
       CompensatoryOff:0, //hrs
       LeavewithoutPay:0 ,//days
-      PaidLeave:0 ,//days
+      PaidLeave:2 ,//days
       RestrictedHolidays:2, //days
       Sickleave:3,//days
     }

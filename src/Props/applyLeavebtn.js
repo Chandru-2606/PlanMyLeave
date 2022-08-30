@@ -92,6 +92,7 @@ console.log("item.name", item.name)
 
 
           <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
+            
            <ConformLeave id={id} 
                         dateStart={dateStart} 
                         dateType={dateType} 

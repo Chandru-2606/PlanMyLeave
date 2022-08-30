@@ -12,15 +12,42 @@
 .day-today{
     float: right;
 }
-
+.space{
+    background-color: white;
+    padding-top: 100px;
+}
+.space h3{
+    display: none;
+}
+.admin-container{
+    background-color: #f8f8f8;
+}
 .day-today h1{
     font-size: 16px;
     margin-right: 210px;
     color: blue;
 }
+.today-header{
+    display: flex;
+    justify-content: space-between;
+    /* background-color: white; */
+    width: 90%;
+    height: 70px;
+    margin-left: 80px;
+    /* box-shadow:2px 2px 2px 2px grey; */
+    border-radius: 5px;
+}
+.admin-subComtainer{
+    padding-top: 20px;
+}
 
 .data-today{
-    margin-top: 100px;
+    width: 100%;
+}
+.data-today h3{
+    margin-top: 23px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .today-data{
@@ -41,8 +68,11 @@
     width: 70%;
     margin-left: 60px;
     margin-top: 20px;
-
 }
+/* .today_list:hover{
+    background-color: grey;
+    color: white;
+} */
 .today_listData {
     width: 20%;
     float: left;
@@ -233,7 +263,7 @@
     border: none;
     width: 100px;
     height: 30px;
-
+    cursor: pointer;
 }
 
 #approveRequest-btn2{

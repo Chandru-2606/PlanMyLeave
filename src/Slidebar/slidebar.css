@@ -22,7 +22,8 @@
   background-color: rgb(247,247,247);
 } */
 .section{
-background-color: rgb(247,247,247)
+background-color: rgb(247,247,247);
+font-family: 'Smooch Sans', sans-serif;
 }
 
 
@@ -228,9 +229,9 @@ margin-left: 60px;
 width: 50%;
 }
 
-.applyleave_div {
-  /* padding: 10px; */
-}
+/* .applyleave_div {
+  padding: 10px;
+} */
 th{
   line-height: 4px;
 }
@@ -250,10 +251,12 @@ th{
 .applyleave_div{
   width: 95%;
   height: 350px;
-
+  margin-top: 8px;
 }
+
 .ant-tabs-content-holder{
   overflow-y: scroll;
+  overflow-x: hidden;
   height: 300px;
   width: 100%;
   
@@ -688,16 +691,13 @@ border-right: 1px solid rgb(222,226,230);
 width: 10%;
 height: 100%;
 border-right: 1px solid rgb(222,226,230);
-
-
 }
 
 #applied-date{
   opacity: 0.7;
   width: 30%;
-height: 100%;
-border-right: 1px solid rgb(222,226,230);
-
+  height: 100%;
+  border-right: 1px solid rgb(222,226,230);
 }
 
 #aprovel{
@@ -705,7 +705,6 @@ border-right: 1px solid rgb(222,226,230);
   color: green;
   font-size: 16px;
   width: 20%;
-
 }
 
 #type-leaveData{

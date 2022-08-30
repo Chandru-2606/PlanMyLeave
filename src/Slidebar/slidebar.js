@@ -82,6 +82,8 @@ const [leaveBalance, setLeaveBalance] = useState("")
 const [leaveBalanceData, setLeaveBalanceData] = useState([])
 const [selectLeave, setSelectLeave] = useState(false)
 const [todayLeave, setTodayLeave] = useState([])
+const [newDatas, setNewDatas] = useState([])
+const [newApproval, setNewApproval] = useState([])
 const { TabPane } = Tabs;
 
 
@@ -99,24 +101,24 @@ const [notApprovedData,setNotApprovedData] = useState([])
 
 
 const TodayEvents = (e) =>{
+  let localrecived = JSON.parse(localStorage.getItem("ApprovalData"))
 
 const current =  moment(new Date()).format('l');
 switch (e.target.value){
 
   case "Today": 
       
-      const todayLeaveData = datesends.filter(itemInArray => 
-      moment(itemInArray.leaveDate).format('l') == current
+      const todayLeaveData = localrecived.filter(itemInArray => 
+      moment(itemInArray.dateStart).format('l') == current
       );
       setSelectLeave(todayLeaveData)
-      setTodayLeave(todayLeaveData)
     break;
 
 
     case "Tomorrow":
       let TomorrowDate =  moment().add(1, 'days').format('l');
-      const TomorrowLeaveData = datesends.filter(itemInArray => 
-      moment(itemInArray.leaveDate).format('l') == moment(TomorrowDate).format('l')
+      const TomorrowLeaveData = localrecived.filter(itemInArray => 
+      moment(itemInArray.dateStart).format('l') == moment(TomorrowDate).format('l')
       )
       setSelectLeave(TomorrowLeaveData)
       console.log("Tomorrow")
@@ -212,6 +214,7 @@ setYearLeaveData(a)
 
 
 let localrecived = JSON.parse(localStorage.getItem("ApprovalData"))
+setNewDatas(localrecived)
 // console.log("localrecived", localrecived)
 
 
@@ -236,10 +239,10 @@ const filterArrrarys =brr ? brr.filter(itemInArray =>
   itemInArray.id == id
   ) : []
   // console.log("filterArrr", filterArrr)
-  setNotApprovedData(filterArrrarys)
-const FilteredArarryss = localrecived ? localrecived.filter(itemInArray =>
-  itemInArray.name == id
-  ) : []
+//   setNotApprovedData(filterArrrarys)
+// const FilteredArarryss = localrecived ? localrecived.filter(itemInArray =>
+//   itemInArray.name == id
+//   ) : []
 // {localrecived && localrecived.map((item, index)=>{
 //   if(item.name === valId){
 //  setApprovalLeave(localrecived)
@@ -249,17 +252,57 @@ const FilteredArarryss = localrecived ? localrecived.filter(itemInArray =>
 //     console.log("false")
 //   }
 // })}
-let approval = JSON.parse(localStorage.getItem("approvelDates"))
-const Datessss =localrecived &&  localrecived.map(t1 => ({...t1, ...approval && approval.find(t2 => t2.date === t1.date)})) 
 
-console.log("Datessss", Datessss)
+// let approval = JSON.parse(localStorage.getItem("approvelDates"))
+// // console.log("approval", approval)
 
-const filterAproval =  Datessss && Datessss.filter(itemInArray => 
- itemInArray.name == valId
-);
-setApprovalLeave(filterAproval)
+// const filteredLeave = approval && approval.filter(employee=>{
+//   return  employee.name == valId
+// }) 
+// setNewApproval(filteredLeave)
+
+
+
+// {newDatas && newDatas.map((item, index)=>{
+
+// const filteredLeave = approval && approval.filter(employee=>{
+//   return  employee.idd == item.idd
+// }) 
+// console.log("filteredLeave", filteredLeave)
+// })}
+
+// const Datesssss = newDatas.map(t1 => ({...t1, ...approval.find(t2 => t2.idd === t1.idd)}))
+// console.log("Datesssss", Datesssss)
+
+
+
+// setApprovalLeave(filteredLeave)
+
+
+
+// {newDatas && newDatas.map((item, index)=>{
+// const filteredLeaves =filteredLeave ? filteredLeave.filter(employee=>{
+//   return employee.idd == item.idd;
+// }) : []
+// // console.log("filteredLeaves", filteredLeaves)
+// })}
+
+
+
+
 
 }, [newVariable])
+
+// console.log("newApproval", newApproval)
+
+// {newDatas && newDatas.map((item, index)=>{
+//   let approvalLeavesss =approvalLeaves && approvalLeaves.filter(itemInArray => 
+//      itemInArray.idd == item.idd
+//   )
+//   console.log("approvalLeavesss", approvalLeavesss)
+  
+//   })}
+//   console.log("newDatas", newDatas)
 
 
 const leaveBalnce = () =>{
@@ -287,6 +330,8 @@ const dateCellRender = (value) => {
       type: '',
       content:(item.workingHrs),
     },
+    
+    
     ]
   }
    })}
@@ -742,14 +787,14 @@ const dateCellRender = (value) => {
                          {yearLeaveData && yearLeaveData.map((item, index)=>{
                           return(
                             <div className="yearLeave-data">
-                            <ul value={item.Date}>
+                            <ul >
                                <li >{item.leaveDate}({item.leaveType}) </li>
                                <li id="yearleave-date" >{item.Date} </li>
                             </ul>
                             </div>
                           );
-                         })}
-                          </div>
+                        })}
+                      </div>
 
                         
                      </TabPane>
@@ -782,7 +827,7 @@ const dateCellRender = (value) => {
                 <div className="user-real">
                   <li>{item.name}</li>
                   <li>{item.leaveType ? item.leaveType : ""}</li>
-                  <li id="userData-leave">{item.leaveDate ?   moment(item.leaveDate).format("LL") : ""}</li>
+                  <li id="userData-leave">{item.dateStart ?   moment(item.dateStart).format("LL") : ""}</li>
                 </div>
               );
             })}
@@ -805,7 +850,11 @@ const dateCellRender = (value) => {
     );
   })}
 </div> */}
- 
+
+
+
+
+ <div>
 <h1 id="leave-head">My Leave Request</h1>
   <div className="approved">    
     <div className="leave-request">
@@ -826,8 +875,9 @@ const dateCellRender = (value) => {
       })}
     </div>
   </div>
+  </div>
 
-  <h1 id="clockin-head">Last 15 Clock In</h1>
+  <h1 id="clockin-head">My Clock In and Clock Out</h1>
     <div className='clockin_datas'>
       {newVariable && newVariable.reverse().map((item, index)=>{
         return(
