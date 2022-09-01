@@ -1,0 +1,24 @@
+.adminapproval{
+text-align: center;
+
+}
+
+.appeoval-leavetype{
+    text-align: center;
+}
+#leavetype-admin{
+    color: #716ffb;
+}
+.appeoval-leavetype span{
+    color: black;
+}
+
+#balance-leave{
+    color: #716ffb;
+}
+
+#reason-admin{
+    color: blue;
+
+}
+

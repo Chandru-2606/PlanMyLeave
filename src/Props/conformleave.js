@@ -64,6 +64,7 @@ const[submitted,setSubmitted]=useState(false)
                       leaveType:props.leaveType,
                       date: moment(momentDate).format('LLL'),
                       difference:difference,
+                      leaveBalance:props.leaveBalance,
                       idd:uuidv4()
                       }
 console.log("ApprovalData", ApprovalData)

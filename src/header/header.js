@@ -8,8 +8,13 @@ import './header.css'
   const moment = require('moment');
   const [datesends, setDatesend] = useState([])
   const [isLoggedin, setIsLoggedin] = useState(true)
+  const [clockintrue, setClockintrue] =useState("")
   const [startDate, setStartDate] = useState();
   const [newVariable, setNewVariable] = useState([])
+
+
+
+
 
 
   let { id } = useParams();
@@ -430,17 +435,16 @@ const variableOne = datesends.filter(itemInArray =>
   );
   setNewVariable(variableOne)
 
+  // setClockintrue(isLoggedin)
+
 }, [newVariable])
+
+
   const clockin = (e) => {
 
 
-
-
-//   const [logout, setLogout] = useState([])
-//   const [login, setLogin] = useState([])
-
-
    setIsLoggedin(false)
+
    let momentDate = moment(startDate).valueOf()
     const Clockin = { Clockin:momentDate }
    const datereceived=localStorage.getItem("Clockin")
@@ -454,12 +458,15 @@ const variableOne = datesends.filter(itemInArray =>
   }
 }
   const clockout = (e) =>{
+
   setIsLoggedin(true)
+   
+   
   e.preventDefault();
   let momentDate = moment(startDate).valueOf()
   const Clockout = { Clockout:momentDate }
   const datereceived=localStorage.getItem("Clockout")
-  console.log(datereceived)
+  // console.log(datereceived)
   if(datereceived==null){
       localStorage.setItem("Clockout",JSON.stringify([Clockout]))
     }

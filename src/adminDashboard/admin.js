@@ -12,6 +12,15 @@ import { admindata} from './../adminDashboard/ApiDatas/apiData';
 import AddEmployee from "../Props/addEmployee";
 import EditEmployee from "../Props/editEmployee";
 import { Table } from 'antd';
+import { Badge, Calendar } from 'antd';
+import ApplyLeavebtn from "../Props/applyLeavebtn";
+import AdminApproval from "../Props/adminApproval";
+import { Tabs } from 'antd';
+
+const { TabPane } = Tabs;
+// import AdminApproval from "../Props/adminApproval";
+
+
 
 
 function Admin () {
@@ -31,7 +40,10 @@ const [approvalLeave, setApprovalLeave] = useState("")
 const [newData, setNewData] = useState([])
 const [filterAprroval, setFilterApproval] = useState([])
 const [newEmployee, setNewEmployee] = useState([])
+const [disable, setDisable] =useState(false);
 const moment = require('moment');
+const [selectLeave, setSelectLeave] = useState()
+
 
 useEffect(() => {
    const Datessssss = clockindata.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
@@ -80,11 +92,91 @@ const EmployeeLeave = (e) =>{
 }
 
 
+const dateCellRender = (value) => {
+   let listData = [];
+ 
+//    if (data){
+//     listData = [
+//    {
+//      type: '',
+//      content:(item.workingHrs),
+//    },
+   
+   
+//    ]
+//  }
+//   })}
+return (
+   <ul className="events">
+        {listData.map((item) => (
+         <li key={item.content}>
+          <Badge status={item.type} text={item.content} />
+         </li>
+       ))}
+    </ul>
+   );
+}
+const onChange = (key) => {
+   // console.log(key);
+ };
+
+ const TodayEvents = (e) =>{
+   let localrecived = JSON.parse(localStorage.getItem("ApprovalData"))
+ 
+ const current =  moment(new Date()).format('l');
+ switch (e.target.value){
+ 
+   case "Today": 
+       
+       const todayLeaveData = localrecived.filter(itemInArray => 
+       moment(itemInArray.dateStart).format('l') == current
+       );
+       setSelectLeave(todayLeaveData)
+     break;
+ 
+ 
+     case "Tomorrow":
+       let TomorrowDate =  moment().add(1, 'days').format('l');
+       const TomorrowLeaveData = localrecived.filter(itemInArray => 
+       moment(itemInArray.dateStart).format('l') == moment(TomorrowDate).format('l')
+       )
+       setSelectLeave(TomorrowLeaveData)
+       console.log("Tomorrow")
+     break;
+ 
+     case "Next 7 days":
+       console.log("Next 7 days");
+   
+     break;
+ 
+ 
+     case "Next 14 Days":
+       console.log("Next 14 Days");
+     break;
+ 
+ 
+     case "Next 30 Days":
+       console.log("Next 30 Days");
+     break;
+ 
+ 
+     case "Next 60 Days":
+       console.log("Next 60 Days");
+     break;
+       case "Next 90 Days":
+ 
+     console.log("Next 90 Days");
+     break;
+     // default:
+     //      case "Today" :
+ 
+ }
+ }
 
 
 const Approval = (event, param)=>{
  let arr = JSON.parse(localStorage.getItem("ApprovalData"))
-   
+ setDisable(true)
       let UpdatesapprovelDates = {approved:approved,
                                  name:param.name,
                                  dateStart:param.dateStart, 
@@ -121,7 +213,7 @@ const Approval = (event, param)=>{
 
    const Rejected = (event , param) =>{
       let brr = JSON.parse(localStorage.getItem("ApprovalData"))
-  
+      setDisable(true)
       let notapproved = {approved:notApproved,
                         name:param.name,
                         dateStart:param.dateStart, 
@@ -195,11 +287,207 @@ if(leaveDatareceived==null)
       <Header name={admindata?.[0]?.name} email={admindata?.[0]?.email}/>
       </div >
       <div className="space">
-         <h3>clock</h3>
+        <a href="#">LEAVE</a>
+        <a href="#">ATTENDANCE</a>
+        <a href="#">USERS</a>
+        <a href="#">REPORTS</a>
+        <a href="#">SETUP</a>
+        <a href="#">BULK UPDATE</a>
       </div>
       <div className="admin-container">
-      
-<div className="data-today">
+
+
+      <div className='srcoll_leave'>
+               <div className='calender'>
+                <div className="calender_div">
+               <Calendar  dateCellRender={dateCellRender}  />
+
+               </div>
+              </div>
+
+              <div className="applyleave">
+              <div className="applyleave_div">
+
+              <Tabs defaultActiveKey="1" onChange={onChange}>
+                <TabPane tab="My Leave Data" key="1">
+               
+  
+   <table>
+        <tr >
+          <div className="th_div">
+            <div className="data_leave">
+              <th  id="type-leave"> Authorizedbreak</th><br></br>
+                <th>Next Year</th>
+            </div>
+
+            <div className="hours">
+              <th> 0 Days</th><br></br>
+                <th>0 Days</th>
+            </div>
+
+            <div className="td_a">
+              <td >
+
+              <ApplyLeavebtn leaveBalance={"12 Days"} leaveType="Authorized break" />
+                  
+              </td>
+            </div>
+          </div>
+        </tr>
+
+        <tr >
+          <div className="th_div">
+            <div className="data_leave">
+              <th id="type-leave" >CasualLeave</th><br></br>
+                <th>Next Year</th>
+            </div>
+
+            <div className="hours">
+              <th>12
+                Days</th><br></br>
+                <th>0 Days</th>
+            </div>
+
+            <div className="td_a">
+              <td >
+
+              <ApplyLeavebtn leaveBalance={"12 Days"} leaveType="Casual Leave" />
+
+                  
+              </td>
+            </div>
+          </div>
+        </tr>
+
+        <tr >
+          <div className="th_div">
+            <div className="data_leave">
+              <th id="type-leave" > CompensatoryOff</th><br></br>
+                <th>Next Year</th>
+            </div>
+
+            <div className="hours">
+              <th >0 Days</th><br></br>
+                <th>0 Days</th>
+            </div>
+
+            <div className="td_a">
+              <td >
+
+              <ApplyLeavebtn leaveBalance="CompensatoryOff"  leaveType="Compensatory Off"/>
+
+                  
+              </td>
+            </div>
+          </div>
+        </tr>
+
+        <tr >
+          <div className="th_div">
+            <div className="data_leave">
+              <th id="type-leave" >  LeavewithoutPay</th><br></br>
+                <th>Next Year</th>
+            </div>
+
+            <div className="hours">
+              <th>12 Days</th><br></br>
+                <th>0 Days</th>
+            </div>
+
+            <div className="td_a">
+              <td >
+
+              <ApplyLeavebtn leaveBalance="12 Days" leaveType="Leave without Pay" />
+
+                  
+              </td>
+            </div>
+          </div>
+        </tr>
+
+        <tr >
+          <div className="th_div">
+            <div className="data_leave">
+              <th id="type-leave" >   PaidLeave</th><br></br>
+                <th>Next Year</th>
+            </div>
+
+            <div className="hours">
+              <th>0 Days</th><br></br>
+                <th>0 Days</th>
+            </div>
+
+            <div className="td_a">
+              <td >
+
+              <ApplyLeavebtn leaveBalance="0 days" leaveType="Paid Leave" />
+
+                  
+              </td>
+            </div>
+          </div>
+        </tr>
+
+        <tr >
+          <div className="th_div">
+            <div className="data_leave">
+              <th id="type-leave" >   RestrictedHolidays</th><br></br>
+                <th>Next Year</th>
+            </div>
+
+            <div className="hours">
+              <th>0 Days</th><br></br>
+                <th>0 Days</th>
+            </div>
+
+            <div className="td_a">
+              <td >
+
+              <ApplyLeavebtn leaveBalance="0 Days" leaveType="Restrickted Holidays" />
+
+                  
+              </td>
+            </div>
+          </div>
+        </tr>
+
+        <tr >
+          <div className="th_div">
+            <div className="data_leave">
+              <th id="type-leave" >   Sickleave</th><br></br>
+                <th>Next Year</th>
+            </div>
+
+            <div className="hours">
+              <th>6 Days</th><br></br>
+                <th>0 Days</th>
+            </div>
+
+            <div className="td_a">
+              <td >
+              <ApplyLeavebtn leaveBalance="0 days"  leaveType="Sick Leave"/>
+
+                  
+              </td>
+            </div>
+          </div>
+        </tr>
+   </table>
+
+
+               
+               </TabPane>
+               <TabPane tab="My Leave Balance as of Future Date" key="2">
+                     No Data Found
+                     </TabPane>
+
+                            </Tabs>
+              
+                </div>
+              </div>
+            </div>
+
+{/* <div className="data-today">
    <div className="admin-subComtainer">
    <div className="today-header">
 <h3>Today Clockin</h3>
@@ -219,6 +507,8 @@ if(leaveDatareceived==null)
 </div>
 </div>
 </div>
+
+
 
 
    <div className="today-data">
@@ -248,12 +538,38 @@ if(leaveDatareceived==null)
 
 
 
-</div>
+</div> */}
+        <h1 id="approval-header">Leave Request Waiting for Approval</h1>
+
       <div className="approveRequest">
          <div className="approval">
-        <h1>Leave Approval</h1>
+            <div className="approval-header">
+        </div>
+       <div>
+      {approvalLeave && approvalLeave.map((item, index)=>{
+         return(
+            <div>
+               <div className="list-approval1">
+                  <li id="aproval-name">{item.name}</li>
+                  <li id="no-days">{item.dateStart} - {item.dateEnd}</li>
+                  <li id="no-difference">{item.difference} Days</li>
+                  {/* <button >Review and Approve </button> */}
+                  <AdminApproval
+                  name={item.name} startdate={item.dateEnd} endDate={item.dateEnd} difference= {item.difference}
+                  reason={item.reason} leaveType={item.leaveType} leaveBalance={item.leaveBalance}
+                  />
+               </div>
+               <div className="list-approval2">
+                  <li id="leavetype">{item.leaveType}</li>
+                  <li id="appliedDate"><span>Applied On :</span>{item.date}</li>
+               </div>
+            </div>
+         )
+      })}
+       </div>
 
-        <select id="old-leave" onChange={EmployeeLeave}>
+
+        {/* <select id="old-leave" onChange={EmployeeLeave}>
       {lisEmployee.map((item, index)=>{
          return(
             <option value={item.id}>
@@ -261,16 +577,16 @@ if(leaveDatareceived==null)
             </option>
          );
       })}
-   </select>
+   </select> */}
    </div>
-      <div className="today-data">
+      {/* <div className="today-data">
       <div className="todayData-head"><h1>Name</h1></div>
       <div className="todayData-head"><h1>Leave start</h1></div>
       <div className="todayData-head"><h1>Leave End</h1></div>
       <div className="todayData-head"><h1>Leave Type</h1></div>
       <div className="todayData-head"><h1>Reason</h1></div>
       <div className="todayData-head"><h1>No of Days</h1></div>
-   </div>
+   </div> */}
 
       {approvalLeave && approvalLeave.map((item, index)=>{
 
@@ -293,11 +609,10 @@ if(leaveDatareceived==null)
                      <div className="today_listData" id="workingshrs">{item.leaveType} </div>
                      <div className="today_listData" id="leave-type">{item.reason}</div>
                      <div className="today_listData" id="workingshrs">{item.difference} Days </div><br/>
-                     
-                     <button  id="approveRequest-btn1"onClick={event => Approval(event, {dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Approve</button>
-                     <button id="approveRequest-btn1"onClick={event => Rejected(event, {dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Reject</button>
 
-                     {/* <button id="approveRequest-btn2" onClick={event => NotApproval(event)}>Reject</button> */}
+                     <button  id="approveRequest-btn1" disabled={disable} onClick={event => Approval(event, {dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Approve</button>
+                     <button id="approveRequest-btn1" disabled={disable} onClick={event => Rejected(event, {dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Reject</button>
+
                   </div>
                   <div>
 
@@ -340,7 +655,7 @@ if(leaveDatareceived==null)
             </div>
             {/* <Table columns={columns} dataSource={data} size="middle" /> */}
 
-            <div className="userData">
+            {/* <div className="userData">
             <div className="userData_heading">
             <div className="headingName"> <h4>Name</h4></div>
             <div className="headingName" id="heading-email"><h4>email</h4></div>
@@ -406,28 +721,86 @@ if(leaveDatareceived==null)
            
 
          </div>
-      </div>
+      </div> */}
             
       </div>
-      <div className="leaveDatalist">
-         <div> 
-            <h1>Leave Data</h1>
-         <button onClick={(e)=>{AddSubmit(e)}}><FileAddOutlined /></button>
-
+      {/* <div className="leaveDatalist"> */}
+         
+      {/* {leaveData.length && leaveData.map((item, index) => { */}
+      {/* return( */}
+<div>
+<div className="leave_data">
+          <div className="holidaylist">
+            <div className="admin-year-leave">
+          <h1>My Holiday List</h1>
+         <button id="yearLeave-id" onClick={(e)=>{AddSubmit(e)}}><FileAddOutlined /></button>
          </div>
-      {leaveData.length && leaveData.map((item, index) => {
-      return(
-         <div className="yearLeave-data">
+                    <div className="holiday_year">
+                    <Tabs defaultActiveKey="3" onChange={onChange}>
 
-      <ul value={item.Date}>
-         <li className="yearleave-datess" >{item.leaveDate}</li>
-         <li  className="yearleave-datess">{item.leaveType}</li>
-         <li  className="yearleave-datess">{item.Date} </li>
-      </ul>
+
+                   <TabPane tab="2021" key="2">
+                    No Data Found
+                   </TabPane>
+
+                     <TabPane tab="2022" key="3">
+                      <div className="year-leaveData">
+                         {leaveData && leaveData.map((item, index)=>{
+                          return(
+                            <div className="yearLeave-data">
+                            <ul >
+                               <li >{item.leaveDate}({item.leaveType}) </li>
+                               <li id="yearleave-date" >{item.Date} </li>
+                            </ul>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                        
+                     </TabPane>
+
+                     <TabPane tab="2023" key="4">
+                     No Data Found
+
+                     </TabPane>
+                  </Tabs>
+                    </div>
+        </div>
+      
+
+      <div className="user-leave">
+            <h1>User on Leave</h1>
+            <div className="users-on-leave"> 
+              <select onClick={TodayEvents} >
+                <option value={"Today"} >Today</option>
+                <option value={"Tomorrow"} >Tomorrow</option>
+                <option value={"Next 7 days"}>Next 7 days</option>
+                <option value={"Next 14 days"}>Next 14 days</option>
+                <option value={"Next 30 days"}>Next 30 days</option>
+                <option value={"Next 60 days"}>Next 60 days</option>
+                <option value={"Next 90 days"}>Next 90 days</option>
+              </select>
+             <hr />
+            {selectLeave && selectLeave.map((item, index)=>{
+              return(
+                
+                <div className="user-real">
+                  <li>{item.name? item.name : "Everyone is working hard today"}</li>
+                  <li>{item.leaveType ? item.leaveType : ""}</li>
+                  <li id="userData-leave">{item.dateStart ?   moment(item.dateStart).format("LL") : ""}</li>
+                </div>
+              );
+            })}
+            </div>
       </div>
-         );
-         })}
+
+        </div>
+
+         
+
       </div>
+         
       </div>
       </div>
     );

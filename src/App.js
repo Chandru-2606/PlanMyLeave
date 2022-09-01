@@ -8,6 +8,7 @@ import Login from './Login/login';
 import Slidebar from './Slidebar/slidebar';
 import Form from './Form/form';
 import Admin from './adminDashboard/admin';
+import AdminApproval from './Props/adminApproval';
 // import ConformLeave from './Props/conformleave';
 // import AddEmployee from './Props/addEmployee';
 
@@ -21,6 +22,9 @@ function App() {
       <Route path={`/Slidebar/:id`} element={<Slidebar />} />
       <Route path="/Form" element={<Form />} />
       <Route path={"/Admin"} element={<Admin />} />
+      <Route path={"/AdminApproval"} element={<AdminApproval />} />
+
+
       {/* <Route path={"/ConformLeave"} element={<ConformLeave />}/> */}
       {/* <Route path={"/AddEmployee"} element={<AddEmployee />} /> */}
 

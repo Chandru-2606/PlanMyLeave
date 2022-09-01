@@ -72,7 +72,7 @@ const menu = (
   );
 const Slidebar = (props) => {
 
-const moment = require('moment');
+const moment = require('moment')
 const [datesends, setDatesend] = useState([])
 const [newVariable, setNewVariable] = useState([])
 const [yearLeaveData, setYearLeaveData] = useState([])
@@ -80,7 +80,7 @@ const [loading, setLoading] = useState(false);
 const [visible, setVisible] = useState(false);
 const [leaveBalance, setLeaveBalance] = useState("")
 const [leaveBalanceData, setLeaveBalanceData] = useState([])
-const [selectLeave, setSelectLeave] = useState(false)
+const [selectLeave, setSelectLeave] = useState()
 const [todayLeave, setTodayLeave] = useState([])
 const [newDatas, setNewDatas] = useState([])
 const [newApproval, setNewApproval] = useState([])
@@ -192,25 +192,6 @@ setYearLeaveData(a)
 
 
 
-// let b = JSON.parse(localStorage.getItem("aprovelDatass"))
-// setApproved(b) 
-// console.log("bbbbbbbbbb", b)
-// // console.log("approved", approved)
-// const arrayFiltered =b ? b.filter(itemInArray =>
-//   // itemInArray.id == id 
-//   console.log("itemInArray.id", itemInArray.id == valId)
-//   // if(itemInArray.id == id ){
-
-//   // }
-
-//  ) :[]
-//   setApprovedData(arrayFiltered) 
-//   console.log("valid", valId)
-
-
-//  console.log("ApprovedData", approvedData)
-
-// let localrecived = JSON.parse(localStorage.getItem(""))
 
 
 let localrecived = JSON.parse(localStorage.getItem("ApprovalData"))
@@ -238,71 +219,13 @@ let brr = JSON.parse(localStorage.getItem("notapprovelDates"))
 const filterArrrarys =brr ? brr.filter(itemInArray =>
   itemInArray.id == id
   ) : []
-  // console.log("filterArrr", filterArrr)
-//   setNotApprovedData(filterArrrarys)
-// const FilteredArarryss = localrecived ? localrecived.filter(itemInArray =>
-//   itemInArray.name == id
-//   ) : []
-// {localrecived && localrecived.map((item, index)=>{
-//   if(item.name === valId){
-//  setApprovalLeave(localrecived)
- 
-//   }
-//   else{
-//     console.log("false")
-//   }
-// })}
-
-// let approval = JSON.parse(localStorage.getItem("approvelDates"))
-// // console.log("approval", approval)
-
-// const filteredLeave = approval && approval.filter(employee=>{
-//   return  employee.name == valId
-// }) 
-// setNewApproval(filteredLeave)
-
-
-
-// {newDatas && newDatas.map((item, index)=>{
-
-// const filteredLeave = approval && approval.filter(employee=>{
-//   return  employee.idd == item.idd
-// }) 
-// console.log("filteredLeave", filteredLeave)
-// })}
-
-// const Datesssss = newDatas.map(t1 => ({...t1, ...approval.find(t2 => t2.idd === t1.idd)}))
-// console.log("Datesssss", Datesssss)
-
-
-
-// setApprovalLeave(filteredLeave)
-
-
-
-// {newDatas && newDatas.map((item, index)=>{
-// const filteredLeaves =filteredLeave ? filteredLeave.filter(employee=>{
-//   return employee.idd == item.idd;
-// }) : []
-// // console.log("filteredLeaves", filteredLeaves)
-// })}
-
 
 
 
 
 }, [newVariable])
 
-// console.log("newApproval", newApproval)
 
-// {newDatas && newDatas.map((item, index)=>{
-//   let approvalLeavesss =approvalLeaves && approvalLeaves.filter(itemInArray => 
-//      itemInArray.idd == item.idd
-//   )
-//   console.log("approvalLeavesss", approvalLeavesss)
-  
-//   })}
-//   console.log("newDatas", newDatas)
 
 
 const leaveBalnce = () =>{
@@ -821,11 +744,11 @@ const dateCellRender = (value) => {
                 <option value={"Next 90 days"}>Next 90 days</option>
               </select>
              <hr />
-
             {selectLeave && selectLeave.map((item, index)=>{
               return(
+                
                 <div className="user-real">
-                  <li>{item.name}</li>
+                  <li>{item.name? item.name : "Everyone is working hard today"}</li>
                   <li>{item.leaveType ? item.leaveType : ""}</li>
                   <li id="userData-leave">{item.dateStart ?   moment(item.dateStart).format("LL") : ""}</li>
                 </div>
@@ -855,14 +778,14 @@ const dateCellRender = (value) => {
 
 
  <div>
-<h1 id="leave-head">My Leave Request</h1>
+<h1 id="leave-head">My recent leave requests</h1>
   <div className="approved">    
     <div className="leave-request">
       {approvalLeave && approvalLeave.map((item, index)=>{
     return(
       <div className="applyLeave-container">
         <div className="leave-requestList">
-        <h3 id="no-days">{moment(item.dateStart).format('DD.MM.YY')} - {moment(item.dateEnd).format('DD.MM.YY')}</h3>
+        <h3 id="no-dayss">{moment(item.dateStart).format('DD.MM.YY')} - {moment(item.dateEnd).format('DD.MM.YY')}</h3>
         <h3 id="days-difference">{item.difference} Day</h3>
         <h3 id="applied-date">Applied on {moment(item.date).format('DD.MM.YY')} {moment(item.date).format('LT')}</h3>
         <h3 id="aprovel">{item.approved ? item.approved : "Waiting For Approval"} <CloseCircleOutlined /></h3>
