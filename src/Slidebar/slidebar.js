@@ -84,6 +84,7 @@ const [selectLeave, setSelectLeave] = useState()
 const [todayLeave, setTodayLeave] = useState([])
 const [newDatas, setNewDatas] = useState([])
 const [newApproval, setNewApproval] = useState([])
+const [working, setWorking] = useState("")
 const { TabPane } = Tabs;
 
 
@@ -94,10 +95,6 @@ const [notApprovedData,setNotApprovedData] = useState([])
 
 
 
-// console.log("approvedData", approvedData)
-
-
-// console.log("newApproval", newApproval)
 
 
 const TodayEvents = (e) =>{
@@ -157,6 +154,8 @@ switch (e.target.value){
 let { id } = useParams();
 let valId = `${id}`
 
+
+
 // const filteredddd = leaveBalance.filter(employee => {
 //   return employee.CasualLeave > 0
 // });
@@ -179,6 +178,11 @@ setNewVariable(variableOne)
 const filterLeave = ApplyLeave.filter(itemInArray => 
   itemInArray.id == valId
 );
+
+// const Datesssss = userdata.map(t1 => ({...t1, ...filterLeave.find(t2 => t2.employeeId === t1.id)}))
+// console.log("Datessssss", Datesssss)
+
+
 setLeaveBalance(filterLeave)
 // console.log("filterLeave", filterLeave)
 
@@ -221,7 +225,14 @@ const filterArrrarys =brr ? brr.filter(itemInArray =>
   ) : []
 
 
-
+  let Clockin = JSON.parse(localStorage.getItem("Clockin"))
+  let Clockout = JSON.parse(localStorage.getItem("Clockout"))
+  const Datesss =Clockin ? Clockin.map(t1 => ({...t1, ...Clockout && Clockout.find(t2 => t2.id === t1.id)})) : []
+  setWorking(Datesss)
+  {working && working.map((item, index)=>{
+    let a =  moment(item.Clockin).format("hh:mm")
+    let b = moment(item.Clockout).format("hh:mm")
+  })}
 
 }, [newVariable])
 
@@ -356,7 +367,7 @@ const dateCellRender = (value) => {
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th  id="type-leave"> Authorizedbreak</th><br></br>
+              <th  id="type-leave"> Authorized break</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -378,7 +389,7 @@ const dateCellRender = (value) => {
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th id="type-leave" >CasualLeave</th><br></br>
+              <th id="type-leave" >Casual Leave</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -401,7 +412,7 @@ const dateCellRender = (value) => {
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th id="type-leave" > CompensatoryOff</th><br></br>
+              <th id="type-leave" > Compensatory Off</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -424,7 +435,7 @@ const dateCellRender = (value) => {
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th id="type-leave" >  LeavewithoutPay</th><br></br>
+              <th id="type-leave" >  Leave without Pay</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -447,7 +458,7 @@ const dateCellRender = (value) => {
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th id="type-leave" >   PaidLeave</th><br></br>
+              <th id="type-leave" >   Paid Leave</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -470,7 +481,7 @@ const dateCellRender = (value) => {
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th id="type-leave" >   RestrictedHolidays</th><br></br>
+              <th id="type-leave" >   Restricted Holidays</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -493,7 +504,7 @@ const dateCellRender = (value) => {
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th id="type-leave" >   Sickleave</th><br></br>
+              <th id="type-leave" >   Sick leave</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -813,7 +824,6 @@ const dateCellRender = (value) => {
       })}
     </div>
   <div className="last"></div>
-
   </div>
 
 </div>

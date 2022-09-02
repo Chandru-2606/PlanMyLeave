@@ -437,6 +437,9 @@ const variableOne = datesends.filter(itemInArray =>
 
   // setClockintrue(isLoggedin)
 
+
+
+
 }, [newVariable])
 
 
@@ -446,7 +449,7 @@ const variableOne = datesends.filter(itemInArray =>
    setIsLoggedin(false)
 
    let momentDate = moment(startDate).valueOf()
-    const Clockin = { Clockin:momentDate }
+    const Clockin = { Clockin:momentDate, id:valId }
    const datereceived=localStorage.getItem("Clockin")
    if(datereceived==null){
     localStorage.setItem("Clockin",JSON.stringify([Clockin]))
@@ -464,7 +467,7 @@ const variableOne = datesends.filter(itemInArray =>
    
   e.preventDefault();
   let momentDate = moment(startDate).valueOf()
-  const Clockout = { Clockout:momentDate }
+  const Clockout = { Clockout:momentDate, id:valId}
   const datereceived=localStorage.getItem("Clockout")
   // console.log(datereceived)
   if(datereceived==null){

@@ -187,7 +187,8 @@ const Approval = (event, param)=>{
                                  leaveType:param.leaveType,
                                  difference:param.difference,
                                  idd:param.idd,
-                                 date:param.date
+                                 date:param.date,
+                                 leaveBalance:param.leaveBalance
                                  }
 
          let objIndex = arr.findIndex((obj => obj.idd == param.idd));
@@ -224,7 +225,8 @@ const Approval = (event, param)=>{
                         leaveType:param.leaveType,
                         difference:param.difference,
                         idd:param.idd,
-                        date:param.date
+                        date:param.date,
+                        leaveBalance:param.leaveBalance
                      }
       let objIndex = brr.findIndex((obj => obj.idd == param.idd));
       console.log(brr)
@@ -316,7 +318,7 @@ if(leaveDatareceived==null)
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th  id="type-leave"> Authorizedbreak</th><br></br>
+              <th  id="type-leave"> Authorized break</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -338,7 +340,7 @@ if(leaveDatareceived==null)
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th id="type-leave" >CasualLeave</th><br></br>
+              <th id="type-leave" >Casual Leave</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -362,7 +364,7 @@ if(leaveDatareceived==null)
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th id="type-leave" > CompensatoryOff</th><br></br>
+              <th id="type-leave" > Compensatory Off</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -385,7 +387,7 @@ if(leaveDatareceived==null)
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th id="type-leave" >  LeavewithoutPay</th><br></br>
+              <th id="type-leave" >  Leave without Pay</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -408,7 +410,7 @@ if(leaveDatareceived==null)
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th id="type-leave" >   PaidLeave</th><br></br>
+              <th id="type-leave" >   Paid Leave</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -431,7 +433,7 @@ if(leaveDatareceived==null)
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th id="type-leave" >   RestrictedHolidays</th><br></br>
+              <th id="type-leave" >   Restricted Holidays</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -454,7 +456,7 @@ if(leaveDatareceived==null)
         <tr >
           <div className="th_div">
             <div className="data_leave">
-              <th id="type-leave" >   Sickleave</th><br></br>
+              <th id="type-leave" >   Sick Leave</th><br></br>
                 <th>Next Year</th>
             </div>
 
@@ -543,30 +545,55 @@ if(leaveDatareceived==null)
 
       <div className="approveRequest">
          <div className="approval">
-            <div className="approval-header">
-        </div>
+         
        <div>
       {approvalLeave && approvalLeave.map((item, index)=>{
+                  let name= item.name
+                  let idd = item.idd
+                  let dateEnd = item.dateEnd
+                  let dayEnd =item.dayEnd
+                  let leaveType = item.leaveType
+                  let reason = item.reason
+                  let difference = item.difference
+                  let date = item.date
+                  let dateStart = item.dateStart
+                  let leaveBalance =item.leaveBalance
          return(
             <div>
+               {item.approved ? "":
                <div className="list-approval1">
                   <li id="aproval-name">{item.name}</li>
-                  <li id="no-days">{item.dateStart} - {item.dateEnd}</li>
-                  <li id="no-difference">{item.difference} Days</li>
-                  {/* <button >Review and Approve </button> */}
-                  <AdminApproval
+                  <li id="no-days">{moment(item.dateStart).format('DD.MM.YY')} -   {moment(item.dateEnd).format('DD.MM.YY')}</li>
+                  <li id="no-difference">No of Days : {item.difference} Days</li>
+                  {/* <AdminApproval 
                   name={item.name} startdate={item.dateEnd} endDate={item.dateEnd} difference= {item.difference}
                   reason={item.reason} leaveType={item.leaveType} leaveBalance={item.leaveBalance}
-                  />
+                  /> */}
+                  {item.approved ? "Approved" :
+                     <button  id="approveRequest-btn1" onClick={event => Approval(event, {leaveBalance, dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Approve</button>
+                  }
+                  {item.approved ? "" :
+                     <button id="approveRequest-btn1"  onClick={event => Rejected(event, {leaveBalance, dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Reject</button>
+                  }
+
                </div>
+      }
+
+{item.approved ? "":
+
                <div className="list-approval2">
-                  <li id="leavetype">{item.leaveType}</li>
-                  <li id="appliedDate"><span>Applied On :</span>{item.date}</li>
+               <li id="leavetype">{item.leaveType}</li>
+                  <li id="reason-admin1">Reason : {item.reason}</li>
+                  <li id="appliedDate"><span>Applied On :</span>{moment(item.date).format('lll')}</li>
+                  <li id="yearBalance-users">Year End Balance : {item.leaveBalance} Days</li>
                </div>
+      }
             </div>
          )
       })}
        </div>
+
+
 
 
         {/* <select id="old-leave" onChange={EmployeeLeave}>
@@ -588,7 +615,7 @@ if(leaveDatareceived==null)
       <div className="todayData-head"><h1>No of Days</h1></div>
    </div> */}
 
-      {approvalLeave && approvalLeave.map((item, index)=>{
+      {/* {approvalLeave && approvalLeave.map((item, index)=>{
 
          let name= item.name
          let idd = item.idd
@@ -602,27 +629,29 @@ if(leaveDatareceived==null)
            
             return(
                <ul>
-                  <div className="today_list">   
+                  <div className="today_list"> 
                      <div className="today_listData">{item.name}</div>
                      <div className="today_listData">{moment(item.dateEnd).format('DD.MM.YY')}</div>
                      <div className="today_listData">{moment(item.dateEnd).format('DD.MM.YY')}</div>
                      <div className="today_listData" id="workingshrs">{item.leaveType} </div>
                      <div className="today_listData" id="leave-type">{item.reason}</div>
                      <div className="today_listData" id="workingshrs">{item.difference} Days </div><br/>
-
-                     <button  id="approveRequest-btn1" disabled={disable} onClick={event => Approval(event, {dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Approve</button>
-                     <button id="approveRequest-btn1" disabled={disable} onClick={event => Rejected(event, {dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Reject</button>
-
+                  {item.approved ? "Approved" :
+                     <button  id="approveRequest-btn1" onClick={event => Approval(event, {dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Approve</button>
+                  }
+                  {item.approved ? "" :
+                     <button id="approveRequest-btn1"  onClick={event => Rejected(event, {dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Reject</button>
+                  }
                   </div>
                   <div>
 
                   </div>
                </ul>
             );
-            })}
+            })} */}
 
 
-      {newData && newData.reverse().map((item, index)=>{
+      {/* {newData && newData.reverse().map((item, index)=>{
       return(
          <ul>
   
@@ -637,45 +666,85 @@ if(leaveDatareceived==null)
             </div>
          </ul>
       );
-      })}
+      })} */}
    </div>
 
+
+       <h1 id="approval-header">Recent Approved</h1>
+       <div className="approveRequest"> 
+         <div className="approval">
+       <div>
+       {approvalLeave && approvalLeave.map((item, index)=>{
+         return(
+            <div>
+               {item.approved ? 
+               <div>
+               <div className="list-approval1">
+                  <li id="aproval-name">{item.name}</li>
+                  <li id="no-days">{moment(item.dateStart).format('DD.MM.YY')} -   {moment(item.dateEnd).format('DD.MM.YY')}</li>
+                  <li id="no-difference">No of Days : {item.difference} Days</li>
+                  <li id="approved-not">{item.approved ? item.approved : ""}</li>
+               </div>
+               <div className="list-approval2">
+               <li id="leavetype">{item.leaveType}</li>
+                  <li id="reason-admin1">Reason : {item.reason}</li>
+                  <li id="appliedDate"><span>Applied On :</span>{moment(item.date).format('lll')}</li>
+                  <li id="yearBalance-users">Year End Balance : {item.leaveBalance} Days</li>
+               </div>
+               </div>
+               : ""}
+
+
+{/* {item.approved ? 
+
+               <div className="list-approval2">
+                  <li id="leavetype">{item.leaveType}</li>
+                  <li id="appliedDate"><span>Applied On :</span>{item.date}</li>
+               </div>
+               : ""
+      } */}
+            </div>
+         )
+      })}
+       </div>
+       </div>
+       </div>
 
 
          <div>
             <div className="empolyee-header">
-               <h1>Employee List</h1>
+               <h1 id="approval-header">Employee List</h1>
               
 
               <AddEmployee />
 
-
-
-            
             </div>
-            {/* <Table columns={columns} dataSource={data} size="middle" /> */}
 
-            {/* <div className="userData">
-            <div className="userData_heading">
-            <div className="headingName"> <h4>Name</h4></div>
-            <div className="headingName" id="heading-email"><h4>email</h4></div>
-            <div className="headingName"><h4>Adress</h4></div>
-            <div className="headingName"><h4>DOB</h4></div>
-            <div className="headingName"><h4>DOJ </h4></div>
-            <div className="headingName"><h4>Status </h4></div>
-            <div className="headingName"><h4>Action </h4></div>
-            <div className="headingName">
+            <div className="Employee-dats">    
+                        
+                <h4 id="employee-headerAdmin">Name</h4>
+                <h4 id="employee-headerAdmin">email</h4>
+                <h4 id="address-of-employee">Adress</h4>
+                <h4 id="employee-headerAdmin">DOB</h4>
+                <h4 id="employee-headerAdmin">DOJ </h4>
+                <h4 id="status">Status </h4>
+                <h4 id="status">Action </h4>
+                <div className="editbtn-admin">
                <button onClick={() => { setDisplay(true)}}><MenuUnfoldOutlined /></button></div>
-            </div>
-             {lisEmployee && lisEmployee.reverse().map((item, index) =>{
+
+               </div>
+
+             {lisEmployee && lisEmployee.map((item, index) =>{
            return(
-               <div className="employeeesDatalist"> 
-               <ul key={index}>
-                  <div className="employesssList">{item.name}</div>
-                  <div className="employesssList" id="employe-email">{item.email}</div>
-                  <div className="employesssList">{item.Address}</div>
-                  <div className="employesssList">{item.DOB}</div>
-                  <div className="employesssList">{item.DOJ}</div>
+               <div className="Employee-dats"> 
+                <h4 id="userDetails-admin">{item.name}</h4>
+                <h4>{item.email}</h4>
+                <h4 id="address-of-employee1">{item.Address}</h4>
+                <h4>{item.DOB}</h4>
+                <h4>{item.DOJ}</h4>
+                <h4 id="status1"></h4>
+                <h4 id="status1"></h4>
+
                  {display ? 
                   <div className="edit_btns">
               <EditEmployee />
@@ -684,7 +753,6 @@ if(leaveDatareceived==null)
                      </div>
                   </div> :"" }
 
-            </ul>
 
            
 
@@ -698,7 +766,7 @@ if(leaveDatareceived==null)
             {newEmployee && newEmployee.map((item, index) => {
            return(
                <div className="employeeesDatalist"> 
-               <ul key={index}>
+               {/* <ul key={index}>
                   <div className="employesssList">{item.addName}</div>
                   <div className="employesssList" id="employe-email">{item.addEmail}</div>
                   <div className="employesssList">{item.addAddress}</div>
@@ -713,7 +781,28 @@ if(leaveDatareceived==null)
                   <DownCircleOutlined />
                      </div>
                   </div> :"" }
-            </ul>
+            </ul> */}
+            <div className="Employee-dats"> 
+                <h4 id="userDetails-admin">{item.addName}</h4>
+                <h4>{item.addEmail}</h4>
+                <h4 id="address-of-employee1">{item.addAddress}</h4>
+                <h4> {moment(item.addDOB).format("DD.MM.YYYY")}</h4>
+                <h4> {moment(item.addDOJ).format("DD.MM.YYYY")}</h4>
+                <h4 id="status1"></h4>
+                <h4 id="status1"></h4>
+
+                 {display ? 
+                  <div className="edit_btns">
+                            <EditEmployee id={item.id} />
+                     <div className="edit_btns1">
+                  <DownCircleOutlined />
+                     </div>
+                  </div> :"" }
+
+
+           
+
+            </div>
             </div>
             );
             })} 
@@ -721,13 +810,10 @@ if(leaveDatareceived==null)
            
 
          </div>
-      </div> */}
             
       </div>
-      {/* <div className="leaveDatalist"> */}
          
-      {/* {leaveData.length && leaveData.map((item, index) => { */}
-      {/* return( */}
+
 <div>
 <div className="leave_data">
           <div className="holidaylist">

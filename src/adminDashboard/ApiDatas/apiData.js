@@ -1,4 +1,3 @@
-
 export  const admindata=[
     {
         "id": 310,
@@ -36,7 +35,7 @@ export   const userdata=[
       "id": 3182,
       "roleId":1,
       "name": "Kameshwar",
-      "email": "kameshwar@gmail.com",
+      "email": "kamesh@gmail.com",
       "password":"Anexas123456",
       "DOB":"00-00-0000",
       "DOJ":"00-00-0000",
@@ -88,6 +87,14 @@ export  const clockindata=[
       leaveType:'',
       leaveDate:""
       },
+      {
+        employeeId:3180,
+        clockin:"Mon Sep 02 2022 09:30:00 GMT+0530 (India Standard Time)",
+        clockout:"Mon Sep 02 2022 06:30:00 GMT+0530 (India Standard Time)",
+        workingHrs:9,
+        leaveType:'',
+        leaveDate:""
+        },
       {
         employeeId:3180,
         clockin:"Tue Aug 02 2022 09:30:00 GMT+0530 (India Standard Time)",
