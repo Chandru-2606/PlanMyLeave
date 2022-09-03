@@ -434,12 +434,6 @@ const variableOne = datesends.filter(itemInArray =>
   itemInArray.employeeId == valId
   );
   setNewVariable(variableOne)
-
-  // setClockintrue(isLoggedin)
-
-
-
-
 }, [newVariable])
 
 
@@ -463,13 +457,10 @@ const variableOne = datesends.filter(itemInArray =>
   const clockout = (e) =>{
 
   setIsLoggedin(true)
-   
-   
   e.preventDefault();
   let momentDate = moment(startDate).valueOf()
   const Clockout = { Clockout:momentDate, id:valId}
   const datereceived=localStorage.getItem("Clockout")
-  // console.log(datereceived)
   if(datereceived==null){
       localStorage.setItem("Clockout",JSON.stringify([Clockout]))
     }
@@ -479,54 +470,48 @@ const variableOne = datesends.filter(itemInArray =>
     localStorage.setItem("Clockout",JSON.stringify(arr));
     }
   }
-//   const onChange = (key) => {
-//     console.log(key);
-//   };
+
 
 
     const menu = (
         <Menu
         items={
           [{
-
-
             label:<div className="profile_name">
-                        
-               <h1>{props.name}</h1> 
-                       <p>{props.email}</p><hr></hr>
-                       </div>
-                       ,
+                  <h1>{props.name}</h1> 
+                  <p>{props.email}</p><hr></hr>
+                  </div>,
             key: '0',
           },
           {
             label:<div className="display_profile">
-              <div><p className="my_profile"></p></div> 
-              <div><a className="profile_name" href="#">My Profile</a></div>
-               </div>,
+                  <div><p className="my_profile"></p></div> 
+                  <div><a className="profile_name" href="#">My Profile</a></div>
+                  </div>,
             key: '2',
           },
           {
             label:<div  className="display_profile">
-              <div><p className="password"></p></div>
-              <div><a className="profile_name" href="#">Change Password</a> </div>
-              </div>,
+                  <div><p className="password"></p></div>
+                  <div><a className="profile_name" href="#">Change Password</a> </div>
+                  </div>,
             key: '3',
           },
           {
             label:<div className="display_profile">
-              <div><p className="shortcut"></p> </div>
-              <div><a className="profile_name" href="#">Keyboard Shortcuts</a> </div>
-              </div> ,
+                  <div><p className="shortcut"></p> </div>
+                  <div><a className="profile_name" href="#">Keyboard Shortcuts</a> </div>
+                  </div>,
             key: '4',
           },
           {
             label:<div className="display_profile"><div><p className="mobile_version" ></p> </div>
-            <div><a className="profile_name" href="#">Mobile Version</a> </div> 
-            </div>,
+                  <div><a className="profile_name" href="#">Mobile Version</a> </div> 
+                  </div>,
             key: '5',
           },
           {
-            label:<div><hr></hr> <button className="logout_btn" onClick={() => { 
+            label:<div><hr /><button className="logout_btn" onClick={() => { 
               navigate("/") } }>Logout</button></div>,
             key:'6',
           }

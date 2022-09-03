@@ -84,18 +84,18 @@ opacity: 0.8;
   border-radius: 5px;
 }
 .ant-picker-calendar-date-value{
-  text-align: center !important;
-  /* color: #007ecf; */
+  /* text-align: center !important; */
+  font-size: 12px;
 }
 
 .ant-picker-cell {
   border-right: 1px solid rgb(222,226,230);
-  
-  /* border-bottom: 1px solid ; */
 }
+
 .ant-picker-calendar-date-content{
   text-align: center !important;
-  margin-top: 3px;
+  margin-top: -3px;
+  float: left;
 }
 
 .ant-badge span{
@@ -117,7 +117,7 @@ opacity: 0.8;
 }
 
 .holidaylist{
-  width: 52%;
+  width: 50%;
   height: 350px;
 }
 
@@ -148,16 +148,19 @@ border-radius: 5px;
 .holiday_year{
     display: flex;
     list-style: none;
-    width: 83%;
-    margin-left: 70px;
+    width: 86%;
+    margin-left: 56px;
     height: 350px;
     border-radius: 3px;
     box-shadow:3px 3px 3px 3px rgb(222,226,230);
     background-color: rgb(255,255,255);
 }
 
+
+
+
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 5px;
   color:  rgb(255,255,255);
 }
 
@@ -167,12 +170,12 @@ border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: grey; 
+  background: #c1c1c1; 
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: grey; 
+  background: #c1c1c1; 
 }
 
 .ant-tabs-nav-wrap .ant-tabs-nav-list{
@@ -184,8 +187,8 @@ border-radius: 5px;
   line-height: 2.6;
   color: red;
   font-size: 16px;
-
 }
+
 .holiday_year span{
   float: right;
   color: black;
@@ -198,7 +201,7 @@ border-radius: 5px;
 
 .calender{
   margin-top: 30px;
-  width: 50%;
+  width: 48%;
   border-radius: 5px;
 }
 .calender table{
@@ -206,7 +209,7 @@ border-radius: 5px;
 }
  .calender_div{
   width: 90%;
-  margin-left:70px;
+  margin-left:50px;
   height: 300px;
 }
 /* .ant-picker-calendar .ant-picker-panel .ant-picker-body{
@@ -223,14 +226,14 @@ padding-left: 20px;
   height: 18px;
 }
 .ant-picker-cell-inner {
-  height: 55px !important;
+  height: 45px !important;
 }
 
 
 .applyleave{
   margin-top: 24px;
-margin-left: 60px;
-width: 50%;
+margin-left: 37px;
+width: 48%;
 }
 
 /* .applyleave_div {
@@ -270,6 +273,27 @@ text-align: center;
 padding-left: 70px;
 float: right;
 }
+.id-leave{
+  color: #dd5353;
+  font-size: 16px;
+  font-weight: bolder;
+}
+#leaveBlance-input{
+  margin-left: 10px;
+  opacity: .8;
+  width: 125px;
+  border-radius: 5px;
+  border: none;
+  border: 1px solid rgb(222,226,230);
+}
+#leave-balance-btn{
+  background-color: #e9573f;
+  color: white;
+  border: none;
+  margin-left: 10px;
+  border-radius: 5px;
+  height: 30px;
+}
 
 .td_a{
   width: 33.33%;
@@ -291,14 +315,14 @@ float: right;
 .clockin_datas{
   background-color: white;
   border-radius: 10px;
-  width: 90%;
-  margin-left: 80px;
+  width: 93%;
+  margin-left: 56px;
   box-shadow:3px 3px 3px 3px rgb(222,226,230);
   margin-bottom: 50px;
 }
 
 #clockin-head{
-  margin-left: 80px;
+  margin-left: 56px;
   font-size: 20px;
 }
 
@@ -524,7 +548,7 @@ float: right;
 .user-leave{
   margin-left: 50px;
   height: 400px;
-  width: 44%;
+  width: 46%;
 }
 
 .user-leave h1{
@@ -543,8 +567,8 @@ float: right;
   height: 350px;
   width: 100%;
   background-color: rgb(255,255,255);
-  margin-left: -40px;
-  margin-top: -6px;
+  margin-left: -35px;
+    margin-top: -9px;
   box-shadow:3px 3px 3px 3px rgb(222,226,230);
   border-radius: 5px;
 }
@@ -632,15 +656,14 @@ float: right;
 }
 
 .leave-request{
-  margin-left: 30px;
   margin-bottom: 20px;
-  width: 90%;
-  margin-left: 80px;
+  width: 93%;
+  margin-left: 56px;
 }
 
 #leave-head {
    color: black;
-   margin-left: 80px;
+   margin-left: 56px;
    font-size: 20px;
    margin-top: 50px;
 }

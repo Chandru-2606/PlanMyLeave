@@ -79,7 +79,6 @@ console.log("ApprovalData", ApprovalData)
 if((leaveBalanceData > 0)  && (ApprovalDatareceived === null)){
   localStorage.setItem("ApprovalData",JSON.stringify([ApprovalData]))
 }
-
 else if(leaveBalanceData > 0){
   let arr=JSON.parse(ApprovalDatareceived)
   console.log(arr)

@@ -303,10 +303,8 @@ if(leaveDatareceived==null)
                <div className='calender'>
                 <div className="calender_div">
                <Calendar  dateCellRender={dateCellRender}  />
-
                </div>
               </div>
-
               <div className="applyleave">
               <div className="applyleave_div">
 
@@ -596,77 +594,12 @@ if(leaveDatareceived==null)
 
 
 
-        {/* <select id="old-leave" onChange={EmployeeLeave}>
-      {lisEmployee.map((item, index)=>{
-         return(
-            <option value={item.id}>
-               {item.name}
-            </option>
-         );
-      })}
-   </select> */}
+        
    </div>
-      {/* <div className="today-data">
-      <div className="todayData-head"><h1>Name</h1></div>
-      <div className="todayData-head"><h1>Leave start</h1></div>
-      <div className="todayData-head"><h1>Leave End</h1></div>
-      <div className="todayData-head"><h1>Leave Type</h1></div>
-      <div className="todayData-head"><h1>Reason</h1></div>
-      <div className="todayData-head"><h1>No of Days</h1></div>
-   </div> */}
-
-      {/* {approvalLeave && approvalLeave.map((item, index)=>{
-
-         let name= item.name
-         let idd = item.idd
-         let dateEnd = item.dateEnd
-         let dayEnd =item.dayEnd
-         let leaveType = item.leaveType
-         let reason = item.reason
-         let difference = item.difference
-         let date = item.date
-         let dateStart = item.dateStart
-           
-            return(
-               <ul>
-                  <div className="today_list"> 
-                     <div className="today_listData">{item.name}</div>
-                     <div className="today_listData">{moment(item.dateEnd).format('DD.MM.YY')}</div>
-                     <div className="today_listData">{moment(item.dateEnd).format('DD.MM.YY')}</div>
-                     <div className="today_listData" id="workingshrs">{item.leaveType} </div>
-                     <div className="today_listData" id="leave-type">{item.reason}</div>
-                     <div className="today_listData" id="workingshrs">{item.difference} Days </div><br/>
-                  {item.approved ? "Approved" :
-                     <button  id="approveRequest-btn1" onClick={event => Approval(event, {dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Approve</button>
-                  }
-                  {item.approved ? "" :
-                     <button id="approveRequest-btn1"  onClick={event => Rejected(event, {dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Reject</button>
-                  }
-                  </div>
-                  <div>
-
-                  </div>
-               </ul>
-            );
-            })} */}
+     
 
 
-      {/* {newData && newData.reverse().map((item, index)=>{
-      return(
-         <ul>
-  
-
-            <div id="user-leaveDate" className="today_list">
-               <div className="today_listData">{item.leaveType ? item.employeeId : ""}</div>
-               <div className="today_listData"> {item.leaveDate ? moment(item.leaveDate).format('DD.MM.YY') : ""}</div>
-               <div className="today_listData">{item.leaveDate ? moment(item.leaveDate).format('DD.MM.YY') : ""}</div>
-               <div className="today_listData" id="workingshrs"> {item.leaveType}</div>
-               <div className="today_listData" id="leave-type">{item.reason}</div>
-               <div className="today_listData" id="workingshrs">{item.leaveType ? moment(item.leaveDate).format('DD.MM.YY') : ""}</div>
-            </div>
-         </ul>
-      );
-      })} */}
+     
    </div>
 
 
@@ -674,7 +607,7 @@ if(leaveDatareceived==null)
        <div className="approveRequest"> 
          <div className="approval">
        <div>
-       {approvalLeave && approvalLeave.map((item, index)=>{
+       {approvalLeave && approvalLeave.reverse().map((item, index)=>{
          return(
             <div>
                {item.approved ? 
@@ -722,19 +655,19 @@ if(leaveDatareceived==null)
 
             <div className="Employee-dats">    
                         
-                <h4 id="employee-headerAdmin">Name</h4>
-                <h4 id="employee-headerAdmin">email</h4>
-                <h4 id="address-of-employee">Adress</h4>
-                <h4 id="employee-headerAdmin">DOB</h4>
-                <h4 id="employee-headerAdmin">DOJ </h4>
-                <h4 id="status">Status </h4>
-                <h4 id="status">Action </h4>
-                <div className="editbtn-admin">
-               <button onClick={() => { setDisplay(true)}}><MenuUnfoldOutlined /></button></div>
-
+               
+               <h4 id="employee-headerAdmin">Name</h4>
+               <h4 id="employee-headerAdmin">Email</h4>
+               <h4 id="address-of-employee">Address</h4>
+               <h4 id="employee-headerAdmin">DOB</h4>
+               <h4 id="employee-headerAdmin">DOJ</h4>
+               <h4 id="status">Status </h4>
+               <h4 id="status">Action </h4>
+               <div className="editbtn-admin">
+                <button onClick={() => { setDisplay(true)}}><MenuUnfoldOutlined /></button></div>
                </div>
 
-             {lisEmployee && lisEmployee.map((item, index) =>{
+             {/* {lisEmployee && lisEmployee.map((item, index) =>{
            return(
                <div className="Employee-dats"> 
                 <h4 id="userDetails-admin">{item.name}</h4>
@@ -752,38 +685,40 @@ if(leaveDatareceived==null)
                   <DownCircleOutlined />
                      </div>
                   </div> :"" }
-
-
-           
-
             </div>
             );
-            })} 
-            <div>
-
-           
-
-            {newEmployee && newEmployee.map((item, index) => {
-           return(
-               <div className="employeeesDatalist"> 
-               {/* <ul key={index}>
-                  <div className="employesssList">{item.addName}</div>
-                  <div className="employesssList" id="employe-email">{item.addEmail}</div>
-                  <div className="employesssList">{item.addAddress}</div>
-                  <div className="employesssList">{moment(item.addDOB).format("DD.MM.YYYY")}</div>
-                  <div className="employesssList">{moment(item.addDOJ).format("DD.MM.YYYY")}</div>
-                 {display ? 
+            })}  */}
+            {lisEmployee && lisEmployee.map((item, index)=>{
+            return(
+              <div className="Employee-dats"> 
+                <h4 id="userDetails-admin">{item.name}</h4>
+                <h4>{item.email}</h4>
+                <h4 id="address-of-employee1">{item.Address}</h4>
+                <h4>{item.DOB}</h4>
+                <h4>{item.DOJ}</h4>
+                <h4 id="status1"></h4>
+                <h4 id="status1"></h4>
+                {display ? 
                   <div className="edit_btns">
-                  
-              <EditEmployee id={item.id} />
-
+              <EditEmployee />
                      <div className="edit_btns1">
                   <DownCircleOutlined />
                      </div>
                   </div> :"" }
-            </ul> */}
+              </div>
+            );
+            })}
+            <div>
+
+           
+
+
+
+{newEmployee && newEmployee.map((item, index) => {
+return(
+  <div className="employeeesDatalist"> 
             <div className="Employee-dats"> 
-                <h4 id="userDetails-admin">{item.addName}</h4>
+            <h4 id="userDetails-admin">{item.addName}</h4>
                 <h4>{item.addEmail}</h4>
                 <h4 id="address-of-employee1">{item.addAddress}</h4>
                 <h4> {moment(item.addDOB).format("DD.MM.YYYY")}</h4>
@@ -791,21 +726,18 @@ if(leaveDatareceived==null)
                 <h4 id="status1"></h4>
                 <h4 id="status1"></h4>
 
-                 {display ? 
+                {display ? 
                   <div className="edit_btns">
                             <EditEmployee id={item.id} />
                      <div className="edit_btns1">
                   <DownCircleOutlined />
                      </div>
                   </div> :"" }
-
-
-           
-
             </div>
-            </div>
-            );
-            })} 
+
+</div>
+);
+})}
             
            
 
@@ -870,7 +802,6 @@ if(leaveDatareceived==null)
              <hr />
             {selectLeave && selectLeave.map((item, index)=>{
               return(
-                
                 <div className="user-real">
                   <li>{item.name? item.name : "Everyone is working hard today"}</li>
                   <li>{item.leaveType ? item.leaveType : ""}</li>

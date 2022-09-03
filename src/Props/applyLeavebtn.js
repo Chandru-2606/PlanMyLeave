@@ -124,7 +124,6 @@ console.log("item.name", item.name)
     <span>{props.leaveBalance} Days</span>
   </div>
 </div>
-
 <div className="apply-leave">    
   <div className="leave-start">
     <div className="leave-start-date">
@@ -133,7 +132,6 @@ console.log("item.name", item.name)
     
     <div className="leave-daytype">
       <input type="date" value={dateStart} onChange={(e) => {setDateStart(e.target.value)}}/> 
-
       <select value={dateType} onChange={(e) => {setDateType(e.target.value)}}>
         <option>Select day type</option>
         <option>Full Day</option>

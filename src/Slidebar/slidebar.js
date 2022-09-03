@@ -156,15 +156,7 @@ let valId = `${id}`
 
 
 
-// const filteredddd = leaveBalance.filter(employee => {
-//   return employee.CasualLeave > 0
-// });
-// console.log("filteredddd", filteredddd)
 
-// const LeaveBalanceData = ApplyLeave.filter(itemInArray => 
-//   itemInArray.Authorizedbreak == 0
-//   );
-//   console.log("LeaveBalanceData", LeaveBalanceData)
 
 useEffect(() => {
   const Datessssss = clockindata.map(t1 => ({...t1, ...userdata.find(t2 => t2.id === t1.employeeId)}))
@@ -178,11 +170,6 @@ setNewVariable(variableOne)
 const filterLeave = ApplyLeave.filter(itemInArray => 
   itemInArray.id == valId
 );
-
-// const Datesssss = userdata.map(t1 => ({...t1, ...filterLeave.find(t2 => t2.employeeId === t1.id)}))
-// console.log("Datessssss", Datesssss)
-
-
 setLeaveBalance(filterLeave)
 // console.log("filterLeave", filterLeave)
 
@@ -335,15 +322,14 @@ const dateCellRender = (value) => {
 
   return(
     <div className='container_divs'>
-     
-              <Header name={newVariable?.[0]?.name}   email={newVariable?.[0]?.email}/>
-              
-<div className="header-btn">
-              <a href="#">LEAVE</a>
-              <a href="#">ATTENDANCE</a>
-              <a href="#">SOCIAL INTRANET</a>
-              <a href="#">REPORTS</a>
-</div>
+      <Header name={newVariable?.[0]?.name}   email={newVariable?.[0]?.email}/>
+        <div className="header-btn">
+          <a href="#">LEAVE</a>
+          <a href="#">ATTENDANCE</a>
+          <a href="#">SOCIAL INTRANET</a>
+          <a href="#">REPORTS</a>
+        </div>
+        
 <div className="body-container">
 <div className="section">
 
@@ -529,11 +515,11 @@ const dateCellRender = (value) => {
                </TabPane>
 
               <TabPane tab="My Leave Balance" key="2">
-               <label>As of date</label> <input type="date" /><button onClick={leaveBalnce} >Find My Leave</button>
+               <label className="id-leave">As of date</label> <input id="leaveBlance-input" type="date" /><button id="leave-balance-btn" onClick={leaveBalnce} >Find My Leave</button>
                
                <div>
                {leaveBalanceData && leaveBalanceData.map((item, index)=>{
-                 return(
+                return(
                   <table>
                       <tr >
                         <div className="th_div">
@@ -549,9 +535,7 @@ const dateCellRender = (value) => {
 
                           <div className="td_a">
                             <td >
-              
                             <ApplyLeavebtn leaveBalance={item.Authorizedbreak} leaveType="Authorized break" />
-                                
                             </td>
                           </div>
                         </div>
@@ -573,10 +557,7 @@ const dateCellRender = (value) => {
               
                           <div className="td_a">
                             <td >
-              
                             <ApplyLeavebtn leaveBalance={item.CasualLeave} leaveType="Casual Leave" />
-              
-                                
                             </td>
                           </div>
                         </div>
@@ -596,10 +577,7 @@ const dateCellRender = (value) => {
               
                           <div className="td_a">
                             <td >
-              
                             <ApplyLeavebtn leaveBalance={item.CompensatoryOff}  leaveType="Compensatory Off"/>
-              
-                                
                             </td>
                           </div>
                         </div>
@@ -619,10 +597,7 @@ const dateCellRender = (value) => {
               
                           <div className="td_a">
                             <td >
-              
                             <ApplyLeavebtn leaveBalance={item.LeavewithoutPay} leaveType="Leave without Pay" />
-              
-                                
                             </td>
                           </div>
                         </div>
@@ -642,10 +617,7 @@ const dateCellRender = (value) => {
               
                           <div className="td_a">
                             <td >
-              
                             <ApplyLeavebtn leaveBalance={item.PaidLeave} leaveType="Paid Leave" />
-              
-                                
                             </td>
                           </div>
                         </div>
@@ -665,10 +637,7 @@ const dateCellRender = (value) => {
               
                           <div className="td_a">
                             <td >
-              
                             <ApplyLeavebtn leaveBalance={item.RestrictedHolidays} leaveType="Restrickted Holidays" />
-              
-                                
                             </td>
                           </div>
                         </div>
@@ -689,14 +658,12 @@ const dateCellRender = (value) => {
                           <div className="td_a">
                             <td >
                             <ApplyLeavebtn leaveBalance={item.Sickleave}  leaveType="Sick Leave"/>
-              
-                                
                             </td>
                           </div>
                         </div>
                       </tr>
-                             </table>
-              );
+                  </table>
+                );
                })}
                </div>
                </TabPane>
@@ -771,19 +738,7 @@ const dateCellRender = (value) => {
 
 
 
-{/* <div className='leaves_taken'>
-  <h1>My recent leave</h1>
-  {newVariable.reverse().map((item, index)=>{
-    return (
-<ul>
-  <li className="appliedDate">{item.leaveDate ? moment(item.leaveDate).format('DD.MM.YY') : ""}</li>
-<li className="leaveType-data">{item.leaveType}</li> 
-     
-  <li>{item.leaveDate ? moment(item.leaveDate).format('LLL') : ""}</li>
-</ul>
-    );
-  })}
-</div> */}
+
 
 
 
