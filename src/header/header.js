@@ -520,33 +520,30 @@ const variableOne = datesends.filter(itemInArray =>
         );
     return (
       <div className='header'>
-        <div className="logo_div">
-          </div>
-
-
-
-          <div className="icons">
-
-          
-
-          {isLoggedin ?
-           <button className='clockin' onClick={(e) => clockin(e)}>Clock in</button>
-      :  <button className="logout" onClick={(e) => clockout(e)}>Clock out</button>}
-
+        <a href='#' className="logo_div" ></a>
+  <div className="icons">
+    {props.user ?
+      <div>
+        {isLoggedin ?
+        <button className='clockin' onClick={(e) => clockin(e)}>Clock in</button>
+      : <button className="logout" onClick={(e) => clockout(e)}>Clock out</button>}
+      </div>
+    : "" }
+          <a href='#' className='contact-Hr'></a>
+          <a href='#' className='Leave-DashBoard'></a>
+          <a href='#' className='reports-header'></a>
+          <a href='#' className='calender-header'></a>
           <a href="#" className="notification" > </a>
           <a href="#" className="apply_leave"></a>
- 
-
-<Dropdown overlay={menu} trigger={['click']}>
-<a className="profile" onClick={(e) => e.preventDefault()}>
-
-</a>
-</Dropdown>
+          <a href='#' className='support'></a>
 
 
-      </div>
+        <Dropdown overlay={menu} trigger={['click']}>
+          <a className="profile" onClick={(e) => e.preventDefault()}></a>
+        </Dropdown>
     </div>
-    );
+  </div>
+  );
  } 
 
  export default Header;

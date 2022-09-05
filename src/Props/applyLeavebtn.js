@@ -26,6 +26,7 @@ let valId = `${id}`
     const [startDate, setStartDate] = useState(new Date());
     const [name, setName] = useState([])
     const [applyLeaveData, setApplyLeaveData] = useState([])
+    
     const moment = require('moment');
 
 
@@ -49,50 +50,42 @@ let valId = `${id}`
 console.log("item.name", item.name)
 
   let ApplyLeave = {dateStart:dateStart,
-    dateType:dateType,
-    dateEnd:dateEnd, 
-    dayEnd:dayEnd, 
-    reason:reason, 
-    address:address,
-    number:number, 
-    // id:id,
-    name:(item.name),
-    date:momentDate }
-    setApplyLeaveData(ApplyLeave)
+                   dateType:dateType,
+                   dateEnd:dateEnd, 
+                   dayEnd:dayEnd, 
+                   reason:reason, 
+                   address:address,
+                   number:number, 
+                   name:(item.name),
+                   date:momentDate }
+                   setApplyLeaveData(ApplyLeave)
+    })}
 
-  })}
-
-
-        
-
-
-
-
-       console.log("leave Apply", ApplyLeave)  
-      };
-      const handleCancel = (props) => {
-        setVisible(false);
+    console.log("leave Apply", ApplyLeave)  
+    };
+    
+    const handleCancel = (props) => {
+    setVisible(false);
       };
 
 
     return(
         <div>
-              <Button type="primary" onClick={showModal}>
-                  Apply Leave
-                </Button>
-      <Modal
-        visible={visible}
-        title="Apply Leave"
-        onOk={handleOk}
-        onCancel={handleCancel}
-        footer={[
+          <Button type="primary" onClick={showModal}>
+            Apply Leave
+          </Button>
+          <Modal
+            visible={visible}
+            title="Apply Leave"
+            onOk={handleOk}
+            onCancel={handleCancel}
+            footer={[
           <Button key="back" onClick={handleCancel}>
-          Cancel
+            Cancel
           </Button>,
 
 
           <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
-            
            <ConformLeave id={id} 
                         dateStart={dateStart} 
                         dateType={dateType} 
@@ -103,14 +96,12 @@ console.log("item.name", item.name)
                         applyLeaveData={applyLeaveData}
                         leaveBalance={props.leaveBalance}
                          />
-           Submit
+              Submit
           </Button>,
         ]}
       >
         <div className="leave-form">
-    <form>
-    
-   
+          <form>
 <div className="type-leave">
   <div className="type-leavedata">
     <label>Leave Type</label><br></br>
@@ -119,11 +110,14 @@ console.log("item.name", item.name)
       </div>
   </div>
 
-  <div className="leave-balnce">
+  <div className="leave-leave">
     <label>Current Balance</label>
-    <span>{props.leaveBalance} Days</span>
+    <div className="leave-balnce">   
+       <span id="leaveType-Data">{props.leaveBalance} Days</span>
+    </div>
   </div>
 </div>
+
 <div className="apply-leave">    
   <div className="leave-start">
     <div className="leave-start-date">

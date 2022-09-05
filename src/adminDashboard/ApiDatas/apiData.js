@@ -168,54 +168,7 @@ export  const clockindata=[
                       leaveType:"Leave without Pay",
                       leaveDate:"Fri Aug 12 2022 09:30:00 GMT+0530 (India Standard Time)"
                       },
-                      {
-                        employeeId:3180,
-                        clockin:"",
-                        clockout:"",
-                        workingHrs:0,
-                        leaveType:"Leave without Pay",
-                        leaveDate:"Sat Aug 13 2022 09:30:00 GMT+0530 (India Standard Time)"
-                        },
-                        {
-                          employeeId:3180,
-                          clockin:"",
-                          clockout:"",
-                          workingHrs:0,
-                          leaveType:"Leave without Pay",
-                          leaveDate:"Sat Aug 14 2022 09:30:00 GMT+0530 (India Standard Time)"
-                          },
-                          {
-                            employeeId:3180,
-                            clockin:"",
-                            clockout:"",
-                            workingHrs:0,
-                            leaveType:"Leave without Pay",
-                            leaveDate:"Sat Aug 16 2022 09:30:00 GMT+0530 (India Standard Time)"
-                            },
-                            {
-                              employeeId:3180,
-                              clockin:"",
-                              clockout:"",
-                              workingHrs:0,
-                              leaveType:"Leave without Pay",
-                              leaveDate:"Sat Aug 18 2022 09:30:00 GMT+0530 (India Standard Time)"
-                              },
-                              {
-                                employeeId:3180,
-                                clockin:"",
-                                clockout:"",
-                                workingHrs:0,
-                                leaveType:"Leave without Pay",
-                                leaveDate:"Sat Aug 19 2022 09:30:00 GMT+0530 (India Standard Time)"
-                                },
-                                {
-                                  employeeId:3180,
-                                  clockin:"",
-                                  clockout:"",
-                                  workingHrs:0,
-                                  leaveType:"Leave without Pay",
-                                  leaveDate:"Sat Aug 20 2022 09:30:00 GMT+0530 (India Standard Time)"
-                                  },
+                      
                                   {
                                     employeeId:3180,
                                     clockin:"",

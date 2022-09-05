@@ -85,6 +85,8 @@ const [todayLeave, setTodayLeave] = useState([])
 const [newDatas, setNewDatas] = useState([])
 const [newApproval, setNewApproval] = useState([])
 const [working, setWorking] = useState("")
+  const[valid,setValid]=useState(false);
+
 const { TabPane } = Tabs;
 
 
@@ -200,7 +202,7 @@ const filterArrr =arrrr ? arrrr.filter(itemInArray =>
   setApprovedData(filterArrr)
 
 const FilteredArarry = localrecived ? localrecived.filter(itemInArray =>
-  itemInArray.name == id
+  itemInArray.id == id
   ) : []
 setApprovalLeave(FilteredArarry)
 
@@ -322,14 +324,14 @@ const dateCellRender = (value) => {
 
   return(
     <div className='container_divs'>
-      <Header name={newVariable?.[0]?.name}   email={newVariable?.[0]?.email}/>
+      <Header name={newVariable?.[0]?.name}   email={newVariable?.[0]?.email} user="UserDashboard"/>
         <div className="header-btn">
           <a href="#">LEAVE</a>
           <a href="#">ATTENDANCE</a>
           <a href="#">SOCIAL INTRANET</a>
           <a href="#">REPORTS</a>
         </div>
-        
+
 <div className="body-container">
 <div className="section">
 
@@ -514,7 +516,7 @@ const dateCellRender = (value) => {
                
                </TabPane>
 
-              <TabPane tab="My Leave Balance" key="2">
+              <TabPane tab="My Leave Balance as of Future Date" key="2">
                <label className="id-leave">As of date</label> <input id="leaveBlance-input" type="date" /><button id="leave-balance-btn" onClick={leaveBalnce} >Find My Leave</button>
                
                <div>
@@ -672,6 +674,7 @@ const dateCellRender = (value) => {
                 </div>
               </div>
             </div>
+
         <div className="leave_data">
           <div className="holidaylist">
                 <h1>My Holiday List</h1>
@@ -736,15 +739,8 @@ const dateCellRender = (value) => {
       </div>
         </div>
 
-
-
-
-
-
-
-
  <div>
-<h1 id="leave-head">My recent leave requests</h1>
+<h1 id="leave-head">My Recent Leave Requests</h1>
   <div className="approved">    
     <div className="leave-request">
       {approvalLeave && approvalLeave.map((item, index)=>{

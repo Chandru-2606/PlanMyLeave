@@ -167,9 +167,6 @@ const onChange = (key) => {
  
      console.log("Next 90 Days");
      break;
-     // default:
-     //      case "Today" :
- 
  }
  }
 
@@ -188,7 +185,8 @@ const Approval = (event, param)=>{
                                  difference:param.difference,
                                  idd:param.idd,
                                  date:param.date,
-                                 leaveBalance:param.leaveBalance
+                                 leaveBalance:param.leaveBalance,
+                                 id:param.id
                                  }
 
          let objIndex = arr.findIndex((obj => obj.idd == param.idd));
@@ -196,20 +194,6 @@ const Approval = (event, param)=>{
          arr[objIndex] = UpdatesapprovelDates
 
          localStorage.setItem("ApprovalData",JSON.stringify(arr))
-
-         // console.log("updated expense",arr)
-   // console.log("approvalDates", approvelDates)
-
-   // const localrecived=localStorage.getItem("approvelDates")
-   // // console.log(localrecived);
-   // if(localrecived==null){
-   //   localStorage.setItem("approvelDates",JSON.stringify([approvelDates]))
-   // }
-   // else{
-   //   let arr=JSON.parse(localrecived);
-   //   arr.push(approvelDates);
-   //   localStorage.setItem("approvelDates",JSON.stringify(arr));
-   // }
    }
 
    const Rejected = (event , param) =>{
@@ -226,7 +210,8 @@ const Approval = (event, param)=>{
                         difference:param.difference,
                         idd:param.idd,
                         date:param.date,
-                        leaveBalance:param.leaveBalance
+                        leaveBalance:param.leaveBalance,
+                        id:param.id
                      }
       let objIndex = brr.findIndex((obj => obj.idd == param.idd));
       console.log(brr)
@@ -286,7 +271,7 @@ if(leaveDatareceived==null)
     return(
       <div className="adminApp">  
       <div className="admin_header">
-      <Header name={admindata?.[0]?.name} email={admindata?.[0]?.email}/>
+      <Header name={admindata?.[0]?.name} email={admindata?.[0]?.email} />
       </div >
       <div className="space">
         <a href="#">LEAVE</a>
@@ -487,14 +472,13 @@ if(leaveDatareceived==null)
               </div>
             </div>
 
-{/* <div className="data-today">
+<div className="data-today">
    <div className="admin-subComtainer">
    <div className="today-header">
-<h3>Today Clockin</h3>
+<h3>Today Clockin :{moment().format('DD.MM.YY')}</h3>
 
 <div className="day-today"> 
-
-<h1>Today:{moment().format('L')}</h1>
+<span>Filter Users Leave : </span>
 <select onChange={EmployeeName}>
 {lisEmployee.map((item, index)=>{
    return(
@@ -508,41 +492,33 @@ if(leaveDatareceived==null)
 </div>
 </div>
 
-
-
-
    <div className="today-data">
-      <div className="todayData-head"><h1>Name</h1></div>
-      <div className="todayData-head"><h1>Clockin</h1></div>
-      <div className="todayData-head"><h1>Clockout</h1></div>
-      <div className="todayData-head"><h1>Leave</h1></div>
-      <div className="todayData-head"><h1>workingHrs</h1></div>
+      <li>Name</li>
+      <li>Clockin</li>
+      <li>Clockout</li>
+      <li>Leave</li>
+      <li>WorkingHrs</li>
    </div>
 
 {todayLeave && todayLeave.reverse().map((item, index)=>{
   return(
-    <ul>
-                  <div className="today_list">   
-            <div className="today_listData">{item.name}</div>
-            <div className="today_listData">{item.clockin ? moment(item.clockin).format('lll') : 
-                                             moment(item.leaveDate).format('ll')}
+                  <div className="today-data1">   
+            <li>{item.name}</li>
+            <li>{item.clockin ? moment(item.clockin).format('lll') : 
+                                             moment(item.leaveDate).format('ll')} </li>
+            <li>{item.clockout ? moment(item.clockout).format('LT') : ""}</li>
+            <li id="admin-leaveType">{item.leaveType ? item.leaveType : ""}</li>
+            <li>{item.workingHrs ? item.workingHrs : "0"} hours</li>
             </div>
-            <div className="today_listData">{item.clockout ? moment(item.clockout).format('LT') : ""}
-            </div>
-            <div className="today_listData" id="leave-type">{item.leaveType ? item.leaveType : ""}</div>
-            <div className="today_listData" id="workingshrs">{item.workingHrs ? item.workingHrs : "0"} hours</div>
-            </div>
-    </ul>
   )
 })}
 
 
-
-</div> */}
-        <h1 id="approval-header">Leave Request Waiting for Approval</h1>
-
-      <div className="approveRequest">
-         <div className="approval">
+ 
+</div>
+      <h1 id="approval-header">Leave Request Waiting for Approval</h1>
+        <div className="approveRequest">
+          <div className="approval">
          
        <div>
       {approvalLeave && approvalLeave.map((item, index)=>{
@@ -556,6 +532,7 @@ if(leaveDatareceived==null)
                   let date = item.date
                   let dateStart = item.dateStart
                   let leaveBalance =item.leaveBalance
+                  let id = item.id
          return(
             <div>
                {item.approved ? "":
@@ -563,17 +540,13 @@ if(leaveDatareceived==null)
                   <li id="aproval-name">{item.name}</li>
                   <li id="no-days">{moment(item.dateStart).format('DD.MM.YY')} -   {moment(item.dateEnd).format('DD.MM.YY')}</li>
                   <li id="no-difference">No of Days : {item.difference} Days</li>
-                  {/* <AdminApproval 
-                  name={item.name} startdate={item.dateEnd} endDate={item.dateEnd} difference= {item.difference}
-                  reason={item.reason} leaveType={item.leaveType} leaveBalance={item.leaveBalance}
-                  /> */}
+                  <li id="iddddddddd">{item.id}</li>
                   {item.approved ? "Approved" :
-                     <button  id="approveRequest-btn1" onClick={event => Approval(event, {leaveBalance, dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Approve</button>
+                     <button  id="approveRequest-btn1" onClick={event => Approval(event, {id,leaveBalance, dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Approve</button>
                   }
                   {item.approved ? "" :
-                     <button id="approveRequest-btn1"  onClick={event => Rejected(event, {leaveBalance, dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Reject</button>
+                     <button id="approveRequest-btn2"  onClick={event => Rejected(event, {id, leaveBalance, dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Reject</button>
                   }
-
                </div>
       }
 
@@ -590,16 +563,7 @@ if(leaveDatareceived==null)
          )
       })}
        </div>
-
-
-
-
-        
    </div>
-     
-
-
-     
    </div>
 
 
@@ -628,14 +592,7 @@ if(leaveDatareceived==null)
                : ""}
 
 
-{/* {item.approved ? 
 
-               <div className="list-approval2">
-                  <li id="leavetype">{item.leaveType}</li>
-                  <li id="appliedDate"><span>Applied On :</span>{item.date}</li>
-               </div>
-               : ""
-      } */}
             </div>
          )
       })}
@@ -654,8 +611,6 @@ if(leaveDatareceived==null)
             </div>
 
             <div className="Employee-dats">    
-                        
-               
                <h4 id="employee-headerAdmin">Name</h4>
                <h4 id="employee-headerAdmin">Email</h4>
                <h4 id="address-of-employee">Address</h4>
@@ -811,13 +766,8 @@ return(
             })}
             </div>
       </div>
-
         </div>
-
-         
-
       </div>
-         
       </div>
       </div>
     );

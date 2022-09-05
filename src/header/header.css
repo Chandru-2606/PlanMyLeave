@@ -5,55 +5,86 @@
   .header{
     width: 100%;
     position: fixed;
-    height: 57px;
+    height: 40px;
     background-color: rgb(251,246,246);
     display: flex;
     justify-content: space-between;
     z-index: 3;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
   }
+
   .logo_div{
-     background-image: url(./../Images/anexaslogo.png);
+     background-image: url(./../Images/anexaslogo.jpg);
      background-position: center;
-     background-size: 100px;
+     background-size: 70px;
      background-repeat: no-repeat;
-     height: 70px;
-     width: 20%;
+     height: 40px;
+     width: 6%;
   }
 
   .icons{
     display: flex;
+    margin-right: 25px;
   }
   
-  .notification{
+  /* .notification{
        background-image: url(./../Images/notification.svg);
-       width: 53px;
+       width: 45px;
        background-position: center;
        background-size: 35px;
        background-repeat: no-repeat;
-       height: 36px;
+       height: 30px;
        border: none;
        margin-top: 10px;
-  }
+  } */
   .apply_leave{
     background-image: url(./../Images/apply-leave.svg);
     width: 53px;
     background-position: center;
-    background-size: 35px;
+    background-size: 30px;
     background-repeat: no-repeat;
-    height: 36px;
-    margin-top: 12px;
+    height: 37px;
   }
-
+  .contact-Hr{
+    background-image: url(./../Images/add.svg);
+    width: 40px;
+    background-position: center;
+    background-size: 30px;
+    background-repeat: no-repeat;
+    height: 30px;
+    margin-right: 15px;
+    margin-top: 5px;
+  }
+  
+  .support{
+    background-image: url(./../Images/question-big.png);
+    width: 40px;
+    background-position: center;
+    background-size: 30px;
+    background-repeat: no-repeat;
+    height: 30px;
+    margin-right: 15px;
+    margin-top: 5px;
+  }
+.Leave-DashBoard{
+  background-image: url(./../Images/speedometer_2.svg);
+    width: 40px;
+    background-position: center;
+    background-size: 30px;
+    background-repeat: no-repeat;
+    height: 30px;
+    margin-right: 15px;
+    margin-top: 5px;
+}
   .header button{
     border: none;
     width: 100px;
-    height: 40px;
-    margin-top: 10px;
-    /* background-color: rgb(221, 83, 83); */
+    height: 30px;
+    margin-top: 4px;
     color: white;
     border-radius: 10px;
     cursor: pointer;
+    margin-right: 20px;
   }
   .clockin{
     background-color: rgba(0, 0, 255, 0.548);
@@ -65,14 +96,30 @@
     background-image: url(./../Images/myprofile.svg);
     width: 40px;
     background-position: center;
-    background-size: 40px;
+    background-size: 30px;
     background-repeat: no-repeat;
-    background-color: white;
-    height: 46px;
-    margin-right: 40px;
-    margin-left: 20px;
-    margin-top: 5px;
   }
+.reports-header{
+    background-image: url(./../Images/report.svg);
+    width: 40px;
+    background-position: center;
+    background-size: 30px;
+    background-repeat: no-repeat;
+    height: 30px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.calender-header{
+  background-image: url(./../Images/calender.svg);
+    width: 40px;
+    background-position: center;
+    background-size: 30px;
+    background-repeat: no-repeat;
+    height: 30px;
+    margin-right: 5px;
+    margin-top: 5px; 
+}
 
   .ant-dropdown-menu {
     width: 400px;

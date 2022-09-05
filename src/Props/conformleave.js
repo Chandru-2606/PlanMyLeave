@@ -54,8 +54,9 @@ const[submitted,setSubmitted]=useState(false)
   };
 
   const handleOk = () => {
+    {nameEmp && nameEmp.map((item, index)=>{
     
-  const ApprovalData ={name:props.id, 
+  const ApprovalData ={id:props.id, 
                       dateStart:props.dateStart, 
                       dateType:props.dateType, 
                       dateEnd:props.dateEnd,  
@@ -65,6 +66,7 @@ const[submitted,setSubmitted]=useState(false)
                       date: moment(momentDate).format('LLL'),
                       difference:difference,
                       leaveBalance:props.leaveBalance,
+                      name:item.name,
                       idd:uuidv4()
                       }
 console.log("ApprovalData", ApprovalData)
@@ -93,6 +95,7 @@ else if(leaveBalanceData > 0){
       setLoading(false)
       setVisible(false)
     })
+  })}
   }
   const handleCancel = () => {
     setVisible(false)
