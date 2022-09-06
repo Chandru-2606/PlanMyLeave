@@ -349,7 +349,7 @@ const dateCellRender = (value) => {
               <Tabs defaultActiveKey="1" onChange={onChange}>
                 <TabPane tab="My Leave Data" key="1">
                
-{leaveBalance && leaveBalance.map((item, index)=>{
+                  {leaveBalance && leaveBalance.map((item, index)=>{
   return(
     <table>
         <tr >
@@ -512,9 +512,8 @@ const dateCellRender = (value) => {
         </tr>
                </table>
 );
-})}
-               
-               </TabPane>
+                  })}
+                </TabPane>
 
               <TabPane tab="My Leave Balance as of Future Date" key="2">
                <label className="id-leave">As of date</label> <input id="leaveBlance-input" type="date" /><button id="leave-balance-btn" onClick={leaveBalnce} >Find My Leave</button>
@@ -743,7 +742,7 @@ const dateCellRender = (value) => {
 <h1 id="leave-head">My Recent Leave Requests</h1>
   <div className="approved">    
     <div className="leave-request">
-      {approvalLeave && approvalLeave.map((item, index)=>{
+      {approvalLeave && approvalLeave.reverse().map((item, index)=>{
     return(
       <div className="applyLeave-container">
         <div className="leave-requestList">

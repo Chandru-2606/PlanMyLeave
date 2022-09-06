@@ -167,6 +167,8 @@ const onChange = (key) => {
  
      console.log("Next 90 Days");
      break;
+     
+     
  }
  }
 
@@ -535,8 +537,8 @@ if(leaveDatareceived==null)
                   let id = item.id
          return(
             <div>
-               {item.approved ? "":
-               <div className="list-approval1">
+              {item.approved ? "":
+              <div className="list-approval1">
                   <li id="aproval-name">{item.name}</li>
                   <li id="no-days">{moment(item.dateStart).format('DD.MM.YY')} -   {moment(item.dateEnd).format('DD.MM.YY')}</li>
                   <li id="no-difference">No of Days : {item.difference} Days</li>
@@ -547,11 +549,9 @@ if(leaveDatareceived==null)
                   {item.approved ? "" :
                      <button id="approveRequest-btn2"  onClick={event => Rejected(event, {id, leaveBalance, dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Reject</button>
                   }
-               </div>
-      }
-
-{item.approved ? "":
-
+              </div>
+              }
+        {item.approved ? "":
                <div className="list-approval2">
                <li id="leavetype">{item.leaveType}</li>
                   <li id="reason-admin1">Reason : {item.reason}</li>
@@ -683,7 +683,9 @@ return(
 
                 {display ? 
                   <div className="edit_btns">
+                    <div className="edit-btn2">
                             <EditEmployee id={item.id} />
+                            </div>
                      <div className="edit_btns1">
                   <DownCircleOutlined />
                      </div>
@@ -745,7 +747,7 @@ return(
       <div className="user-leave">
             <h1>User on Leave</h1>
             <div className="users-on-leave"> 
-              <select onClick={TodayEvents} >
+              <select onClick={TodayEvents}>
                 <option value={"Today"} >Today</option>
                 <option value={"Tomorrow"} >Tomorrow</option>
                 <option value={"Next 7 days"}>Next 7 days</option>
@@ -755,6 +757,9 @@ return(
                 <option value={"Next 90 days"}>Next 90 days</option>
               </select>
              <hr />
+                 
+
+
             {selectLeave && selectLeave.map((item, index)=>{
               return(
                 <div className="user-real">
