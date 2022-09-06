@@ -21,6 +21,7 @@ import EditEmployee from "../Props/editEmployee";
 
 
 
+
 const menu = (
   <Menu
   items={
@@ -222,17 +223,13 @@ const filterArrrarys =brr ? brr.filter(itemInArray =>
     let a =  moment(item.Clockin).format("hh:mm")
     let b = moment(item.Clockout).format("hh:mm")
   })}
-
 }, [newVariable])
-
-
-
 
 const leaveBalnce = () =>{
   const FilteredArarryss =  leaveBalance.filter(itemInArray =>
     itemInArray.Authorizedbreak >0
   ) 
-  // console.log("FilteredArarryss", FilteredArarryss)
+  // console.log("FilteredArarrys", FilteredArarryss)
   if(FilteredArarryss == true ){
     console.log("true")
     setLeaveBalanceData(FilteredArarryss)
@@ -240,7 +237,7 @@ const leaveBalnce = () =>{
   else{
     console.log("false")
   }
-}
+  }
 const dateCellRender = (value) => {
     let listData = [];
     {newVariable.map((item,index)=>{
@@ -253,10 +250,8 @@ const dateCellRender = (value) => {
       type: '',
       content:(item.workingHrs),
     },
-    
-    
     ]
-  }
+    }
    })}
     
 

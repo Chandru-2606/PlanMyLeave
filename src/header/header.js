@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router";
 import './header.css'
+import { Button, Tooltip } from 'antd';
+
 
  function Header (props) {
   const moment = require('moment');
@@ -11,11 +13,21 @@ import './header.css'
   const [clockintrue, setClockintrue] =useState("")
   const [startDate, setStartDate] = useState();
   const [newVariable, setNewVariable] = useState([])
+  const text = <span id='tooltip-aa'>
+                  <a>Apply Leave</a>
+               </span>;
+  const text1 = <span id='tooltip-aa'>Leave DashBoard</span>
+  const text2 = <span id='tooltip-aa'>Reports</span>
+  const text3 = <span><div className='header-tooltip'>
+                 <h2>Calendars</h2>
+                 <h6>You can view leave/ holiday Calendars by Monthly, Yearly and also Team wise</h6>
+                 </div></span>
 
-
-
-
-
+   const text4 = <span><div className='header-tooltip'> 
+                 <h2>Notifications</h2>
+                 <h6>See your Company notifications here.</h6>
+                 </div></span>
+  const text5 = <span id='tooltip-aa'><a href='#'>Visit Our Website</a></span>
 
   let { id } = useParams();
   let valId = `${id}`
@@ -436,10 +448,7 @@ const variableOne = datesends.filter(itemInArray =>
   setNewVariable(variableOne)
 }, [newVariable])
 
-
-  const clockin = (e) => {
-
-
+const clockin = (e) => {
    setIsLoggedin(false)
 
    let momentDate = moment(startDate).valueOf()
@@ -448,6 +457,7 @@ const variableOne = datesends.filter(itemInArray =>
    if(datereceived==null){
     localStorage.setItem("Clockin",JSON.stringify([Clockin]))
   }
+  
   else{
     let arr=JSON.parse(datereceived);
     arr.push(Clockin);
@@ -516,27 +526,68 @@ const variableOne = datesends.filter(itemInArray =>
             key:'6',
           }
         ]}
-      />
+       />
         );
     return (
       <div className='header'>
         <a href='#' className="logo_div" ></a>
   <div className="icons">
-    {props.user ?
+  <div className='hr-test'>
+         <Tooltip placement="bottom" title={text}>
+        <button  className='contact-Hr'>
+        </button>
+      </Tooltip>
+      </div>
+
+
+          
+
+          
+
+      <div className='hr-test'>
+         <Tooltip placement="bottom" title={text1}>
+        <button className='Leave-DashBoard' >
+        </button>
+      </Tooltip>
+      </div>
+
+      <div className='hr-test'>
+         <Tooltip placement="bottom" title={text2}>
+        <button className='reports-header' >
+        </button>
+      </Tooltip>
+      </div>
+
+      <div className='hr-test'>
+         <Tooltip placement="bottom" title={text3}>
+        <button className='calender-header' >
+        </button>
+      </Tooltip>
+      </div>
+
+      <div className='hr-test'>
+         <Tooltip placement="bottom" title={text4}>
+        <button className="notification" >
+        </button>
+      </Tooltip>
+      </div>
+    
+      
+
+      <div className='hr-test'>
+         <Tooltip placement="bottom" title={text5}>
+        <button className='support' >
+        </button>
+      </Tooltip>
+      </div>
+
+      {props.user ?
       <div>
         {isLoggedin ?
         <button className='clockin' onClick={(e) => clockin(e)}>Clock in</button>
       : <button className="logout" onClick={(e) => clockout(e)}>Clock out</button>}
       </div>
     : "" }
-          <a href='#' className='contact-Hr'></a>
-          <a href='#' className='Leave-DashBoard'></a>
-          <a href='#' className='reports-header'></a>
-          <a href='#' className='calender-header'></a>
-          <a href="#" className="notification" > </a>
-          <a href="#" className="apply_leave"></a>
-          <a href='#' className='support'></a>
-
 
         <Dropdown overlay={menu} trigger={['click']}>
           <a className="profile" onClick={(e) => e.preventDefault()}></a>
@@ -544,6 +595,6 @@ const variableOne = datesends.filter(itemInArray =>
     </div>
   </div>
   );
- } 
+ }
 
  export default Header;

@@ -14,7 +14,6 @@ import EditEmployee from "../Props/editEmployee";
 import { Table } from 'antd';
 import { Badge, Calendar } from 'antd';
 import ApplyLeavebtn from "../Props/applyLeavebtn";
-import AdminApproval from "../Props/adminApproval";
 import { Tabs } from 'antd';
 
 const { TabPane } = Tabs;
@@ -480,7 +479,7 @@ if(leaveDatareceived==null)
 <h3>Today Clockin :{moment().format('DD.MM.YY')}</h3>
 
 <div className="day-today"> 
-<span>Filter Users Leave : </span>
+<span>Filter Users Leave and Clockin Details : </span>
 <select onChange={EmployeeName}>
 {lisEmployee.map((item, index)=>{
    return(

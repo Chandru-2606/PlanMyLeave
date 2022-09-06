@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
 .headerdivs{
     background-color: rgb(251,246,246);
   }
@@ -10,7 +12,35 @@
     display: flex;
     justify-content: space-between;
     z-index: 3;
+font-family: 'Poppins', sans-serif;
+
     /* margin-bottom: 50px; */
+  }
+  .ant-tooltip-inner{
+    background-color: white;
+    width: 230px;
+  }
+  .header-tooltip h2{
+    background-color: #e2e2e7;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: bolder;
+    text-align: center;
+    width: 100%;
+  }
+  .ant-tooltip-content{
+    text-align: center !important;
+  }
+  .header-tooltip h6{
+   font-family: 'Poppins', sans-serif;
+   font-size: 11px;
+   text-align: center;
+  }
+
+  #tooltip-aa{
+   font-family: 'Poppins', sans-serif;
+   text-align: center;
+   color: black;
   }
 
   .logo_div{
@@ -24,19 +54,20 @@
 
   .icons{
     display: flex;
-    margin-right: 25px;
+    /* margin-right: 25px; */
   }
   
-  /* .notification{
+  .notification{
        background-image: url(./../Images/notification.svg);
        width: 45px;
        background-position: center;
-       background-size: 35px;
+       background-size: 26px;
        background-repeat: no-repeat;
-       height: 30px;
+       height: 25px;
        border: none;
        margin-top: 10px;
-  } */
+
+  }
   .apply_leave{
     background-image: url(./../Images/apply-leave.svg);
     width: 53px;
@@ -44,16 +75,25 @@
     background-size: 30px;
     background-repeat: no-repeat;
     height: 37px;
+    margin-right: 15px;
+
   }
   .contact-Hr{
     background-image: url(./../Images/add.svg);
-    width: 40px;
+    width: 20px;
     background-position: center;
     background-size: 30px;
     background-repeat: no-repeat;
     height: 30px;
-    margin-right: 15px;
     margin-top: 5px;
+    margin-right: 15px;
+
+  }
+  .hr-test button{
+    border: none;
+    background-color: #fbf6f6;
+    cursor: pointer;
+    width: 40px;
   }
   
   .support{
@@ -76,7 +116,7 @@
     margin-right: 15px;
     margin-top: 5px;
 }
-  .header button{
+  /* .header button{
     border: none;
     width: 100px;
     height: 30px;
@@ -85,12 +125,29 @@
     border-radius: 10px;
     cursor: pointer;
     margin-right: 20px;
-  }
+  } */
   .clockin{
     background-color: rgba(0, 0, 255, 0.548);
+    border: none;
+    width: 100px;
+    height: 30px;
+    margin-top: 4px;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 10px;
   }
   .logout{
     background-color: rgb(221, 83, 83);
+    border: none;
+    width: 100px;
+    height: 30px;
+    margin-top: 4px;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 10px;
+
   }
   .profile {
     background-image: url(./../Images/myprofile.svg);
@@ -98,6 +155,7 @@
     background-position: center;
     background-size: 30px;
     background-repeat: no-repeat;
+    margin-right: 20px;
   }
 .reports-header{
     background-image: url(./../Images/report.svg);
@@ -141,41 +199,37 @@
   
   .password{
     background-image: url(./../Images/password.svg);
-    width: 20px;
+    width: 25px;
     background-position: center;
-    background-size: 20px;
+    background-size: 25px;
     background-repeat: no-repeat;
-    background-color: white;
     height: 30px;
   }
   
   .my_profile{
     background-image: url(./../Images/myprofile.svg);
-    width: 20px;
+    width: 25px;
     background-position: center;
-    background-size: 20px;
+    background-size: 25px;
     background-repeat: no-repeat;
-    background-color: white;
     height: 30px;
   }
   
   .shortcut{
     background-image: url(./../Images/shortcut.svg);
-    width: 20px;
+    width: 25px;
     background-position: center;
-    background-size: 20px;
+    background-size: 25px;
     background-repeat: no-repeat;
-    background-color: white;
     height: 30px;
   }
   
   .mobile_version{
     background-image: url(./../Images/mobile-version.svg);
-    width: 20px;
+    width: 25px;
     background-position: center;
-    background-size: 20px;
+    background-size: 25px;
     background-repeat: no-repeat;
-    background-color: white;
     height: 30px;
   }
 

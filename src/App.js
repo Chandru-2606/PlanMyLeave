@@ -24,9 +24,8 @@ function App() {
       <Route path={"/Admin"} element={<Admin />} />
       <Route path={"/AdminApproval"} element={<AdminApproval />} />
 
-
-      {/* <Route path={"/ConformLeave"} element={<ConformLeave />}/> */}
-      {/* <Route path={"/AddEmployee"} element={<AddEmployee />} /> */}
+      {/* <Route path={"/ConformLeave"} element={<ConformLeave />}/>
+      <Route path={"/AddEmployee"} element={<AddEmployee />} /> */}
 
 
     </Routes>
