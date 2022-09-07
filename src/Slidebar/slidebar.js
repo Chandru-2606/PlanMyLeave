@@ -86,28 +86,25 @@ const [todayLeave, setTodayLeave] = useState([])
 const [newDatas, setNewDatas] = useState([])
 const [newApproval, setNewApproval] = useState([])
 const [working, setWorking] = useState("")
-  const[valid,setValid]=useState(false);
+const[valid,setValid]=useState(false);
+const [cancelLeave, setCancelLeave] = useState("LR - Cancelled")
+const [approver, setApprover] = useState("LR - Cancelled")
+
+
 
 const { TabPane } = Tabs;
-
-
 
 const [approvalLeave, setApprovalLeave] = useState("")
 const [approvedData, setApprovedData] = useState([])
 const [notApprovedData,setNotApprovedData] = useState([])
 
-
-
-
-
 const TodayEvents = (e) =>{
-  let localrecived = JSON.parse(localStorage.getItem("ApprovalData"))
+let localrecived = JSON.parse(localStorage.getItem("ApprovalData"))
 
 const current =  moment(new Date()).format('l');
-switch (e.target.value){
-
+switch (e.target.value)
+{
   case "Today": 
-      
       const todayLeaveData = localrecived.filter(itemInArray => 
       moment(itemInArray.dateStart).format('l') == current
       );
@@ -238,6 +235,31 @@ const leaveBalnce = () =>{
     console.log("false")
   }
   }
+
+const AprovalCancel = (event, param) =>{
+ let arr = JSON.parse(localStorage.getItem("ApprovalData"))
+ let ApprovalCancel = {approved:cancelLeave,
+                      name:param.name,
+                      dateStart:param.dateStart, 
+                      dateType:param.dateType, 
+                      dateEnd:param.dateEnd,  
+                      dayEnd:param.dayEnd, 
+                      reason:param.reason, 
+                      leaveType:param.leaveType,
+                      difference:param.difference,
+                      idd:param.idd,
+                      date:param.date,
+                      leaveBalance:param.leaveBalance,
+                      id:param.id,
+                      approver:approver
+                      }    
+                      // console.log("ApprovalCancel", ApprovalCancel)
+                      let objIndex = arr.findIndex((obj => obj.idd == param.idd));
+                      console.log(arr)
+                      arr[objIndex] = ApprovalCancel
+                      localStorage.setItem("ApprovalData",JSON.stringify(arr))
+}
+
 const dateCellRender = (value) => {
     let listData = [];
     {newVariable.map((item,index)=>{
@@ -511,7 +533,7 @@ const dateCellRender = (value) => {
                 </TabPane>
 
               <TabPane tab="My Leave Balance as of Future Date" key="2">
-               <label className="id-leave">As of date</label> <input id="leaveBlance-input" type="date" /><button id="leave-balance-btn" onClick={leaveBalnce} >Find My Leave</button>
+               <label className="id-leave">As of date</label><input id="leaveBlance-input" type="date" /><button id="leave-balance-btn" onClick={leaveBalnce} >Find My Leave</button>
                
                <div>
                {leaveBalanceData && leaveBalanceData.map((item, index)=>{
@@ -665,7 +687,7 @@ const dateCellRender = (value) => {
                </TabPane>
               </Tabs>
               
-                </div>
+              </div>
               </div>
             </div>
 
@@ -730,7 +752,7 @@ const dateCellRender = (value) => {
               );
             })}
             </div>
-      </div>
+        </div>
         </div>
 
  <div>
@@ -738,19 +760,33 @@ const dateCellRender = (value) => {
   <div className="approved">    
     <div className="leave-request">
       {approvalLeave && approvalLeave.reverse().map((item, index)=>{
+        let name= item.name
+        let idd = item.idd
+        let dateEnd = item.dateEnd
+        let dayEnd =item.dayEnd
+        let leaveType = item.leaveType
+        let reason = item.reason
+        let difference = item.difference
+        let date = item.date
+        let dateStart = item.dateStart
+        let leaveBalance =item.leaveBalance
+        let id = item.id
     return(
       <div className="applyLeave-container">
         <div className="leave-requestList">
         <h3 id="no-dayss">{moment(item.dateStart).format('DD.MM.YY')} - {moment(item.dateEnd).format('DD.MM.YY')}</h3>
         <h3 id="days-difference">{item.difference} Day</h3>
         <h3 id="applied-date">Applied on {moment(item.date).format('DD.MM.YY')} {moment(item.date).format('LT')}</h3>
-        <h3 id="aprovel">{item.approved ? item.approved : "Waiting For Approval"} <CloseCircleOutlined /></h3>
+        <h3 id="aprovel">{item.approved ? item.approved : "Waiting For Approval"} 
+        <CloseCircleOutlined  onClick={event => AprovalCancel(event, {id, leaveBalance, dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}/>
+        </h3>
         </div>
         
         <h3 id="type-leaveData">{item.leaveType}</h3>
-        <h3 id="approver">{item.approved? "Approved By: Varsha Saxena" : "Waiting For Approval"}</h3>
+        
+        <h3 id="approver">{item.approved? item.approver : "Waiting For Approval"}</h3>
       </div>
-    )
+    ) 
       })}
     </div>
   </div>

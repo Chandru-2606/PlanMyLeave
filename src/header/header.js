@@ -10,7 +10,6 @@ import { Button, Tooltip } from 'antd';
   const moment = require('moment');
   const [datesends, setDatesend] = useState([])
   const [isLoggedin, setIsLoggedin] = useState(true)
-  const [clockintrue, setClockintrue] =useState("")
   const [startDate, setStartDate] = useState();
   const [newVariable, setNewVariable] = useState([])
   const text = <span id='tooltip-aa'>
@@ -22,11 +21,12 @@ import { Button, Tooltip } from 'antd';
                  <h2>Calendars</h2>
                  <h6>You can view leave/ holiday Calendars by Monthly, Yearly and also Team wise</h6>
                  </div></span>
-
+                 
    const text4 = <span><div className='header-tooltip'> 
                  <h2>Notifications</h2>
                  <h6>See your Company notifications here.</h6>
                  </div></span>
+
   const text5 = <span id='tooltip-aa'><a href='#'>Visit Our Website</a></span>
 
   let { id } = useParams();
@@ -450,13 +450,13 @@ const variableOne = datesends.filter(itemInArray =>
 
 const clockin = (e) => {
    setIsLoggedin(false)
-
    let momentDate = moment(startDate).valueOf()
     const Clockin = { Clockin:momentDate, id:valId }
    const datereceived=localStorage.getItem("Clockin")
-   if(datereceived==null){
+   if(datereceived==null)
+   {
     localStorage.setItem("Clockin",JSON.stringify([Clockin]))
-  }
+   }
   
   else{
     let arr=JSON.parse(datereceived);
@@ -480,8 +480,6 @@ const clockin = (e) => {
     localStorage.setItem("Clockout",JSON.stringify(arr));
     }
   }
-
-
 
     const menu = (
         <Menu
@@ -539,10 +537,6 @@ const clockin = (e) => {
       </Tooltip>
       </div>
 
-
-          
-
-          
 
       <div className='hr-test'>
          <Tooltip placement="bottom" title={text1}>

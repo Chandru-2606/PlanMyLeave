@@ -14,6 +14,8 @@ import EditEmployee from "../Props/editEmployee";
 import { Table } from 'antd';
 import { Badge, Calendar } from 'antd';
 import ApplyLeavebtn from "../Props/applyLeavebtn";
+import { CloseCircleOutlined } from '@ant-design/icons';
+
 import { Tabs } from 'antd';
 
 const { TabPane } = Tabs;
@@ -34,6 +36,12 @@ const [isSubmitted, setIsSubmitted] = useState(false)
 const [approvalbtn, setApprovalbtn ] = useState(false)
 
 const [notApproved, setNotApproved] = useState("Rejected")
+const [approver, setApprover] = useState("Approved By: Varsha Saxena")
+const [rejected, setRejected] = useState("Rejected By: Varsha Saxena")
+
+const [approvalCancel, setApprovalCancel] = useState("LR Cancelled ")
+const [approvers, setApprovers] = useState("Cancelled By: Varsha Saxena")
+
 
 const [approvalLeave, setApprovalLeave] = useState("")
 const [newData, setNewData] = useState([])
@@ -187,7 +195,8 @@ const Approval = (event, param)=>{
                                  idd:param.idd,
                                  date:param.date,
                                  leaveBalance:param.leaveBalance,
-                                 id:param.id
+                                 id:param.id, 
+                                 approver:approver
                                  }
 
          let objIndex = arr.findIndex((obj => obj.idd == param.idd));
@@ -195,6 +204,33 @@ const Approval = (event, param)=>{
          arr[objIndex] = UpdatesapprovelDates
 
          localStorage.setItem("ApprovalData",JSON.stringify(arr))
+   }
+
+   const AdminCancel = (event , param) =>{
+    console.log("btn trigrered")
+
+    let ApprovalCanceled = {approved:approvalCancel,
+                               name:param.name,
+                               dateStart:param.dateStart, 
+                               dateType:param.dateType, 
+                               dateEnd:param.dateEnd,  
+                               dayEnd:param.dayEnd, 
+                               reason:param.reason, 
+                               leaveType:param.leaveType,
+                               difference:param.difference,
+                               idd:param.idd,
+                               date:param.date,
+                               leaveBalance:param.leaveBalance,
+                               id:param.id, 
+                               approver:approvers
+                              }
+                              console.log("ApprovalCanceled", ApprovalCanceled)
+      let crr = JSON.parse(localStorage.getItem("ApprovalData"))
+      let objIndex = crr.findIndex((obj => obj.idd == param.idd));
+      console.log(crr)
+      crr[objIndex] = ApprovalCanceled
+      localStorage.setItem("ApprovalData",JSON.stringify(crr))
+
    }
 
    const Rejected = (event , param) =>{
@@ -212,7 +248,8 @@ const Approval = (event, param)=>{
                         idd:param.idd,
                         date:param.date,
                         leaveBalance:param.leaveBalance,
-                        id:param.id
+                        id:param.id,
+                        approver:rejected
                      }
       let objIndex = brr.findIndex((obj => obj.idd == param.idd));
       console.log(brr)
@@ -520,7 +557,6 @@ if(leaveDatareceived==null)
       <h1 id="approval-header">Leave Request Waiting for Approval</h1>
         <div className="approveRequest">
           <div className="approval">
-         
        <div>
       {approvalLeave && approvalLeave.map((item, index)=>{
                   let name= item.name
@@ -536,8 +572,10 @@ if(leaveDatareceived==null)
                   let id = item.id
          return(
             <div>
+
               {item.approved ? "":
               <div className="list-approval1">
+
                   <li id="aproval-name">{item.name}</li>
                   <li id="no-days">{moment(item.dateStart).format('DD.MM.YY')} -   {moment(item.dateEnd).format('DD.MM.YY')}</li>
                   <li id="no-difference">No of Days : {item.difference} Days</li>
@@ -548,6 +586,7 @@ if(leaveDatareceived==null)
                   {item.approved ? "" :
                      <button id="approveRequest-btn2"  onClick={event => Rejected(event, {id, leaveBalance, dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}>Reject</button>
                   }
+                  <CloseCircleOutlined  onClick={event => AdminCancel(event, {id, leaveBalance, dayEnd, date, dateStart, name, idd, dateEnd, leaveType, reason, difference})}/>
               </div>
               }
         {item.approved ? "":
@@ -585,7 +624,10 @@ if(leaveDatareceived==null)
                <li id="leavetype">{item.leaveType}</li>
                   <li id="reason-admin1">Reason : {item.reason}</li>
                   <li id="appliedDate"><span>Applied On :</span>{moment(item.date).format('lll')}</li>
+                  {item.approver ? 
+                  <li id="yearBalance-users1">{item.approver}</li> :
                   <li id="yearBalance-users">Year End Balance : {item.leaveBalance} Days</li>
+                  }
                </div>
                </div>
                : ""}

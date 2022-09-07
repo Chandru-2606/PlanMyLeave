@@ -710,7 +710,9 @@ font-family: 'Poppins', sans-serif;
   border-right: 1px solid rgb(222,226,230);
 
 }
- 
+ #spaceIn{
+  height: 20px;
+ }
 #days-difference{
   /* opacity: 0.7; */
   background-color: white;
